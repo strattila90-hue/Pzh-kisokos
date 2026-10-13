@@ -8,6 +8,7 @@
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>:root{color-scheme:dark}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>window.PZH_SHARE_URL=location.origin+location.pathname.replace(/index\.html$/,"");</script>
 <script src="firebase-config.js"></script>
 <title>PzH Milliomos</title>
 </head>
@@ -336,23 +337,75 @@ table.lb th{text-align:left;font:500 11px var(--f-mono);letter-spacing:.08em;tex
 table.lb td{padding:8px;border-bottom:1px solid var(--line)}
 table.lb .num,table.lb th.num{text-align:right;font-variant-numeric:tabular-nums}
 table.lb tr.me td{background:color-mix(in srgb,var(--gold) 16%,transparent);font-weight:600}
+
+/* --- menü, fejléc, oldalak (v4) --- */
+.topbar{position:sticky;top:0;z-index:12;background:var(--bg);padding-block:10px;margin-block:-14px 12px;border-bottom:1px solid var(--line)}
+.tbact{display:flex;gap:8px;align-items:center}
+.ibtn{min-height:40px;min-width:40px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 12px;border-radius:4px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 15px var(--f-cond);letter-spacing:.05em;text-transform:uppercase}
+.ibtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ibtn[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.ibtn.exitb{border-color:color-mix(in srgb,var(--bad) 60%,var(--line));color:var(--ink)}
+.ibtn:hover{border-color:var(--gold)}
+#home{max-width:880px;margin-inline:auto}
+.menu{display:grid;gap:8px;margin-top:6px}
+.mgrp{margin:14px 2px 0}
+.mrow{display:grid;grid-template-columns:46px minmax(0,1fr) auto 14px;align-items:center;gap:14px;text-align:left;padding:12px 14px;min-height:70px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:6px;color:var(--ink);transition:border-color .15s,background .15s}
+.mrow:hover{border-color:var(--gold);background:var(--panel2)}
+.mrow:active{transform:scale(.995)}
+.mi{width:46px;height:46px;display:grid;place-items:center;border-radius:4px;background:var(--panel2);border:1px solid var(--line);color:var(--gold)}
+.mi svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.mtx b{display:block;font:400 24px/1.05 var(--f-display);letter-spacing:.01em}
+.mtx small{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+.mbest{font:500 11.5px var(--f-mono);letter-spacing:.04em;color:var(--gold);text-align:right;white-space:nowrap}
+.mchev{color:var(--muted);font-size:26px;line-height:1}
+@media(max-width:520px){.mrow{grid-template-columns:42px minmax(0,1fr) 12px;gap:12px}.mi{width:42px;height:42px}.mbest{grid-column:2;grid-row:2;text-align:left;margin-top:-4px}.mbest:empty{display:none}.mchev{grid-column:3;grid-row:1}.mtx b{font-size:22px}}
+.pg{padding:18px;max-width:880px;margin-inline:auto}
+.pgt{font:400 30px var(--f-display);margin:0}
+.pgs{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sub{margin:6px 0 14px;color:var(--muted)}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.srow b{display:block;font-weight:600}
+.srow small{display:block;color:var(--muted);font-size:13.5px}
+.srow input[type=range]{width:min(220px,45vw);accent-color:var(--gold)}
+.sw{flex:none;width:52px;height:30px;border-radius:99px;border:1px solid var(--line);background:var(--panel2);position:relative;padding:0}
+.sw i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--muted);transition:left .15s,background .15s}
+.sw[aria-checked="true"]{background:color-mix(in srgb,var(--gold) 30%,var(--panel2));border-color:var(--gold)}
+.sw[aria-checked="true"] i{left:25px;background:var(--gold)}
+.shgrid{display:grid;gap:16px;align-items:start}
+@media(min-width:620px){.shgrid{grid-template-columns:auto 1fr}}
+.kistools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.kistools input[type=search]{flex:1 1 220px;min-width:0;padding:9px 12px;border-radius:4px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font:500 15px var(--f-body)}
+.chk{display:inline-flex;gap:6px;align-items:center;font-size:14px;color:var(--muted)}
+#kisFilters,#lbTabs{margin-bottom:12px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#kisFilters::-webkit-scrollbar,#lbTabs::-webkit-scrollbar{display:none}
+#kisFilters .tab,#lbTabs .tab{flex:none}
+#kisFilters .tab small,#lbTabs .tab small{font:500 11px var(--f-mono);opacity:.7;margin-left:4px}
+button.kcard{text-align:left;color:var(--ink);display:grid;gap:4px;align-content:start}
+button.kcard:hover{border-color:var(--gold)}
+.kcard p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--muted)!important}
+.kcard .rd{color:var(--ok);margin-left:6px}
+.kcard.read{opacity:.7}
+.mbtns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.mcard{max-height:86vh;overflow:auto}
+.live{display:inline-flex;align-items:center;gap:6px;font:500 11.5px var(--f-mono);letter-spacing:.05em;color:var(--muted)}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}100%{box-shadow:0 0 0 8px transparent}}
+.mebox{margin:12px 0;padding:12px 14px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center}
+.mebox b{color:var(--gold)}
+.lbwrap{overflow-x:auto}
+table.lb td .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-left:6px;vertical-align:middle}
+table.lb td.when{color:var(--muted);font-size:12.5px;white-space:nowrap}
+table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 
 <div class="wrap">
  <header class="topbar">
   <button class="brand" id="brand" type="button">PzH <b>Milliomos</b></button>
-  <nav class="tabs" aria-label="Módok">
-   <button class="tab" data-go="home" type="button">Főoldal</button>
-   <button class="tab" data-go="start" type="button">Kvíz</button>
-   <button class="tab" data-go="sim" type="button">Tűzfeladat</button>
-   <button class="tab" data-go="dd" type="button">Lőszertároló</button>
-   <button class="tab" data-go="ter" type="button">Terep</button>
-   <button class="tab" data-go="hangar" type="button">Raktár</button>
-   <button class="tab" data-go="kis" type="button">Kisokos</button>
-   <button class="tab" data-go="rank" type="button">Ranglista</button>
-   <button class="sndbtn" id="sndBtn" type="button" aria-pressed="true">♪ Hang: be</button>
-  </nav>
+  <div class="tbact">
+   <button class="ibtn" id="sndBtn" type="button" aria-pressed="true" aria-label="Hang ki/be"></button>
+   <button class="ibtn exitb hide" id="tbExit" type="button">✕ Kilépés</button>
+  </div>
  </header>
 
  <!-- KEZDŐLAP -->
@@ -392,23 +445,20 @@ table.lb tr.me td{background:color-mix(in srgb,var(--gold) 16%,transparent);font
     <div><b>3 / 10 mp</b><span class="k">Tűzgyorsaság</span></div>
    </div>
   </div>
-  <div class="modes">
-   <button class="panel mode" data-go="start" type="button"><span class="k" style="color:var(--gold)">232 kérdéses bank</span><span class="mt">Milliomos kvíz</span><span class="md">50 kérdés egyre nehezebben. 3 élet, 3 segítség, magyarázat a tananyag fejezetével.</span><span class="go">Indítás →</span></button>
-   <button class="panel mode" data-go="sim" type="button"><span class="k" style="color:var(--gold)">11 lépés</span><span class="mt">Tűzfeladat</span><span class="md">Bekapcsolástól a lövésig, a löveg metszetén követve, mi történik.</span><span class="go">Indítás →</span></button>
-   <button class="panel mode" data-go="dd" type="button"><span class="k" style="color:var(--gold)">Húzd a helyére</span><span class="mt">Lőszertároló</span><span class="md">Rekeszek, tárolók és a lőszerszállító rendszer elemeinek megnevezése.</span><span class="go">Indítás →</span></button>
-   <button class="panel mode" data-go="ter" type="button"><span class="k" style="color:var(--gold)">Átjut vagy nem?</span><span class="mt">Terepjárás</span><span class="md">Árok, lépcső, emelkedő, oldaldőlés, gázló, híd. Döntsd el, és megnézzük, mi történik.</span><span class="go">Indítás →</span></button>
-   <button class="panel mode" data-go="hangar" type="button"><span class="k" style="color:var(--gold)">Add a kezébe</span><span class="mt">Lőszerraktár</span><span class="md">A töltőkezelő odasétál, te a kezébe adod a gránátot, gyújtót, töltetet. Ha rosszat adsz: bumm, és jön a magyarázat.</span><span class="go">Indítás →</span></button>
-  </div>
-  <div class="stats" id="bestStats"></div>
-  <div class="actions" style="justify-content:center;margin-top:10px"><button class="btn ghost small" data-go="kis" type="button">Kisokos – tudásmorzsák</button><button class="btn ghost small" data-go="rank" type="button">Ranglista</button></div>
-  <div class="panel share">
-   <div class="qrbox" id="qr" aria-label="QR-kód a játék linkjéhez"></div>
-   <div style="min-width:0">
-    <h3>Megosztás</h3>
-    <p>Olvasd be telefonnal a QR-kódot, vagy küldd el a linket.</p>
-    <div class="linkrow"><input id="shareUrl" readonly aria-label="A játék linkje"><button class="btn small" id="copyBtn" type="button">Másolás</button></div>
-   </div>
-  </div>
+<nav class="menu" aria-label="Főmenü">
+<div class="mgrp k">Gyakorlás</div>
+<button class="mrow" data-go="start" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 20.5 7.3v9.4L12 21.5 3.5 16.7V7.3z"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.6"/><circle cx="12" cy="16.6" r=".6" fill="currentColor"/></svg></span><span class="mtx"><b>Milliomos kvíz</b><small>50 kérdés, 3 élet, 3 segítség · 232 kérdéses bank</small></span><span class="mbest" data-best="start"></span><span class="mchev" aria-hidden="true">›</span></button>
+<button class="mrow" data-go="sim" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><path d="M12 1.5v5M12 17.5v5M1.5 12h5M17.5 12h5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span><span class="mtx"><b>Tűzfeladat</b><small>Bekapcsolástól a lövésig, a löveg metszetén</small></span><span class="mbest" data-best="sim"></span><span class="mchev" aria-hidden="true">›</span></button>
+<button class="mrow" data-go="hangar" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 4l9 6v10H3z"/><path d="M7 20v-6h10v6M7 17h10"/></svg></span><span class="mtx"><b>Lőszerraktár</b><small>Add a töltőkezelő kezébe a helyes lőszert</small></span><span class="mbest" data-best="hangar"></span><span class="mchev" aria-hidden="true">›</span></button>
+<button class="mrow" data-go="dd" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.3h18M3 14.7h18M9 4v16M15 4v16"/></svg></span><span class="mtx"><b>Lőszertároló</b><small>Húzd a megnevezést a rekeszhez</small></span><span class="mbest" data-best="dd"></span><span class="mchev" aria-hidden="true">›</span></button>
+<button class="mrow" data-go="ter" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 19.5 8.5 9l4 6 3-4 6.5 8.5z"/><path d="M15 6.5a1.8 1.8 0 1 0 0-.01"/></svg></span><span class="mtx"><b>Terepjárás</b><small>Átjut vagy nem? Árok, lépcső, gázló, híd</small></span><span class="mbest" data-best="ter"></span><span class="mchev" aria-hidden="true">›</span></button>
+<div class="mgrp k">Tudás és közösség</div>
+<button class="mrow" data-go="kis" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 4.5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg></span><span class="mtx"><b>Kisokos</b><small>Tudásmorzsák, legendák, rekordok, jövő</small></span><span class="mbest" data-best="kis"></span><span class="mchev" aria-hidden="true">›</span></button>
+<button class="mrow" data-go="rank" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 13v4M8 20.5h8M9.5 17h5v3.5h-5z"/></svg></span><span class="mtx"><b>Ranglista</b><small>Élő toplista becenévvel</small></span><span class="mbest" data-best="rank"></span><span class="mchev" aria-hidden="true">›</span></button>
+<div class="mgrp k">Rendszer</div>
+<button class="mrow" data-go="set" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span><span class="mtx"><b>Beállítások</b><small>Hang, becenév, eredmények</small></span><span class="mbest" data-best="set"></span><span class="mchev" aria-hidden="true">›</span></button>
+<button class="mrow" data-go="share" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/></svg></span><span class="mtx"><b>Megosztás</b><small>QR-kód, link, telepítés telefonra</small></span><span class="mbest" data-best="share"></span><span class="mchev" aria-hidden="true">›</span></button>
+</nav>
   <p class="fine">A kérdések és a lépéssor a lövegkezelői tananyag oldalaiból készültek. A tűzfeladat gyakorló sorrend, a vezényszavakat és a szabályzatot nem helyettesíti.</p>
  </section>
 
@@ -438,7 +488,6 @@ table.lb tr.me td{background:color-mix(in srgb,var(--gold) 16%,transparent);font
     <button class="life" id="lAud" type="button" title="Közönség">Közönség</button>
     <button class="life" id="lTel" type="button" title="Telefon">Telefon</button>
    </div>
-   <button class="btn ghost small" id="exitBtn" type="button">Kilépés</button>
   </div>
   <div class="panel qcard">
    <div class="k" id="tag"></div>
@@ -503,7 +552,6 @@ table.lb tr.me td{background:color-mix(in srgb,var(--gold) 16%,transparent);font
    <div class="stepfoot">
     <div class="stepbar" id="stepBar"></div>
     <span class="k" id="simScore"></span>
-    <button class="btn ghost small" id="simExit" type="button">Kilépés</button>
     <button class="btn hide" id="stepNext" type="button">Tovább</button>
    </div>
   </div>
@@ -526,27 +574,70 @@ table.lb tr.me td{background:color-mix(in srgb,var(--gold) 16%,transparent);font
 
  <!-- KISOKOS -->
  <section id="kis" class="hide">
-  <div class="panel dd">
-   <div class="ddhead"><h2>Kisokos</h2><button class="btn small" id="kisRand" type="button">Véletlen „Tudtad?”</button></div>
-   <p style="margin:6px 0 10px;color:var(--muted)">Tudásmorzsák, legendás tüzértettek, rekordok és a tüzérség jövője.</p>
-   <div class="tabs" id="kisFilters" style="margin-bottom:12px"></div>
+  <div class="panel pg">
+   <div class="ddhead"><h2 class="pgt">Kisokos</h2><span class="k" id="kisProg"></span></div>
+   <p class="sub">Tudásmorzsák, ballisztika, technika, legendás tüzértettek, rekordok és a tüzérség jövője. Minden kártya a készüléken van, offline is olvasható.</p>
+   <div class="kistools"><input id="kisQ" type="search" placeholder="Keresés a kártyák között…" aria-label="Keresés"><label class="chk"><input type="checkbox" id="kisUnread"> csak olvasatlan</label><button class="btn small" id="kisRand" type="button">Véletlen</button></div>
+   <div class="tabs" id="kisFilters"></div>
    <div class="kgrid" id="kisGrid"></div>
   </div>
  </section>
 
  <!-- RANGLISTA -->
  <section id="rank" class="hide">
-  <div class="panel dd">
-   <div class="ddhead"><h2>Ranglista</h2><span class="k">Összpontszámod: <b id="myTotal">0</b></span></div>
-   <div class="nickrow"><label for="nickIn" class="k">Beceneved</label><input id="nickIn" maxlength="24" placeholder="pl. Tüzér Tudsz" autocomplete="nickname"><button class="btn small" id="nickSave" type="button">Mentés</button><span id="nickMsg" class="k"></span></div>
+  <div class="panel pg">
+   <div class="ddhead"><h2 class="pgt">Ranglista</h2><span class="live hide" id="lbLive"></span></div>
+   <div class="mebox" id="lbMe"></div>
+   <div class="tabs" id="lbTabs"></div>
    <p class="note hide" id="lbStatus"></p>
-   <div style="overflow-x:auto"><table class="lb"><thead><tr><th>#</th><th>Becenév</th><th class="num">Össz.</th><th class="num">Kvíz</th><th class="num">Raktár</th><th class="num">Tűzfeladat</th><th class="num">Terep</th></tr></thead><tbody id="lbBody"></tbody></table></div>
-   <p class="fine" style="text-align:left">Összpontszám = legjobb kvíz + legjobb raktár + tűzfeladat (250 pont minden hibátlan lépésért) + terep (250 pont minden jó döntésért) + lőszertároló. Csak a becenév kerül fel, más adat nem.</p>
+   <div class="lbwrap"><table class="lb"><thead><tr id="lbHead"></tr></thead><tbody id="lbBody"></tbody></table></div>
+   <p class="fine" style="text-align:left">Összpontszám = legjobb kvíz + legjobb raktár + tűzfeladat (250 pont minden hibátlan lépésért) + terep (250 pont minden jó döntésért) + lőszertároló. Csak a becenév kerül fel, más adat nem. A lista élőben frissül.</p>
+  </div>
+ </section>
+
+ <!-- BEÁLLÍTÁSOK -->
+ <section id="set" class="hide">
+  <div class="panel pg">
+   <h2 class="pgt">Beállítások</h2>
+   <h3 class="pgs">Hang</h3>
+   <div class="srow"><div><b>Zene</b><small>Hősi indulótéma a háttérben</small></div><button class="sw" id="cfMusic" type="button" role="switch" aria-checked="true" aria-label="Zene"><i></i></button></div>
+   <div class="srow"><div><b>Hangeffektek</b><small>Gombok, töltés, lövés, robbanás, helyes válasz</small></div><button class="sw" id="cfSfx" type="button" role="switch" aria-checked="true" aria-label="Hangeffektek"><i></i></button></div>
+   <div class="srow"><div><b>Hangerő</b><small id="cfVolV"></small></div><input type="range" id="cfVol" min="0" max="100" step="5" aria-label="Hangerő"></div>
+   <h3 class="pgs">Megjelenés</h3>
+   <div class="srow"><div><b>Háttérrobbanások</b><small>Harctéri animáció a főoldalon</small></div><button class="sw" id="cfBlast" type="button" role="switch" aria-checked="true" aria-label="Háttérrobbanások"><i></i></button></div>
+   <h3 class="pgs">Becenév a ranglistához</h3>
+   <div class="nickrow"><input id="nickIn" maxlength="24" placeholder="pl. Tüzér Tudsz" autocomplete="nickname" aria-label="Becenév"><button class="btn small" id="nickSave" type="button">Mentés</button></div>
+   <p class="k" id="nickMsg" style="margin:6px 0 0"></p>
+   <h3 class="pgs">Eredményeid</h3>
+   <div class="stats" id="bestStats" style="text-align:left;margin:0"></div>
+   <div class="actions" style="margin-top:12px"><button class="btn ghost small" id="cfReset" type="button">Eredmények törlése</button></div>
+   <h3 class="pgs">Névjegy</h3>
+   <p class="fine" id="about" style="text-align:left;margin:0"></p>
+  </div>
+ </section>
+
+ <!-- MEGOSZTÁS -->
+ <section id="share" class="hide">
+  <div class="panel pg">
+   <h2 class="pgt">Megosztás</h2>
+   <p class="sub">Olvasd be telefonnal a QR-kódot, vagy küldd el a linket a bajtársaidnak.</p>
+   <div class="shgrid">
+    <div class="qrbox" id="qr" aria-label="QR-kód a játék linkjéhez"></div>
+    <div style="min-width:0;display:grid;gap:10px;align-content:start">
+     <div class="linkrow"><input id="shareUrl" readonly aria-label="A játék linkje"><button class="btn small" id="copyBtn" type="button">Másolás</button></div>
+     <button class="btn ghost hide" id="nativeShare" type="button">Küldés másik alkalmazással…</button>
+    </div>
+   </div>
+   <div class="howto hide" id="howto">
+    <h3 class="pgs">Telepítés telefonra (offline is fut)</h3>
+    <div class="srow"><div><b>iPhone</b><small>Safari → Megosztás gomb → „Hozzáadás a Főképernyőhöz”</small></div></div>
+    <div class="srow"><div><b>Android</b><small>Chrome → ⋮ menü → „Alkalmazás telepítése” vagy „Hozzáadás a kezdőképernyőhöz”</small></div></div>
+   </div>
   </div>
  </section>
 
  <div class="modal hide" id="cardModal" role="dialog" aria-modal="true" aria-labelledby="cmT">
-  <div class="panel mcard okc"><h2 id="cmT"></h2><p id="cmB" class="mwhy"></p><p id="cmR" class="k"></p><button class="btn" id="cmClose" type="button">Rendben</button></div>
+  <div class="panel mcard okc"><h2 id="cmT"></h2><p id="cmB" class="mwhy"></p><p id="cmR" class="k"></p><div class="mbtns"><button class="btn ghost" id="cmClose" type="button">Bezárás</button><button class="btn hide" id="cmNext" type="button">Következő ›</button></div></div>
  </div>
 
  <!-- LŐSZERRAKTÁR -->
@@ -665,21 +756,24 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var SECTIONS=["home","start","game","end","sim","simEnd","dd","ter","terEnd","hangar","hangarEnd","kis","rank"];
+var SECTIONS=["home","start","game","end","sim","simEnd","dd","ter","terEnd","hangar","hangarEnd","kis","rank","set","share"];
+var GAMES=["game","sim","dd","ter","hangar"];
+function curSec(){for(var i=0;i<SECTIONS.length;i++)if(!$(SECTIONS[i]).classList.contains("hide"))return SECTIONS[i];return "home";}
 var TABOF={home:"home",start:"start",game:"start",end:"start",sim:"sim",simEnd:"sim",dd:"dd",ter:"ter",terEnd:"ter",hangar:"hangar",hangarEnd:"hangar",kis:"kis",rank:"rank"};
 function show(id){if(window.factInto){if(id==="hangarEnd")factInto("factHg");if(id==="simEnd")factInto("factSim");if(id==="end")factInto("factQuiz");if(id==="terEnd")factInto("factTer");}
 SECTIONS.forEach(function(s){$(s).classList.toggle("hide",s!==id);});
-  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){t.classList.toggle("on",t.dataset.go===TABOF[id]);});
+  var xb=$("tbExit");xb.classList.toggle("hide",id==="home");xb.textContent=GAMES.indexOf(id)>=0?"✕ Kilépés":"‹ Főmenü";
   window.scrollTo(0,0);}
-function busy(){return (!$("game").classList.contains("hide")&&S)||(!$("sim").classList.contains("hide"));}
+function busy(){var c=curSec();return (c==="game"&&!!S)||c==="sim"||c==="dd"||c==="ter"||c==="hangar";}
 function go(target){
   if(busy()){pendingGo=target;openExit();return;}
   route(target);
 }
 var pendingGo=null;
-function route(t){ if(t==="sim") startSim(); else if(t==="dd") startDD(); else if(t==="ter") startTer(); else if(t==="hangar") startHangar(); else if(t==="kis"){show("kis");renderKis();} else if(t==="rank"){show("rank");$("myTotal").textContent=fmt(LB.total());LB.push();LB.render();} else {show(t); renderStats();} }
+function route(t){ if(t==="sim") startSim(); else if(t==="dd") startDD(); else if(t==="ter") startTer(); else if(t==="hangar") startHangar(); else if(t==="kis"){show("kis");renderKis();} else if(t==="rank"){show("rank");LB.push();LB.render();} else if(t==="set"){show("set");renderSet();} else if(t==="share"){show("share");} else {show(t); renderStats();} }
 Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(b){b.addEventListener("click",function(){go(b.dataset.go);});});
 $("brand").addEventListener("click",function(){go("home");});
+$("tbExit").addEventListener("click",function(){go("home");});
 
 /* ===== PzH rajz (oldalnézeti metszet) ===== */
 /* koordináták: 1000×470, előre jobbra; tornyot hátul, motor elöl – a tananyag 4. oldali elhelyezési vázlata szerint */
@@ -873,16 +967,17 @@ function renderStats(){var parts=[];
   if(store.hgBest!=null)parts.push("Raktár: <strong>"+fmt(store.hgBest)+" pont</strong>");
   if(store.terBest!=null)parts.push("Terepjárás: <strong>"+store.terBest+" / 8</strong>");
   if(store.ddBest!=null)parts.push("Lőszertároló: <strong>"+store.ddBest+" hiba</strong>");
-  $("bestStats").innerHTML=parts.join(" · ");}
+  $("bestStats").innerHTML=parts.length?parts.join("<br>"):"Még nincs mentett eredményed.";
+  var B={start:store.best?fmt(store.best)+" p":"",sim:store.simBest!=null?store.simBest+" hiba":"",hangar:store.hgBest!=null?fmt(store.hgBest)+" p":"",
+    ter:store.terBest!=null?store.terBest+" / 8":"",dd:store.ddBest!=null?store.ddBest+" hiba":"",kis:window.KIS?Object.keys(store.kisRead||{}).length+" / "+KIS.length:"",rank:LB&&LB.total()?fmt(LB.total())+" p":"",set:"",share:""};
+  Array.prototype.forEach.call(document.querySelectorAll(".mbest"),function(n){var v=B[n.dataset.best]||"";n.textContent=v&&(n.dataset.best==="kis"?"Olvasva "+v:n.dataset.best==="rank"?"Össz. "+v:"Legjobb "+v);});}
 $("startBtn").addEventListener("click",newGame);$("againBtn").addEventListener("click",newGame);
 
 /* kilépés */
-function openExit(){$("exitText").textContent=!$("sim").classList.contains("hide")?"A tűzfeladat állása elvész.":"Az eddigi állásod elvész. Ha a pontjaidat vinnéd, használd a „Megállok” gombot.";$("exitModal").classList.remove("hide");$("exitNo").focus();}
+function openExit(){var c=curSec();$("exitText").textContent=c==="sim"?"A tűzfeladat állása elvész.":c==="game"?"Az eddigi állásod elvész. Ha a pontjaidat vinnéd, használd a „Megállok” gombot.":"A játék állása elvész, és visszajutsz a főmenübe.";$("exitModal").classList.remove("hide");$("exitNo").focus();}
 function closeExit(){$("exitModal").classList.add("hide");pendingGo=null;}
-$("exitBtn").addEventListener("click",function(){pendingGo="home";openExit();});
-$("simExit").addEventListener("click",function(){pendingGo="home";openExit();});
 $("exitNo").addEventListener("click",closeExit);
-$("exitYes").addEventListener("click",function(){var t=pendingGo||"home";$("exitModal").classList.add("hide");pendingGo=null;S=null;SIM.run++;$("sim").classList.add("hide");route(t);});
+$("exitYes").addEventListener("click",function(){var t=pendingGo||"home";$("exitModal").classList.add("hide");pendingGo=null;S=null;SIM.run++;TER.run++;HG.run++;$("sim").classList.add("hide");route(t);});
 $("exitModal").addEventListener("click",function(e){if(e.target===this)closeExit();});
 document.addEventListener("keydown",function(e){
   if(!$("exitModal").classList.contains("hide")){if(e.key==="Escape")closeExit();return;}
@@ -1639,16 +1734,108 @@ var KIS=[
  {c:"Jövő",t:"75 km és tovább",b:"A Rheinmetall 2020 óta tesztel L52-es prototípus csövet új töltettel, legalább 75 km-es lőtávolságra. A cél: a rakéta-tüzérség távolságait csöves löveggel elérni, olcsóbb lövedékkel."},
  {c:"Jövő",t:"Torlósugár-hajtású (ramjet) tüzérségi lövedék",b:"Fejlesztés alatt állnak olyan 155 mm-es lövedékek, amelyek a repülés közben beszívott levegővel égetik a hajtóanyagot, mint egy sugárhajtómű. Ettől még nagyobb lőtávolságot várnak."},
  {c:"Jövő",t:"Automatizált, kevés kezelős lövegek",b:"A PzH 2000 automata töltője már ma is percenként 8 lövésre képes. A fejlesztések iránya a még automatizáltabb, távvezérelt toronyrendszerek és a „lőj és tűnj el” (shoot and scoot) taktika: a löveg 2 percen belül tüzel és állást vált, mielőtt az ellentüzérség válaszolna."}
+ ,{c:"Ballisztika",t:"Miért pörög a lövedék?",b:"A cső belsejében csavarvonalú huzagok futnak. A lövedék réz vezetőgyűrűje belepréselődik ezekbe, ezért a lövedék a csövön végigfutva gyors forgásba jön. A pörgő test úgy viselkedik, mint egy pörgettyű: stabilan, orral előre repül, nem bukfencezik."}
+ ,{c:"Ballisztika",t:"A vezetőgyűrű kettős feladata",b:"A gránát hátsó részén lévő lágy fém (rendszerint réz) gyűrű egyszerre tömít és forgat. Tömít, mert nem engedi a lőporgázt a lövedék mellett előre szökni. Forgat, mert a huzagokba vágódva átadja a pörgést. Ha sérült vagy szennyezett, romlik a pontosság, ezért kezeléskor óvni kell."}
+ ,{c:"Ballisztika",t:"Derivációs eltérés",b:"A jobbra csavarodó huzagolású csőből kilőtt, pörgő lövedék repülés közben lassan jobbra sodródik. Ez a deriváció. Nagy távolságon több tíz méter is lehet, ezért a lőelemek számításakor a tűzvezető rendszer automatikusan korrigálja."}
+ ,{c:"Ballisztika",t:"A Föld forgása is beleszól",b:"Nagy lőtávolságon már a Coriolis-hatás is számít: a lövedék alatt a Föld közben elfordul. Az északi féltekén a becsapódás ettől jobbra tolódik. Néhány km-en elhanyagolható, 30–40 km-en viszont már a számítás része, ahogy a Párizs-ágyúnál is az volt."}
+ ,{c:"Ballisztika",t:"Mit tud a meteo-üzenet?",b:"A szél, a hőmérséklet és a légnyomás rétegenként változik a röppálya mentén. A meteorológiai üzenet ezeket magassági rétegekre bontva adja meg, a tűzvezetés pedig minden rétegre korrigál. Friss meteo nélkül egy 30 km-es lövésnél akár több száz méter is lehet a hiba."}
+ ,{c:"Ballisztika",t:"Meleg töltet messzebbre lő",b:"A hajtótöltet hőmérséklete befolyásolja az égés sebességét. Melegebb töltettel nagyobb a kezdősebesség és messzebbre repül a gránát, hidegebbel rövidebb lesz a lövés. Ezért számít a töltethőmérséklet, és ezért nem mindegy, hogy a töltet napon vagy árnyékban állt."}
+ ,{c:"Ballisztika",t:"Két szög, ugyanaz a távolság",b:"Egy adott távolságra (a legnagyobb lőtávolság alatt) két csőemelkedéssel is el lehet találni: egy laposabbal (alsó szögcsoport) és egy meredekebbel (felső szögcsoport). A meredek röppálya hegyek, magas épületek vagy fedezék mögé is betalál, cserébe hosszabb a repülési idő."}
+ ,{c:"Ballisztika",t:"Vonás: a tüzér szögmértéke",b:"A teljes kör 6400 vonás (a NATO-ban). A hasznos közelítés: 1 vonás nagyjából 1 m oldaleltérés 1 km-en. Így 10 km-en 1 vonás hiba kb. 10 m, 30 km-en kb. 30 m. Ezért kell a tüzérnek ilyen apró egységben gondolkodnia."}
+ ,{c:"Ballisztika",t:"A szórási ellipszis",b:"Ugyanazzal a csővel és lőelemekkel lőtt gránátok sem esnek egy pontba. A becsapódások ellipszis alakú területen szóródnak, amely távolság irányban hosszabb, mint oldalirányban. Ezt okozza a töltetek, a lövedékek és a légkör apró eltérése. A tűzvezetés ezzel számol, amikor egy célra több lövést tervez."}
+ ,{c:"Ballisztika",t:"Belövés nélkül, rögtön hatásra",b:"Régen az első lövések a belövést szolgálták, és ez figyelmeztette az ellenséget. Pontos saját helyzettel (navigáció), friss meteóval és mért kezdősebességgel ma rögtön hatásra lehet tüzelni. Ez a meglepetés: az első gránátok már a célba csapódnak."}
+ ,{c:"Ballisztika",t:"Mi az a lőelem?",b:"A lőelemek határozzák meg, hova repül a gránát: az irány (oldalszög), a csőemelkedés, a töltet (hány modul) és a gyújtó beállítása. A PzH 2000-nél ezeket a tűzvezető számítógép adja ki, a kezelőknek a helyes lőszert és töltetet kell biztosítaniuk."}
+ ,{c:"Ballisztika",t:"Repülési idő",b:"Egy 30 km-re kilőtt gránát fél percnél is tovább van a levegőben. Ez alatt egy jármű több száz métert megtehet. Ezért mozgó célra a tüzérség nehezen lő, és ezért fontos az irányított lövedék vagy a gyors tűzkérés."}
+ ,{c:"Ballisztika",t:"Csőkopás",b:"Minden lövésnél a forró lőporgáz egy vékony réteget erodál a töltetűr elejéből és a huzagok kezdetéből. A kopott csőben a lövedék rosszabbul tömít, csökken a kezdősebesség. Ezért vezetik a cső lövésszámát (egyenértékű teljes töltetes lövésben), és ezért mérik a V0-t."}
+ ,{c:"Ballisztika",t:"Miért kell hővédő burkolat a csőre?",b:"Ha a csövet csak egyik oldalról süti a nap vagy veri az eső, egyenetlenül melegszik, és szemmel nem láthatóan, de elhajlik. Pár ezred fok elhajlás is méterekben mérhető hibát okoz 30 km-en. A hővédő burkolat egyenletesen tartja a cső hőmérsékletét."}
+ ,{c:"Technika",t:"L52: milyen hosszú a cső?",b:"Az L52 azt jelenti, hogy a cső hossza 52-szerese az űrméretnek: 155 mm × 52 ≈ 8 m. A hosszabb csőben a lőporgáz tovább gyorsítja a lövedéket, ezért nagyobb a kezdősebesség és a lőtávolság, mint a régebbi L39-es csöveknél."}
+ ,{c:"Technika",t:"A 155/52 közös szabvány",b:"Több NATO-ország közös ballisztikai megállapodásban (JBMoU) rögzítette a 155 mm-es, 52 kaliberhosszú cső és a 23 literes töltetűr szabványát. Így a különböző gyártók lövedékei és töltetei elvileg egymás lövegeiben is használhatók. Ezért lőhet a PzH 2000 dél-afrikai Assegai lőszert is."}
+ ,{c:"Technika",t:"Torkolatfék",b:"A cső végén lévő többkamrás torkolatfék a kiáramló lőporgáz egy részét oldalra és hátrafelé tereli. Ez előre húzza a csövet, és jelentősen csökkenti a hátrasiklás erejét. Ezért bírja a jármű a nagy töltetes lövéseket is."}
+ ,{c:"Technika",t:"Füstelszívó (lőporgáz-elszívó)",b:"A cső közepén lévő hengeres tartály lövéskor megtelik nagynyomású gázzal. Amikor a lövedék elhagyta a csövet, ez a gáz ferde furatokon előre fúj, és kiszívja a maradék lőporgázt a csőből. Így a zár nyitásakor nem a küzdőtérbe áramlik a mérgező gáz."}
+ ,{c:"Technika",t:"Hátrasiklás és előresiklás",b:"Lövéskor a cső hátrasiklik, a hátrasiklás-fék elnyeli az energiát, majd az előresiklató visszatolja a csövet. Enélkül a teljes visszarúgás a járműre jutna, és minden lövés után újra kellene irányozni."}
+ ,{c:"Technika",t:"Saját navigáció: tudja, hol áll",b:"A PzH 2000 inerciális navigációval és műholdas helymeghatározással ismeri a saját helyzetét és a cső irányát. Nem kell hagyományos geodéziai előkészítés és irányzópont. Megállás után rövid időn belül tűzkész, majd lövés után azonnal továbbállhat."}
+ ,{c:"Technika",t:"Miért automata a töltő?",b:"A PzH 2000 lőszerszállító rendszere a tárolóból a csőig maga viszi a gránátot, és be is tolja. A kezelőknek a töltet behelyezése és a felügyelet marad. Ez adja a nagy tűzgyorsaságot, és ez teszi lehetővé az MRSI-t, a több gránát egyidejű becsapódását."}
+ ,{c:"Technika",t:"Motor elöl, torony hátul",b:"A PzH 2000-ben a motor és a hajtómű elöl van, a torony hátul. Így a nehéz torony és a cső a jármű hátsó részére kerül, a küzdőtér pedig nagy, jól kialakítható. A hajtást egy MTU dízelmotor adja kb. 1000 LE teljesítménnyel."}
+ ,{c:"Technika",t:"Mozgékonyság",b:"Az kb. 55 tonnás PzH 2000 közúton kb. 60 km/h-val halad, és egy tankolással kb. 400 km-t tesz meg. Ez lánctalpas tüzérségi löveghez képest gyors. Tud együtt mozogni a harckocsikkal és a gyalogsági harcjárművekkel."}
+ ,{c:"Technika",t:"Védett küzdőtér",b:"A páncéltest a kézifegyverek, a gránátrepeszek és a kisebb kaliberű lövedékek ellen véd, a tetőn kiegészítő páncél óv a felülről érkező kisbombák ellen. Az ABV-szűrő túlnyomást tart a küzdőtérben, így a vegyi és sugárszennyezett levegő nem jut be."}
+ ,{c:"Technika",t:"Kettős biztosítás a gyújtóban",b:"A modern tüzérségi gyújtó két független hatásra élesedik: a lövés hátrafelé ható gyorsulására és a lövedék forgására. Raktárban, szállításkor vagy egy véletlen ejtéskor egyik sem lép fel egyszerre, ezért a gyújtó nem élesedik. A csőből kilépés után is csak biztonságos távolság megtétele után élesedik."}
+ ,{c:"Technika",t:"Irányított gyújtó: régi gránát, új pontosság",b:"A precíziós irányítókészlet (pl. az amerikai PGK) egy gyújtó helyére csavarható, GPS-szel vezérelt egység. Kis kormánylapokkal korrigálja a röppályát, és egy hagyományos repeszgránát szórását több száz méterről néhány tíz méterre csökkenti."}
+ ,{c:"Technika",t:"Excalibur: a GPS-es gránát",b:"Az M982 Excalibur 155 mm-es irányított lövedék a röppálya csúcsa után kinyitja a szárnyait, és GPS segítségével siklik a célra. Drága, de egy-két lövéssel elvégzi, amihez hagyományos gránátból tucatnyi kellene. Ráadásul a saját csapatok közelében is kisebb a kockázata."}
+ ,{c:"Technika",t:"Ellentüzérségi radar",b:"A radar követi a beérkező gránát röppályáját, és visszaszámolja, honnan lőtték ki. Ez percek, sőt másodpercek alatt megvan. Ezért a modern löveg lő, és azonnal tovább is áll („shoot and scoot”), mielőtt a válaszcsapás megérkezne."}
+ ,{c:"Technika",t:"Szenzortól a lövegig",b:"A tüzérség lánca: a felderítő (előretolt megfigyelő, drón, radar) megtalálja a célt, a tűzvezetés kiszámolja a lőelemeket, a löveg tüzel. Minél rövidebb az idő az észleléstől a becsapódásig, annál nagyobb az esély, hogy a cél még ott van. A digitális tűzvezetés ezt percekre csökkentette."}
+ ,{c:"Tudásmorzsa",t:"TOT: időzített egyidejű becsapódás",b:"A Time on Target azt jelenti, hogy több löveg vagy üteg, különböző távolságokból úgy időzíti a lövéseit, hogy minden gránát ugyanabban a pillanatban csapódjon be. A célnak nincs ideje fedezékbe húzódni: az első becsapódás egyben az utolsó is."}
+ ,{c:"Tudásmorzsa",t:"Közvetett és közvetlen irányzás",b:"A tüzérség jellemzően közvetett irányzással lő: a célt nem látja, a lőelemeket számítás adja. Közvetlen irányzásnál a löveg a látott célra lő, mint egy harckocsi. A PzH 2000 mindkettőre képes, de az ereje a nagy távolságú közvetett tűz."}
+ ,{c:"Tudásmorzsa",t:"Honnan jön a „howitzer” szó?",b:"A tarack angol neve, a howitzer, a cseh „houfnice” szóból ered. Ez a huszita háborúkban (15. század) a kőgolyót szóró, szekérvárból használt löveget jelentette. A német Haubitze és az angol howitzer is innen származik."}
+ ,{c:"Tudásmorzsa",t:"Tarack, ágyú, mozsár: mi a különbség?",b:"Az ágyú hosszú csövű, lapos röppályán, nagy kezdősebességgel lő. A mozsár rövid csövű, meredeken lő. A tarack a kettő között van: alsó és felső szögcsoportban is tüzelhet. A PzH 2000 hivatalosan önjáró tarack (Panzerhaubitze), a hosszú csöve miatt nagyon messzire hord."}
+ ,{c:"Tudásmorzsa",t:"„A tüzérség a háború istene”",b:"Ezt a mondást Sztálinnak tulajdonítják a második világháborúból. A Vörös Hadsereg támadásait hatalmas tüzérségi előkészítés nyitotta, kilométerenként több száz löveggel. A mondás jól mutatja, mekkora szerepe volt a tüzérségnek a 20. század háborúiban."}
+ ,{c:"Tudásmorzsa",t:"Repesz, a gránát hatóanyaga",b:"A repeszgránát hatását nem a robbanás nyomása, hanem a szétvetett acélburkolat darabjai adják. A burkolat anyaga és vastagsága úgy van megválasztva, hogy sok, megfelelő méretű repesz keletkezzen. Ezért számít a gyújtó beállítása: a levegőben robbanó gránát repeszei nagyobb területet fednek le."}
+ ,{c:"Tudásmorzsa",t:"Ködgránát és megvilágító",b:"Nem minden tüzérségi lőszer robban a célban. A ködgránát a levegőben vagy a talajon füstöt fejleszt, ami eltakarja a saját mozgást az ellenséges megfigyelés elől. A megvilágító gránát ejtőernyőn ereszkedő fényforrást old ki, és éjjel kivilágítja a terepet. Modern változata infravörös fényben, csak éjjellátóval látható."}
+ ,{c:"Tudásmorzsa",t:"Mennyi egy 155 mm-es gránát?",b:"Egy 155 mm-es repeszgránát tömege jellemzően 43–47 kg. Ezért fontos a gépesített lőszerkezelés: egy tüzelési sorozatban a kezelők tonnaszám mozgatnák a lőszert, ha mindent kézzel kellene."}
+ ,{c:"Tudásmorzsa",t:"Miért nincs hüvely a PzH-ban?",b:"A PzH 2000 hüvely nélküli, moduláris hajtótöltettel lő. A töltetmodul égése után nem marad kivetendő fémhüvely, nem kell hüvelyt tárolni és elszállítani. A zár tömítését a zárszerkezet adja, a töltetet az indítóöltény gyújtja."}
+ ,{c:"Tudásmorzsa",t:"Szent Borbála napja: december 4.",b:"A tüzérek ünnepe sok országban december 4. Ilyenkor hagyomány a „Borbála-ágacska”: a napon levágott cseresznyeágat vízbe teszik, és ha karácsonyra kivirágzik, szerencsés év jön."}
+ ,{c:"Legenda",t:"Orbán, a magyar ágyúöntő",b:"1453-ban II. Mehmed szultán Konstantinápoly falait egy Orbán nevű, Magyarországról vagy Erdélyből származó mester öntötte óriásbronzágyúkkal lövette. Orbán először Bizáncnak ajánlotta a tudását, de ott nem tudták megfizetni. A falak, amelyek ezer évig álltak, a tüzérség előtt elestek."}
+ ,{c:"Legenda",t:"Henry Shrapnel és a „srapnel”",b:"Henry Shrapnel brit tüzértiszt az 1780-as években olyan lövedéket talált fel, amely golyókkal volt megtöltve, és a cél felett kis töltettel vetette szét őket. A találmány annyira sikeres lett, hogy a neve köznévvé vált: ma a repeszeket is gyakran srapnelnek hívják."}
+ ,{c:"Legenda",t:"Gribeauval, a szabványosító",b:"Jean-Baptiste de Gribeauval francia tábornok a 18. században egységesítette a lövegeket: azonos űrméretek, cserélhető alkatrészek, könnyebb lövegtalpak. Az így megújult francia tüzérséggel aratta később Napóleon a győzelmeit."}
+ ,{c:"Legenda",t:"A francia 75-ös",b:"Az 1897-ben rendszeresített francia 75 mm-es tábori ágyú volt az első igazán modern löveg. A hidraulikus hátrasiklás-fék miatt lövéskor nem mozdult el, ezért nem kellett újra irányozni. Percenként 15 lövésre is képes volt, ami akkor forradalmi volt."}
+ ,{c:"Legenda",t:"Verdun 1916: több mint ezer löveg nyitott",b:"1916. február 21-én a német támadás több mint ezer löveg órákig tartó tüzével kezdődött egy viszonylag keskeny arcvonalon. A verduni csata tíz hónapig tartott. A tüzérség okozta a veszteségek nagy részét, a táj egyes részei ma is krátermezők."}
+ ,{c:"Legenda",t:"Somme 1916: a hét napos tűz",b:"A somme-i támadás előtt a brit tüzérség egy hétig mintegy másfél millió gránátot lőtt ki. Sok lövedék nem robbant fel, és a drótakadályok nagy része megmaradt. Az első napon a britek kb. 57 000 főt vesztettek. A tanulság: a mennyiség nem pótolja a pontosságot és a jó gyújtót."}
+ ,{c:"Legenda",t:"A titkos közelségi gyújtó",b:"A második világháború egyik legjobban őrzött titka a rádiós közelségi (VT) gyújtó volt. Kezdetben csak tengerre lőhették, hogy ne kerüljön ellenséges kézbe. 1944 végén, az ardenneki csatában vetették be először szárazföldön, és a levegőben robbanó gránátok megtörték a német támadásokat."}
+ ,{c:"Legenda",t:"Pointe du Hoc, 1944",b:"A partraszállás napján amerikai rangerek kötéllétrákon másztak fel a 30 m-es normandiai sziklafalra, hogy elpusztítsák az ott jelentett német lövegeket. Fent a lövegállások üresek voltak, a lövegeket hátrébb rejtették el. A rangerek megtalálták és harcképtelenné tették őket."}
+ ,{c:"Legenda",t:"Dien Bien Phu, 1954",b:"A francia parancsnokság úgy hitte, a hegyekre nem lehet nehéztüzérséget felvinni. A vietnami erők szétszedve, kézzel, kerékpáron vonszolták fel a lövegeket, és a hegyoldalba vájt, álcázott állásokból lőtték a völgyben lévő támaszpontot. A francia ellentüzérség nem találta meg őket."}
+ ,{c:"Legenda",t:"A PzH 2000 első harci bevetése",b:"A holland hadsereg 2006-tól Afganisztánban (Uruzgán tartományban) vetette be először harcban a PzH 2000-et, majd a német Bundeswehr is. A nagy pontosság miatt a saját csapatokhoz közeli célokra is lőhettek, ami tüzérséggel ritka."}
+ ,{c:"Legenda",t:"PzH 2000 Ukrajnában",b:"2022-től Németország és Hollandia PzH 2000-eket adott Ukrajnának. A háború megmutatta a löveg erejét, de a gyengeségét is: a folyamatos, nagy intenzitású tüzelés nagyon megterheli a lőszerkezelő rendszert és a csövet, ezért kulcskérdés lett a karbantartás és az alkatrész-utánpótlás."}
+ ,{c:"Legenda",t:"Felfújható PzH és drónok",b:"Ukrajnában mindkét fél felfújható vagy fából készült löveg- és harcjármű-makettekkel csalja a felderítést. A drónok miatt a löveg ma szinte állandóan megfigyelés alatt van, ezért az álcázás, az állásváltás és a gyors tüzelés életmentő."}
+ ,{c:"Történelem",t:"Mons Meg, a skót óriás",b:"Az edinburgh-i várban ma is látható 15. századi óriás bombarda kb. 50 cm-es kőgolyókat lőtt. Olyan nehéz volt, hogy naponta csak néhány kilométert tudták vontatni."}
+ ,{c:"Történelem",t:"A Cár-ágyú",b:"A moszkvai Kremlben álló, 1586-ban öntött bronzágyú űrmérete kb. 890 mm, tömege közel 40 tonna. Harcban soha nem használták; inkább a cári hatalom jelképe volt, mint fegyver."}
+ ,{c:"Történelem",t:"Bombardák és kőgolyók",b:"A 14–15. századi korai lövegek kovácsolt vasrudakból abroncsolt vagy bronzból öntött csövek voltak, kőgolyót lőttek. Egy lövésre néha órákat kellett várni, a cső pedig gyakran felrobbant. Mégis ezek döntötték le a középkori várfalakat."}
+ ,{c:"Történelem",t:"Mohács, 1526",b:"A mohácsi csatában a hagyomány szerint a török sereg nagy számú, láncokkal összekötött ágyúja a janicsárok előtt felsorakozva fogadta a magyar lovasroham. A tüzérség és a sáncolt állás együtt döntötte el a csatát. Évszázadokig tanulságként emlegették, mit jelent a tüzérség és a gyalogság együttműködése."}
+ ,{c:"Történelem",t:"Az ostromtüzérség kora",b:"A 16–17. században a vár erőssége a tüzérséggel szembeni ellenállásán múlott. Ezért születtek a bástyás, alacsony, vastag falú erődök, amelyek oldalazó tűzzel védték egymást. A komáromi erődrendszer is ennek a gondolkodásnak a késői, 19. századi utóda."}
+ ,{c:"Történelem",t:"Hidegháborús tüzérség itthon",b:"A Varsói Szerződés idején a magyar tüzérség szovjet típusú lövegeket használt, például vontatott 152 mm-es tarackokat és 122 mm-es önjáró tarackokat. A PzH 2000 rendszeresítése új korszakot nyitott: NATO-szabványú, digitális tűzvezetésű, automata töltésű löveg."}
+ ,{c:"Történelem",t:"Sorozatvetők: a „Sztálin-orgona”",b:"A második világháborús szovjet Katyusa sorozatvető egyetlen sortűzzel nagy területet borított be rakétákkal. A német katonák a hangja miatt Sztálin-orgonának hívták. A rakéta-tüzérség és a csöves tüzérség azóta is kiegészíti egymást."}
+ ,{c:"Magyar vonatkozás",t:"Gábor Áron, a székely ágyúöntő",b:"1848-ban a háromszéki Gábor Áron tanult öntőmester nélkül, harangokból és rézedényekből kezdett ágyút önteni, hogy a székely önvédelemnek legyen tüzérsége. Ágyúi a szabadságharc legendáivá váltak. 1849-ben Kökösnél esett el, a saját lövegei mellett."}
+ ,{c:"Magyar vonatkozás",t:"Bornemissza Gergely tűzszerkezetei",b:"Az egri vár 1552-es ostromakor Bornemissza Gergely tüzes kerekeket és robbanó gránátokat szerkesztett a védőknek. Gárdonyi Géza Egri csillagok című regénye tette a nevét mindenki számára ismertté."}
+ ,{c:"Magyar vonatkozás",t:"A Monostori erőd",b:"A komáromi Monostori erőd Közép-Európa egyik legnagyobb újkori erődje, a 19. század második felében épült. Kazamatái, lőrései és lövegállásai a korabeli tüzérség elleni védekezést mutatják. Ma múzeumként látogatható."}
+ ,{c:"Magyar vonatkozás",t:"A Škoda 30,5 cm-es mozsár",b:"Az Osztrák–Magyar Monarchia Škoda gyártmányú 30,5 cm-es mozsara 1914-ben a német Dicke Bertha mellett lőtte a belga erődöket. Szétszedve, gépjárművekkel szállították, ami akkor újdonság volt. A monarchia nehéztüzérsége így beírta magát a hadtörténetbe."}
+ ,{c:"Magyar vonatkozás",t:"Magyar tüzérek a Doberdón és az Isonzónál",b:"Az első világháború olasz frontján, a karsztos Doberdó-fennsíkon a gránát a kemény sziklán sok szilánkot vert le, ezért ott a tüzérségi tűz különösen pusztító volt. A magyar honvéd és közös hadseregbeli tüzérek az isonzói csatákban hónapokon át tartották az arcvonalat."}
+ ,{c:"Rekord",t:"180 km magasra lőtt lövedék",b:"A kanadai–amerikai HARP-program 1966-ban egy átalakított, összetoldott hajóágyúval kb. 180 km magasra lőtt fel egy mérőlövedéket, az űr határán túlra. A programot Gerald Bull vezette, aki később a dél-afrikai G5/G6 lövegek és a nagy hatótávú lövedékek fejlesztésében is részt vett."}
+ ,{c:"Rekord",t:"A legnagyobb űrméret: 914 mm",b:"Az amerikai „Little David” mozsár űrmérete 914 mm volt. A második világháborúban bunkerek rombolására fejlesztették, de harcban soha nem használták. Az ugyanilyen űrméretű 19. századi brit Mallet-mozsár szintén kísérleti példány maradt."}
+ ,{c:"Rekord",t:"Atomágyú: egyetlen éles lövés",b:"1953-ban az amerikai 280 mm-es „Atomic Annie” ágyú egy kísérleten kb. 10 km-re lőtt ki egy atomtöltetű lövedéket. Ez volt a történelem egyetlen éles atomtüzérségi lövése. A hidegháborúban sok ilyen lövedék készült, de mára mindet kivonták."}
+ ,{c:"Rekord",t:"Több tízezer gránát naponta",b:"Az ukrajnai háború csúcsidőszakaiban becslések szerint napi több tízezer tüzérségi lövedéket lőttek ki. A világháborúk óta nem látott lőszerfogyasztás miatt Európa-szerte újraindult és bővült a lőszergyártás."}
+ ,{c:"Rekord",t:"A leggyorsabb első lövés",b:"A modern önjáró lövegek egyik legfontosabb mutatója, mennyi idő telik el a megállástól az első lövésig. A PzH 2000 automatizált irányzással és navigációval ebben a kategóriában a leggyorsabbak közé tartozik, ezért tud a válaszcsapás előtt elhagyni az állást."}
+ ,{c:"Jövő",t:"RCH 155: torony távirányítással",b:"Az RCH 155 kerekes Boxer alvázra szerelt, távirányított tornyú löveg, ugyanazzal a 155/52-es csővel és sok rendszerelemmel, mint a PzH 2000. A toronyban nem ül ember, a személyzet a páncélozott vezetőfülkéből kezeli. Németország és az Egyesült Királyság is rendszeresíti."}
+ ,{c:"Jövő",t:"Vulcano: irányított, nagy hatótávú lőszer",b:"Az olasz Vulcano 155 mm-es lövedékcsalád leválasztó köpenyes, kis keresztmetszetű, szárnyas lövedékkel 70 km körüli lőtávolságot ér el. GPS-szel és félaktív lézerrel vezérelt változata is van. A 155/52-es szabvány miatt a PzH 2000-ből is kilőhető."}
+ ,{c:"Jövő",t:"ERCA: a 70 km-es amerikai próbálkozás",b:"Az amerikai hadsereg kísérleti, 58 kaliberhosszú csővel szerelt löveggel (XM1299) próbált 70 km-re lőni. A program 2024-ben leállt, mert a cső kopása túl nagy volt. A tanulság: a lőtávolság növelése nem csak a csövön, hanem a lövedéken és a tölteten is múlik."}
+ ,{c:"Jövő",t:"Hiperszonikus lövedék csöves lövegből",b:"Kísérletek folynak olyan kis keresztmetszetű, nagy sebességű lövedékkel, amely a hagyományos 155 mm-es csőből is kilőhető, és sokkal gyorsabban ér célba. Ez légvédelmi és rakétaelhárító feladatokat is adhat a tüzérségnek."}
+ ,{c:"Jövő",t:"Elektromágneses sínágyú",b:"A sínágyú lőpor nélkül, elektromágneses erővel gyorsítja a lövedéket. Az amerikai haditengerészet évekig fejlesztette, de 2021-ben leállította: a sínek kopása és az óriási energiaigény még nem megoldott. Az ötlet azonban nem tűnt el."}
+ ,{c:"Jövő",t:"Csavarogó lőszer és tüzérség",b:"A célterület felett köröző, kamerás lőszer (loitering munition) egyszerre felderítő és fegyver. A jövő tüzérsége valószínűleg vegyesen használja: a drón megtalálja és megjelöli a célt, a löveg olcsó gránátokkal megsemmisíti."}
+ ,{c:"Jövő",t:"Mesterséges intelligencia a tűzvezetésben",b:"A szenzoradatok (drón, radar, megfigyelő) gyorsabb feldolgozását, a célok rangsorolását és a lövegek közötti tűzelosztást egyre inkább gépi segédletek gyorsítják. A tűzparancs és a felelősség azonban az embernél marad."}
+ ,{c:"Jövő",t:"Robotizált lőszerutánpótlás",b:"A tűzgyorsaság ma már gyakran nem a lövegen, hanem a lőszerutánpótláson múlik. Fejlesztések célja az automatikus átrakás a lőszerszállító járműről a lövegbe, hogy a kezelőknek ne kelljen a szabadban, kézzel tonnákat mozgatniuk."}
+ ,{c:"Jövő",t:"Kerekes vagy lánctalpas?",b:"Az utóbbi években sok hadsereg kerekes önjáró löveget (pl. Archer, Caesar, RCH 155) választott: gyorsabb közúton, olcsóbb fenntartani. A lánctalpas PzH 2000 előnye a terepjáró képesség, a páncélvédelem és a nagy lőszerjavadalmazás. A két típus kiegészíti egymást."}
 ];
-var KISC=["Mind","Tudásmorzsa","Legenda","Magyar vonatkozás","Rekord","Jövő"],kisF="Mind";
-function renderKis(){var f=$("kisFilters");f.innerHTML="";KISC.forEach(function(c){var b=document.createElement("button");b.type="button";b.className="tab"+(c===kisF?" on":"");b.textContent=c;
-    b.addEventListener("click",function(){kisF=c;renderKis();});f.appendChild(b);});
-  var g=$("kisGrid");g.innerHTML="";KIS.filter(function(k){return kisF==="Mind"||k.c===kisF;}).forEach(function(k){var a=document.createElement("article");a.className="panel kcard";
-    a.innerHTML="<span class='k'></span><h3></h3><p></p>";a.children[0].textContent=k.c;a.children[1].textContent=k.t;a.children[2].textContent=k.b;g.appendChild(a);});}
+var KISC=["Mind","Tudásmorzsa","Ballisztika","Technika","Legenda","Történelem","Magyar vonatkozás","Rekord","Jövő"],kisF="Mind";
+var kisList=[],kisIdx=-1;
+function kisRd(){return store.kisRead||(store.kisRead={});}
+function renderKis(){var f=$("kisFilters"),rd=kisRd();f.innerHTML="";
+  KISC.forEach(function(c){var n=c==="Mind"?KIS.length:KIS.filter(function(k){return k.c===c;}).length;var b=document.createElement("button");b.type="button";b.className="tab"+(c===kisF?" on":"");
+    b.textContent=c;var sm=document.createElement("small");sm.textContent=n;b.appendChild(sm);b.addEventListener("click",function(){kisF=c;renderKis();});f.appendChild(b);});
+  var q=($("kisQ").value||"").trim().toLowerCase(),un=$("kisUnread").checked;
+  kisList=KIS.filter(function(k){return (kisF==="Mind"||k.c===kisF)&&(!un||!rd[k.t])&&(!q||(k.t+" "+k.b+" "+k.c).toLowerCase().indexOf(q)>=0);});
+  var g=$("kisGrid");g.innerHTML="";
+  if(!kisList.length){var p=document.createElement("p");p.className="sub";p.textContent=un?"Ebben a szűrésben mindent elolvastál.":"Nincs találat.";g.appendChild(p);}
+  kisList.forEach(function(k,i){var a=document.createElement("button");a.type="button";a.className="panel kcard"+(rd[k.t]?" read":"");
+    a.innerHTML="<span class='k'></span><h3></h3><p></p>";a.children[0].textContent=k.c;if(rd[k.t]){var t=document.createElement("span");t.className="rd";t.textContent="✓ olvasva";a.children[0].appendChild(t);}
+    a.children[1].textContent=k.t;a.children[2].textContent=k.b;a.addEventListener("click",function(){openKis(i);});g.appendChild(a);});
+  $("kisProg").textContent="Olvasva: "+Object.keys(rd).filter(function(t){return KIS.some(function(k){return k.t===t;});}).length+" / "+KIS.length;}
+function openKis(i){var k=kisList[i];if(!k)return;openCard(k.t,k.b,k.c+" · "+(i+1)+" / "+kisList.length);kisIdx=i;
+  $("cmNext").classList.toggle("hide",i>=kisList.length-1);kisRd()[k.t]=1;save(store);}
+$("kisQ").addEventListener("input",function(){renderKis();});
+$("kisUnread").addEventListener("change",function(){renderKis();});
 function randomFact(){var k=KIS[Math.floor(Math.random()*KIS.length)];return k;}
-function openCard(t,b,ref){var m=$("cardModal");m.classList.remove("hide");$("cmT").textContent=t;$("cmB").textContent=b;$("cmR").textContent=ref||"";$("cmClose").focus();}
-$("cmClose").addEventListener("click",function(){$("cardModal").classList.add("hide");});
-$("cardModal").addEventListener("click",function(e){if(e.target===this)this.classList.add("hide");});
+function openCard(t,b,ref){var m=$("cardModal");m.classList.remove("hide");kisIdx=-1;$("cmNext").classList.add("hide");m.querySelector(".mcard").scrollTop=0;$("cmT").textContent=t;$("cmB").textContent=b;$("cmR").textContent=ref||"";$("cmClose").focus();}
+function closeCard(){$("cardModal").classList.add("hide");if(curSec()==="kis")renderKis();}
+$("cmClose").addEventListener("click",closeCard);
+$("cmNext").addEventListener("click",function(){if(kisIdx>=0)openKis(kisIdx+1);});
+$("cardModal").addEventListener("click",function(e){if(e.target===this)closeCard();});
 $("kisRand").addEventListener("click",function(){var k=randomFact();openCard("Tudtad? · "+k.t,k.b,k.c);});
 function factInto(id){var k=randomFact(),n=$(id);if(!n)return;n.innerHTML="<b>Tudtad?</b><div class='it'></div><div></div>";n.children[1].textContent=k.t;n.children[2].textContent=k.b;n.classList.remove("hide");}
 
@@ -1660,7 +1847,7 @@ var LB={db:null,me:null,unsub:null,rows:[],
   init:async function(){if(!window.claude||!claude.use){if(window.PZH_FIREBASE)return LB.initFirebase();LB.status("A ranglista ebben a változatban nincs bekapcsolva. A játék enélkül is működik, az eredményeid a készüléken maradnak.");return;}
     try{var db=await claude.use("db"),user=await claude.use("user");if(!db||!user){LB.status("A ranglista most nem érhető el (bejelentkezés kell). A játék enélkül is működik, az eredményeid a készüléken maradnak.");return;}
       LB.db=db;LB.me=await user.id();LB.status("");
-      LB.unsub=db.collection("board").orderBy("total","desc").limit(200).onSnapshot(function(s){LB.rows=s.docs.map(function(d){var x=d.data();x._id=d.id;return x;});LB.render();},function(){LB.status("A ranglista kapcsolata megszakadt.");});
+      LB.unsub=db.collection("board").orderBy("total","desc").limit(500).onSnapshot(function(s){LB.rows=s.docs.map(function(d){var x=d.data();x._id=d.id;return x;});LB.render();},function(){LB.status("A ranglista kapcsolata megszakadt.");});
       if(LB.nick())LB.push();}catch(e){LB.status("A ranglista most nem érhető el.");}},
   status:function(t){var n=$("lbStatus");if(n){n.textContent=t;n.classList.toggle("hide",!t);}},
   push:async function(){if(!LB.db||!LB.me||!LB.nick())return;var d={nick:LB.nick().slice(0,24),total:LB.total(),quiz:store.best||0,hangar:store.hgBest||0,
@@ -1668,12 +1855,35 @@ var LB={db:null,me:null,unsub:null,rows:[],
     if(LB.last===JSON.stringify(d.total+"|"+d.nick+"|"+d.quiz+"|"+d.hangar+"|"+d.sim+"|"+d.ter+"|"+d.dd))return;
     LB.last=JSON.stringify(d.total+"|"+d.nick+"|"+d.quiz+"|"+d.hangar+"|"+d.sim+"|"+d.ter+"|"+d.dd);
     try{await LB.db.doc("board/"+LB.me).set(d);}catch(e){LB.status("Az eredmény mentése nem sikerült ("+(e&&e.code||"hiba")+"). Csak olvasási joggal nem lehet ranglistára írni.");}},
-  render:function(){var tb=$("lbBody");if(!tb)return;tb.innerHTML="";
-    if(!LB.rows.length){var tr=document.createElement("tr");tr.innerHTML="<td colspan='7' style='color:var(--muted)'>Még senki nincs a ranglistán. Adj meg becenevet, és játssz egy kört!</td>";tb.appendChild(tr);return;}
-    LB.rows.forEach(function(r,i){var tr=document.createElement("tr");if(r._id===LB.me)tr.className="me";
-      [String(i+1),r.nick||"?",fmt(r.total||0),fmt(r.quiz||0),fmt(r.hangar||0),r.sim==null?"–":r.sim+" hiba",r.ter==null?"–":r.ter+"/8"].forEach(function(v,j){var td=document.createElement("td");td.textContent=v;if(j>=2)td.className="num";tr.appendChild(td);});
-      tb.appendChild(tr);});}
+  render:function(){LB.renderView();}
 };
+var LBV=[["total","Összesített",-1],["quiz","Kvíz",-1],["hangar","Raktár",-1],["sim","Tűzfeladat",1],["ter","Terep",-1],["dd","Lőszertároló",1]],lbView="total";
+function lbVal(r,k){var v=r[k];if(v==null||v==="")return null;return +v;}
+function lbFmt(k,v){return k==="sim"||k==="dd"?v+" hiba":k==="ter"?v+" / 8":fmt(v)+" p";}
+function ago(iso){var t=Date.parse(iso);if(!t)return "";var m=(Date.now()-t)/60000;if(m<1)return "most";if(m<60)return Math.round(m)+" perce";if(m<1440)return Math.round(m/60)+" órája";return Math.round(m/1440)+" napja";}
+LB.renderView=function(){var tb=$("lbBody");if(!tb)return;
+  var tabs=$("lbTabs");tabs.innerHTML="";LBV.forEach(function(v){var b=document.createElement("button");b.type="button";b.className="tab"+(v[0]===lbView?" on":"");b.textContent=v[1];
+    b.addEventListener("click",function(){lbView=v[0];LB.renderView();});tabs.appendChild(b);});
+  var vw=LBV.filter(function(v){return v[0]===lbView;})[0],k=vw[0],dir=vw[2];
+  var rows=LB.rows.filter(function(r){var v=lbVal(r,k);return r.nick&&v!=null&&(dir>0||v>0||k==="total");});
+  rows.sort(function(a,b){var d=(lbVal(a,k)-lbVal(b,k))*dir;return d!==0?d:(lbVal(b,"total")||0)-(lbVal(a,"total")||0);});
+  var now=Date.now(),act=LB.rows.filter(function(r){return r.at&&now-Date.parse(r.at)<3600000;}).length;
+  var lv=$("lbLive");if(LB.db){lv.classList.remove("hide");lv.textContent="Élő · "+LB.rows.length+" játékos · "+act+" aktív az elmúlt órában";}else lv.classList.add("hide");
+  var me=$("lbMe");me.innerHTML="";var nk=LB.nick();
+  if(!nk){var sp=document.createElement("span");sp.textContent="Még nincs beceneved, ezért nem szerepelsz a listán.";var bt=document.createElement("button");bt.type="button";bt.className="btn small";bt.textContent="Becenév megadása";
+    bt.addEventListener("click",function(){route("set");setTimeout(function(){$("nickIn").focus();},50);});me.appendChild(sp);me.appendChild(bt);}
+  else{var pos=-1;rows.forEach(function(r,i){if(r._id===LB.me)pos=i;});
+    me.innerHTML="<span>Becenév: <b></b></span><span>Összpontszám: <b></b></span><span>Helyezés (<i></i>): <b></b></span>";
+    var bs=me.querySelectorAll("b");bs[0].textContent=nk;bs[1].textContent=fmt(LB.total());me.querySelector("i").textContent=vw[1].toLowerCase();bs[2].textContent=pos>=0?(pos+1)+". / "+rows.length:"–";}
+  var hd=$("lbHead");hd.innerHTML="";["#","Becenév",vw[1],k==="total"?"Kvíz":"Össz.","Utoljára"].forEach(function(h,j){var th=document.createElement("th");th.textContent=h;if(j===2||j===3)th.className="num";hd.appendChild(th);});
+  tb.innerHTML="";
+  if(!rows.length){var tr=document.createElement("tr");tr.innerHTML="<td colspan='5' style='color:var(--muted)'></td>";tr.firstChild.textContent=LB.db?"Ebben a kategóriában még nincs eredmény. Játssz egy kört!":"A ranglista hálózat nélkül vagy ebben a változatban nem érhető el.";tb.appendChild(tr);return;}
+  rows.forEach(function(r,i){var tr=document.createElement("tr");if(r._id===LB.me)tr.className="me";if(i<3)tr.className+=" podium";
+    var c=[String(i+1),r.nick,lbFmt(k,lbVal(r,k)),k==="total"?fmt(r.quiz||0)+" p":fmt(r.total||0)+" p",ago(r.at)];
+    c.forEach(function(v,j){var td=document.createElement("td");td.textContent=v;if(j===2||j===3)td.className="num";if(j===4)td.className="when";
+      if(j===1&&r.at&&now-Date.parse(r.at)<3600000){var d=document.createElement("span");d.className="dot";d.title="Aktív az elmúlt órában";td.appendChild(d);}
+      tr.appendChild(td);});tb.appendChild(tr);});};
+setInterval(function(){if(curSec()==="rank")LB.renderView();},60000);
 
 /* Firebase-ranglista a GitHub Pages változathoz (firebase-config.js tölti ki a window.PZH_FIREBASE-t) */
 LB.loadScript=function(src){return new Promise(function(res,rej){var s=document.createElement("script");s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});};
@@ -1683,30 +1893,33 @@ LB.initFirebase=async function(){var V="10.12.2",B="https://www.gstatic.com/fire
     if(!firebase.apps.length)firebase.initializeApp(window.PZH_FIREBASE);
     var cred=await firebase.auth().signInAnonymously();LB.me=cred.user.uid;var fs=firebase.firestore();
     LB.db={doc:function(path){var r=fs.doc(path);return {set:function(d){return r.set(d);}};}};
-    fs.collection("board").orderBy("total","desc").limit(200).onSnapshot(function(s){LB.rows=s.docs.map(function(d){var x=d.data();x._id=d.id;return x;});LB.render();},function(){LB.status("A ranglista kapcsolata megszakadt.");});
+    fs.collection("board").orderBy("total","desc").limit(500).onSnapshot(function(s){LB.rows=s.docs.map(function(d){var x=d.data();x._id=d.id;return x;});LB.render();},function(){LB.status("A ranglista kapcsolata megszakadt.");});
     LB.status("");if(LB.nick())LB.push();}
   catch(e){LB.status("A ranglista most nem érhető el ("+(e&&e.code||"hiba")+"). A játék enélkül is működik.");}};
 $("nickSave").addEventListener("click",function(){var v=$("nickIn").value.trim().replace(/\s+/g," ");if(v.length<2){$("nickMsg").textContent="Legalább 2 karakter legyen.";return;}
-  LB.setNick(v.slice(0,24));$("nickMsg").textContent=LB.db?"Mentve. Az eredményeid ezzel a névvel kerülnek a ranglistára.":"Mentve a készülékre. A ranglista bejelentkezve, a megosztott linken működik.";LB.last=null;LB.push();});
+  LB.setNick(v.slice(0,24));$("nickMsg").textContent=LB.db?"Mentve. Az eredményeid ezzel a névvel kerülnek a ranglistára.":"Mentve a készülékre. A ranglistára hálózaton, a megosztott linken kerülsz fel.";LB.last=null;LB.push();renderStats();});
 $("nickIn").value=LB.nick();
-$("myTotal").textContent=fmt(LB.total());
 LB.init();
 
 /* ===== megosztás ===== */
-var SHARE_URL="https://claude.ai/artifact/FdnNS7L9TsXA5bMSFhZo3K";
+var SHARE_URL=window.PZH_SHARE_URL||"https://claude.ai/artifact/FdnNS7L9TsXA5bMSFhZo3K";
+if(window.PZH_SHARE_URL)$("howto").classList.remove("hide");
+if(navigator.share){$("nativeShare").classList.remove("hide");$("nativeShare").addEventListener("click",function(){navigator.share({title:"PzH Milliomos",text:"PzH 2000 kezelői tudásteszt és játékok",url:SHARE_URL}).catch(function(){});});}
 $("shareUrl").value=SHARE_URL;
 try{if(window.QRCode)new QRCode($("qr"),{text:SHARE_URL,width:144,height:144,colorDark:"#101310",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});}catch(e){}
 $("copyBtn").addEventListener("click",function(){var b=this;function ok(){b.textContent="Másolva";setTimeout(function(){b.textContent="Másolás";},1600);}
   try{navigator.clipboard.writeText(SHARE_URL).then(ok,function(){$("shareUrl").select();});}catch(e){$("shareUrl").select();}});
 /* ===== HANG: Web Audio szintézis (külső fájl nélkül) ===== */
+var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,_prev:null};
+  try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
+function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
 var SND=(function(){
-  var ac=null,master,music,sfx,on=true,started=false,timer=null,nextBar=0,bar=0,noiseBuf=null;
-  try{var v=localStorage.getItem(KEY+"-snd");if(v==="0")on=false;}catch(e){}
+  var ac=null,master,music,sfx,started=false,timer=null,nextBar=0,bar=0,noiseBuf=null;
   function ctx(){if(ac)return ac;var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ac=new C();
-    master=ac.createGain();master.gain.value=on?0.9:0;master.connect(ac.destination);
+    master=ac.createGain();master.gain.value=CFG.vol;master.connect(ac.destination);
     var comp=ac.createDynamicsCompressor();comp.connect(master);
-    music=ac.createGain();music.gain.value=0.16;music.connect(comp);
-    sfx=ac.createGain();sfx.gain.value=0.55;sfx.connect(comp);
+    music=ac.createGain();music.gain.value=CFG.music?0.16:0;music.connect(comp);
+    sfx=ac.createGain();sfx.gain.value=CFG.sfx?0.55:0;sfx.connect(comp);
     noiseBuf=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate);var d=noiseBuf.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;
     return ac;}
   function hz(n){return 440*Math.pow(2,(n-69)/12);}
@@ -1741,6 +1954,7 @@ var SND=(function(){
     if(i>=8||i%2===1){var tt=t;MEL[k].forEach(function(n){brass(hz(n[0]),tt,n[1]*BEAT*0.95);tt+=n[1]*BEAT;});}}
   function tick(){if(!ac)return;while(nextBar<ac.currentTime+1.2){scheduleBar(nextBar,bar++);nextBar+=BARLEN;}}
   function startMusic(){if(timer||!ac)return;nextBar=ac.currentTime+0.1;timer=setInterval(tick,250);tick();}
+  function stopMusic(){if(timer){clearInterval(timer);timer=null;}}
   /* effektek */
   function tone(f,t,dur,type,vol,dest){var o=ac.createOscillator(),g=ac.createGain();o.type=type||"sine";o.frequency.value=f;o.connect(g);g.connect(dest||sfx);env(g,t,0.005,vol||0.3,dur,dur*0.8);o.start(t);o.stop(t+dur+0.05);return o;}
   function piano(f,t,vol){[1,2,3,4].forEach(function(h,i){tone(f*h,t,1.4/(i+1),"sine",(vol||0.25)/(h*h*0.8+0.2));});}
@@ -1748,12 +1962,15 @@ var SND=(function(){
     s.connect(f);f.connect(g);g.connect(sfx);env(g,t,0.01,vol,2,1.9);s.start(t);s.stop(t+2.1);
     var o=ac.createOscillator(),og=ac.createGain();o.frequency.setValueAtTime(75,t);o.frequency.exponentialRampToValueAtTime(28,t+0.9);o.connect(og);og.connect(sfx);env(og,t,0.005,vol*0.9,1,0.95);o.start(t);o.stop(t+1.05);}
   var api={
-    unlock:function(){if(!on)return;var c=ctx();if(!c)return;if(c.state==="suspended")c.resume();if(!started){started=true;startMusic();}},
-    toggle:function(){on=!on;try{localStorage.setItem(KEY+"-snd",on?"1":"0");}catch(e){}
-      if(on){api.unlock();if(master)master.gain.setTargetAtTime(0.9,ac.currentTime,0.05);}else if(master){master.gain.setTargetAtTime(0,ac.currentTime,0.05);}
-      return on;},
-    isOn:function(){return on;},
-    ok:function(){return on&&ac&&ac.state==="running";},
+    unlock:function(){if(!CFG.music&&!CFG.sfx)return;var c=ctx();if(!c)return;if(c.state==="suspended")c.resume();if(CFG.music)startMusic();},
+    apply:function(){if(!ac){api.unlock();if(!ac)return;}var t=ac.currentTime;
+      master.gain.setTargetAtTime(CFG.vol,t,0.05);music.gain.setTargetAtTime(CFG.music?0.16:0,t,0.05);sfx.gain.setTargetAtTime(CFG.sfx?0.55:0,t,0.05);
+      if(CFG.music||CFG.sfx){if(ac.state==="suspended")ac.resume();}if(CFG.music)startMusic();else stopMusic();},
+    toggle:function(){if(CFG.music||CFG.sfx){CFG._prev={m:CFG.music,s:CFG.sfx};CFG.music=false;CFG.sfx=false;}
+      else{var p=CFG._prev||{m:true,s:true};CFG.music=p.m;CFG.sfx=p.s;if(!CFG.music&&!CFG.sfx){CFG.music=true;CFG.sfx=true;}}
+      saveCfg();api.apply();return api.isOn();},
+    isOn:function(){return CFG.music||CFG.sfx;},
+    ok:function(){return CFG.sfx&&ac&&ac.state==="running";},
     lock:function(){if(!api.ok())return;var t=ac.currentTime;tone(hz(N.D3),t,0.5,"square",0.12);tone(hz(N.A3),t,0.5,"square",0.08);tone(hz(N.D4),t+0.02,0.45,"triangle",0.15);},
     right:function(){if(!api.ok())return;var t=ac.currentTime;[N.C5,N.E5,N.G5,N.C6].forEach(function(n,i){piano(hz(n),t+i*0.09,0.28);});
       [N.C5,N.E5,N.G5].forEach(function(n){piano(hz(n),t+0.42,0.16);});piano(hz(N.E6),t+0.42,0.18);},
@@ -1775,7 +1992,20 @@ var SND=(function(){
   ["pointerdown","keydown"].forEach(function(ev){document.addEventListener(ev,function(){api.unlock();},{capture:true});});
   return api;
 })();
-function renderSnd(){var b=$("sndBtn");b.textContent=SND.isOn()?"♪ Hang: be":"♪ Hang: ki";b.setAttribute("aria-pressed",SND.isOn()?"true":"false");}
+function renderSnd(){var b=$("sndBtn"),on=SND.isOn();
+  b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/>'+(on?'<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>':'<path d="M16 9.5l5 5M21 9.5l-5 5"/>')+'</svg>';
+  b.setAttribute("aria-pressed",on?"true":"false");b.title=on?"Hang kikapcsolása":"Hang bekapcsolása";if(curSec()==="set")renderSet();}
+function swSet(id,v){$(id).setAttribute("aria-checked",v?"true":"false");}
+function renderSet(){swSet("cfMusic",CFG.music);swSet("cfSfx",CFG.sfx);swSet("cfBlast",CFG.blasts);$("cfVol").value=Math.round(CFG.vol*100);$("cfVolV").textContent=Math.round(CFG.vol*100)+"%";
+  $("nickIn").value=LB.nick();renderStats();
+  $("about").textContent="PzH Milliomos · "+BANK.length+" kvízkérdés · "+KIS.length+" kisokos-kártya · "+(navigator.onLine?"online":"offline")+". A kérdések és a lépéssor a lövegkezelői tananyagból készültek; a szabályzatot és a vezényszavakat nem helyettesítik.";}
+$("cfMusic").addEventListener("click",function(){CFG.music=!CFG.music;saveCfg();SND.apply();renderSnd();renderSet();});
+$("cfSfx").addEventListener("click",function(){CFG.sfx=!CFG.sfx;saveCfg();SND.apply();renderSnd();renderSet();if(CFG.sfx)setTimeout(function(){SND.ding();},80);});
+$("cfVol").addEventListener("input",function(){CFG.vol=(+this.value)/100;$("cfVolV").textContent=this.value+"%";SND.apply();});
+$("cfVol").addEventListener("change",function(){saveCfg();SND.ding();});
+$("cfBlast").addEventListener("click",function(){CFG.blasts=!CFG.blasts;saveCfg();renderSet();});
+$("cfReset").addEventListener("click",function(){if(!confirm("Biztosan törlöd az összes mentett eredményedet és statisztikádat? A becenév és a beállítások megmaradnak."))return;
+  var kr=store.kisRead;store={topics:{}};if(kr)store.kisRead=kr;save(store);LB.last=null;LB.push();renderSet();});
 $("sndBtn").addEventListener("click",function(){SND.toggle();renderSnd();});
 renderSnd();
 
@@ -1784,7 +2014,7 @@ renderSnd();
   var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var spots=[[120,262,.55],[300,250,.5],[470,256,.55],[640,236,.6],[860,212,.55],[980,190,.5],[230,320,.85],[560,318,.9],[820,300,.9]];
   function blast(){
-    if(!$("home").classList.contains("hide")){
+    if(CFG.blasts&&!$("home").classList.contains("hide")){
       var s=spots[Math.floor(Math.random()*spots.length)],g=el("g",{transform:"translate("+s[0]+","+s[1]+") scale("+s[2]+")","class":"blast"},layer);
       el("circle",{r:60,fill:"url(#blastG)","class":"bf"},g);
       for(var i=0;i<4;i++) el("circle",{cx:(i-1.5)*18,cy:-20-i*16,r:26+i*6,fill:"#5a5546",opacity:.0,"class":"bs",style:"animation-delay:"+(0.15+i*0.12)+"s"},g);
