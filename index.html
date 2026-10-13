@@ -594,6 +594,27 @@ body:has(#sim:not(.hide)){overscroll-behavior:none}
 .heraldry .crest{width:calc(64px * var(--fz));height:auto;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
 .heraldry .flagsvg{width:calc(84px * var(--fz));height:auto;overflow:visible}
 @media(max-width:520px){.herorow{flex-direction:column-reverse;align-items:stretch}.heraldry{align-self:flex-end;margin-bottom:-8px}.heraldry .crest{width:74px}.heraldry .flagsvg{width:92px}}
+
+/* --- forgózsámoly (lőszerraktár) --- */
+.tt{position:relative;height:clamp(200px,30vh,260px);perspective:950px;perspective-origin:50% 30%;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;margin-top:6px;cursor:grab}
+.tt:active{cursor:grabbing}
+.ttbase{position:absolute;left:50%;bottom:0;width:min(86%,460px);aspect-ratio:1;transform:translate(-50%,44%);perspective:none;pointer-events:none}
+.ttplate{width:100%;height:100%;border-radius:50%;transform:rotateX(72deg);background:repeating-conic-gradient(from 0deg,#3b4034 0 6deg,#2c3027 6deg 12deg),#2f332a;border:6px solid #5c6250;box-shadow:0 0 0 3px #1a1d16,inset 0 0 40px rgba(0,0,0,.6),0 30px 40px rgba(0,0,0,.5)}
+.ttstage{position:absolute;left:50%;top:44%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-8deg)}
+.ttring{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.ttcard{position:absolute;left:-66px;top:-62px;width:132px;height:118px;display:grid;justify-items:center;align-content:center;gap:2px;border-radius:8px;border:1.5px solid rgba(255,255,255,.12);background:linear-gradient(#24281f,#1a1d16);box-shadow:0 8px 16px rgba(0,0,0,.45);transition:opacity .3s,border-color .2s;backface-visibility:hidden;-webkit-backface-visibility:hidden;cursor:pointer}
+.ttcard svg{width:112px;height:auto}
+.ttcard .pname{font-size:calc(12px * var(--fz))}
+.ttcard.front{border-color:#e3b341;box-shadow:0 0 0 2px rgba(227,179,65,.35),0 10px 22px rgba(0,0,0,.5)}
+.ttarrow{position:absolute;top:40%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid #e3b341;background:rgba(20,22,17,.85);color:#e3b341;font:700 26px/1 var(--f-body);z-index:3}
+.ttarrow.l{left:6px}.ttarrow.r{right:6px}
+.ttfront{display:flex;align-items:center;gap:10px;margin-top:8px}
+.ttname{flex:1;min-width:0;display:grid}
+.ttname b{font:700 calc(16px * var(--fz)) var(--f-mono);color:#f3e3b0}
+.ttname small{color:var(--muted);font-size:calc(13.5px * var(--fz));line-height:1.3}
+.ttinfo{position:static;flex:none;width:36px;height:36px}
+#ttGive{flex:none;min-height:48px;padding:10px 18px}
+#ttGive[disabled]{opacity:.45}
 /* --- olvashatóság (v1.6) --- */
 .topbar{flex-wrap:nowrap}
 .brand{white-space:nowrap;min-width:0}
@@ -834,7 +855,7 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
    <div class="srow"><div><b>Offline tárolás</b><small id="offState"></small></div><button class="btn small ghost hide" id="offSave" type="button">Letöltés</button></div>
    <h3 class="pgs">Megjelenés</h3>
    <div class="srow"><div><b>Betűméret</b><small>Az egész játékra vonatkozik</small></div><div class="fzseg" id="fzSeg" role="group" aria-label="Betűméret"><button type="button" data-fz="1">A</button><button type="button" data-fz="1.2" style="font-size:1.15em">A</button><button type="button" data-fz="1.4" style="font-size:1.35em">A</button></div></div>
-   <div class="srow"><div><b>Találatok hatása</b><small>Vér és felkiáltás, ha a gránát katonát talál (tűzfeladat háttér)</small></div><button class="sw" id="cfGore" type="button" role="switch" aria-checked="true" aria-label="Találatok hatása"><i></i></button></div>
+   <div class="srow"><div><b>Találatok hatása</b><small>Vér, ha a gránát katonát talál (tűzfeladat háttér)</small></div><button class="sw" id="cfGore" type="button" role="switch" aria-checked="true" aria-label="Találatok hatása"><i></i></button></div>
    <div class="srow"><div><b>Háttérrobbanások</b><small>Harctéri animáció a főoldalon</small></div><button class="sw" id="cfBlast" type="button" role="switch" aria-checked="true" aria-label="Háttérrobbanások"><i></i></button></div>
    <h3 class="pgs">Becenév a ranglistához</h3>
    <div class="nickrow"><input id="nickIn" maxlength="24" placeholder="pl. Tüzér Tudsz" autocomplete="nickname" aria-label="Becenév"><button class="btn small" id="nickSave" type="button">Mentés</button></div>
@@ -890,7 +911,12 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
   </div>
   <div class="panel hgtraybox">
    <div class="ddhead"><h3 id="hgTrayH" style="font:400 20px var(--f-display);margin:0"></h3><span class="k" id="hgHint"></span></div>
-   <div class="pallets hgtray" id="hgTray"></div>
+   <div class="tt" id="tt" aria-label="Forgózsámoly – húzd oldalra a forgatáshoz">
+    <div class="ttbase"><div class="ttplate" id="ttPlate"></div></div>
+    <div class="ttstage"><div class="ttring" id="hgTray"></div></div>
+    <button class="ttarrow l" id="ttL" type="button" aria-label="Forgatás balra">‹</button><button class="ttarrow r" id="ttR" type="button" aria-label="Forgatás jobbra">›</button>
+   </div>
+   <div class="ttfront"><div class="ttname"><b id="ttName"></b><small id="ttSub"></small></div><button class="pinfo ttinfo" id="ttInfo" type="button" aria-label="Adatlap">i</button><button class="btn" id="ttGive" type="button">Átadás ›</button></div>
   </div>
   <div class="modal hide" id="hgModal" role="dialog" aria-modal="true" aria-labelledby="mHead">
    <div class="panel mcard">
@@ -990,8 +1016,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.9.0",APP_DATE="2026-10-13";
-var CHANGELOG=[["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.9.1",APP_DATE="2026-10-13";
+var CHANGELOG=[["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -1331,7 +1357,7 @@ function killTroop(S,bx,sc){if(S.dead)return;S.dead=true;var d=S.x>=bx?1:-1,x=S.
   g.removeAttribute("transform");g.style.transformBox="view-box";g.style.transformOrigin="0 0";
   g.animate([{transform:"translate("+x+"px,"+y+"px) rotate(0deg) scale("+k+")"},{transform:"translate("+(x+d*sp*.55)+"px,"+(y-up)+"px) rotate("+(d*280)+"deg) scale("+k+")",offset:.45},
     {transform:"translate("+(x+d*sp)+"px,"+(y+14)+"px) rotate("+(d*450)+"deg) scale("+k+")"}],{duration:1150,easing:"cubic-bezier(.2,.6,.45,1)",fill:"forwards"});
-  if(CFG.gore){SND.scream(0.16+0.18*sc);
+  if(CFG.gore){
     for(var i=0;i<16;i++){var a=-Math.PI*(0.1+0.8*Math.random()),v=25+Math.random()*70,p=el("circle",{cx:x,cy:y-6,r:1.2+Math.random()*2.6,fill:i%3?"#a3101a":"#6e070d"},TRG);
       p.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate("+(Math.cos(a)*v+d*20)+"px,"+(Math.sin(a)*v)+"px)",offset:.45,opacity:1},{transform:"translate("+(Math.cos(a)*v*1.4+d*30)+"px,"+(24+Math.random()*6)+"px)",opacity:.85}],{duration:900+Math.random()*300,easing:"ease-out",fill:"forwards"});
       (function(n){setTimeout(function(){n.animate([{opacity:.85},{opacity:0}],{duration:1500,fill:"forwards"});setTimeout(function(){n.remove();},1600);},4200);})(p);}
@@ -1385,13 +1411,13 @@ function callout(who,txt){var c=$("callout");$("calloutWho").textContent=who;$("
 function act(ids,on){(ids||[]).forEach(function(id){var n=typeof id==="string"?$(id):id;if(n)n.classList.toggle("act",on);});}
 function withAct(fn,ids){return async function(run){act(ids,true);try{await fn(run);}finally{act(ids,false);}};}
 var SV=$("simSvg");
-var TS=1; /* animációs időskála: 1 = normál, kisebb = gyorsabb (sorozatlövésnél) */
-function wait(ms){return new Promise(function(r){setTimeout(r,ms*TS);});}
-function servo(d,v){SND.servo(Math.max(.15,d*TS),v);}
+var ATS=1; /* animációs időskála: 1 = normál, kisebb = gyorsabb (sorozatlövésnél) */
+function wait(ms){return new Promise(function(r){setTimeout(r,ms*ATS);});}
+function servo(d,v){SND.servo(Math.max(.15,d*ATS),v);}
 function frames2(){return new Promise(function(r){requestAnimationFrame(function(){requestAnimationFrame(r);});});}
 function alive(run){return SIM.run===run;}
 function rotP(x,y,deg){var a=-deg*Math.PI/180,dx=x-PIV.x,dy=y-PIV.y;return {x:PIV.x+dx*Math.cos(a)-dy*Math.sin(a),y:PIV.y+dx*Math.sin(a)+dy*Math.cos(a)};}
-function setT(id,t,dur,ease){var n=typeof id==="string"?$(id):id;if(dur!=null)n.style.transition="transform "+(dur*TS)+"ms "+(ease||"cubic-bezier(.45,0,.25,1)");n.style.transform=t;}
+function setT(id,t,dur,ease){var n=typeof id==="string"?$(id):id;if(dur!=null)n.style.transition="transform "+(dur*ATS)+"ms "+(ease||"cubic-bezier(.45,0,.25,1)");n.style.transform=t;}
 /* mozgó elemek: gránát, töltetmodulok, 2-es töltőkezelő */
 var tokShell=el("g",{opacity:0},SV);var tokInner=shellShape(tokShell,-34,0,0,1.02);
 var tokChg=el("g",{opacity:0},SV);for(var ci=0;ci<3;ci++)chargeShape(tokChg,-36+ci*24,-11,22,22);
@@ -1437,11 +1463,11 @@ function corrVals(){return {o:(ELO+CORR.o+6400)%6400,m:Math.max(180,Math.min(660
 function mtr(n){return fmt(n)+" m";}
 function obsTxt(){return (CORR.o>0?"BALRA":"JOBBRA")+" · "+(CORR.m>0?"RÖVID":"TÚL");}
 function sec1(x){return x.toFixed(1).replace(".",",");}
-async function reload(run,ts){var old=TS;TS=ts;try{tokS(324,344,-90,0,0);tokC(80,232,0,0);await frames2();
+async function reload(run,ts){var old=ATS;ATS=ts;try{tokS(324,344,-90,0,0);tokC(80,232,0,0);await frames2();
     var seq=[aPTM,aPTR,aProg,aPTA,aRam,aCharge,aClose];for(var i=0;i<seq.length;i++){await seq[i](run);if(!alive(run))return;}
-    lamp("lpLoad","g");lamp("lpBreech","g");}finally{TS=old;}}
+    lamp("lpLoad","g");lamp("lpBreech","g");}finally{ATS=old;}}
 async function aCorrect(run){SND.compressor(2.2);var c=corrVals();ELO=c.o;ELM=c.m;TAV=c.t;ANG=ELM*360/6400;
-  var old=TS;TS=0.55;try{await aAim(run);}finally{TS=old;}if(!alive(run))return;
+  var old=ATS;ATS=0.55;try{await aAim(run);}finally{ATS=old;}if(!alive(run))return;
   await reload(run,0.3);if(!alive(run))return;
   callout("2-es töltőkezelő","LÖVEG TÖLTVE!");$("fireBtn").classList.add("armed");wtReady(true);$("modeCap").textContent="Tűzkész";
   fke(["JAVÍTOTT LŐELEMEN ✓","LÖVEG TÖLTVE · TŰZKÉSZ","KÖVETKEZIK: 3 GRÁNÁT, HATÁSRA"]);}
@@ -1467,7 +1493,7 @@ function v4(n){return ("000"+n).slice(-4);} function v3(n){return ("00"+n).slice
 
 function resetScene(){
   ["sgun","spta","swedge","shatchLid","needle","sptmArm","scar","sprog","srecoil",tokShell,tokChg,loader,"simPzh"].forEach(function(n){var x=typeof n==="string"?$(n):n;x.style.transition="none";});
-  $("sgun").style.transform="rotate(0deg)";AIM0={o:0,m:0,t:0};TS=1;BURST_FIRE=null;$("tgt").setAttribute("opacity",0);$("spta").style.transform="none";$("swedge").style.transform="translateY(0)";
+  $("sgun").style.transform="rotate(0deg)";AIM0={o:0,m:0,t:0};ATS=1;BURST_FIRE=null;$("tgt").setAttribute("opacity",0);$("spta").style.transform="none";$("swedge").style.transform="translateY(0)";
   $("shatchLid").style.transform="rotate(-70deg)";$("needle").style.transform="rotate(0deg)";$("sptmArm").style.transform="translateY(0)";
   $("scar").style.transform="translateX(0)";$("sprog").style.transform="none";$("srecoil").style.transform="none";$("simPzh").style.transform="none";
   tokS(324,344,-90,0,0);tokC(80,232,0,0);loaderTo(185,0);loaderTag.textContent="2-ES TÖLTŐ";loader.setAttribute("opacity",1);
@@ -1483,7 +1509,7 @@ function resetScene(){
 var AIM0={o:0,m:0,t:0};
 async function aAim(run){var D=2400;servo(D/1000);fke(["AUTOMATA IRÁNYZÁS","CÉL: TÁV "+mtr(TAV),"OLDAL "+v4(ELO)+" v · MAG. "+v3(ELM)+" v","MOZGÁS…"]);
   setT("sgun","rotate("+(-ANG)+"deg)",D);setT("needle","rotate("+(ELO*360/6400)+"deg)",D);setT("wtTur","rotate("+(ELO*360/6400)+"deg)",D);
-  var o0=AIM0.o,m0=AIM0.m,t00=AIM0.t||TAV,DD=D*TS,t0=performance.now();await new Promise(function(res){(function step(){if(!alive(run))return res();var k=Math.min(1,(performance.now()-t0)/DD),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+  var o0=AIM0.o,m0=AIM0.m,t00=AIM0.t||TAV,DD=D*ATS,t0=performance.now();await new Promise(function(res){(function step(){if(!alive(run))return res();var k=Math.min(1,(performance.now()-t0)/DD),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
     $("roO").textContent=v4(Math.round(o0+(ELO-o0)*e));$("roM").textContent=v3(Math.round(m0+(ELM-m0)*e));$("roT").textContent=fmt(Math.round((t00+(TAV-t00)*e)/10)*10);if(k<1)requestAnimationFrame(step);else res();})();});
   AIM0={o:ELO,m:ELM,t:TAV};if(!alive(run))return;fke(["AUTOMATA IRÁNYZÁS","TÁV "+mtr(TAV),"OLDAL "+v4(ELO)+" v · MAGASSÁG "+v3(ELM)+" v","LŐELEMEN ✓"]);SND.clunk();}
 async function aPTM(run){tokShell.setAttribute("opacity",1);servo(1.2,0.5);setT("sptmArm","translateY(22px)",500);await wait(550);if(!alive(run))return;SND.clunk();
@@ -2113,15 +2139,37 @@ async function nextRequest(){var run=HG.run,k=STEPK[HG.step];HG.state="walk";bui
   await ldPos(HX.hand,1300,-1);if(HG.run!==run)return;
   LD.querySelector(".walker").style.transform="scaleX(1)";
   $("ldBubble").setAttribute("opacity",1);$("ldSay").textContent={granat:"Kérem a gránátot!",gyujto:"Kérem a gyújtót!",toltet:"Kérem a hajtótöltetet!",indito:"Kérem az indítóöltényt!"}[k];
-  HG.state="wait";$("hgHint").textContent="Húzd a kiválasztott tételt a töltőkezelő kezébe (vagy koppints a tételre, majd rá).";}
-function buildTray(k){var tr=$("hgTray");tr.innerHTML="";$("hgTrayH").textContent={granat:"A sor · Gránátok",gyujto:"B sor · Gyújtók",toltet:"C sor · Hajtótöltetek",indito:"D sor · Indítóöltény"}[k];
-  ITEMS.filter(function(x){return x.cat===k;}).forEach(function(it){var b=document.createElement("div");b.className="pallet";
-    var bt=document.createElement("button");bt.type="button";bt.className="pbtn";bt.appendChild(pileSvg(it));
-    var n=document.createElement("span");n.className="pname";n.textContent=it.name;bt.appendChild(n);
-    var sb=document.createElement("span");sb.className="psub";sb.textContent=it.sub;bt.appendChild(sb);
-    var inf=document.createElement("button");inf.type="button";inf.className="pinfo";inf.textContent="i";inf.setAttribute("aria-label","Adatlap: "+it.name);
-    inf.addEventListener("click",function(e){e.stopPropagation();openCard(it.name+" · "+it.sub,it.info,"Forrás: "+it.src);});
-    dragGive(bt,it);b.appendChild(bt);b.appendChild(inf);tr.appendChild(b);});}
+  HG.state="wait";$("hgHint").textContent="Forgasd a zsámolyt (húzd oldalra vagy ‹ ›), az elöl lévőt add át.";$("ttGive").disabled=false;}
+/* ===== FORGÓZSÁMOLY: a sor tételei egy forgatható tárcsán; a középső (elöl lévő) tétel adható át ===== */
+var TT={items:[],pos:0,shown:-1,R:200,stepA:60};
+function buildTray(k){var ring=$("hgTray");ring.innerHTML="";$("hgTrayH").textContent={granat:"A sor · Gránátok",gyujto:"B sor · Gyújtók",toltet:"C sor · Hajtótöltetek",indito:"D sor · Indítóöltény"}[k];
+  TT.items=shuffle(ITEMS.filter(function(x){return x.cat===k;}));var n=Math.max(4,TT.items.length);TT.stepA=360/n;TT.R=Math.round(Math.max(150,66/Math.tan(Math.PI/n)+26));TT.pos=0;TT.shown=-1;
+  TT.items.forEach(function(it,i){var c=document.createElement("div");c.className="ttcard";c.style.transform="rotateY("+(i*TT.stepA)+"deg) translateZ("+TT.R+"px)";
+    c.appendChild(pileSvg(it));var nm=document.createElement("span");nm.className="pname";nm.textContent=it.name;c.appendChild(nm);
+    c.addEventListener("click",function(){if(TT.moved)return;var cur=ttIdx();if(cur===i){ttGive();return;}var d=i-cur,n2=TT.items.length;if(d>n2/2)d-=n2;if(d<-n2/2)d+=n2;ttSet(TT.pos+d,true);});
+    ring.appendChild(c);});
+  ttSet(0,false);}
+function ttIdx(){var n=TT.items.length;return ((Math.round(TT.pos)%n)+n)%n;}
+function ttRender(anim){var ring=$("hgTray"),n=TT.items.length;ring.style.transition=anim?"transform .5s cubic-bezier(.25,.8,.3,1)":"none";
+  ring.style.transform="translateZ("+(-TT.R)+"px) rotateY("+(-TT.pos*TT.stepA)+"deg)";
+  $("ttPlate").style.transition=anim?"transform .5s cubic-bezier(.25,.8,.3,1)":"none";$("ttPlate").style.transform="rotateX(72deg) rotateZ("+(TT.pos*TT.stepA)+"deg)";
+  Array.prototype.forEach.call(ring.children,function(c,i){var d=((i-TT.pos)%n+n)%n;if(d>n/2)d-=n;var a=Math.abs(d);c.style.opacity=String(Math.max(.12,1-a*0.32));c.classList.toggle("front",a<0.5);});
+  var idx=ttIdx(),it=TT.items[idx];if(it){$("ttName").textContent=it.name;$("ttSub").textContent=it.sub;}
+  if(idx!==TT.shown){if(TT.shown>=0)SND.tick();TT.shown=idx;}}
+function ttSet(p,anim){TT.pos=p;ttRender(anim);if(anim)SND.servo(0.35,0.35);}
+function ttGive(){if(HG.state!=="wait")return;var it=TT.items[ttIdx()];if(it)give(it);}
+(function(){var tt=$("tt"),sx=0,sp=0,lastX=0,lastT=0,vel=0,down=false;
+  tt.addEventListener("pointerdown",function(e){if(e.target.closest(".ttarrow"))return;down=true;TT.moved=false;sx=lastX=e.clientX;sp=TT.pos;lastT=performance.now();vel=0;});
+  window.addEventListener("pointermove",function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>6){TT.moved=true;}if(!TT.moved)return;
+    var now=performance.now();vel=(e.clientX-lastX)/Math.max(1,now-lastT);lastX=e.clientX;lastT=now;TT.pos=sp-dx/95;ttRender(false);});
+  window.addEventListener("pointerup",function(){if(!down)return;down=false;if(TT.moved){ttSet(Math.round(TT.pos-vel*3.2),true);setTimeout(function(){TT.moved=false;},60);}});
+  $("ttL").addEventListener("click",function(){ttSet(Math.round(TT.pos)-1,true);});
+  $("ttR").addEventListener("click",function(){ttSet(Math.round(TT.pos)+1,true);});
+  $("ttGive").addEventListener("click",ttGive);
+  $("ttInfo").addEventListener("click",function(){var it=TT.items[ttIdx()];if(it)openCard(it.name+" · "+it.sub,it.info,"Forrás: "+it.src);});
+  document.addEventListener("keydown",function(e){if(curSec()!=="hangar"||!$("hgModal").classList.contains("hide"))return;
+    if(e.key==="ArrowLeft"){ttSet(Math.round(TT.pos)-1,true);e.preventDefault();}else if(e.key==="ArrowRight"){ttSet(Math.round(TT.pos)+1,true);e.preventDefault();}
+    else if(e.key==="Enter"&&document.activeElement===document.body){ttGive();}});})();
 function overHand(x,y){var e=document.elementFromPoint(x,y);return !!(e&&e.closest&&e.closest("#ldHit,#ld"));}
 function dragGive(bt,it){var ghost=null,moved=false,sx=0,sy=0;
   bt.addEventListener("pointerdown",function(e){if(HG.state!=="wait")return;if(e.pointerType==="mouse")e.preventDefault();sx=e.clientX;sy=e.clientY;moved=false;bt.setPointerCapture(e.pointerId);});
@@ -2134,8 +2182,14 @@ function dragGive(bt,it){var ghost=null,moved=false,sx=0,sy=0;
     else{if(HG.pick===it){give(it);return;}HG.pick=it;Array.prototype.forEach.call(document.querySelectorAll("#hgTray .pbtn"),function(x){x.classList.toggle("picked",x===bt);});
       $("hgHint").textContent="Kiválasztva: "+it.name+". Koppints a töltőkezelőre (vagy még egyszer a tételre) az átadáshoz.";}});}
 $("hgSvg").addEventListener("click",function(e){if(HG.state==="wait"&&HG.pick&&overHand(e.clientX,e.clientY))give(HG.pick);});
-async function give(it){if(HG.state!=="wait")return;HG.state="carry";HG.pick=null;var run=HG.run,m=HG.list[HG.i],k=STEPK[HG.step];
+function speakHu(txt){try{if(!CFG.sfx||!window.speechSynthesis)return false;var u=new SpeechSynthesisUtterance(txt);u.lang="hu-HU";
+  var vs=speechSynthesis.getVoices()||[],v=vs.filter(function(x){return /^hu/i.test(x.lang);})[0];if(v)u.voice=v;u.rate=1.08;u.pitch=0.62;u.volume=1;
+  speechSynthesis.cancel();speechSynthesis.speak(u);return true;}catch(e){return false;}}
+if(window.speechSynthesis){try{speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};}catch(e){}}
+async function give(it){if(HG.state!=="wait")return;HG.state="carry";HG.pick=null;var run=HG.run,m=HG.list[HG.i],k=STEPK[HG.step];$("ttGive").disabled=true;
+  var bad=m.ok[k].indexOf(it.id)<0;
   SND.clunk();holdItem(it);say("");$("hgHint").textContent="Viszi a lövegbe…";
+  if(bad){speakHu("Bazdmeg, ez szar!");say("Bazdmeg, ez szar!");LD.querySelector(".walker").style.transform="scaleX(1)";await wait(1500);if(HG.run!==run)return;say("");}
   await ldPos(HX.home,1400,1);if(HG.run!==run)return;
   holdItem(null);SND.ram();
   var ok=m.ok[k].indexOf(it.id)>-1;
