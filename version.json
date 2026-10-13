@@ -1,5 +1,5 @@
 {
- "version": "1.11.1",
+ "version": "1.13.0",
  "date": "2026-10-13",
- "notes": "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"
+ "notes": "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"
 }
