@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101310">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PzH Milliomos">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>:root{color-scheme:dark}body{margin:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<script>window.PZH_SHARE_URL=location.origin+location.pathname.replace(/index\.html$/,"");</script>
+<script>window.PZH_PWA=true;window.PZH_SHARE_URL=location.origin+location.pathname.replace(/index\.html$/,"");</script>
 <script src="firebase-config.js"></script>
 <title>PzH Milliomos</title>
 </head>
@@ -396,6 +398,13 @@ button.kcard:hover{border-color:var(--gold)}
 table.lb td .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-left:6px;vertical-align:middle}
 table.lb td.when{color:var(--muted);font-size:12.5px;white-space:nowrap}
 table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
+
+.netchip{min-height:32px;padding:0 10px;border-radius:99px;border:1px solid var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--ink);font:600 11px var(--f-mono);letter-spacing:.1em}
+.updbar{position:sticky;top:62px;z-index:11;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;border-radius:6px;background:color-mix(in srgb,var(--gold) 16%,var(--panel));border:1px solid var(--gold);font-weight:600}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:30;max-width:min(92vw,460px);padding:10px 16px;border-radius:6px;background:var(--ink);color:var(--bg);font-size:14.5px;box-shadow:var(--shadow);text-align:center}
+.chlog{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px}
+.chlog li{margin:3px 0}
+.chlog b{color:var(--ink);font-weight:600}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 
@@ -403,10 +412,13 @@ table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
  <header class="topbar">
   <button class="brand" id="brand" type="button">PzH <b>Milliomos</b></button>
   <div class="tbact">
+   <button class="netchip hide" id="netChip" type="button" title="Offline – a játék hálózat nélkül fut">OFFLINE</button>
    <button class="ibtn" id="sndBtn" type="button" aria-pressed="true" aria-label="Hang ki/be"></button>
    <button class="ibtn exitb hide" id="tbExit" type="button">✕ Kilépés</button>
   </div>
  </header>
+ <div class="updbar hide" id="updBar" role="status"><span id="updTxt"></span><button class="btn small" id="updGo" type="button">Frissítés most</button></div>
+ <div class="toast hide" id="toast" role="status"></div>
 
  <!-- KEZDŐLAP -->
  <section id="home">
@@ -459,7 +471,7 @@ table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
 <button class="mrow" data-go="set" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span><span class="mtx"><b>Beállítások</b><small>Hang, becenév, eredmények</small></span><span class="mbest" data-best="set"></span><span class="mchev" aria-hidden="true">›</span></button>
 <button class="mrow" data-go="share" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/></svg></span><span class="mtx"><b>Megosztás</b><small>QR-kód, link, telepítés telefonra</small></span><span class="mbest" data-best="share"></span><span class="mchev" aria-hidden="true">›</span></button>
 </nav>
-  <p class="fine">A kérdések és a lépéssor a lövegkezelői tananyag oldalaiból készültek. A tűzfeladat gyakorló sorrend, a vezényszavakat és a szabályzatot nem helyettesíti.</p>
+  <p class="fine">A kérdések és a lépéssor a lövegkezelői tananyag oldalaiból készültek. A tűzfeladat gyakorló sorrend, a vezényszavakat és a szabályzatot nem helyettesíti. <span id="verFoot"></span></p>
  </section>
 
  <!-- KVÍZ -->
@@ -603,6 +615,10 @@ table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
    <div class="srow"><div><b>Zene</b><small>Hősi indulótéma a háttérben</small></div><button class="sw" id="cfMusic" type="button" role="switch" aria-checked="true" aria-label="Zene"><i></i></button></div>
    <div class="srow"><div><b>Hangeffektek</b><small>Gombok, töltés, lövés, robbanás, helyes válasz</small></div><button class="sw" id="cfSfx" type="button" role="switch" aria-checked="true" aria-label="Hangeffektek"><i></i></button></div>
    <div class="srow"><div><b>Hangerő</b><small id="cfVolV"></small></div><input type="range" id="cfVol" min="0" max="100" step="5" aria-label="Hangerő"></div>
+   <h3 class="pgs">Kapcsolat és offline mód</h3>
+   <div class="srow"><div><b>Hálózat</b><small id="netState"></small></div></div>
+   <div class="srow"><div><b>Offline mód</b><small>Nincs hálózati forgalom. A ranglista szünetel, az eredmények a készüléken gyűlnek, és visszakapcsoláskor feltöltődnek.</small></div><button class="sw" id="cfOffline" type="button" role="switch" aria-checked="false" aria-label="Offline mód"><i></i></button></div>
+   <div class="srow"><div><b>Offline tárolás</b><small id="offState"></small></div><button class="btn small ghost hide" id="offSave" type="button">Letöltés</button></div>
    <h3 class="pgs">Megjelenés</h3>
    <div class="srow"><div><b>Háttérrobbanások</b><small>Harctéri animáció a főoldalon</small></div><button class="sw" id="cfBlast" type="button" role="switch" aria-checked="true" aria-label="Háttérrobbanások"><i></i></button></div>
    <h3 class="pgs">Becenév a ranglistához</h3>
@@ -611,6 +627,9 @@ table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
    <h3 class="pgs">Eredményeid</h3>
    <div class="stats" id="bestStats" style="text-align:left;margin:0"></div>
    <div class="actions" style="margin-top:12px"><button class="btn ghost small" id="cfReset" type="button">Eredmények törlése</button></div>
+   <h3 class="pgs">Verzió és frissítés</h3>
+   <div class="srow"><div><b id="verTxt"></b><small id="updMsg"></small></div><button class="btn small" id="updCheck" type="button">Frissítés keresése</button></div>
+   <ul class="chlog" id="chlog"></ul>
    <h3 class="pgs">Névjegy</h3>
    <p class="fine" id="about" style="text-align:left;margin:0"></p>
   </div>
@@ -756,6 +775,13 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
+var APP_VERSION="1.4.0",APP_DATE="2026-10-13";
+var CHANGELOG=[["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,offline:false,_prev:null};
+  try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
+function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
+function isOff(){return CFG.offline||!navigator.onLine;}
+
 var SECTIONS=["home","start","game","end","sim","simEnd","dd","ter","terEnd","hangar","hangarEnd","kis","rank","set","share"];
 var GAMES=["game","sim","dd","ter","hangar"];
 function curSec(){for(var i=0;i<SECTIONS.length;i++)if(!$(SECTIONS[i]).classList.contains("hide"))return SECTIONS[i];return "home";}
@@ -1844,13 +1870,15 @@ var LB={db:null,me:null,unsub:null,rows:[],
   nick:function(){try{return localStorage.getItem(KEY+"-nick")||"";}catch(e){return "";}},
   setNick:function(n){try{localStorage.setItem(KEY+"-nick",n);}catch(e){}},
   total:function(){return (store.best||0)+(store.hgBest||0)+(store.simBest!=null?Math.max(0,12-store.simBest)*250:0)+(store.terBest||0)*250+(store.ddBest!=null?Math.max(0,15-store.ddBest)*100:0);},
-  init:async function(){if(!window.claude||!claude.use){if(window.PZH_FIREBASE)return LB.initFirebase();LB.status("A ranglista ebben a változatban nincs bekapcsolva. A játék enélkül is működik, az eredményeid a készüléken maradnak.");return;}
+  init:async function(){if(CFG.offline){LB.status("Offline mód bekapcsolva: a ranglista szünetel. Az eredményeid a készüléken gyűlnek, és visszakapcsoláskor feltöltődnek.");return;}
+    if(LB.db){LB.status("");LB.push();return;}
+    if(!window.claude||!claude.use){if(window.PZH_FIREBASE)return LB.initFirebase();LB.status("A ranglista ebben a változatban nincs bekapcsolva. A játék enélkül is működik, az eredményeid a készüléken maradnak.");return;}
     try{var db=await claude.use("db"),user=await claude.use("user");if(!db||!user){LB.status("A ranglista most nem érhető el (bejelentkezés kell). A játék enélkül is működik, az eredményeid a készüléken maradnak.");return;}
       LB.db=db;LB.me=await user.id();LB.status("");
       LB.unsub=db.collection("board").orderBy("total","desc").limit(500).onSnapshot(function(s){LB.rows=s.docs.map(function(d){var x=d.data();x._id=d.id;return x;});LB.render();},function(){LB.status("A ranglista kapcsolata megszakadt.");});
       if(LB.nick())LB.push();}catch(e){LB.status("A ranglista most nem érhető el.");}},
   status:function(t){var n=$("lbStatus");if(n){n.textContent=t;n.classList.toggle("hide",!t);}},
-  push:async function(){if(!LB.db||!LB.me||!LB.nick())return;var d={nick:LB.nick().slice(0,24),total:LB.total(),quiz:store.best||0,hangar:store.hgBest||0,
+  push:async function(){if(CFG.offline||!LB.db||!LB.me||!LB.nick())return;var d={nick:LB.nick().slice(0,24),total:LB.total(),quiz:store.best||0,hangar:store.hgBest||0,
       sim:store.simBest!=null?store.simBest:null,ter:store.terBest!=null?store.terBest:null,dd:store.ddBest!=null?store.ddBest:null,at:new Date().toISOString()};
     if(LB.last===JSON.stringify(d.total+"|"+d.nick+"|"+d.quiz+"|"+d.hangar+"|"+d.sim+"|"+d.ter+"|"+d.dd))return;
     LB.last=JSON.stringify(d.total+"|"+d.nick+"|"+d.quiz+"|"+d.hangar+"|"+d.sim+"|"+d.ter+"|"+d.dd);
@@ -1868,7 +1896,7 @@ LB.renderView=function(){var tb=$("lbBody");if(!tb)return;
   var rows=LB.rows.filter(function(r){var v=lbVal(r,k);return r.nick&&v!=null&&(dir>0||v>0||k==="total");});
   rows.sort(function(a,b){var d=(lbVal(a,k)-lbVal(b,k))*dir;return d!==0?d:(lbVal(b,"total")||0)-(lbVal(a,"total")||0);});
   var now=Date.now(),act=LB.rows.filter(function(r){return r.at&&now-Date.parse(r.at)<3600000;}).length;
-  var lv=$("lbLive");if(LB.db){lv.classList.remove("hide");lv.textContent="Élő · "+LB.rows.length+" játékos · "+act+" aktív az elmúlt órában";}else lv.classList.add("hide");
+  var lv=$("lbLive");if(LB.db&&!isOff()){lv.classList.remove("hide");lv.textContent="Élő · "+LB.rows.length+" játékos · "+act+" aktív az elmúlt órában";}else lv.classList.add("hide");
   var me=$("lbMe");me.innerHTML="";var nk=LB.nick();
   if(!nk){var sp=document.createElement("span");sp.textContent="Még nincs beceneved, ezért nem szerepelsz a listán.";var bt=document.createElement("button");bt.type="button";bt.className="btn small";bt.textContent="Becenév megadása";
     bt.addEventListener("click",function(){route("set");setTimeout(function(){$("nickIn").focus();},50);});me.appendChild(sp);me.appendChild(bt);}
@@ -1910,9 +1938,6 @@ try{if(window.QRCode)new QRCode($("qr"),{text:SHARE_URL,width:144,height:144,col
 $("copyBtn").addEventListener("click",function(){var b=this;function ok(){b.textContent="Másolva";setTimeout(function(){b.textContent="Másolás";},1600);}
   try{navigator.clipboard.writeText(SHARE_URL).then(ok,function(){$("shareUrl").select();});}catch(e){$("shareUrl").select();}});
 /* ===== HANG: Web Audio szintézis (külső fájl nélkül) ===== */
-var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,_prev:null};
-  try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
-function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
 var SND=(function(){
   var ac=null,master,music,sfx,started=false,timer=null,nextBar=0,bar=0,noiseBuf=null;
   function ctx(){if(ac)return ac;var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ac=new C();
@@ -1996,7 +2021,7 @@ function renderSnd(){var b=$("sndBtn"),on=SND.isOn();
   b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/>'+(on?'<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>':'<path d="M16 9.5l5 5M21 9.5l-5 5"/>')+'</svg>';
   b.setAttribute("aria-pressed",on?"true":"false");b.title=on?"Hang kikapcsolása":"Hang bekapcsolása";if(curSec()==="set")renderSet();}
 function swSet(id,v){$(id).setAttribute("aria-checked",v?"true":"false");}
-function renderSet(){swSet("cfMusic",CFG.music);swSet("cfSfx",CFG.sfx);swSet("cfBlast",CFG.blasts);$("cfVol").value=Math.round(CFG.vol*100);$("cfVolV").textContent=Math.round(CFG.vol*100)+"%";
+function renderSet(){renderVer();renderNet();swSet("cfMusic",CFG.music);swSet("cfSfx",CFG.sfx);swSet("cfBlast",CFG.blasts);$("cfVol").value=Math.round(CFG.vol*100);$("cfVolV").textContent=Math.round(CFG.vol*100)+"%";
   $("nickIn").value=LB.nick();renderStats();
   $("about").textContent="PzH Milliomos · "+BANK.length+" kvízkérdés · "+KIS.length+" kisokos-kártya · "+(navigator.onLine?"online":"offline")+". A kérdések és a lépéssor a lövegkezelői tananyagból készültek; a szabályzatot és a vezényszavakat nem helyettesítik.";}
 $("cfMusic").addEventListener("click",function(){CFG.music=!CFG.music;saveCfg();SND.apply();renderSnd();renderSet();});
@@ -2025,6 +2050,61 @@ renderSnd();
   }
   setTimeout(blast,1200);
 })();
+
+/* ===== VERZIÓ, FRISSÍTÉS, OFFLINE ===== */
+var PWA=!!window.PZH_PWA,FILEMODE=location.protocol==="file:",UPD={remote:null};
+function toast(t,ms){var n=$("toast");n.textContent=t;n.classList.remove("hide");clearTimeout(toast.h);toast.h=setTimeout(function(){n.classList.add("hide");},ms||3200);}
+function cmpVer(a,b){a=String(a).split(".").map(Number);b=String(b).split(".").map(Number);for(var i=0;i<3;i++){var d=(a[i]||0)-(b[i]||0);if(d)return d>0?1:-1;}return 0;}
+function setUpdMsg(t){var n=$("updMsg");if(n)n.textContent=t;}
+async function offReady(){if(!PWA||!window.caches)return false;try{var h=await caches.match("index.html")||await caches.match("./");return !!h;}catch(e){return false;}}
+async function renderNet(){var off=isOff();$("netChip").classList.toggle("hide",!off);
+  $("netChip").textContent=CFG.offline?"OFFLINE MÓD":"OFFLINE";
+  if(curSec()!=="set")return;
+  swSet("cfOffline",CFG.offline);
+  $("netState").textContent=!navigator.onLine?"Nincs hálózat – a játék offline fut.":CFG.offline?"Van hálózat, de az offline mód be van kapcsolva.":"Online"+(LB.db?" · a ranglista élő.":".");
+  var os=$("offState"),sb=$("offSave");
+  if(FILEMODE){os.textContent="Önálló fájlként fut: teljesen offline, nincs mit letölteni.";sb.classList.add("hide");return;}
+  if(!PWA){os.textContent="A claude.ai-s linkhez nincs offline tárolás. Offline használathoz nyisd meg a telepíthető (Verceles) változatot, és add hozzá a kezdőképernyőhöz.";sb.classList.add("hide");return;}
+  var ok=await offReady();os.textContent=ok?"Kész ✓ – a játék internet nélkül is elindul ezen a készüléken.":"Még nincs letöltve. Nyomd meg a Letöltés gombot, amíg van hálózat.";
+  sb.classList.toggle("hide",false);sb.textContent=ok?"Újra letöltés":"Letöltés";}
+async function saveOffline(){if(!navigator.onLine){toast("Letöltéshez hálózat kell.");return;}
+  try{var c=await caches.open("pzh-milliomos-"+APP_VERSION);
+    await c.addAll(["./","index.html","firebase-config.js","manifest.webmanifest","icon-192.png","icon-512.png"]);
+    var ext=Array.prototype.map.call(document.querySelectorAll('link[rel=stylesheet][href^="http"],script[src^="http"]'),function(n){return n.href||n.src;});
+    await Promise.all(ext.map(function(u){return fetch(u,{mode:"no-cors"}).then(function(r){return c.put(u,r);}).catch(function(){});}));
+    toast("Letöltve: a játék offline is indul.");}catch(e){toast("A letöltés nem sikerült.");}
+  renderNet();}
+function renderVer(){$("verTxt").textContent="Verzió "+APP_VERSION+" · "+APP_DATE;$("verFoot").textContent="v"+APP_VERSION;
+  var ul=$("chlog");ul.innerHTML="";CHANGELOG.slice(0,4).forEach(function(c){var li=document.createElement("li");li.innerHTML="<b></b> ";li.firstChild.textContent=c[0]+":";li.appendChild(document.createTextNode(c[1]));ul.appendChild(li);});
+  if(!$("updMsg").textContent)setUpdMsg(UPD.remote&&cmpVer(UPD.remote,APP_VERSION)>0?"Új verzió érhető el: "+UPD.remote:"");}
+function showUpd(v){$("updTxt").textContent="Új verzió érhető el: "+v+" (most: "+APP_VERSION+")";$("updBar").classList.remove("hide");}
+async function checkUpdate(manual){
+  if(FILEMODE){if(manual)setUpdMsg("Önálló fájl: új verzióhoz töltsd le újra a fájlt.");return;}
+  if(!PWA){if(manual){setUpdMsg("A claude.ai-s link mindig a legfrissebb verziót tölti be. Újratöltöm…");setTimeout(function(){location.reload();},700);}return;}
+  if(isOff()){if(manual)setUpdMsg(CFG.offline?"Offline módban nem keresek frissítést.":"Nincs hálózat, frissítést nem lehet keresni.");return;}
+  if(manual)setUpdMsg("Keresés…");
+  try{var r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});var j=await r.json();UPD.remote=j.version;
+    if(cmpVer(j.version,APP_VERSION)>0){showUpd(j.version);setUpdMsg("Új verzió érhető el: "+j.version);}
+    else if(manual)setUpdMsg("A legfrissebb verziót használod ✓");}
+  catch(e){if(manual)setUpdMsg("Nem sikerült ellenőrizni (hálózati hiba).");}}
+async function doUpdate(){if(isOff()){toast("Frissítéshez hálózat kell.");return;}
+  if(busy()&&!confirm("Folyamatban lévő játék van. Frissítsek most? Az állás elvész."))return;
+  $("updGo").disabled=true;$("updTxt").textContent="Frissítés…";
+  try{if("serviceWorker" in navigator){var reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update();}
+    if(window.caches){var ks=await caches.keys();await Promise.all(ks.map(function(k){return caches.delete(k);}));}}catch(e){}
+  location.reload();}
+$("updGo").addEventListener("click",doUpdate);
+$("updCheck").addEventListener("click",function(){if(UPD.remote&&cmpVer(UPD.remote,APP_VERSION)>0){doUpdate();return;}checkUpdate(true);});
+$("offSave").addEventListener("click",saveOffline);
+$("netChip").addEventListener("click",function(){route("set");});
+$("cfOffline").addEventListener("click",function(){CFG.offline=!CFG.offline;saveCfg();
+  try{if(window.firebase&&firebase.apps&&firebase.apps.length){var f=firebase.firestore();CFG.offline?f.disableNetwork():f.enableNetwork();}}catch(e){}
+  if(CFG.offline){toast("Offline mód bekapcsolva.");LB.status("Offline mód bekapcsolva: a ranglista szünetel. Az eredményeid a készüléken gyűlnek, és visszakapcsoláskor feltöltődnek.");}
+  else{toast("Offline mód kikapcsolva.");LB.status("");LB.last=null;LB.init();}
+  renderNet();LB.renderView();});
+window.addEventListener("offline",function(){toast("Nincs hálózat – a játék offline tovább fut.");renderNet();LB.renderView();});
+window.addEventListener("online",function(){renderNet();if(!CFG.offline){toast("Újra online.");LB.last=null;LB.init();checkUpdate(false);}});
+renderVer();renderNet();setTimeout(function(){checkUpdate(false);},2500);
 
 show("home");renderStats();
 </script>
