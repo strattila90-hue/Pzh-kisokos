@@ -723,6 +723,10 @@ body:has(#sim:not(.hide)){overscroll-behavior:none}
 @keyframes tpulse{50%{transform:scale(1.18)}}
 .qlive{font-size:calc(12.5px * var(--fz));color:#9fb0ff;margin-top:4px}
 .qlive i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3fd17a;animation:onp 2s infinite}
+.simclock{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;background:rgba(0,0,0,.55);border:1px solid rgba(227,179,65,.55);color:var(--gold);font:700 calc(13px * var(--fz)) var(--f-mono);letter-spacing:.02em;white-space:nowrap}
+.simclock b{font-variant-numeric:tabular-nums;color:#ffe08a;min-width:5.2ch;text-align:right}
+.simclock.done{border-color:#4fe08a}.simclock.done b{color:#7fe0a6}
+.simendtime{font:700 calc(20px * var(--fz)) var(--f-mono);color:var(--gold);margin:4px 0 8px}
 /* --- olvashatóság (v1.6) --- */
 .topbar{flex-wrap:nowrap}
 .brand{white-space:nowrap;min-width:0}
@@ -883,7 +887,7 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
   <div class="panel scene" id="scene">
    <div class="scenebar">
     <span class="sbl"><span>PzH 2000 HU</span><span id="modeCap">Kikapcsolva</span></span>
-    <span class="sbr"><span class="readout"><span>TÁV <b id="roT">—</b> m</span><span>OLDAL <b id="roO">0000</b></span><span>MAG. <b id="roM">000</b></span></span><span class="estop" id="estop" title="Vészleállító">STOP</span><span class="firebtn" id="fireBtn" title="TŰZ gomb">TŰZ</span></span>
+    <span class="sbr"><span class="simclock" id="simClock" title="Eltelt idő a tűzfeladat kezdete óta">⏱ <b id="simClockT">0:00,0</b></span><span class="readout"><span>TÁV <b id="roT">—</b> m</span><span>OLDAL <b id="roO">0000</b></span><span>MAG. <b id="roM">000</b></span></span><span class="estop" id="estop" title="Vészleállító">STOP</span><span class="firebtn" id="fireBtn" title="TŰZ gomb">TŰZ</span></span>
    </div>
    <div class="svgwrap"><div class="fke ov" id="fkeBox" aria-live="polite"><div class="h">FKE</div><pre id="fkeText"></pre></div>
    <svg viewBox="-20 -150 1040 655" id="simSvg" class="xray" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A PzH 2000 átlátszó (röntgen) oldalnézete harctéri környezetben">
@@ -927,6 +931,7 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
    <span class="k" style="color:var(--gold)">Lövés leadva</span>
    <h1 style="font-size:clamp(36px,7vw,56px);margin-top:6px">Tűzfeladat <span style="color:var(--gold)">végrehajtva</span></h1>
    <div class="score" id="simEndScore"></div>
+   <p id="simEndTime" class="simendtime"></p>
    <p id="simEndSub" style="color:var(--muted)"></p>
    <div class="review hide" id="simReview"></div>
    <div class="expl good hide" id="factSim" style="text-align:left;margin:0 0 14px"></div>
@@ -1136,8 +1141,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.11.0",APP_DATE="2026-10-13";
-var CHANGELOG=[["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.11.1",APP_DATE="2026-10-13";
+var CHANGELOG=[["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -1154,7 +1159,7 @@ var GAMES=["game","sim","dd","ter","hangar"];
 function curSec(){for(var i=0;i<SECTIONS.length;i++)if(!$(SECTIONS[i]).classList.contains("hide"))return SECTIONS[i];return "home";}
 var TABOF={home:"home",start:"start",game:"start",end:"start",sim:"sim",simEnd:"sim",dd:"dd",ter:"ter",terEnd:"ter",hangar:"hangar",hangarEnd:"hangar",kis:"kis",rank:"rank"};
 function show(id){if(window.factInto){if(id==="hangarEnd")factInto("factHg");if(id==="simEnd")factInto("factSim");if(id==="end")factInto("factQuiz");if(id==="terEnd")factInto("factTer");}
-SECTIONS.forEach(function(s){$(s).classList.toggle("hide",s!==id);});if(id!=="sim")wakeOff();
+SECTIONS.forEach(function(s){$(s).classList.toggle("hide",s!==id);});if(id!=="sim"){wakeOff();if(window.clkStop&&id!=="simEnd"&&CLK.iv){clearInterval(CLK.iv);CLK.iv=null;}}
   if(id!=="game"&&window.qtStop){qtStop();if(window.SND&&SND.mode)SND.mode("normal");}
   var lt=document.getElementById("lbTab");if(lt)lt.classList.toggle("hide",id==="rank");if(window.LB&&LB.beat)setTimeout(LB.beat,300);
   var xb=$("tbExit");xb.classList.toggle("hide",id==="home");xb.textContent=GAMES.indexOf(id)>=0?"✕ Kilépés":"‹ Főmenü";
@@ -1395,7 +1400,7 @@ function weakest(){var w=null,wr=0;Object.keys(store.topics).forEach(function(k)
 function renderStats(){var parts=[];
   if(store.best)parts.push("Legjobb kvíz: <strong>"+fmt(store.best)+" pont</strong>");
   var w=weakest();if(w)parts.push("Leggyengébb téma: <strong>"+w+"</strong>");
-  if(store.simBest!=null)parts.push("Legjobb tűzfeladat: <strong>"+store.simBest+" hiba</strong>");
+  if(store.simBest!=null)parts.push("Legjobb tűzfeladat: <strong>"+store.simBest+" hiba</strong>"+(store.simTime?" · legjobb idő <strong>"+clkFmt(store.simTime)+"</strong>":""));
   if(store.hgBest!=null)parts.push("Raktár: <strong>"+fmt(store.hgBest)+" pont</strong>");
   if(store.terBest!=null)parts.push("Terepjárás: <strong>"+store.terBest+" / 8</strong>");
   if(store.ddBest!=null)parts.push("Lőszertároló: <strong>"+store.ddBest+" hiba</strong>");
@@ -1895,7 +1900,13 @@ var STEPS=[
   r:"Kiegészítő ismeret (MRSI) · 1. Általános adatok (3–4. o.)"}
 ];
 var SIM={run:0,i:0,errors:0,missed:[],ord:0,tries:0,busy:false};
-function startSim(){wakeOn();SIM={run:SIM.run+1,i:0,errors:0,missed:[],ord:0,tries:0,busy:false,chg:0,burst:0};pick();show("sim");resetScene();renderStepBar();showStep();}
+function startSim(){wakeOn();SIM={run:SIM.run+1,i:0,errors:0,missed:[],ord:0,tries:0,busy:false,chg:0,burst:0};pick();show("sim");resetScene();renderStepBar();showStep();clkStart();}
+/* stopper: másodperc + tized másodperc */
+var CLK={t0:0,iv:null,el:0};
+function clkFmt(sec){var t=Math.floor(sec*10),m=Math.floor(t/600),ss=Math.floor(t/10)%60,d=t%10;return m+":"+(ss<10?"0":"")+ss+","+d;}
+function clkTick(){CLK.el=(performance.now()-CLK.t0)/1000;$("simClockT").textContent=clkFmt(CLK.el);}
+function clkStart(){clkStop();CLK.t0=performance.now();CLK.el=0;$("simClock").classList.remove("done");CLK.iv=setInterval(clkTick,100);clkTick();}
+function clkStop(){if(CLK.iv){clearInterval(CLK.iv);CLK.iv=null;clkTick();$("simClock").classList.add("done");}}
 function renderStepBar(){$("stepBox").scrollTop=0;var b=$("stepBar");b.innerHTML="";STEPS.forEach(function(s,i){var x=document.createElement("i");if(i<SIM.i)x.className="d";else if(i===SIM.i)x.className="c";b.appendChild(x);});
   $("simScore").textContent="Hibák: "+SIM.errors;}
 function val(v){return typeof v==="function"?v():v;}
@@ -1938,8 +1949,10 @@ async function stepDone(first,played,anchor){var st=STEPS[SIM.i],run=SIM.run;$("
 function nextStep(){if(STEPS[SIM.i].last){finishSim();return;}SIM.i++;renderStepBar();showStep();$("stepBox").scrollTop=0;}
 $("stepNext").addEventListener("click",nextStep);
 document.addEventListener("keydown",function(e){if(curSec()!=="sim"||e.key!=="Enter")return;var g=document.querySelector("#stepBody .go:not([disabled])");if(g&&document.activeElement!==g){e.preventDefault();nextStep();}});
-function finishSim(){SIM.run++;show("simEnd");var e=SIM.errors;
-  $("simEndScore").textContent=e===0?"Hibátlan":e+" hiba";
+function finishSim(){clkStop();var tm=CLK.el,prevT=store.simTime;SIM.run++;show("simEnd");var e=SIM.errors;
+  $("simEndScore").textContent=(e===0?"Hibátlan":e+" hiba")+" · ⏱ "+clkFmt(tm);
+  if(!store.simTime||tm<store.simTime)store.simTime=tm;
+  $("simEndTime").textContent="Idő: "+clkFmt(tm)+" ("+tm.toFixed(1).replace(".",",")+" mp)"+(prevT?(tm<prevT?" – új egyéni csúcs! Előző: "+clkFmt(prevT):" – legjobb: "+clkFmt(prevT)):" – első mért idő");
   $("simEndSub").textContent=(e===0?"Minden lépést elsőre jól választottál. ":STEPS.length+" lépésből "+(STEPS.length-e)+" ment elsőre. ")+"Feladat: "+SC.name+", javított lőelem: "+mtr(TAV)+", "+v4(ELO)+" / "+v3(ELM)+" v."+(SIM.mrsi!=null?" MRSI-ablak: "+sec1(SIM.mrsi)+" mp.":"")+(SIM.burst?" Sorozat: 3 lövés "+sec1(SIM.burst)+" mp alatt"+(store.simBurst?" (legjobb: "+sec1(Math.min(store.simBurst,SIM.burst))+" mp)":"")+".":"");wakeOff();
   if(SIM.burst&&(!store.simBurst||SIM.burst<store.simBurst))store.simBurst=SIM.burst;
   renderReview($("simReview"),SIM.missed);if(store.simBest==null||e<store.simBest)store.simBest=e;save(store);LB.push();}
