@@ -1,5 +1,5 @@
 {
- "version": "1.4.0",
+ "version": "1.6.1",
  "date": "2026-10-13",
- "notes": "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"
+ "notes": "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"
 }
