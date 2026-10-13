@@ -468,7 +468,7 @@ table.lb tr.podium td:first-child{color:var(--gold);font-weight:700}
 .scenebar .sbl{display:flex;gap:10px;align-items:center;min-width:0;white-space:nowrap;overflow:hidden}
 .scenebar #modeCap{color:#ffd84a}
 .scenebar .sbr{display:flex;gap:6px;align-items:center;flex:none}
-.scenebar .readout{font:500 calc(11px * var(--fz)) var(--f-mono);color:#9fb0bd;white-space:nowrap;letter-spacing:.04em}
+.scenebar .readout{display:flex;gap:12px;font:500 calc(11px * var(--fz)) var(--f-mono);color:#9fb0bd;white-space:nowrap;letter-spacing:.04em}
 .scenebar .readout b{color:#e8f0f5;font-weight:600}
 .scenebar .readout i{font-style:normal;opacity:.5}
 .scenebar .estop,.scenebar .firebtn{width:30px;height:30px;font-size:calc(7.5px * var(--fz));box-shadow:0 0 0 2px #11140f}
@@ -586,6 +586,14 @@ body:has(#sim:not(.hide)){overscroll-behavior:none}
   #sim .opt,#sim .ochip{font-size:calc(13px * var(--fz));padding:7px 10px}
   #sim .expl{font-size:calc(12.5px * var(--fz))}
 }
+
+/* --- címer + zászló a főoldalon --- */
+.herorow{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:18px 18px 0}
+.herorow h1{margin:0}
+.heraldry{display:flex;align-items:flex-end;gap:8px;flex:none}
+.heraldry .crest{width:calc(64px * var(--fz));height:auto;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+.heraldry .flagsvg{width:calc(84px * var(--fz));height:auto;overflow:visible}
+@media(max-width:520px){.herorow{flex-direction:column-reverse;align-items:stretch}.heraldry{align-self:flex-end;margin-bottom:-8px}.heraldry .crest{width:74px}.heraldry .flagsvg{width:92px}}
 /* --- olvashatóság (v1.6) --- */
 .topbar{flex-wrap:nowrap}
 .brand{white-space:nowrap;min-width:0}
@@ -622,7 +630,7 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
  <section id="home">
   <div class="panel hero">
    <div class="tagline k"><span>PzH 2000 HU · 155 mm L52</span><span>Kezelői felkészítő</span></div>
-   <h1>PzH<em>Milliomos</em></h1>
+   <div class="herorow"><h1>PzH<em>Milliomos</em></h1><div class="heraldry" aria-label="Az üteg címere és a magyar zászló"><img class="crest" alt="Az üteg címere" src="data:image/webp;base64,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"><svg viewBox="0 0 130 132" id="heroFlag" class="flagsvg" aria-hidden="true"></svg></div></div>
    <p>Tudásteszt, interaktív tűzfeladat és lőszertároló-gyakorló a lövegkezelői tananyagból.</p>
    <div class="plate">
    <svg viewBox="0 0 1200 490" aria-hidden="true" id="heroSvg">
@@ -734,7 +742,7 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
   <div class="panel scene" id="scene">
    <div class="scenebar">
     <span class="sbl"><span>PzH 2000 HU</span><span id="modeCap">Kikapcsolva</span></span>
-    <span class="sbr"><span class="readout">OLDAL <b id="roO">0000</b> <i>·</i> MAG. <b id="roM">000</b></span><span class="estop" id="estop" title="Vészleállító">STOP</span><span class="firebtn" id="fireBtn" title="TŰZ gomb">TŰZ</span></span>
+    <span class="sbr"><span class="readout"><span>TÁV <b id="roT">—</b> m</span><span>OLDAL <b id="roO">0000</b></span><span>MAG. <b id="roM">000</b></span></span><span class="estop" id="estop" title="Vészleállító">STOP</span><span class="firebtn" id="fireBtn" title="TŰZ gomb">TŰZ</span></span>
    </div>
    <div class="svgwrap"><div class="fke ov" id="fkeBox" aria-live="polite"><div class="h">FKE</div><pre id="fkeText"></pre></div>
    <svg viewBox="-20 -150 1040 655" id="simSvg" class="xray" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A PzH 2000 átlátszó (röntgen) oldalnézete harctéri környezetben">
@@ -822,9 +830,11 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
    <h3 class="pgs">Kapcsolat és offline mód</h3>
    <div class="srow"><div><b>Hálózat</b><small id="netState"></small></div></div>
    <div class="srow"><div><b>Offline mód</b><small>Nincs hálózati forgalom. A ranglista szünetel, az eredmények a készüléken gyűlnek, és visszakapcsoláskor feltöltődnek.</small></div><button class="sw" id="cfOffline" type="button" role="switch" aria-checked="false" aria-label="Offline mód"><i></i></button></div>
+   <div class="srow"><div><b>Értesítés frissítésről</b><small id="notifState">Szólunk, ha új verzió jelenik meg.</small></div><button class="sw" id="cfNotif" type="button" role="switch" aria-checked="false" aria-label="Értesítés frissítésről"><i></i></button></div>
    <div class="srow"><div><b>Offline tárolás</b><small id="offState"></small></div><button class="btn small ghost hide" id="offSave" type="button">Letöltés</button></div>
    <h3 class="pgs">Megjelenés</h3>
    <div class="srow"><div><b>Betűméret</b><small>Az egész játékra vonatkozik</small></div><div class="fzseg" id="fzSeg" role="group" aria-label="Betűméret"><button type="button" data-fz="1">A</button><button type="button" data-fz="1.2" style="font-size:1.15em">A</button><button type="button" data-fz="1.4" style="font-size:1.35em">A</button></div></div>
+   <div class="srow"><div><b>Találatok hatása</b><small>Vér és felkiáltás, ha a gránát katonát talál (tűzfeladat háttér)</small></div><button class="sw" id="cfGore" type="button" role="switch" aria-checked="true" aria-label="Találatok hatása"><i></i></button></div>
    <div class="srow"><div><b>Háttérrobbanások</b><small>Harctéri animáció a főoldalon</small></div><button class="sw" id="cfBlast" type="button" role="switch" aria-checked="true" aria-label="Háttérrobbanások"><i></i></button></div>
    <h3 class="pgs">Becenév a ranglistához</h3>
    <div class="nickrow"><input id="nickIn" maxlength="24" placeholder="pl. Tüzér Tudsz" autocomplete="nickname" aria-label="Becenév"><button class="btn small" id="nickSave" type="button">Mentés</button></div>
@@ -980,9 +990,9 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.8.1",APP_DATE="2026-10-13";
-var CHANGELOG=[["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
-var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,offline:false,fz:1.2,_prev:null};
+var APP_VERSION="1.9.0",APP_DATE="2026-10-13";
+var CHANGELOG=[["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
 function isOff(){return CFG.offline||!navigator.onLine;}
@@ -1118,6 +1128,23 @@ function drawPzH(root,o){
   $("nearForest").setAttribute("d",trees(function(x){return 412-6*Math.sin(x/70);},18,40,16,30));
 })();
 
+/* lobogó magyar zászló (SVG, hullámzó csíkok + árnyékolás) */
+var FLAGS=[];
+function makeFlag(parent,x,y,w,h,opt){opt=opt||{};var g=el("g",{"class":"hflag"},parent),dir=opt.dir||1,N=16;
+  if(opt.pole){el("line",{x1:x,y1:y-3,x2:x,y2:y+opt.pole,stroke:opt.poleCol||"#bfae7e","stroke-width":opt.pw||3,"stroke-linecap":"round"},g);el("circle",{cx:x,cy:y-4,r:(opt.pw||3)*1.15,fill:"#e3c25c"},g);}
+  var st=["#CE2939","#FFFFFF","#477050"].map(function(c){return el("path",{fill:c},g);}),sh=[];for(var i=0;i<N;i++)sh.push(el("path",{fill:"#000",opacity:0},g));
+  var ol=el("path",{fill:"none",stroke:"rgba(0,0,0,.25)","stroke-width":.6},g);
+  function edge(yb,t){var p=[];for(var i=0;i<=N;i++){var u=i/N;p.push([x+dir*u*w,yb+h*0.085*u*Math.sin(u*7.2-t*4.4)+u*h*0.06]);}return p;}
+  function P(p){return p[0].toFixed(1)+" "+p[1].toFixed(1);}
+  function frame(t){var e=[0,1,2,3].map(function(k){return edge(y+k*h/3,t);});
+    for(var s2=0;s2<3;s2++)st[s2].setAttribute("d","M"+e[s2].map(P).join(" L")+" L"+e[s2+1].slice().reverse().map(P).join(" L")+"Z");
+    for(var i=0;i<N;i++){var a0=e[0][i],a1=e[0][i+1],b0=e[3][i],b1=e[3][i+1],sl=(a1[1]-a0[1])/Math.max(.1,Math.abs(a1[0]-a0[0]));
+      sh[i].setAttribute("d","M"+P(a0)+" L"+P(a1)+" L"+P(b1)+" L"+P(b0)+"Z");sh[i].setAttribute("opacity",Math.max(0,Math.min(.32,sl*1.4)).toFixed(3));}
+    ol.setAttribute("d","M"+e[0].map(P).join(" L")+" L"+e[3].slice().reverse().map(P).join(" L")+"Z");}
+  var F={frame:frame,sec:opt.sec};FLAGS.push(F);frame(0);return g;}
+(function flagLoop(ts){var c=curSec();FLAGS.forEach(function(F){if(!F.sec||F.sec===c)F.frame(ts/1000);});requestAnimationFrame(flagLoop);})(0);
+makeFlag($("heroFlag"),12,10,104,64,{pole:118,pw:3.4,sec:"home"});
+
 /* ===== KVÍZ ===== */
 var TOTAL=50,LIVES=3,S=null;
 function worth(lv){return lv<16?1000:(lv<33?2000:3000);}
@@ -1226,6 +1253,7 @@ document.addEventListener("keydown",function(e){
 
 /* ===== TŰZFELADAT ===== */
 /* röntgen-kezelők: ülő és álló emberalak, átlátszó fehér körvonallal */
+var CREST_SRC=document.querySelector(".heraldry .crest").getAttribute("src");
 function ghostSeat(g,x,y,face){var f=face||1,k=el("g",{"class":"ghost-g"},g);
   el("circle",{cx:x,cy:y-64,r:8.5,"class":"ghost"},k);
   el("path",{d:"M"+(x-10)+" "+(y-52)+" Q"+x+" "+(y-58)+" "+(x+10)+" "+(y-52)+" L"+(x+11)+" "+(y-24)+" L"+(x-11)+" "+(y-24)+" Z","class":"ghost"},k);
@@ -1253,6 +1281,8 @@ drawPzH($("simPzh"),{p:"s",interior:true,gap:true,nolabel:true});
   el("polyline",{points:"30,206 478,206","class":"xd"},d);el("polyline",{points:"360,160 360,206","class":"xd"},d);
   el("line",{x1:44,y1:178,x2:30,y2:40,"class":"xd",style:"stroke-width:1.6px"},d);el("line",{x1:70,y1:172,x2:62,y2:52,"class":"xd",style:"stroke-width:1.6px"},d);
   el("rect",{x:206,y:138,width:34,height:8,rx:3,"class":"xd"},d);
+  makeFlag(R,62,54,74,46,{sec:"sim"});
+  var cr=el("image",{href:CREST_SRC,x:166,y:166,width:34,height:40,opacity:.92},R);
   var crew=el("g",{},R);
   ghostSeat(crew,548,380,1);   /* harcjárművezető */
   ghostSeat(crew,214,284,1);   /* lövegparancsnok */
@@ -1282,7 +1312,38 @@ drawPzH($("simPzh"),{p:"s",interior:true,gap:true,nolabel:true});
 })();
 /* háttér-becsapódások és nyomjelzők */
 var BFX=$("simBgFx");
-function bfBlast(x,y,sc,loud){var g=el("g",{transform:"translate("+x+","+y+") scale("+sc+")"},BFX);
+/* ellenséges katonák a háttérben – a közeli becsapódás eltalálja őket */
+var TROOPS=[],TRG=el("g",{id:"simTroops"},$("simSvg"));$("simSvg").insertBefore(TRG,BFX);
+function soldierShape(g){var c="#2b2f25";g.setAttribute("stroke","rgba(255,226,190,.55)");g.setAttribute("stroke-width","0.9");
+  el("path",{d:"M-7 -24 Q0 -33 7 -24 Z",fill:"#2c3324"},g);el("circle",{cx:0,cy:-21,r:4.6,fill:c},g);
+  el("path",{d:"M-6 -16 L6 -16 L7 3 L-6 3 Z",fill:c},g);el("path",{d:"M-6 -12 L-14 -2 L-12 0 L-4 -8 Z",fill:c},g);
+  el("line",{x1:-16,y1:-6,x2:12,y2:-14,stroke:"#14170f","stroke-width":2.2},g);
+  el("path",{d:"M-6 2 L-2 2 L-3 22 L-8 22 Z",fill:c,"class":"lg1"},g);el("path",{d:"M1 2 L6 2 L8 22 L3 22 Z",fill:c,"class":"lg2"},g);}
+function spawnTroop(x){var S={x:x!=null?x:(745+Math.random()*260),dir:Math.random()<.5?-1:1,sp:6+Math.random()*10,dead:false,ph:Math.random()*6,sc:1.25+Math.random()*.25};
+  S.g=el("g",{},TRG);soldierShape(S.g);TROOPS.push(S);return S;}
+for(var ti=0;ti<4;ti++)spawnTroop();
+var TLAST=0;(function troopLoop(ts){var dt=Math.min(.1,(ts-TLAST)/1000||0);TLAST=ts;
+  if(curSec()==="sim")TROOPS.forEach(function(S){if(S.dead)return;S.x+=S.dir*S.sp*dt;if(S.x<740||S.x>1010){S.dir*=-1;S.x=Math.max(740,Math.min(1010,S.x));}
+    if(Math.random()<.004)S.dir*=-1;S.ph+=dt*6;var bob=Math.abs(Math.sin(S.ph))*1.5;
+    S.g.setAttribute("transform","translate("+S.x.toFixed(1)+","+(424-bob).toFixed(1)+") scale("+(S.dir*S.sc).toFixed(2)+","+S.sc.toFixed(2)+")");});
+  requestAnimationFrame(troopLoop);})(0);
+function killTroop(S,bx,sc){if(S.dead)return;S.dead=true;var d=S.x>=bx?1:-1,x=S.x,y=424,g=S.g,k=S.sc,sp=40+60*sc,up=70+70*sc;
+  g.removeAttribute("transform");g.style.transformBox="view-box";g.style.transformOrigin="0 0";
+  g.animate([{transform:"translate("+x+"px,"+y+"px) rotate(0deg) scale("+k+")"},{transform:"translate("+(x+d*sp*.55)+"px,"+(y-up)+"px) rotate("+(d*280)+"deg) scale("+k+")",offset:.45},
+    {transform:"translate("+(x+d*sp)+"px,"+(y+14)+"px) rotate("+(d*450)+"deg) scale("+k+")"}],{duration:1150,easing:"cubic-bezier(.2,.6,.45,1)",fill:"forwards"});
+  if(CFG.gore){SND.scream(0.16+0.18*sc);
+    for(var i=0;i<16;i++){var a=-Math.PI*(0.1+0.8*Math.random()),v=25+Math.random()*70,p=el("circle",{cx:x,cy:y-6,r:1.2+Math.random()*2.6,fill:i%3?"#a3101a":"#6e070d"},TRG);
+      p.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate("+(Math.cos(a)*v+d*20)+"px,"+(Math.sin(a)*v)+"px)",offset:.45,opacity:1},{transform:"translate("+(Math.cos(a)*v*1.4+d*30)+"px,"+(24+Math.random()*6)+"px)",opacity:.85}],{duration:900+Math.random()*300,easing:"ease-out",fill:"forwards"});
+      (function(n){setTimeout(function(){n.animate([{opacity:.85},{opacity:0}],{duration:1500,fill:"forwards"});setTimeout(function(){n.remove();},1600);},4200);})(p);}
+    var pool=el("ellipse",{cx:x+d*sp,cy:y+24,rx:1,ry:.5,fill:"#5c070c",opacity:.9},TRG);
+    pool.animate([{transform:"scale(1)"},{transform:"scale(1)",offset:.3},{transform:"scale(1)"}],{duration:10});
+    setTimeout(function(){pool.setAttribute("rx",10);pool.setAttribute("ry",2.6);},1100);
+    setTimeout(function(){pool.animate([{opacity:.9},{opacity:0}],{duration:1500,fill:"forwards"});setTimeout(function(){pool.remove();},1600);},5200);}
+  setTimeout(function(){g.animate([{opacity:1},{opacity:0}],{duration:1200,fill:"forwards"});},4600);
+  setTimeout(function(){g.remove();TROOPS=TROOPS.filter(function(t){return t!==S;});spawnTroop(Math.random()<.5?1012:742);},6000);}
+function bfBlast(x,y,sc,loud){
+  if(y>418)TROOPS.forEach(function(S){if(!S.dead&&Math.abs(S.x-x)<26+44*sc)killTroop(S,x,sc);});
+  var g=el("g",{transform:"translate("+x+","+y+") scale("+sc+")"},BFX);
   var f=el("circle",{r:46,fill:"url(#bfBlast)"},g);f.animate([{transform:"scale(.2)",opacity:1},{transform:"scale(1.15)",opacity:.95,offset:.25},{transform:"scale(1.3)",opacity:0}],{duration:900,easing:"ease-out",fill:"forwards"});
   for(var i=0;i<9;i++){var a=-Math.PI*(0.15+0.7*Math.random()),v=60+Math.random()*90,p=el("rect",{x:-2,y:-2,width:4,height:4,fill:"#2a241b"},g);
     p.animate([{transform:"translate(0,0)"},{transform:"translate("+(Math.cos(a)*v)+"px,"+(Math.sin(a)*v)+"px)",offset:.55},{transform:"translate("+(Math.cos(a)*v*1.3)+"px,"+(Math.sin(a)*v*0.6+40)+"px)",opacity:0}],{duration:1200,easing:"ease-out",fill:"forwards"});}
@@ -1299,7 +1360,9 @@ function bfTracers(){var y=180+Math.random()*170,dir=Math.random()<.5?1:-1,n=3+M
     (function(n2){setTimeout(function(){n2.remove();},1100+i*110);})(l);}}
 (function loop(){var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(curSec()==="sim"&&!document.hidden){var r=Math.random();
-    if(r<.62){var y=372+Math.random()*72,sc=0.35+(y-372)/72*0.7,x=-10+Math.random()*1020;bfIncoming(x,y,sc);}else bfTracers();}
+    var live=TROOPS.filter(function(t){return !t.dead;});
+    if(r<.3&&live.length){var T=live[Math.floor(Math.random()*live.length)];bfIncoming(T.x+(Math.random()*30-15),438,0.95);}
+    else if(r<.68){var y=372+Math.random()*72,sc=0.35+(y-372)/72*0.7,x=-10+Math.random()*1020;bfIncoming(x,y,sc);}else bfTracers();}
   setTimeout(loop,(reduce?6000:1500)+Math.random()*(reduce?4000:2600));})();
 /* WT-stílusú kis HUD: felülnézet, torony iránya, személyzet, töltött lőszer */
 (function(){var g=el("g",{id:"wt"},$("simSvg"));var cx=60,cy=-38;
@@ -1365,17 +1428,19 @@ var SCEN=[
   bad:["DM131A1 repeszgránát + PD544 gyújtó „pillanat” beállításban","DM131A1 repeszgránát + DM84 közelségi beállítás (6 m)"],
   e:"A ködképző gránát elsődlegesen a saját erők takarására, a fedett mozgás biztosítására való. Időzíthető gyújtót (DM52C1) használ, a kivető szerkezet a röppálya kiszámolt pontján indítja a ködképző altölteteket.",band:"#c9d1c4"}
 ];
-var SC=null,ELO=0,ELM=0,ANG=0,CORR={o:0,m:0},BURST_FIRE=null;
-function pick(){SC=SCEN[Math.floor(Math.random()*SCEN.length)];ELO=Math.floor(Math.random()*6400);ELM=180+Math.floor(Math.random()*440);ANG=ELM*360/6400;
-  CORR={o:(Math.random()<.5?-1:1)*(10+Math.floor(Math.random()*36)),m:(Math.random()<.5?-1:1)*(6+Math.floor(Math.random()*19))};
+var TAV=0,SC=null,ELO=0,ELM=0,ANG=0,CORR={o:0,m:0},BURST_FIRE=null;
+function pick(){SC=SCEN[Math.floor(Math.random()*SCEN.length)];ELO=Math.floor(Math.random()*6400);
+  TAV=9000+Math.floor(Math.random()*381)*50;ELM=Math.round(180+(TAV-9000)/19000*420+(Math.random()*40-20));ANG=ELM*360/6400;
+  var sg=Math.random()<.5?-1:1;CORR={o:(Math.random()<.5?-1:1)*(10+Math.floor(Math.random()*36)),m:sg*(6+Math.floor(Math.random()*19)),d:sg*(100+Math.floor(Math.random()*7)*50)};
   Array.prototype.forEach.call(tokInner.querySelectorAll("rect"),function(r,i){if(i===1)r.setAttribute("fill",SC.band);});}
-function corrVals(){return {o:(ELO+CORR.o+6400)%6400,m:Math.max(180,Math.min(660,ELM+CORR.m))};}
+function corrVals(){return {o:(ELO+CORR.o+6400)%6400,m:Math.max(180,Math.min(660,ELM+CORR.m)),t:TAV+CORR.d};}
+function mtr(n){return fmt(n)+" m";}
 function obsTxt(){return (CORR.o>0?"BALRA":"JOBBRA")+" · "+(CORR.m>0?"RÖVID":"TÚL");}
 function sec1(x){return x.toFixed(1).replace(".",",");}
 async function reload(run,ts){var old=TS;TS=ts;try{tokS(324,344,-90,0,0);tokC(80,232,0,0);await frames2();
     var seq=[aPTM,aPTR,aProg,aPTA,aRam,aCharge,aClose];for(var i=0;i<seq.length;i++){await seq[i](run);if(!alive(run))return;}
     lamp("lpLoad","g");lamp("lpBreech","g");}finally{TS=old;}}
-async function aCorrect(run){SND.compressor(2.2);var c=corrVals();ELO=c.o;ELM=c.m;ANG=ELM*360/6400;
+async function aCorrect(run){SND.compressor(2.2);var c=corrVals();ELO=c.o;ELM=c.m;TAV=c.t;ANG=ELM*360/6400;
   var old=TS;TS=0.55;try{await aAim(run);}finally{TS=old;}if(!alive(run))return;
   await reload(run,0.3);if(!alive(run))return;
   callout("2-es töltőkezelő","LÖVEG TÖLTVE!");$("fireBtn").classList.add("armed");wtReady(true);$("modeCap").textContent="Tűzkész";
@@ -1402,11 +1467,11 @@ function v4(n){return ("000"+n).slice(-4);} function v3(n){return ("00"+n).slice
 
 function resetScene(){
   ["sgun","spta","swedge","shatchLid","needle","sptmArm","scar","sprog","srecoil",tokShell,tokChg,loader,"simPzh"].forEach(function(n){var x=typeof n==="string"?$(n):n;x.style.transition="none";});
-  $("sgun").style.transform="rotate(0deg)";AIM0={o:0,m:0};TS=1;BURST_FIRE=null;$("tgt").setAttribute("opacity",0);$("spta").style.transform="none";$("swedge").style.transform="translateY(0)";
+  $("sgun").style.transform="rotate(0deg)";AIM0={o:0,m:0,t:0};TS=1;BURST_FIRE=null;$("tgt").setAttribute("opacity",0);$("spta").style.transform="none";$("swedge").style.transform="translateY(0)";
   $("shatchLid").style.transform="rotate(-70deg)";$("needle").style.transform="rotate(0deg)";$("sptmArm").style.transform="translateY(0)";
   $("scar").style.transform="translateX(0)";$("sprog").style.transform="none";$("srecoil").style.transform="none";$("simPzh").style.transform="none";
   tokS(324,344,-90,0,0);tokC(80,232,0,0);loaderTo(185,0);loaderTag.textContent="2-ES TÖLTŐ";loader.setAttribute("opacity",1);
-  fx.innerHTML="";$("roO").textContent="0000";$("roM").textContent="000";
+  fx.innerHTML="";$("roO").textContent="0000";$("roM").textContent="000";$("roT").textContent="—";
   Array.prototype.forEach.call(document.querySelectorAll(".scmod"),function(c){c.setAttribute("opacity",1);});
   ["lpSys","lpNav","lpHatch","lpSafe","lpLoad","lpBreech"].forEach(function(i){lamp(i,"");});lamp("lpHatch","a");lamp("lpSafe","g");
   $("fireBtn").classList.remove("armed");fke(["RENDSZER: KI"]);$("modeCap").textContent="Kikapcsolva";
@@ -1415,12 +1480,12 @@ function resetScene(){
 }
 
 /* részanimációk */
-var AIM0={o:0,m:0};
-async function aAim(run){var D=2400;servo(D/1000);fke(["AUTOMATA IRÁNYZÁS","CÉL: OLDAL "+v4(ELO)+" v","      MAGASSÁG "+v3(ELM)+" v","MOZGÁS…"]);
+var AIM0={o:0,m:0,t:0};
+async function aAim(run){var D=2400;servo(D/1000);fke(["AUTOMATA IRÁNYZÁS","CÉL: TÁV "+mtr(TAV),"OLDAL "+v4(ELO)+" v · MAG. "+v3(ELM)+" v","MOZGÁS…"]);
   setT("sgun","rotate("+(-ANG)+"deg)",D);setT("needle","rotate("+(ELO*360/6400)+"deg)",D);setT("wtTur","rotate("+(ELO*360/6400)+"deg)",D);
-  var o0=AIM0.o,m0=AIM0.m,DD=D*TS,t0=performance.now();await new Promise(function(res){(function step(){if(!alive(run))return res();var k=Math.min(1,(performance.now()-t0)/DD),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
-    $("roO").textContent=v4(Math.round(o0+(ELO-o0)*e));$("roM").textContent=v3(Math.round(m0+(ELM-m0)*e));if(k<1)requestAnimationFrame(step);else res();})();});
-  AIM0={o:ELO,m:ELM};if(!alive(run))return;fke(["AUTOMATA IRÁNYZÁS","OLDAL "+v4(ELO)+" v · MAGASSÁG "+v3(ELM)+" v","LŐELEMEN ✓"]);SND.clunk();}
+  var o0=AIM0.o,m0=AIM0.m,t00=AIM0.t||TAV,DD=D*TS,t0=performance.now();await new Promise(function(res){(function step(){if(!alive(run))return res();var k=Math.min(1,(performance.now()-t0)/DD),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    $("roO").textContent=v4(Math.round(o0+(ELO-o0)*e));$("roM").textContent=v3(Math.round(m0+(ELM-m0)*e));$("roT").textContent=fmt(Math.round((t00+(TAV-t00)*e)/10)*10);if(k<1)requestAnimationFrame(step);else res();})();});
+  AIM0={o:ELO,m:ELM,t:TAV};if(!alive(run))return;fke(["AUTOMATA IRÁNYZÁS","TÁV "+mtr(TAV),"OLDAL "+v4(ELO)+" v · MAGASSÁG "+v3(ELM)+" v","LŐELEMEN ✓"]);SND.clunk();}
 async function aPTM(run){tokShell.setAttribute("opacity",1);servo(1.2,0.5);setT("sptmArm","translateY(22px)",500);await wait(550);if(!alive(run))return;SND.clunk();
   setT("sptmArm","translateY(-6px)",900);tokS(324,300,-90,null,900);await wait(950);if(!alive(run))return;
   tokS(300,284,0,null,700);setT("sptmArm","translateY(0)",500);await wait(750);SND.clunk();}
@@ -1441,7 +1506,7 @@ async function aClose(run){setT("swedge","translateY(-34px)",350);SND.breech();l
 async function aLoaded(run){callout("2-es töltőkezelő","LÖVEG TÖLTVE!");SND.chime();lamp("lpLoad","g");lamp("lpBreech","g");
   fke(["LÖVEG TÖLTVE","GRÁNÁT ✓  TÖLTET ✓","ÉKZÁR: LEZÁRVA ✓"]);await wait(1600);}
 async function aReady(run){callout("Lövegparancsnok","TŰZKÉSZ!");SND.lock();$("fireBtn").classList.add("armed");wtReady(true);$("modeCap").textContent="Tűzkész";
-  fke(["TŰZKÉSZ ✓","LŐELEM: "+v4(ELO)+" / "+v3(ELM)+" v","VÁRAKOZÁS: „TŰZ!” PARANCS"]);await wait(1600);}
+  fke(["TŰZKÉSZ ✓","TÁV "+mtr(TAV)+" · "+v4(ELO)+" / "+v3(ELM)+" v","VÁRAKOZÁS: „TŰZ!” PARANCS"]);await wait(1600);}
 function puff(x,y,r,col,dx,dy,dur,delay){var c=el("circle",{cx:x,cy:y,r:r,fill:col,opacity:0},fx);
   c.animate([{opacity:0,transform:"translate(0,0) scale(.3)"},{opacity:.85,offset:.12},{opacity:0,transform:"translate("+dx+"px,"+dy+"px) scale(2.2)"}],{duration:dur,delay:delay||0,easing:"ease-out",fill:"forwards"});
   c.style.transformBox="fill-box";c.style.transformOrigin="center";setTimeout(function(){c.remove();},dur+(delay||0)+50);}
@@ -1502,7 +1567,7 @@ var STEPS=[
   e:"Tűzfeladat közben a búvónyílásokat minden esetben be kell zárni. A lőporgázokat a füstelszívó vezeti ki a csőből. Az „átjáró szabad” (ZÖLD) állás a ki- és beszálláshoz, illetve a lőszerszállító elemek közé való belépéshez kell.",r:"2. Biztonsági rendszabályok (7–8. o.)",
   run:async function(){setT("shatchLid","rotate(0deg)",600);await wait(600);SND.clang(0.55,null,190);lamp("lpHatch","g");lamp("lpSafe","");$("modeCap").textContent="Harci üzem";fke(["BÚVÓNYÍLÁS ..... ZÁRVA","ÜZEMMÓD: HARCI","VÁRAKOZÁS TŰZPARANCSRA"]);}},
  {t:"Tűzparancs érkezett",who:"Lövegparancsnok",hl:["fkeBox"],
-  pre:function(){SND.chime();fke(["TŰZPARANCS ÉRKEZETT","FELADAT: "+SC.name.toUpperCase(),"OLDAL "+v4(ELO)+" v · MAGASSÁG "+v3(ELM)+" v","LÖVÉS: 1"]);},
+  pre:function(){SND.chime();fke(["TŰZPARANCS ÉRKEZETT","FELADAT: "+SC.name.toUpperCase(),"TÁV "+mtr(TAV),"OLDAL "+v4(ELO)+" v · MAG. "+v3(ELM)+" v"]);},
   sit:function(){return "Megérkezett a tűzparancs az FKE-re („"+SC.name+"”). Honnan és hogyan jöttek az adatok?";},
   opts:[["Digitális adatösszeköttetésen (IC2A) a tűzvezető ponttól: célkoordináták, lőszer- és időjárási adatok, fedezőgerinc; a lőelemeket a számítógép számolja.",1],
         ["Hangrádión, a lőelemeket az irányzó számolja ki térképről.",0],
@@ -1514,7 +1579,7 @@ var STEPS=[
   e:function(){return SC.e;},r:"11. Lőszerek (39–45. o.)",
   run:async function(){fke(["LŐSZER KIJELÖLVE",SC.fk[0],SC.fk[1],"TÖLTET: DM72/DM92 MODULÁRIS"]);}},
  {t:"Irányzás",who:"Irányzó",hl:["sgun","dial"],
-  sit:function(){return "Közvetett tüzelés, automata üzem. A löveg 0 vonáson áll, a lőelem oldal "+v4(ELO)+" v, magasság "+v3(ELM)+" v (≈"+ANG.toFixed(1)+"°). Hogyan áll rá a löveg?";},
+  sit:function(){return "Közvetett tüzelés, automata üzem. A löveg 0 vonáson áll, a cél távolsága "+mtr(TAV)+", a lőelem oldal "+v4(ELO)+" v, magasság "+v3(ELM)+" v (≈"+ANG.toFixed(1)+"°). Hogyan áll rá a löveg?";},
   opts:[["Automata irányzás: az irányzó rendszer szervomotorjai a tornyot oldalirányban, a csövet magasságban a számított lőelemekre állítják.",1],
         ["A vezérlőkarral, a „Közvetlen irányzás” nyomókapcsolóval irányzok.",0],
         ["Kézikerékkel tekerem be, a szervomotort közben bekapcsolva hagyom.",0]],
@@ -1569,8 +1634,8 @@ var STEPS=[
   e:"A vezérlőkaron TŰZ gomb van. Tűzfeladat közben a búvónyílás zárva marad. A vészleállító harci módról készenléti módra kapcsol és lekapcsolja a vezérlő elektronikákat; az utasítás nélküli cső- vagy toronymozgásra való.",r:"3. Fegyverrendszer (18. o.) · 2. Biztonsági rendszabályok (7. o.)",
   run:function(run){return aFire(run,{dx:CORR.m>0?-75:75,txt:["Megfigyelő",obsTxt()]});}},
  {t:"Javítás",who:"Lövegparancsnok · tűzvezetés",hl:["fkeBox","sgun"],
-  pre:function(){var c=corrVals();SND.chime();fke(["JAVÍTÁS ÉRKEZETT","MEGFIGYELŐ: "+obsTxt(),"ÚJ LŐELEM: "+v4(c.o)+" / "+v3(c.m)+" v"]);},
-  sit:function(){var c=corrVals();return "Az első gránát becsapódott, a megfigyelő jelentése: „"+obsTxt().toLowerCase()+"”. A tűzvezetés javítást küld, új lőelem: oldal "+v4(c.o)+" v, magasság "+v3(c.m)+" v. Mi történik?";},
+  pre:function(){var c=corrVals();SND.chime();fke(["JAVÍTÁS ÉRKEZETT","MEGFIGYELŐ: "+obsTxt(),"ÚJ TÁV: "+mtr(c.t)+" ("+(CORR.d>0?"+":"−")+Math.abs(CORR.d)+" m)","ÚJ LŐELEM: "+v4(c.o)+" / "+v3(c.m)+" v"]);},
+  sit:function(){var c=corrVals();return "Az első gránát becsapódott, a megfigyelő jelentése: „"+obsTxt().toLowerCase()+"”. A tűzvezetés javítást küld: távolság "+mtr(c.t)+" ("+(CORR.d>0?"+":"−")+Math.abs(CORR.d)+" m), oldal "+v4(c.o)+" v, magasság "+v3(c.m)+" v. Mi történik?";},
   opts:[["Az automata irányzás a javított lőelemre állítja a löveget, közben újratöltünk (gránát: PTM–PTR–PTA, töltet: 2-es töltőkezelő).",1],
         ["A javítást kézikerékkel visszük be, az automata irányzást ehhez kikapcsoljuk.",0],
         ["Ugyanazzal a lőelemmel lövünk még egyet, és csak utána javítunk.",0]],
@@ -1627,7 +1692,7 @@ $("stepNext").addEventListener("click",nextStep);
 document.addEventListener("keydown",function(e){if(curSec()!=="sim"||e.key!=="Enter")return;var g=document.querySelector("#stepBody .go:not([disabled])");if(g&&document.activeElement!==g){e.preventDefault();nextStep();}});
 function finishSim(){SIM.run++;show("simEnd");var e=SIM.errors;
   $("simEndScore").textContent=e===0?"Hibátlan":e+" hiba";
-  $("simEndSub").textContent=(e===0?"Minden lépést elsőre jól választottál. ":STEPS.length+" lépésből "+(STEPS.length-e)+" ment elsőre. ")+"Feladat: "+SC.name+", javított lőelem: "+v4(ELO)+" / "+v3(ELM)+" v."+(SIM.burst?" Sorozat: 3 lövés "+sec1(SIM.burst)+" mp alatt"+(store.simBurst?" (legjobb: "+sec1(Math.min(store.simBurst,SIM.burst))+" mp)":"")+".":"");wakeOff();
+  $("simEndSub").textContent=(e===0?"Minden lépést elsőre jól választottál. ":STEPS.length+" lépésből "+(STEPS.length-e)+" ment elsőre. ")+"Feladat: "+SC.name+", javított lőelem: "+mtr(TAV)+", "+v4(ELO)+" / "+v3(ELM)+" v."+(SIM.burst?" Sorozat: 3 lövés "+sec1(SIM.burst)+" mp alatt"+(store.simBurst?" (legjobb: "+sec1(Math.min(store.simBurst,SIM.burst))+" mp)":"")+".":"");wakeOff();
   if(SIM.burst&&(!store.simBurst||SIM.burst<store.simBurst))store.simBurst=SIM.burst;
   renderReview($("simReview"),SIM.missed);if(store.simBest==null||e<store.simBest)store.simBest=e;save(store);LB.push();}
 $("simAgain").addEventListener("click",startSim);
@@ -2438,6 +2503,14 @@ var SND=(function(){
       g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.16,t+0.4);g.gain.setValueAtTime(0.16,t+d-0.4);g.gain.exponentialRampToValueAtTime(0.0001,t+d);out(g,0.1);
       [o,o2,am].forEach(function(x){x.start(t);x.stop(t+d+0.05);});
       nz(t,d,"bandpass",2400,null,1.2,0.035,0.3,0);api.pneu(0.7,0.25,t+d-0.05);},
+    /* felkiáltás: fűrészfog-hang „a” formánsokon, hajlító hangmagassággal */
+    scream:function(v){if(!api.ok())return;var t=ac.currentTime+0.05,f0=330+Math.random()*160;v=v||0.25;
+      var o=ac.createOscillator(),vib=ac.createOscillator(),vg=ac.createGain(),g=ac.createGain();o.type="sawtooth";
+      o.frequency.setValueAtTime(f0*0.8,t);o.frequency.linearRampToValueAtTime(f0*1.3,t+0.12);o.frequency.exponentialRampToValueAtTime(f0*0.5,t+1.0);
+      vib.frequency.value=6+Math.random()*3;vg.gain.value=f0*0.05;vib.connect(vg);vg.connect(o.frequency);
+      [[760,6,1],[1180,8,.75],[2550,10,.35]].forEach(function(f){var bp=ac.createBiquadFilter(),fg=ac.createGain();bp.type="bandpass";bp.frequency.value=f[0]*(0.9+Math.random()*0.2);bp.Q.value=f[1];fg.gain.value=f[2]*3;o.connect(bp);bp.connect(fg);fg.connect(g);});
+      g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v,t+0.06);g.gain.setValueAtTime(v*0.9,t+0.55);g.gain.exponentialRampToValueAtTime(0.0001,t+1.05);out(g,0.55);
+      nz(t,0.9,"bandpass",1700,900,1.4,v*0.25,0.05,0.3);[o,vib].forEach(function(x){x.start(t);x.stop(t+1.1);});},
     tick:function(){if(!api.ok())return;tone(1800,ac.currentTime,0.04,"square",0.04);}
   };
   ["pointerdown","keydown"].forEach(function(ev){document.addEventListener(ev,function(){api.unlock();},{capture:true});});
@@ -2447,7 +2520,7 @@ function renderSnd(){var b=$("sndBtn"),on=SND.isOn();
   b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/>'+(on?'<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>':'<path d="M16 9.5l5 5M21 9.5l-5 5"/>')+'</svg>';
   b.setAttribute("aria-pressed",on?"true":"false");b.title=on?"Hang kikapcsolása":"Hang bekapcsolása";if(curSec()==="set")renderSet();}
 function swSet(id,v){$(id).setAttribute("aria-checked",v?"true":"false");}
-function renderSet(){renderVer();renderNet();Array.prototype.forEach.call($("fzSeg").children,function(b){b.setAttribute("aria-pressed",String(+b.dataset.fz===+CFG.fz));});swSet("cfMusic",CFG.music);swSet("cfSfx",CFG.sfx);swSet("cfBlast",CFG.blasts);$("cfVol").value=Math.round(CFG.vol*100);$("cfVolV").textContent=Math.round(CFG.vol*100)+"%";
+function renderSet(){renderVer();renderNet();swSet("cfGore",CFG.gore);swSet("cfNotif",CFG.notif&&window.Notification&&Notification.permission==="granted");Array.prototype.forEach.call($("fzSeg").children,function(b){b.setAttribute("aria-pressed",String(+b.dataset.fz===+CFG.fz));});swSet("cfMusic",CFG.music);swSet("cfSfx",CFG.sfx);swSet("cfBlast",CFG.blasts);$("cfVol").value=Math.round(CFG.vol*100);$("cfVolV").textContent=Math.round(CFG.vol*100)+"%";
   $("nickIn").value=LB.nick();renderStats();
   $("about").textContent="PzH Milliomos · "+BANK.length+" kvízkérdés · "+KIS.length+" kisokos-kártya · "+(navigator.onLine?"online":"offline")+". A kérdések és a lépéssor a lövegkezelői tananyagból készültek; a szabályzatot és a vezényszavakat nem helyettesítik.";}
 $("cfMusic").addEventListener("click",function(){CFG.music=!CFG.music;saveCfg();SND.apply();renderSnd();renderSet();});
@@ -2511,7 +2584,7 @@ async function checkUpdate(manual){
   if(isOff()){if(manual)setUpdMsg(CFG.offline?"Offline módban nem keresek frissítést.":"Nincs hálózat, frissítést nem lehet keresni.");return;}
   if(manual)setUpdMsg("Keresés…");
   try{var r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});var j=await r.json();UPD.remote=j.version;
-    if(cmpVer(j.version,APP_VERSION)>0){showUpd(j.version);setUpdMsg("Új verzió érhető el: "+j.version);}
+    if(cmpVer(j.version,APP_VERSION)>0){showUpd(j.version);setUpdMsg("Új verzió érhető el: "+j.version);if(CFG.notif&&document.hidden&&window.Notification&&Notification.permission==="granted"){try{(await navigator.serviceWorker.ready).showNotification("PzH Milliomos – új verzió: "+j.version,{body:j.notes||"Koppints a frissítéshez.",icon:"icon-192.png",tag:"pzh-update"});}catch(e){}}}
     else if(manual)setUpdMsg("A legfrissebb verziót használod ✓");}
   catch(e){if(manual)setUpdMsg("Nem sikerült ellenőrizni (hálózati hiba).");}}
 async function doUpdate(){if(isOff()){toast("Frissítéshez hálózat kell.");return;}
@@ -2532,6 +2605,34 @@ $("cfOffline").addEventListener("click",function(){CFG.offline=!CFG.offline;save
 window.addEventListener("offline",function(){toast("Nincs hálózat – a játék offline tovább fut.");renderNet();LB.renderView();});
 window.addEventListener("online",function(){renderNet();if(!CFG.offline){toast("Újra online.");LB.last=null;LB.init();checkUpdate(false);}});
 renderVer();renderNet();setTimeout(function(){checkUpdate(false);},2500);
+
+
+/* ===== ÉRTESÍTÉS FRISSÍTÉSRŐL =====
+   1) Android (telepített app): háttérben időnként megnézi a version.json-t és értesít (periodic background sync) – szerver nélkül.
+   2) Mindenki (Android + iPhone a Főképernyőről + gép): Firebase Cloud Messaging – a Firebase konzolból egy kampánnyal mindenkinek kiküldhető. */
+function notifMsg(t){var n=$("notifState");if(n)n.textContent=t;}
+async function ensureMessaging(){var B="https://www.gstatic.com/firebasejs/10.12.2/";
+  if(!window.firebase)await LB.loadScript(B+"firebase-app-compat.js");if(!firebase.apps.length)firebase.initializeApp(window.PZH_FIREBASE);
+  if(!firebase.messaging)await LB.loadScript(B+"firebase-messaging-compat.js");return firebase.messaging();}
+function hasVapid(){return !!(window.PZH_FIREBASE&&window.PZH_VAPID&&!/IDE_/.test(window.PZH_VAPID));}
+async function notifSetup(silent){var parts=[];
+  try{var reg=await navigator.serviceWorker.ready;
+    try{if(reg.periodicSync){var ps=await navigator.permissions.query({name:"periodic-background-sync"});if(ps.state==="granted"){await reg.periodicSync.register("pzh-update",{minInterval:6*3600*1000});parts.push("automatikus ellenőrzés");}}}catch(e){}
+    if(hasVapid()&&!isOff()){try{var m=await ensureMessaging();var tok=await m.getToken({vapidKey:window.PZH_VAPID,serviceWorkerRegistration:reg});if(tok){parts.push("push");
+        m.onMessage(function(p){var n=p&&p.notification||{};toast((n.title||"PzH Milliomos")+(n.body?" – "+n.body:""),5000);checkUpdate(false);});}}catch(e){if(!silent)console.warn(e);}}}catch(e){}
+  notifMsg(parts.length?"Bekapcsolva ("+parts.join(" + ")+").":"Bekapcsolva: az app megnyitásakor jelez."+(hasVapid()?"":" (A mindenkinek szóló push-hoz a VAPID-kulcs kell a firebase-config.js-be.)"));}
+async function notifEnable(){
+  var ios=/iP(hone|ad|od)/.test(navigator.userAgent),standalone=window.navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
+  if(!PWA){notifMsg("Értesítés csak a telepített (Verceles) változatban működik.");return false;}
+  if(ios&&!standalone){notifMsg("iPhone-on előbb add hozzá a Főképernyőhöz (Megosztás → Hozzáadás a Főképernyőhöz), és onnan nyisd meg.");return false;}
+  if(!("Notification" in window)||!("serviceWorker" in navigator)){notifMsg("Ez a böngésző nem támogatja az értesítést.");return false;}
+  var p=await Notification.requestPermission();if(p!=="granted"){notifMsg("Az értesítés le van tiltva a böngésző/telefon beállításaiban.");return false;}
+  await notifSetup(false);return true;}
+$("cfNotif").addEventListener("click",async function(){if(CFG.notif&&window.Notification&&Notification.permission==="granted"){CFG.notif=false;saveCfg();notifMsg("Kikapcsolva.");renderSet();
+    try{var reg=await navigator.serviceWorker.ready;if(reg.periodicSync)await reg.periodicSync.unregister("pzh-update");if(hasVapid()){var m=await ensureMessaging();await m.deleteToken();}}catch(e){}return;}
+  var ok=await notifEnable();CFG.notif=ok;saveCfg();renderSet();if(ok){try{(await navigator.serviceWorker.ready).showNotification("PzH Milliomos",{body:"Értesítés bekapcsolva – szólunk, ha frissítés érkezik.",icon:"icon-192.png",tag:"pzh-test"});}catch(e){}}});
+$("cfGore").addEventListener("click",function(){CFG.gore=!CFG.gore;saveCfg();renderSet();});
+if(CFG.notif&&PWA&&window.Notification&&Notification.permission==="granted")setTimeout(function(){notifSetup(true);},3000);
 
 /* rezgés a válaszokra (Androidon; iOS a webes rezgést nem támogatja) */
 (function(){var r=SND.right,w=SND.wrong;SND.right=function(){buzz(18);r();};SND.wrong=function(){buzz([40,50,40]);w();};})();
