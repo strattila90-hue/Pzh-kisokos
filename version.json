@@ -1,5 +1,5 @@
 {
-  "version": "1.14.0",
+  "version": "1.15.0",
   "date": "2026-10-14",
-  "notes": "Az alkalmazás megosztási oldala megújult a látványterv alapján; QR-kód, linkmásolás és natív megosztás; közvetlen elérés a Beállításokból. A játék eredményének megosztása nincs beépítve."
+  "notes": "Látványfrissítés: taktikai műszerfal-stílus, kiemelt módválasztók, kártyás eredmények és megosztási panel finomítása. Az alkalmazás megosztása a nyilvános alkalmazáslinket használja; játék-eredmény megosztása nincs."
 }
