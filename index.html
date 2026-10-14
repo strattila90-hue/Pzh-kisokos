@@ -85,6 +85,50 @@ body{background:radial-gradient(ellipse at 50% -12%,rgba(90,105,62,.22),transpar
 <script>window.PZH_PWA=true;window.PZH_SHARE_URL=location.origin+location.pathname.replace(/index\.html$/,"");</script>
 <script src="firebase-config.js"></script>
 <title>PzH Milliomos</title>
+<style id="cinematic-motion-v117">
+/* V1.17 cinematic motion pass — tűzfeladat + lőszerraktár */
+:root{--cin-gold:#f3c65e;--cin-green:#76e6a0;--cin-shadow:rgba(0,0,0,.55)}
+#sim .scene,#hangar .hgscene{isolation:isolate;border:1px solid rgba(231,190,83,.48);background:#0b100c;box-shadow:0 0 0 1px rgba(255,222,139,.05),0 16px 38px rgba(0,0,0,.42),inset 0 0 35px rgba(0,0,0,.3)}
+#sim .scene:before,#hangar .hgscene:before{content:"";position:absolute;inset:8px;z-index:2;pointer-events:none;border:1px solid rgba(245,207,105,.13);border-radius:5px;background:linear-gradient(180deg,rgba(3,7,4,.12),transparent 24%,transparent 68%,rgba(3,7,4,.28)),repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0px,rgba(255,255,255,.018) 1px,transparent 2px,transparent 5px);box-shadow:inset 0 0 35px rgba(0,0,0,.18)}
+#sim .scene:after,#hangar .hgscene:after{content:"";position:absolute;inset:8px;z-index:2;pointer-events:none;border-radius:5px;background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,.22) 100%)}
+#sim .scenebar{position:relative;z-index:4;background:linear-gradient(90deg,rgba(7,13,8,.95),rgba(20,27,17,.84));border-bottom:1px solid rgba(230,190,83,.35);padding:9px 10px;backdrop-filter:blur(5px)}
+#sim .svgwrap{position:relative;overflow:hidden;background:linear-gradient(#17221e,#776d4e 72%,#2a2c24);}
+#sim #simSvg{filter:drop-shadow(0 8px 13px rgba(0,0,0,.2));transform-origin:50% 80%}
+#sim .simfoot{position:relative;z-index:4;background:linear-gradient(180deg,rgba(12,17,12,.9),rgba(7,10,7,.98));border-top:1px solid rgba(230,190,83,.24)}
+#sim .step{position:relative;overflow:hidden;border-color:rgba(226,182,79,.35);background:radial-gradient(ellipse at 100% 0,rgba(226,182,79,.08),transparent 42%),linear-gradient(145deg,#1a2118,#0d110d);box-shadow:0 12px 30px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)}
+#sim .step:before{content:"MISSION CONTROL / PZH-2000 HU";display:block;font:500 10px var(--f-mono);letter-spacing:.17em;color:rgba(226,182,79,.66);margin-bottom:8px}
+#sim .stepbar{gap:7px}
+#sim .stepbar i{transition:background .3s,box-shadow .3s,transform .3s}
+#sim .stepbar i.c{transform:scale(1.08);background:var(--cin-gold)}
+#sim .firebtn{transition:box-shadow .2s,transform .2s}
+#sim .firebtn.armed{box-shadow:0 0 0 3px #11140f,0 0 0 6px rgba(236,65,39,.32),0 0 24px rgba(255,77,43,.42);animation:cinArmed 1.2s ease-in-out infinite}
+@keyframes cinArmed{50%{filter:brightness(1.25);box-shadow:0 0 0 3px #11140f,0 0 0 8px rgba(236,65,39,.12),0 0 32px rgba(255,77,43,.62)}}
+#sim .scene.shake{animation:cinImpactShake .58s cubic-bezier(.3,.05,.2,1)}
+@keyframes cinImpactShake{0%,100%{transform:translate3d(0,0,0)}10%{transform:translate3d(-5px,2px,0) rotate(-.15deg)}23%{transform:translate3d(6px,-3px,0) rotate(.2deg)}38%{transform:translate3d(-4px,2px,0)}52%{transform:translate3d(3px,-1px,0)}68%{transform:translate3d(-1px,1px,0)} }
+#sim .flashov{mix-blend-mode:screen;z-index:5}
+#sim .flashov.go{animation:cinMuzzleFlash .7s ease-out}
+@keyframes cinMuzzleFlash{0%{opacity:0}3%{opacity:1}12%{opacity:.92}28%{opacity:.35}100%{opacity:0}}
+#hangar .hgorder{border-color:rgba(226,182,79,.28);background:radial-gradient(ellipse at 100% 0,rgba(226,182,79,.08),transparent 44%),linear-gradient(145deg,#1b2119,#10140f)}
+#hangar .hgscene{background:radial-gradient(ellipse at 50% 25%,rgba(255,223,151,.09),transparent 40%),#171b15}
+#hangar #hgSvg{position:relative;z-index:1;filter:contrast(1.08) saturate(.88);}
+#hangar .hgscene:before{animation:hangarScan 9s linear infinite}
+@keyframes hangarScan{0%{background-position:0 0}100%{background-position:0 90px}}
+#hangar .hgsteps{display:flex;gap:7px;flex-wrap:wrap}
+#hangar .hgstep{border-radius:5px;transition:background .25s,border-color .25s,box-shadow .25s,transform .25s}
+#hangar .hgstep.now{border-color:rgba(243,198,94,.95);box-shadow:0 0 0 1px rgba(243,198,94,.13),0 0 18px rgba(243,198,94,.13);transform:translateY(-1px)}
+#hangar .ttcard{box-shadow:0 8px 18px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.08);backface-visibility:hidden}
+#hangar .ttcard.front{border-color:rgba(243,198,94,.92);box-shadow:0 0 0 1px rgba(243,198,94,.18),0 0 25px rgba(243,198,94,.15),0 10px 24px rgba(0,0,0,.4)}
+#hangar .ttstage:after{content:"";position:absolute;inset:-20px;pointer-events:none;background:conic-gradient(from 0deg,transparent,rgba(243,198,94,.08),transparent 28%);animation:traySweep 8s linear infinite}
+@keyframes traySweep{to{transform:rotate(360deg)}}
+#hangar #ttGive:not(:disabled){box-shadow:0 0 0 1px rgba(243,198,94,.16),0 5px 20px rgba(226,182,79,.15)}
+#hangar .walking .walker{filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+#hangar .hg-dust{animation:hgDustFloat 7s ease-in-out infinite;animation-delay:var(--dust-delay);transform-box:fill-box;transform-origin:center;will-change:transform,opacity}
+#hangar .hg-light-ray{animation:hgLightBreath 6s ease-in-out infinite;transform-origin:center}
+@keyframes hgDustFloat{0%,100%{opacity:.08;transform:translate(0,0) scale(.8)}45%{opacity:.34;transform:translate(var(--dust-x),var(--dust-y)) scale(1.25)}70%{opacity:.2;transform:translate(calc(var(--dust-x)*.45),calc(var(--dust-y)*.7)) scale(1)}}
+@keyframes hgLightBreath{0%,100%{opacity:.025}50%{opacity:.075}}
+#hangar .hgscene .flashov{mix-blend-mode:screen}
+@media(prefers-reduced-motion:reduce){#sim .firebtn.armed,#hangar .hgscene:before,#hangar .ttstage:after,#hangar .hg-dust,#hangar .hg-light-ray{animation:none!important}#sim .scene.shake{animation:none!important}#sim .stepbar i,#hangar .hgstep,#hangar .ttcard{transition:none!important}}
+</style>
 </head>
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1005,6 +1049,9 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
      <radialGradient id="bfGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff9a3a" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a3a" stop-opacity="0"/></radialGradient>
      <radialGradient id="bfBlast"><stop offset="0" stop-color="#fff6cf"/><stop offset=".25" stop-color="#ffc24a"/><stop offset=".55" stop-color="#e2561c" stop-opacity=".85"/><stop offset="1" stop-color="#7a2a0c" stop-opacity="0"/></radialGradient>
      <filter id="bfBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+     <radialGradient id="bfSmoke"><stop offset="0" stop-color="#c8c4b4" stop-opacity=".78"/><stop offset=".42" stop-color="#8f9188" stop-opacity=".52"/><stop offset=".78" stop-color="#575d56" stop-opacity=".28"/><stop offset="1" stop-color="#363b35" stop-opacity="0"/></radialGradient>
+     <radialGradient id="bfDust"><stop offset="0" stop-color="#d4b27a" stop-opacity=".58"/><stop offset=".65" stop-color="#a28b61" stop-opacity=".24"/><stop offset="1" stop-color="#8a7657" stop-opacity="0"/></radialGradient>
+     <filter id="bfSmokeBlur" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="3.5"/></filter>
     </defs>
     <g id="simBg"></g><g id="simBgFx"></g><g id="simPzh"></g>
    </svg></div>
@@ -1139,7 +1186,7 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
   <div class="panel pg app-share-page">
    <div class="share-hero">
     <div class="share-emblem" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 43h48l-4-15-8-7H20l-8 7z"/><path d="M22 21l5-9h12l5 9M5 47h54M14 43v7m36-7v7M29 27h6"/><circle cx="20" cy="43" r="5"/><circle cx="44" cy="43" r="5"/></svg></div>
-    <div><div class="share-kicker">PzH MILLIOMOS · 1.15.0</div><h2 class="pgt">Alkalmazás megosztása</h2><p class="sub">Oszd meg a PzH Milliomost bajtársakkal, kollégákkal vagy barátokkal. A link megnyitja az alkalmazást; a játékot nem kell külön telepíteni.</p></div>
+    <div><div class="share-kicker">PzH MILLIOMOS · 1.16.0</div><h2 class="pgt">Alkalmazás megosztása</h2><p class="sub">Oszd meg a PzH Milliomost bajtársakkal, kollégákkal vagy barátokkal. A link megnyitja az alkalmazást; a játékot nem kell külön telepíteni.</p></div>
    </div>
    <div class="app-share-grid">
     <div class="app-share-qr-card"><div class="qrbox" id="qr" aria-label="QR-kód az alkalmazás linkjéhez"></div><b>Beolvasás telefonnal</b><small>A QR-kód az alkalmazás linkjét tartalmazza.</small></div>
@@ -1262,6 +1309,14 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
    </div>
   </div>
  </section>
+<nav class="bottom-dock" aria-label="Gyors navigáció">
+ <button type="button" data-go="home"><span class="dock-ico">⌂</span><span>Kezdőlap</span></button>
+ <button type="button" data-go="start"><span class="dock-ico">◈</span><span>Kvíz</span></button>
+ <button type="button" data-go="hangar"><span class="dock-ico">▤</span><span>Hangár</span></button>
+ <button type="button" data-go="sim"><span class="dock-ico">◎</span><span>Szimulátor</span></button>
+ <button type="button" data-go="ter"><span class="dock-ico">⌁</span><span>Terep</span></button>
+ <button type="button" data-go="set"><span class="dock-ico">⚙</span><span>Beállítások</span></button>
+</nav>
 </div>
 
 <div class="modal hide" id="exitModal" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
@@ -1286,8 +1341,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.15.0",APP_DATE="2026-10-14";
-var CHANGELOG=[["1.15.0", "Látványfrissítés: taktikai műszerfal-stílus, kiemelt módválasztók, animált státuszfények, kártyás eredmények és megosztási panel finomítása"], ["1.14.0", "Megosztás: az alkalmazás linkjének és QR-kódjának megosztása; Beállításokból közvetlenül elérhető megosztási oldal; mobilos megosztópanel"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.17.0",APP_DATE="2026-10-14";
+var CHANGELOG=[["1.16.0", "Teljes felületi átrendezés: filmszerű nyitópanel, rácsos játékmód-kártyák, egységes panelrendszer, mobil alsó navigáció, új beállítási elrendezés és alkalmazásmegosztási oldal"], ["1.14.0", "Megosztás: az alkalmazás linkjének és QR-kódjának megosztása; Beállításokból közvetlenül elérhető megosztási oldal; mobilos megosztópanel"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,online:true,rank:true,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -1875,9 +1930,12 @@ async function aLoaded(run){callout("2-es töltőkezelő","LÖVEG TÖLTVE!");SND
   fke(["LÖVEG TÖLTVE","GRÁNÁT ✓  TÖLTET ✓","ÉKZÁR: LEZÁRVA ✓"]);await wait(1600);}
 async function aReady(run){callout("Lövegparancsnok","TŰZKÉSZ!");SND.lock();$("fireBtn").classList.add("armed");wtReady(true);$("modeCap").textContent="Tűzkész";
   fke(["TŰZKÉSZ ✓","TÁV "+mtr(TAV)+" · "+v4(ELO)+" / "+v3(ELM)+" v","VÁRAKOZÁS: „TŰZ!” PARANCS"]);await wait(1600);}
-function puff(x,y,r,col,dx,dy,dur,delay){var c=el("circle",{cx:x,cy:y,r:r,fill:col,opacity:0},fx);
-  c.animate([{opacity:0,transform:"translate(0,0) scale(.3)"},{opacity:.85,offset:.12},{opacity:0,transform:"translate("+dx+"px,"+dy+"px) scale(2.2)"}],{duration:dur,delay:delay||0,easing:"ease-out",fill:"forwards"});
-  c.style.transformBox="fill-box";c.style.transformOrigin="center";setTimeout(function(){c.remove();},dur+(delay||0)+50);}
+function puff(x,y,r,col,dx,dy,dur,delay){
+  var dust=(String(col).indexOf("#7b6a")===0||String(col).indexOf("#a")===0&&r>18),fill=dust?"url(#bfDust)":"url(#bfSmoke)";
+  var c=el("circle",{cx:x,cy:y,r:r*(.85+Math.random()*.45),fill:fill,filter:"url(#bfSmokeBlur)",opacity:0,"class":dust?"sim-dust-particle":"sim-smoke-particle"},fx);
+  c.animate([{opacity:0,transform:"translate(0,0) scale(.22)"},{opacity:dust?.46:.72,offset:.14,transform:"translate("+(dx*.12)+"px,"+(dy*.12)+"px) scale(.8)"},{opacity:dust?.18:.3,offset:.58,transform:"translate("+(dx*.55)+"px,"+(dy*.55)+"px) scale(1.55)"},{opacity:0,transform:"translate("+dx+"px,"+dy+"px) scale(2.45)"}],{duration:dur,delay:delay||0,easing:"cubic-bezier(.18,.62,.28,1)",fill:"forwards"});
+  c.style.transformBox="fill-box";c.style.transformOrigin="center";setTimeout(function(){c.remove();},dur+(delay||0)+80);
+}
 async function aFire(run,o){o=o||{};buzz([45,30,90]);
   var m=rotP(985,205,ANG),dirx=Math.cos(ANG*Math.PI/180),diry=-Math.sin(ANG*Math.PI/180);
   SND.shot();$("fireBtn").classList.remove("armed");
@@ -2633,6 +2691,18 @@ var HSV=$("hgSvg");
   var pz=el("g",{transform:"translate(560,334)"},g);
   el("image",{x:0,y:-212,width:430,height:212,href:SILHREF},pz);
   el("rect",{x:6,y:-150,width:22,height:70,rx:3,fill:"#2a2b28",id:"hgHatch"},pz);
+  /* Cinematikus hangárfények, betonpadló-fénycsíkok és lebegő por */
+  var hgLight=el("g",{id:"hgLightRays", "pointer-events":"none"},g);
+  for(var li=0;li<5;li++){
+    var lx=70+li*215;
+    el("path",{d:"M"+lx+" 70 L"+(lx+42)+" 70 L"+(lx+160)+" 328 L"+(lx-95)+" 328 Z",fill:"#fff0be",opacity:li%2?.035:.055,"class":"hg-light-ray"},hgLight);
+    el("ellipse",{cx:lx+28,cy:330,rx:125,ry:9,fill:"#f4cf75",opacity:.045},hgLight);
+  }
+  var hgDust=el("g",{id:"hgDust", "pointer-events":"none"},g);
+  for(var di=0;di<34;di++){
+    var dx=25+((di*137)%950),dy=80+((di*67)%245),dr=0.8+(di%4)*.45;
+    el("circle",{cx:dx,cy:dy,r:dr,fill:di%3?"#e6d5a6":"#fff2cc",opacity:.13+(di%4)*.035,"class":"hg-dust",style:"--dust-delay:"+(-((di%9)*.7))+"s;--dust-x:"+(((di%5)-2)*16)+"px;--dust-y:"+(-18-(di%6)*9)+"px"},hgDust);
+  }
   /* robbanás-réteg, torkolattűz-réteg */
   el("g",{id:"hgFx"},g);
 })();
@@ -3490,5 +3560,161 @@ show("home");renderStats();
 </script>
 
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
+
+<style id="pzh-redesign-v116">
+/* PzH Milliomos 1.16.0 — átfogó, reszponzív újratervezés */
+:root{--fz:1;--bg:#0b0f0c;--panel:#121912;--panel2:#192219;--ink:#f1f0e5;--muted:#aeb6a3;--line:#303b2d;--gold:#e4b64e;--gold2:#ffda78;--ok:#43d38a;--bad:#f07161;--shadow:0 18px 44px rgba(0,0,0,.34)}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-size:16px;line-height:1.48;background:radial-gradient(ellipse at 50% -15%,rgba(119,139,70,.2),transparent 42%),radial-gradient(ellipse at 100% 35%,rgba(184,128,37,.06),transparent 32%),var(--bg);background-attachment:fixed;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.wrap{width:min(100%,1320px);max-width:1320px;padding:clamp(10px,2.4vw,28px) clamp(10px,2.6vw,30px) 30px}
+.topbar{position:relative;z-index:5;align-items:center;margin-bottom:20px;padding:8px 0 16px;border-bottom:1px solid rgba(228,182,78,.25)}
+.topbar:after{content:"";position:absolute;bottom:-1px;left:0;width:140px;height:2px;background:linear-gradient(90deg,var(--gold2),transparent);box-shadow:0 0 14px rgba(228,182,78,.4)}
+.brand{font-size:clamp(23px,3vw,35px);letter-spacing:.025em;text-shadow:0 0 25px rgba(228,182,78,.12)}
+.brand b{color:var(--gold2)}
+.tbact{display:flex;align-items:center;gap:8px}
+.ibtn{min-width:44px;min-height:44px;border:1px solid rgba(228,182,78,.48);border-radius:10px;background:linear-gradient(145deg,#252d20,#111610);box-shadow:inset 0 1px rgba(255,255,255,.06);color:var(--gold2)}
+.panel{border:1px solid rgba(152,169,126,.22);border-radius:13px;background:linear-gradient(145deg,rgba(23,31,22,.98),rgba(13,18,14,.99));box-shadow:var(--shadow);overflow:hidden}
+.btn{border-radius:8px;background:linear-gradient(135deg,#ffda78,#dca638);color:#211806;box-shadow:0 6px 18px rgba(228,182,78,.12);transition:transform .16s,filter .16s,box-shadow .16s}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 8px 22px rgba(228,182,78,.19)}
+.btn.ghost{background:rgba(255,255,255,.025);border:1px solid #424c3a;color:var(--ink);box-shadow:none}
+.btn.small{border-radius:7px}
+/* HERO: keep existing illustrated PzH artwork, elevate it into a cinematic title panel */
+#home .hero{position:relative;border:1px solid rgba(228,182,78,.42);border-radius:16px;background:#11170f;box-shadow:0 22px 60px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.025)}
+#home .hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(8,12,8,.5),transparent 65%),linear-gradient(0deg,rgba(8,12,8,.7),transparent 38%);z-index:0}
+#home .hero>*{position:relative;z-index:1}
+#home .hero .tagline{padding:12px 18px;border-bottom:1px solid rgba(228,182,78,.18);background:rgba(7,10,7,.42);letter-spacing:.12em}
+#home .herorow{align-items:center;margin:clamp(16px,3vw,34px) clamp(16px,3vw,34px) 0;gap:18px}
+#home .hero h1{font-size:clamp(46px,8.2vw,100px);line-height:.92;letter-spacing:.01em;text-shadow:0 8px 30px #000}
+#home .hero h1 em{color:var(--gold2);text-shadow:0 0 28px rgba(228,182,78,.17)}
+#home .hero p{font-size:clamp(15px,1.5vw,18px);max-width:54ch}
+#home .heraldry{filter:drop-shadow(0 0 20px rgba(228,182,78,.2))}
+#home .specs{position:relative;z-index:2;grid-template-columns:repeat(2,minmax(0,1fr));background:rgba(9,13,9,.88);border-top:1px solid rgba(228,182,78,.25)}
+#home .specs div{padding:16px 18px;border-color:rgba(160,174,137,.14)}
+#home .specs b{font-size:clamp(22px,3vw,34px);color:var(--gold2)}
+#home .specs .k{font-size:11px;letter-spacing:.11em}
+@media(min-width:760px){#home .specs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Main menu becomes an actual game launcher, not a long text list */
+#home .menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+#home .mgrp{grid-column:1/-1;margin-top:8px;padding:9px 2px 4px;color:var(--gold2);font-size:11px;letter-spacing:.2em}
+#home .mrow{min-width:0;min-height:142px;display:grid;grid-template-columns:54px minmax(0,1fr) 16px;grid-template-rows:1fr auto;align-items:center;gap:10px;padding:15px;border:1px solid rgba(142,160,120,.25);border-radius:12px;background:linear-gradient(145deg,rgba(34,45,30,.96),rgba(15,21,15,.99));box-shadow:inset 0 1px rgba(255,255,255,.035),0 9px 22px rgba(0,0,0,.2);text-align:left;transition:transform .18s,border-color .18s,background .18s}
+#home .mrow:hover,#home .mrow:focus-visible{transform:translateY(-3px);border-color:rgba(255,211,102,.8);background:linear-gradient(145deg,#303d29,#171e15);box-shadow:0 12px 26px rgba(0,0,0,.32),0 0 0 1px rgba(228,182,78,.08)}
+#home .mrow .mi{grid-row:1/3;width:52px;height:58px;border-radius:10px;background:linear-gradient(145deg,rgba(228,182,78,.2),rgba(7,12,7,.7));border:1px solid rgba(228,182,78,.42);color:var(--gold2)}
+#home .mrow .mi svg{width:28px;height:28px}
+#home .mrow .mtx{min-width:0;align-self:end}
+#home .mrow .mtx b{display:block;font:600 clamp(17px,2vw,21px)/1.1 var(--f-cond);letter-spacing:.015em}
+#home .mrow .mtx small{display:block;margin-top:6px;color:#aeb6a3;font-size:12px;line-height:1.35}
+#home .mrow .mbest{grid-column:2;align-self:start;color:var(--gold2);font-size:11px}
+#home .mrow .mchev{grid-column:3;grid-row:1/3;font-size:25px;color:var(--gold);align-self:center}
+#home .fine{margin-top:20px;padding:14px 4px;border-top:1px solid rgba(228,182,78,.15);line-height:1.6}
+/* All app pages share the same polished frame */
+.pg{width:100%;max-width:1040px;margin-inline:auto;padding:clamp(16px,3vw,32px);border-radius:14px;background:linear-gradient(145deg,rgba(23,30,21,.99),rgba(13,17,13,.99))}
+.pgt{font-size:clamp(27px,4vw,40px);line-height:1.08;letter-spacing:.015em}
+.pgs{margin:25px 0 12px;padding-bottom:10px;border-bottom:1px solid rgba(150,166,128,.19);color:var(--gold2);font-size:13px;letter-spacing:.18em}
+.sub{color:var(--muted);line-height:1.65}
+/* Settings: section headings and options get a dashboard layout */
+#set .pg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;align-items:start}
+#set .pgt,#set .pgs{grid-column:1/-1}
+#set .srow{min-width:0;min-height:76px;margin:0 0 9px;padding:13px 14px;align-items:center;gap:12px;border:1px solid rgba(144,162,121,.18);border-radius:10px;background:linear-gradient(110deg,rgba(255,255,255,.035),rgba(0,0,0,.08))}
+#set .srow>div:first-child{min-width:0}
+#set .srow b{font-size:15px;line-height:1.3;color:#f0efdf}
+#set .srow small{margin-top:4px;font-size:12px;line-height:1.45;color:#aeb6a3}
+#set .srow input[type=range]{max-width:42%;accent-color:var(--gold)}
+#set .share-setting-row{grid-column:1/-1;min-height:94px;padding:16px;border-color:rgba(228,182,78,.55);background:linear-gradient(100deg,rgba(228,182,78,.14),rgba(228,182,78,.035) 70%);box-shadow:inset 3px 0 var(--gold)}
+#set .share-setting-row b{font-size:17px}
+#set .share-setting-row .btn{flex-shrink:0}
+#set .fzseg{display:flex;gap:4px}
+#set .fzseg button{min-width:34px;min-height:34px;border-radius:6px}
+/* Share screen is a dedicated share flow, never an end-score share */
+#share .app-share-page{max-width:1000px}
+#share .share-hero{padding:10px 0 22px;gap:18px}
+#share .share-emblem{width:82px;height:82px;flex-basis:82px;border-radius:15px;box-shadow:0 0 32px rgba(228,182,78,.08)}
+#share .share-kicker{font-size:11px}
+#share .app-share-grid{grid-template-columns:minmax(170px,230px) minmax(0,1fr);gap:22px;margin-top:22px}
+#share .app-share-qr-card{justify-content:center;border-radius:12px;background:linear-gradient(145deg,rgba(228,182,78,.1),rgba(0,0,0,.15));padding:18px}
+#share .app-share-qr-card .qrbox{width:170px;height:170px}
+#share .app-share-qr-card .qrbox canvas,#share .app-share-qr-card .qrbox img{width:150px!important;height:150px!important}
+#share .app-share-actions{padding:clamp(12px,2vw,24px);border:1px solid rgba(144,162,121,.18);border-radius:12px;background:rgba(0,0,0,.12)}
+#share .share-main-btn{min-height:56px;border-radius:9px;font-size:18px}
+#share .linkrow input{min-height:44px;border-radius:8px}
+#share .app-install-guide{border-radius:12px;padding:18px}
+#share .app-install-guide .srow{background:rgba(255,255,255,.025);padding:13px;border-radius:8px;border:1px solid rgba(144,162,121,.12)}
+/* Quiz and training panels */
+.qstart,.endcard,.qcard,.hud,.dd,.scene{border-radius:14px;border-color:rgba(144,162,121,.24);box-shadow:var(--shadow)}
+.qstart,.endcard{padding:clamp(18px,4vw,38px);background:radial-gradient(ellipse at top right,rgba(228,182,78,.1),transparent 48%),linear-gradient(145deg,#182117,#0f140f)}
+.qcard,.hud{background:linear-gradient(145deg,#182117,#111710)}
+.answers{gap:10px}
+.opt,.answer,.ans{border-radius:9px}
+#sim .scene{border-radius:14px;overflow:hidden;background:#101612;border-color:rgba(228,182,78,.35)}
+#sim .scenebar{background:linear-gradient(90deg,#20291e,#111711);border-bottom:1px solid rgba(228,182,78,.2)}
+#sim .firebtn{border-radius:9px;box-shadow:0 0 22px rgba(228,182,78,.18)}
+#sim .svgwrap{overflow:hidden;border-radius:10px}
+#sim .simfoot{padding:12px}
+/* Every other training screen */
+#hangar .panel,#ter .panel,#dd .panel,#htd .panel,#kis .panel,#rank .panel{border-radius:14px;box-shadow:var(--shadow)}
+#hangar .hgscene,#hangar #hgScene{border-radius:10px;overflow:hidden}
+#ter #terSvg,#dd #ddSvg{border:1px solid rgba(228,182,78,.25);border-radius:10px;overflow:hidden}
+#rank .lbwrap{border:1px solid rgba(144,162,121,.18);border-radius:10px;overflow:auto}
+#rank table{width:100%;border-collapse:collapse}
+#rank th{color:var(--gold2);background:rgba(228,182,78,.08)}
+#rank td,#rank th{padding:12px 10px;border-bottom:1px solid rgba(144,162,121,.14)}
+#kis .kistools{gap:10px}
+#kis input[type=search]{min-height:44px;border:1px solid var(--line);border-radius:8px;background:#0e140f;color:var(--ink);padding:10px}
+/* Compact bottom navigation, using the app's existing data-go routing */
+.bottom-dock{position:fixed;z-index:40;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 20px),720px);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;padding:7px;border:1px solid rgba(228,182,78,.27);border-radius:15px;background:rgba(12,17,12,.94);backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.48)}
+.bottom-dock button{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;padding:4px 2px;border:1px solid transparent;border-radius:9px;background:transparent;color:#aeb6a3;font:600 10px/1.1 var(--f-cond);letter-spacing:.01em}
+.bottom-dock button:hover,.bottom-dock button:focus-visible{color:var(--gold2);background:rgba(228,182,78,.09);border-color:rgba(228,182,78,.18)}
+.dock-ico{font:24px/1 var(--f-cond);color:var(--gold2)}
+body:has(#game:not(.hide)) .bottom-dock,body:has(#end:not(.hide)) .bottom-dock,body:has(#htd:not(.hide)) .bottom-dock,body:has(#htdEnd:not(.hide)) .bottom-dock,body:has(#hangar:not(.hide)) .bottom-dock,body:has(#hangarEnd:not(.hide)) .bottom-dock,body:has(#ter:not(.hide)) .bottom-dock,body:has(#terEnd:not(.hide)) .bottom-dock,body:has(#dd:not(.hide)) .bottom-dock{display:none}
+/* Motion respects accessibility settings */
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(min-width:760px){#home .menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}#home .mrow{min-height:160px;padding:18px}#home .mrow .mi{width:58px;height:62px}}
+@media(max-width:650px){
+ body{font-size:15px;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+ .wrap{padding:10px 10px 22px}
+ .topbar{gap:8px;margin-bottom:14px;padding-bottom:12px}
+ .brand{font-size:clamp(21px,6vw,28px)}
+ .tbact{gap:5px}
+ .ibtn{min-width:40px;min-height:40px;padding:6px 9px}
+ #home .hero .tagline{font-size:9px;gap:8px;padding:10px 12px}
+ #home .herorow{margin:18px 14px 0;gap:8px}
+ #home .hero h1{font-size:clamp(44px,13vw,68px)}
+ #home .heraldry .crest{width:56px}
+ #home .hero p{margin-inline:14px;font-size:14px}
+ #home .specs div{padding:11px 12px}
+ #home .specs b{font-size:23px}
+ #home .specs .k{font-size:9px}
+ #home .menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+ #home .mrow{grid-template-columns:1fr;grid-template-rows:auto auto auto;align-content:start;align-items:start;gap:8px;min-height:146px;padding:12px 10px}
+ #home .mrow .mi{grid-row:auto;width:42px;height:44px;border-radius:9px}
+ #home .mrow .mi svg{width:24px;height:24px}
+ #home .mrow .mtx{grid-column:1;align-self:start}
+ #home .mrow .mtx b{font-size:16px;line-height:1.12}
+ #home .mrow .mtx small{font-size:10px;line-height:1.3;margin-top:4px}
+ #home .mrow .mbest{grid-column:1;font-size:10px}
+ #home .mrow .mchev{grid-column:1;grid-row:1;justify-self:end;align-self:start;margin-top:6px;font-size:20px}
+ #set .pg{display:block;padding:16px 12px}
+ #set .srow{min-height:64px;padding:11px 10px;gap:8px}
+ #set .srow b{font-size:14px}
+ #set .srow small{font-size:11px}
+ #set .share-setting-row{display:flex;align-items:center}
+ #set .share-setting-row .btn{padding:9px 10px;font-size:12px}
+ #share .share-hero{align-items:flex-start;gap:12px}
+ #share .share-emblem{width:54px;height:54px;flex-basis:54px;border-radius:10px}
+ #share .share-emblem svg{width:38px;height:38px}
+ #share .share-hero .pgt{font-size:25px}
+ #share .app-share-grid{grid-template-columns:1fr;gap:12px}
+ #share .app-share-qr-card{display:grid;grid-template-columns:100px minmax(0,1fr);grid-template-rows:auto auto;column-gap:12px;text-align:left;padding:12px}
+ #share .app-share-qr-card .qrbox{grid-row:1/3;width:100px;height:100px;padding:4px}
+ #share .app-share-qr-card .qrbox canvas,#share .app-share-qr-card .qrbox img{width:92px!important;height:92px!important}
+ #share .app-share-actions{padding:12px}
+ #share .app-install-guide{padding:12px}
+ .pg{padding:16px 12px}
+ .bottom-dock{width:calc(100% - 12px);bottom:max(5px,env(safe-area-inset-bottom));padding:5px;gap:1px;border-radius:13px}
+ .bottom-dock button{font-size:9px;min-height:48px}
+ .dock-ico{font-size:21px}
+}
+@media(max-width:360px){#home .mrow{min-height:138px;padding:10px 8px}#home .mrow .mtx b{font-size:14px}#home .mrow .mtx small{font-size:9px}.bottom-dock button{font-size:8px}}
+</style>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "version": "1.15.0",
+  "version": "1.17.0",
   "date": "2026-10-14",
-  "notes": "Látványfrissítés: taktikai műszerfal-stílus, kiemelt módválasztók, kártyás eredmények és megosztási panel finomítása. Az alkalmazás megosztása a nyilvános alkalmazáslinket használja; játék-eredmény megosztása nincs."
+  "notes": "Filmszerű animációfrissítés a tűzfeladat és lőszerraktár képernyőn: rétegzett HUD, finom kamerarezgés, füst- és porhatások, hangárfények, lebegő porszemek és kiemelt interakciós állapotok. Az eredménymegosztás nincs bekapcsolva."
 }
