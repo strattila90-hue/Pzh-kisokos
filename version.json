@@ -1,5 +1,5 @@
 {
-  "version": "1.18.0",
-  "date": "2026-10-15",
-  "notes": "Mobilos elrendezésjavítás: a tűzfeladat műszerfala külön sávba került, a jelmagyarázat nem lóg ki, a kérdéskártya saját görgethető területet kapott és nem fut az alsó navigáció alá."
+ "version": "1.13.0",
+ "date": "2026-10-13",
+ "notes": "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"
 }
