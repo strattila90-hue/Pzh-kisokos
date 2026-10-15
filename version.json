@@ -1,5 +1,5 @@
 {
-  "version": "1.20.0",
-  "date": "2026-10-15",
-  "notes": "Megosztás gomb visszakerült a főképernyőre; az alkalmazás megosztásakor a közzétett link és QR-kód dinamikusan készül; külön Kezdés képernyő a tűzfeladat előtt; lekerekített modern panelek."
+ "version": "1.23.0",
+ "date": "2026-10-13",
+ "notes": "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"
 }
