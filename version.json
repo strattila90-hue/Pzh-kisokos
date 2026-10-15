@@ -1,5 +1,5 @@
 {
-  "version": "1.19.0",
+  "version": "1.20.0",
   "date": "2026-10-15",
-  "notes": "Modern, lekerekített felületek; dedikált főképernyős Frissítés gomb; javított frissítésellenőrzés és service worker aktiválás."
+  "notes": "Megosztás gomb visszakerült a főképernyőre; az alkalmazás megosztásakor a közzétett link és QR-kód dinamikusan készül; külön Kezdés képernyő a tűzfeladat előtt; lekerekített modern panelek."
 }
