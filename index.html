@@ -757,6 +757,21 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
 @media(max-width:899px){.simleg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}.simleg::-webkit-scrollbar{display:none}.simleg li{flex:none}}
 .simleg i{font-style:normal;display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:#ffd84a;color:#1a1304;font:700 calc(11px * var(--fz)) var(--f-mono)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* v1.19.0 – egységes, modern, lekerekített felületek */
+:root{--radius-xs:10px;--radius-sm:14px;--radius-md:18px;--radius-lg:24px}
+.panel,.mode,.mrow,.tab,.btn,.ibtn,.opt,.ochip,.srow,.qcard,.step,.answer,.modal,.qrbox,.linkrow input,.simclock,.readout,.estop,.firebtn,.updbar,.toast,.lbtab,.lbdrawer,.share,.specs,.plate{border-radius:var(--radius-md)!important}
+button,.mode,.mrow,.opt,.ochip{transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.mode,.mrow{border:1px solid color-mix(in srgb,var(--line) 72%,var(--gold) 28%)}
+.mode:focus-visible,.mrow:focus-visible,.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.home-update{display:grid;grid-template-columns:54px minmax(0,1fr) auto;align-items:center;gap:12px;margin-top:14px;padding:14px 16px;border-color:color-mix(in srgb,var(--gold) 55%,var(--line));background:linear-gradient(115deg,var(--panel),var(--panel2));box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.hu-icon{display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:linear-gradient(145deg,var(--gold),#f6d779);color:var(--gold-ink);font-size:32px;font-weight:700;box-shadow:0 0 18px color-mix(in srgb,var(--gold) 28%,transparent)}
+.hu-copy{min-width:0;display:grid;gap:2px}.hu-copy b{font:600 calc(19px * var(--fz)) var(--f-cond);letter-spacing:.02em}.hu-copy small{font-size:calc(12px * var(--fz));color:var(--muted);line-height:1.35}
+.hu-btn{white-space:nowrap;padding:12px 16px;border-radius:14px!important;box-shadow:0 4px 14px color-mix(in srgb,var(--gold) 22%,transparent)}.hu-btn span{font-size:1.15em;margin-right:5px}
+.hu-btn[disabled]{opacity:.7;cursor:progress;filter:saturate(.7)}
+@media(max-width:440px){.home-update{grid-template-columns:44px minmax(0,1fr);gap:10px;padding:12px}.hu-icon{width:42px;height:42px;border-radius:13px;font-size:27px}.hu-btn{grid-column:1/-1;width:100%;min-height:46px}.panel{border-radius:18px!important}.mrow{border-radius:14px!important}}
+@media(prefers-reduced-motion:reduce){.home-update,.hu-btn{transition:none}}
+
 </style>
 
 <div class="wrap">
@@ -832,6 +847,11 @@ p,li,.expl div,.mwhy,.sit,.kcard p{text-wrap:pretty}
 <div class="mgrp k">Rendszer</div>
 <button class="mrow" data-go="set" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span><span class="mtx"><b>Beállítások</b><small>Hang, becenév, eredmények</small></span><span class="mbest" data-best="set"></span><span class="mchev" aria-hidden="true">›</span></button>
 </nav>
+  <section class="home-update panel" aria-label="Alkalmazás frissítése">
+   <div class="hu-icon" aria-hidden="true">↻</div>
+   <div class="hu-copy"><b>Alkalmazás frissítése</b><small id="homeUpdateStatus">Ellenőrizd, elérhető-e új verzió.</small></div>
+   <button class="btn hu-btn" id="homeUpdate" type="button"><span aria-hidden="true">↻</span> Frissítés</button>
+  </section>
   <p class="fine">A kérdések és a lépéssor a lövegkezelői tananyag oldalaiból készültek. A tűzfeladat gyakorló sorrend, a vezényszavakat és a szabályzatot nem helyettesíti. <span id="verFoot"></span></p>
  </section>
 
@@ -1181,8 +1201,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.13.0",APP_DATE="2026-10-13";
-var CHANGELOG=[["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.19.0",APP_DATE="2026-10-15";
+var CHANGELOG=[["1.19.0", "Kezdőlap: külön Frissítés gomb; megbízhatóbb frissítésellenőrzés és service worker csere; lekerekített, modernebb panelek és csempék"],["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,online:true,rank:true,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -3308,24 +3328,43 @@ async function saveOffline(){if(!navigator.onLine){toast("Letöltéshez hálóza
 function renderVer(){$("verTxt").textContent="Verzió "+APP_VERSION+" · "+APP_DATE;$("verFoot").textContent="v"+APP_VERSION;
   var ul=$("chlog");ul.innerHTML="";CHANGELOG.slice(0,4).forEach(function(c){var li=document.createElement("li");li.innerHTML="<b></b> ";li.firstChild.textContent=c[0]+":";li.appendChild(document.createTextNode(c[1]));ul.appendChild(li);});
   if(!$("updMsg").textContent)setUpdMsg(UPD.remote&&cmpVer(UPD.remote,APP_VERSION)>0?"Új verzió érhető el: "+UPD.remote:"");}
-function showUpd(v){$("updTxt").textContent="Új verzió érhető el: "+v+" (most: "+APP_VERSION+")";$("updBar").classList.remove("hide");}
+function showUpd(v){$("updTxt").textContent="Új verzió érhető el: "+v+" (most: "+APP_VERSION+")";$("updBar").classList.remove("hide");setHomeUpdateStatus("Új verzió érhető el: "+v);}
+function setHomeUpdateStatus(t){var n=$("homeUpdateStatus");if(n)n.textContent=t;}
+function setUpdateBusy(b,label){var a=$("homeUpdate"),s=$("updCheck"),g=$("updGo");if(a){a.disabled=b;a.innerHTML=b?'<span aria-hidden="true">↻</span> Ellenőrzés…':'<span aria-hidden="true">↻</span> Frissítés';}if(s)s.disabled=b;if(g)g.disabled=b;}
 async function checkUpdate(manual){
-  if(FILEMODE){if(manual)setUpdMsg("Önálló fájl: új verzióhoz töltsd le újra a fájlt.");return;}
-  if(!PWA){if(manual){setUpdMsg("A claude.ai-s link mindig a legfrissebb verziót tölti be. Újratöltöm…");setTimeout(function(){location.reload();},700);}return;}
-  if(isOff()){if(manual)setUpdMsg(CFG.offline?"Offline módban nem keresek frissítést.":"Nincs hálózat, frissítést nem lehet keresni.");return;}
-  if(manual)setUpdMsg("Keresés…");
-  try{var r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});var j=await r.json();UPD.remote=j.version;
-    if(cmpVer(j.version,APP_VERSION)>0){showUpd(j.version);setUpdMsg("Új verzió érhető el: "+j.version);if(CFG.notif&&document.hidden&&window.Notification&&Notification.permission==="granted"){try{(await navigator.serviceWorker.ready).showNotification("PzH Milliomos – új verzió: "+j.version,{body:j.notes||"Koppints a frissítéshez.",icon:"icon-192.png",tag:"pzh-update"});}catch(e){}}}
-    else if(manual)setUpdMsg("A legfrissebb verziót használod ✓");}
-  catch(e){if(manual)setUpdMsg("Nem sikerült ellenőrizni (hálózati hiba).");}}
-async function doUpdate(){if(isOff()){toast("Frissítéshez hálózat kell.");return;}
-  if(busy()&&!confirm("Folyamatban lévő játék van. Frissítsek most? Az állás elvész."))return;
-  $("updGo").disabled=true;$("updTxt").textContent="Frissítés…";
-  try{if("serviceWorker" in navigator){var reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update();}
-    if(window.caches){var ks=await caches.keys();await Promise.all(ks.map(function(k){return caches.delete(k);}));}}catch(e){}
-  location.reload();}
+  if(FILEMODE){if(manual){setUpdMsg("Önálló fájl: új verzióhoz a frissített fájlt kell letölteni.");setHomeUpdateStatus("Fájlként fut: töltsd le az új csomagot.");}return false;}
+  if(!navigator.onLine||CFG.offline){if(manual){var m=CFG.offline?"Kapcsold ki az offline módot a frissítéshez.":"Nincs hálózat. Csatlakozz az internethez.";setUpdMsg(m);setHomeUpdateStatus(m);}return false;}
+  if(manual){setUpdMsg("Frissítés ellenőrzése…");setHomeUpdateStatus("Frissítés ellenőrzése…");}
+  try{var r=await fetch("./version.json?t="+Date.now(),{cache:"no-store",headers:{"Cache-Control":"no-cache"}});if(!r.ok)throw new Error("version.json HTTP "+r.status);var j=await r.json();if(!j||!j.version)throw new Error("Hiányzó verziószám");UPD.remote=j.version;
+    if(cmpVer(j.version,APP_VERSION)>0){showUpd(j.version);setUpdMsg("Új verzió érhető el: "+j.version);setHomeUpdateStatus("Új verzió érhető el: "+j.version+" · koppints a Frissítés gombra.");if(CFG.notif&&document.hidden&&window.Notification&&Notification.permission==="granted"){try{(await navigator.serviceWorker.ready).showNotification("PzH Milliomos – új verzió: "+j.version,{body:j.notes||"Koppints a frissítéshez.",icon:"icon-192.png",tag:"pzh-update"});}catch(e){}}return true;}
+    if(manual){setUpdMsg("A legfrissebb verziót használod ✓");setHomeUpdateStatus("Naprakész · v"+APP_VERSION);}
+    return false;
+  }catch(e){if(manual){setUpdMsg("Nem sikerült ellenőrizni. Ellenőrizd a tárhelyen a version.json fájlt.");setHomeUpdateStatus("Nem sikerült ellenőrizni · próbáld újra.");}return null;}}
+async function doUpdate(){
+  if(FILEMODE){toast("Önálló fájlból nem frissíthető. Töltsd le az új ZIP-et.");setHomeUpdateStatus("Töltsd le az új ZIP-et, majd cseréld le a fájlt.");return;}
+  if(!navigator.onLine||CFG.offline){var msg=CFG.offline?"Kapcsold ki az offline módot a frissítéshez.":"Frissítéshez internetkapcsolat kell.";toast(msg);setHomeUpdateStatus(msg);return;}
+  if(busy()&&!confirm("Folyamatban lévő játék van. Frissítsek most? Az aktuális menet elveszhet."))return;
+  setUpdateBusy(true);setHomeUpdateStatus("Frissítés ellenőrzése…");
+  try{
+    // Előbb ellenőrizzük a közzétett verziót; a gomb akkor is újraellenőrzi a SW-t, ha nincs verzióváltás.
+    var r=await fetch("./version.json?t="+Date.now(),{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
+    if(!r.ok)throw new Error("version.json nem érhető el (HTTP "+r.status+")");
+    var j=await r.json();if(!j.version)throw new Error("Hiányzó verziószám");UPD.remote=j.version;
+    if("serviceWorker" in navigator){
+      var reg=await navigator.serviceWorker.getRegistration();
+      if(reg){await reg.update();if(reg.waiting){reg.waiting.postMessage("SKIP_WAITING");setHomeUpdateStatus("Új verzió aktiválása…");return;}
+        if(reg.installing){setHomeUpdateStatus("Új verzió letöltése…");await new Promise(function(resolve,reject){var w=reg.installing;var timer=setTimeout(function(){reject(new Error("A frissítés időtúllépés miatt leállt."));},15000);w.addEventListener("statechange",function(){if(w.state==="installed"||w.state==="activated"){clearTimeout(timer);resolve();}else if(w.state==="redundant"){clearTimeout(timer);reject(new Error("A frissítés telepítése sikertelen."));}});});}
+      }
+    }
+    setHomeUpdateStatus("Friss verzió ellenőrizve · újratöltés…");
+    // Ne töröljük az összes cache-t: az offline működés és az aktív SW így nem sérül.
+    setTimeout(function(){location.reload();},350);
+  }catch(e){setUpdateBusy(false);var t="Frissítés nem sikerült: "+(e&&e.message?e.message:"hálózati hiba");setUpdMsg(t);setHomeUpdateStatus(t);toast("Frissítés nem sikerült. Ellenőrizd a tárhely fájljait.");}
+}
 $("updGo").addEventListener("click",doUpdate);
-$("updCheck").addEventListener("click",function(){if(UPD.remote&&cmpVer(UPD.remote,APP_VERSION)>0){doUpdate();return;}checkUpdate(true);});
+$("updCheck").addEventListener("click",async function(){var newer=await checkUpdate(true);if(newer)showUpd(UPD.remote);});
+$("homeUpdate").addEventListener("click",async function(){setUpdateBusy(true);try{var newer=await checkUpdate(true);if(newer===null){setUpdateBusy(false);return;}if(newer){setUpdateBusy(false);setHomeUpdateStatus("Új verzió: "+UPD.remote+" · telepítés indul…");await doUpdate();}else{if(!FILEMODE&&navigator.onLine&&!CFG.offline){if("serviceWorker" in navigator){var reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update();}setHomeUpdateStatus("Ellenőrizve · v"+APP_VERSION+" · ha a tárhelyen már cseréltél fájlokat, újratöltés…");setTimeout(function(){location.reload();},500);}setUpdateBusy(false);}}catch(e){setUpdateBusy(false);setHomeUpdateStatus("Nem sikerült frissíteni. Ellenőrizd az internetet és a tárhelyet.");}});
+navigator.serviceWorker&&navigator.serviceWorker.addEventListener("controllerchange",function(){if(window.__pzhUpdating)return;window.__pzhUpdating=true;location.reload();});
 $("offSave").addEventListener("click",saveOffline);
 $("netChip").addEventListener("click",function(){route("set");});
 $("cfOffline").addEventListener("click",function(){CFG.offline=!CFG.offline;saveCfg();

@@ -1,5 +1,5 @@
 {
- "version": "1.13.0",
- "date": "2026-10-13",
- "notes": "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"
+  "version": "1.19.0",
+  "date": "2026-10-15",
+  "notes": "Modern, lekerekített felületek; dedikált főképernyős Frissítés gomb; javított frissítésellenőrzés és service worker aktiválás."
 }
