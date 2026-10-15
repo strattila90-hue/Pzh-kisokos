@@ -3716,5 +3716,64 @@ body:has(#game:not(.hide)) .bottom-dock,body:has(#end:not(.hide)) .bottom-dock,b
 @media(max-width:360px){#home .mrow{min-height:138px;padding:10px 8px}#home .mrow .mtx b{font-size:14px}#home .mrow .mtx small{font-size:9px}.bottom-dock button{font-size:8px}}
 </style>
 
+
+<style id="v118-mobile-scene-layout-fix">
+/* v1.18.0 — javítás: mobilon a műszerfal ne takarja a jelenetet, a kérdéskártya ne fusson az alsó dokk alá */
+@media (max-width:899px) and (orientation:portrait){
+  #sim:not(.hide){
+    height:calc(100dvh - var(--tbh,58px) - 100px - env(safe-area-inset-bottom));
+    min-height:0; overflow:hidden; gap:8px;
+  }
+  #sim .scene{
+    display:flex; flex-direction:column; flex:0 0 auto; min-height:0;
+    overflow:hidden; margin-left:-16px; margin-right:-16px;
+    border-radius:0; border-left:0; border-right:0; padding:0;
+  }
+  #sim .scenebar{
+    position:relative!important; inset:auto!important; z-index:5;
+    display:flex; flex-direction:row!important; align-items:center!important;
+    justify-content:space-between; gap:8px; width:auto; max-width:none;
+    padding:7px 10px!important; border:0!important; border-bottom:1px solid rgba(226,182,79,.3)!important;
+    border-radius:0!important; background:linear-gradient(90deg,#111810,#20271b 65%,#10140f)!important;
+    backdrop-filter:none!important; text-align:left;
+  }
+  #sim .scenebar .sbl{display:flex!important; flex-direction:column; align-items:flex-start; gap:2px; min-width:0; font-size:9px!important; line-height:1.15; letter-spacing:.06em; color:#c6cbb9;}
+  #sim .scenebar .sbl>span:first-child{display:inline!important;color:var(--gold2);font-weight:700;}
+  #sim .scenebar .sbl #modeCap{max-width:34vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9fe0aa;}
+  #sim .scenebar .sbr{display:flex; flex-direction:row; align-items:center; justify-content:flex-end; gap:5px; min-width:0;}
+  #sim .scenebar .readout{display:flex!important; flex-direction:column; align-items:flex-end; gap:1px; line-height:1.1; font-size:9px!important; white-space:nowrap;}
+  #sim .scenebar .readout>span{display:block;}
+  #sim .scenebar .simclock{font-size:10px!important;padding:5px 6px;white-space:nowrap;}
+  #sim .scenebar .estop,#sim .scenebar .firebtn{flex:0 0 28px;width:28px;height:28px;font-size:9px;}
+  #sim .svgwrap{position:relative; width:100%; max-width:none!important; overflow:hidden; flex:none;}
+  #sim #simSvg{display:block;width:100%;height:clamp(118px,25vw,185px)!important;max-height:none!important;}
+  #sim .fke.ov{left:8px!important;right:auto!important;top:auto!important;bottom:7px!important;max-width:43%!important;width:43%;padding:4px 6px!important;z-index:4;border-radius:5px;background:rgba(7,13,9,.88);border:1px solid rgba(112,226,145,.28);box-shadow:0 4px 14px rgba(0,0,0,.3);}
+  #sim .fke.ov .h{display:none!important;}
+  #sim .fke.ov pre{font-size:8px!important;line-height:1.2!important;max-height:2.4em!important;overflow:hidden!important;white-space:pre-wrap;overflow-wrap:anywhere;}
+  #sim .simfoot{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;z-index:4;padding:5px 8px 6px!important;background:#0d120e!important;border-top:1px solid rgba(226,182,79,.2);border-radius:0!important;}
+  #sim .simleg{display:flex;flex-wrap:wrap!important;align-items:center;gap:3px 8px!important;max-height:44px;overflow-y:auto!important;overflow-x:hidden!important;white-space:normal!important;font-size:9px!important;line-height:1.25;}
+  #sim .simleg li{flex:0 0 auto;max-width:100%;white-space:normal;}
+  #sim .simleg li span{overflow-wrap:anywhere;}
+  #sim .callout{z-index:5;max-width:calc(100% - 20px);}
+  #sim .step{flex:1 1 0;min-height:0;max-height:none;overflow-y:auto!important;overscroll-behavior:contain;margin:0!important;padding:11px 12px calc(22px + env(safe-area-inset-bottom))!important;}
+  #sim .step .who{gap:6px;align-items:flex-start;}
+  #sim .step .who .k{min-width:0;overflow-wrap:anywhere;white-space:normal;line-height:1.25;}
+  #sim .step .who .k:first-child{white-space:normal;text-overflow:clip;}
+  #sim .stepbar{display:flex;gap:4px;}
+  #sim .step h2{line-height:1.12;margin:5px 0 7px;overflow-wrap:anywhere;}
+  #sim .step .sit{line-height:1.42;overflow-wrap:anywhere;}
+  #sim #stepBody,#sim .opts,#sim .order{min-width:0;max-width:100%;}
+  #sim .opt,#sim .ochip{white-space:normal;overflow-wrap:anywhere;word-break:normal;}
+  body:has(#sim:not(.hide)) .bottom-dock{z-index:30;}
+}
+@media(max-width:899px) and (orientation:portrait) and (max-height:700px){
+  #sim:not(.hide){height:calc(100dvh - var(--tbh,48px) - 88px - env(safe-area-inset-bottom));}
+  #sim #simSvg{height:clamp(100px,22vw,150px)!important;}
+  #sim .simleg{max-height:36px;}
+  #sim .scenebar{padding:5px 8px!important;}
+}
+@media(prefers-reduced-motion:reduce){#sim .fke.ov,#sim .scene,#sim .step{scroll-behavior:auto!important;}}
+</style>
+
 </body>
 </html>

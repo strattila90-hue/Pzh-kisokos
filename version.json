@@ -1,5 +1,5 @@
 {
-  "version": "1.17.0",
-  "date": "2026-10-14",
-  "notes": "Filmszerű animációfrissítés a tűzfeladat és lőszerraktár képernyőn: rétegzett HUD, finom kamerarezgés, füst- és porhatások, hangárfények, lebegő porszemek és kiemelt interakciós állapotok. Az eredménymegosztás nincs bekapcsolva."
+  "version": "1.18.0",
+  "date": "2026-10-15",
+  "notes": "Mobilos elrendezésjavítás: a tűzfeladat műszerfala külön sávba került, a jelmagyarázat nem lóg ki, a kérdéskártya saját görgethető területet kapott és nem fut az alsó navigáció alá."
 }
