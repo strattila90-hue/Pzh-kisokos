@@ -1,5 +1,5 @@
 {
- "version": "1.26.0",
- "date": "2026-10-13",
- "notes": "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"
+ "version": "1.28.0",
+ "date": "2026-10-16",
+ "notes": "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"
 }

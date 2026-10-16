@@ -1,10 +1,10 @@
-/* PzH Milliomos service worker – v1.24.0
+/* PzH Milliomos service worker – v1.28.0
    Offline működés: a játék fájljai gyorsítótárba kerülnek.
    Az oldal (index.html) hálózat-első: ha van net, mindig a legfrissebb jön, ha nincs, a tárolt. */
-const VERSION = "1.24.0";
+const VERSION = "1.28.0";
 const CACHE = "pzh-milliomos-" + VERSION;
 const CORE = ["./", "index.html", "firebase-config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
-self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
+self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== "pzh-meta").map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("message", e => { if (e.data === "SKIP_WAITING") self.skipWaiting(); });
 /* ---- Értesítések ---- */
@@ -45,8 +45,8 @@ self.addEventListener("fetch", e => {
     e.respondWith(new Promise(resolve => {
       let done = false;
       const fin = r => { if (!done && r) { done = true; resolve(r); } };
-      const t = setTimeout(() => fromCache(req).then(fin), 4000);
-      fetch(req).then(r => { clearTimeout(t); fin(put(req, r)); })
+      const t = setTimeout(() => fromCache(req).then(fin), 7000);
+      fetch(req.url, { cache: "no-store", credentials: "same-origin" }).then(r => { clearTimeout(t); fin(put(req, r)); })
         .catch(() => { clearTimeout(t); fromCache(req).then(h => { if (!done) { done = true; resolve(h || Response.error()); } }); });
     }));
     return;

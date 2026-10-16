@@ -19,7 +19,7 @@
 </head>
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Barlow+Condensed:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700&family=Share+Tech+Mono&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 /* Layout: tűzvezető pult – egy oszlopos, széles munkafelület; felül állapotsáv, középen a tartalom teljes szélességben */
@@ -973,78 +973,6 @@ input,select,textarea{font-size:max(16px,1em)}
 .ttring,.vehs,.crowd .fb{will-change:transform}
 @media (prefers-reduced-motion:reduce){.vehs.moving .whl,.vehs.moving .tlinks,.lampc,#lele .fb{animation:none}}
 
-/* ===== v1.23 TAKTIKAI DIZÁJN: acél-pala alap, borostyán jelzőszín, sarokjelölős kártyák, csapott gombok ===== */
-:root{
-  --f-display:"Oxanium","Barlow Condensed",system-ui,sans-serif;--f-cond:"Oxanium","Barlow Condensed",system-ui,sans-serif;
-  --f-body:"Barlow","IBM Plex Sans",system-ui,sans-serif;--f-mono:"JetBrains Mono","IBM Plex Mono",ui-monospace,monospace;
-  --bg:#0a0e12;--panel:#111820;--panel2:#16202a;--ink:#e9eef1;--muted:#93a3ae;--line:rgba(150,185,210,.14);
-  --gold:#ffb43c;--gold2:#ffd27a;--gold-ink:#1a1204;--hud:#6fd3ff;--glass:rgba(150,185,210,.04);
-  --ok:#3ddc84;--ok-bg:#0e2e20;--bad:#ff5d4d;--bad-bg:#371414;--shadow:0 22px 44px -26px rgba(0,0,0,.85);
-  --cut:12px;
-}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#e9edf0;--panel:#ffffff;--panel2:#f2f5f7;--ink:#0f1820;--muted:#566570;--line:rgba(20,40,60,.14);--gold:#c27800;--gold2:#e09a1a;--gold-ink:#fffaf0;--hud:#0b7fb3;--glass:rgba(255,255,255,.6);--ok:#12864a;--ok-bg:#dcf3e5;--bad:#c2352a;--bad-bg:#fbe1dd;--shadow:0 16px 36px -22px rgba(10,30,50,.3)}}
-:root[data-theme="light"]{--bg:#e9edf0;--panel:#ffffff;--panel2:#f2f5f7;--ink:#0f1820;--muted:#566570;--line:rgba(20,40,60,.14);--gold:#c27800;--gold2:#e09a1a;--gold-ink:#fffaf0;--hud:#0b7fb3;--glass:rgba(255,255,255,.6);--ok:#12864a;--ok-bg:#dcf3e5;--bad:#c2352a;--bad-bg:#fbe1dd;--shadow:0 16px 36px -22px rgba(10,30,50,.3)}
-body{background:
-  radial-gradient(1100px 600px at 100% -10%,color-mix(in srgb,var(--hud) 9%,transparent),transparent 65%),
-  radial-gradient(800px 520px at -10% 20%,color-mix(in srgb,var(--gold) 7%,transparent),transparent 70%),
-  var(--bg);letter-spacing:0}
-body::before{background-image:linear-gradient(color-mix(in srgb,var(--ink) 5%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--ink) 5%,transparent) 1px,transparent 1px);background-size:44px 44px;opacity:.55}
-h1{font-family:var(--f-display);font-weight:800;letter-spacing:-.01em}
-h2,h3{font-family:var(--f-display);font-weight:700}
-.k{font:600 calc(11px * var(--fz)) var(--f-mono);letter-spacing:.16em;color:var(--muted)}
-/* sarokjelölős kártyák (célkereszt-keret) */
-.panel,.mrow{border-radius:6px!important;border:1px solid var(--line);
-  background:
-   linear-gradient(var(--gold),var(--gold)) top left/16px 2px no-repeat,linear-gradient(var(--gold),var(--gold)) top left/2px 16px no-repeat,
-   linear-gradient(var(--gold),var(--gold)) bottom right/16px 2px no-repeat,linear-gradient(var(--gold),var(--gold)) bottom right/2px 16px no-repeat,
-   linear-gradient(180deg,var(--glass),transparent 60%),var(--panel);
-  box-shadow:var(--shadow)}
-.mcard{border-radius:8px!important}
-.mrow{min-height:74px;box-shadow:none}
-.mrow:hover{border-color:color-mix(in srgb,var(--gold) 55%,transparent);transform:translateX(3px);box-shadow:-4px 0 0 0 var(--gold),0 14px 30px -20px color-mix(in srgb,var(--gold) 70%,transparent)}
-.mi{border-radius:4px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--gold)}
-.mtx b{font:700 calc(20px * var(--fz))/1.1 var(--f-display);letter-spacing:.01em;text-transform:none}
-.mchev{border-radius:4px;background:transparent;border:1px solid var(--line);color:var(--gold)}
-.mgrp{font:700 calc(11px * var(--fz)) var(--f-mono);letter-spacing:.2em;color:var(--hud);display:flex;align-items:center;gap:10px}
-.mgrp::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-/* gombok: csapott sarok */
-.btn{border-radius:0!important;clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));
-  background:linear-gradient(180deg,var(--gold2),var(--gold));font:700 calc(15px * var(--fz)) var(--f-display);letter-spacing:.1em;text-transform:uppercase;box-shadow:none}
-.btn.ghost{background:color-mix(in srgb,var(--ink) 6%,transparent);border:0;box-shadow:inset 0 0 0 1px var(--line)}
-.btn.small{--cut:8px}
-.ibtn{border-radius:4px!important;border:1px solid var(--line);background:transparent;font-family:var(--f-display);letter-spacing:.08em}
-.ibtn[aria-pressed="true"]{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 60%,transparent)}
-/* felső sáv */
-.topbar{background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--line);box-shadow:0 1px 0 0 color-mix(in srgb,var(--gold) 25%,transparent)}
-.brand{font:800 calc(20px * var(--fz)) var(--f-display);letter-spacing:.02em}
-.brand b{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--gold)}
-/* fülek, chipek, kapcsolók */
-.tab{border-radius:3px;font:700 calc(12.5px * var(--fz)) var(--f-display);letter-spacing:.1em;text-transform:uppercase}
-.tab.on{background:color-mix(in srgb,var(--gold) 16%,transparent);border-color:color-mix(in srgb,var(--gold) 60%,transparent);color:var(--gold)}
-.sw{border-radius:4px}.sw i{border-radius:3px}
-.life{border-radius:3px;font-family:var(--f-display);letter-spacing:.06em}
-/* kezdőlap */
-.hero{border-radius:8px!important}
-.hero h1{font-size:min(11.5vw,84px);line-height:.92;text-transform:uppercase;letter-spacing:-.005em}
-.herorow{gap:16px;align-items:center}.herorow h1{min-width:0}
-.hero h1 em{background:linear-gradient(90deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .tagline .k{color:var(--hud)}
-.plate{border-radius:4px;border:1px solid var(--line)}
-.specs div{border-radius:4px;background:color-mix(in srgb,var(--hud) 5%,transparent);border-color:color-mix(in srgb,var(--hud) 20%,transparent)}
-.specs b{font:800 calc(26px * var(--fz))/1 var(--f-display);color:var(--ink)}
-.specs .k{color:var(--hud)}
-.home-update,.home-share{border-radius:6px!important}
-.home-update .hu-icon,.home-share .hu-icon{border-radius:4px!important}
-/* kvíz: a milliomos-kék helyett taktikai kijelző */
-#game.mil .qcard{background:radial-gradient(ellipse at 50% -20%,color-mix(in srgb,var(--hud) 22%,transparent),transparent 60%),var(--panel)!important;border-color:color-mix(in srgb,var(--hud) 35%,transparent)!important}
-#game.mil .hud{background:var(--panel)!important}
-#game.mil .ans{background:linear-gradient(90deg,color-mix(in srgb,var(--hud) 55%,transparent),color-mix(in srgb,var(--hud) 90%,#fff) 50%,color-mix(in srgb,var(--hud) 55%,transparent))}
-#game.mil .ans .in{background:linear-gradient(#0f1a24,#0a1118)}
-.qtimer .fg{stroke:var(--hud)}
-.kcard{border-radius:6px!important}
-.endcard .score{font-family:var(--f-display);font-weight:800}
-::selection{background:color-mix(in srgb,var(--gold) 40%,transparent)}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) #game.mil .ans .in{background:linear-gradient(#ffffff,#eef3f6)}}
 @media(max-width:899px) and (orientation:portrait){#sim .opt{padding:8px 12px;line-height:1.3}#sim .step .sit{font-size:calc(14.5px * var(--fz));line-height:1.35;margin-bottom:6px}#sim .step h3,#sim .step .stt{margin-bottom:4px}#sim .bfire{width:84px!important}}
 @media(max-width:899px) and (orientation:portrait){#sim .who{flex-wrap:nowrap;white-space:nowrap;overflow:hidden}#sim .who .k{overflow:hidden;text-overflow:ellipsis;min-width:0}#sim .mplan{font-size:calc(11px * var(--fz))}#sim .mplan td,#sim .mplan th{padding:0 3px;line-height:1.25}#sim .step h2{font-size:calc(19px * var(--fz));margin:2px 0}#sim .step p.sit{font-size:calc(14px * var(--fz));line-height:1.32}}
 
@@ -1053,6 +981,121 @@ h2,h3{font-family:var(--f-display);font-weight:700}
 @media(max-width:600px){.ttfront{flex-wrap:wrap;gap:8px}.ttname{flex:1 1 100%}.ttname b{font-size:calc(15px * var(--fz))}.ttinfo,#ttGive{flex:1 1 0;justify-content:center}}
 .mcard .row2,.mcard .mbtns{display:flex;flex-wrap:wrap;gap:8px}.mcard .row2 .btn,.mcard .mbtns .btn{flex:1 1 150px}
 @media(max-width:600px){.btn{letter-spacing:.05em;padding:12px 14px;font-size:calc(14px * var(--fz))}.mcard{max-width:calc(100vw - 24px)!important}}
+
+/* ===== v1.27 HARCTÉRI FILM: lekerekített modern katonai stílus – Ryan közlegény / Az elit alakulat (filmszemcse, szépia, sablonbetű) + Terminátor (acél, vörös HUD) ===== */
+:root{
+  --f-display:"Stardos Stencil","Black Ops One","Barlow Condensed",Impact,sans-serif;--f-cond:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-body:"Barlow",system-ui,sans-serif;--f-hud:"Share Tech Mono","JetBrains Mono",ui-monospace,monospace;--f-mono:"JetBrains Mono",ui-monospace,monospace;
+  --bg:#0a0c0b;--panel:#131715;--panel2:#1a1f1c;--ink:#ebe7da;--muted:#a3a495;--line:rgba(214,206,170,.13);
+  --gold:#c7a35a;--gold2:#ead39b;--gold-ink:#17130a;--red:#ff3b30;--hud:#ff5145;--steel:#8fb3c9;--glass:rgba(255,255,255,.035);
+  --ok:#5cc985;--ok-bg:#11301e;--bad:#ff5a4a;--bad-bg:#3b1412;--shadow:0 24px 48px -26px rgba(0,0,0,.9);
+  --r-lg:20px;--r-md:14px;--r-sm:10px;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#e8e5da;--panel:#f7f5ee;--panel2:#eeeadd;--ink:#191b17;--muted:#575a4f;--line:rgba(50,52,36,.16);--gold:#7a5e20;--gold2:#9c7a2c;--gold-ink:#fffaf0;--red:#c8231b;--hud:#b3261e;--steel:#3b6276;--glass:rgba(255,255,255,.55);--ok:#18804a;--ok-bg:#dcf1e3;--bad:#b8352a;--bad-bg:#f8dcd7;--shadow:0 18px 36px -24px rgba(40,40,20,.35)}}
+:root[data-theme="light"]{--bg:#e8e5da;--panel:#f7f5ee;--panel2:#eeeadd;--ink:#191b17;--muted:#575a4f;--line:rgba(50,52,36,.16);--gold:#7a5e20;--gold2:#9c7a2c;--gold-ink:#fffaf0;--red:#c8231b;--hud:#b3261e;--steel:#3b6276;--glass:rgba(255,255,255,.55);--ok:#18804a;--ok-bg:#dcf1e3;--bad:#b8352a;--bad-bg:#f8dcd7;--shadow:0 18px 36px -24px rgba(40,40,20,.35)}
+body{background:radial-gradient(140% 95% at 50% 10%,transparent 55%,rgba(0,0,0,.6) 100%),
+  radial-gradient(900px 520px at 88% -12%,color-mix(in srgb,var(--steel) 15%,transparent),transparent 70%),
+  radial-gradient(900px 620px at -5% 108%,color-mix(in srgb,var(--gold) 13%,transparent),transparent 70%),var(--bg);background-attachment:fixed}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) body{background:radial-gradient(140% 95% at 50% 10%,transparent 60%,rgba(60,50,20,.16) 100%),var(--bg)}}
+:root[data-theme="light"] body{background:radial-gradient(140% 95% at 50% 10%,transparent 60%,rgba(60,50,20,.16) 100%),var(--bg)}
+body::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='%23c7a35a' stroke-width='1.2'%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Ccircle cx='100' cy='100' r='96' stroke-dasharray='2 6'/%3E%3Cpath d='M100 0v60M100 140v60M0 100h60M140 100h60M92 100h16M100 92v16'/%3E%3C/svg%3E");background-size:min(620px,120vw);background-repeat:no-repeat;background-position:115% 120px;opacity:.05;mask-image:none;-webkit-mask-image:none}
+body::after{content:"";position:fixed;inset:-60px;pointer-events:none;z-index:80;opacity:.075;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .9s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-22px,14px)}40%{transform:translate(18px,-26px)}60%{transform:translate(-12px,-8px)}80%{transform:translate(26px,20px)}}
+@media (prefers-reduced-motion:reduce){body::after{animation:none}}
+h1,h2,.pgt{font-family:var(--f-display);font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+h3{font-family:var(--f-cond);font-weight:700;letter-spacing:.03em}
+.k{font:400 calc(11.5px * var(--fz)) var(--f-hud);letter-spacing:.16em;color:var(--muted)}
+/* kártyák: lekerekített, matt páncél */
+.panel{border-radius:var(--r-lg)!important;border:1px solid var(--line);background:linear-gradient(180deg,var(--glass),transparent 60%),var(--panel);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),var(--shadow)}
+.mcard{border-radius:22px!important}
+.mrow{position:relative;overflow:hidden;min-height:74px;border-radius:var(--r-lg)!important;border:1px solid var(--line);border-left:1px solid var(--line);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 8%,transparent),transparent 45%),var(--panel);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);transition:transform .15s,border-color .15s,box-shadow .15s}
+.mrow::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;background:var(--gold);transition:background .15s,box-shadow .15s}
+.mrow:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--gold) 45%,transparent);box-shadow:0 16px 30px -22px color-mix(in srgb,var(--gold) 80%,transparent)}
+.mrow:hover::before{background:var(--red);box-shadow:0 0 12px var(--red)}
+.mi{border-radius:14px;border:1px solid color-mix(in srgb,var(--gold) 38%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--gold) 22%,var(--panel2)),var(--panel2));color:var(--gold2)}
+.mtx b{font:700 calc(20px * var(--fz))/1.12 var(--f-display);letter-spacing:.04em;text-transform:uppercase}
+.mchev{border-radius:50%;background:transparent;border:1px solid var(--line);color:var(--gold)}
+.mgrp{font:400 calc(12px * var(--fz)) var(--f-hud);letter-spacing:.24em;color:var(--hud);display:flex;align-items:center;gap:10px;text-transform:uppercase}
+.mgrp::before{content:"";width:8px;height:8px;flex:none;border-radius:50%;background:var(--red);box-shadow:0 0 9px var(--red);animation:eye 2.6s ease-in-out infinite}
+.mgrp::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--red) 45%,transparent),transparent)}
+@keyframes eye{50%{opacity:.35;box-shadow:0 0 3px var(--red)}}
+/* gombok */
+.btn{border-radius:var(--r-md)!important;clip-path:none;background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,color-mix(in srgb,var(--gold) 76%,#000));
+  color:var(--gold-ink);font:700 calc(15px * var(--fz)) var(--f-cond);letter-spacing:.14em;text-transform:uppercase;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -2px 0 rgba(0,0,0,.2),0 10px 22px -12px color-mix(in srgb,var(--gold) 85%,transparent)}
+.btn.ghost{background:color-mix(in srgb,var(--panel2) 70%,transparent);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 60%,transparent)}
+.ibtn{border-radius:12px!important;border:1px solid var(--line);background:color-mix(in srgb,var(--panel2) 60%,transparent);font-family:var(--f-cond);letter-spacing:.1em}
+.ibtn[aria-pressed="true"]{color:var(--gold2);border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+.opt,.ochip,.chip,.dragghost,.plate{border-radius:12px}
+/* felső sáv: üveg + vörös HUD-vonal */
+.topbar{background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 0 color-mix(in srgb,var(--red) 50%,transparent),0 8px 18px -12px color-mix(in srgb,var(--red) 55%,transparent)}
+.brand{font:700 calc(20px * var(--fz)) var(--f-display);letter-spacing:.06em;display:inline-flex;align-items:center;gap:9px;text-transform:uppercase}
+.brand::before{content:"";width:24px;height:24px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23c7a35a' stroke-width='2'%3E%3Ccircle cx='16' cy='16' r='11'/%3E%3Cpath d='M16 1v8M16 23v8M1 16h8M23 16h8'/%3E%3Ccircle cx='16' cy='16' r='2.8' fill='%23ff3b30' stroke='none'/%3E%3C/svg%3E") center/contain no-repeat}
+.brand b{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--gold)}
+.brand{min-width:0;flex:0 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.brand{font-size:calc(16px * var(--fz));gap:6px}.brand::before{width:18px;height:18px}}
+@media (max-width:400px){body:has(#game:not(.hide)) .brand,body:has(#set:not(.hide)) .brand{font-size:calc(13px * var(--fz))}}
+.tab{border-radius:99px;font:700 calc(13px * var(--fz)) var(--f-cond);letter-spacing:.12em;text-transform:uppercase}
+.tab.on{background:color-mix(in srgb,var(--gold) 18%,transparent);border-color:color-mix(in srgb,var(--gold) 55%,transparent);color:var(--gold2)}
+.sw{border-radius:99px}.sw i{border-radius:50%}
+.life{border-radius:99px;font-family:var(--f-cond);letter-spacing:.08em}
+/* kezdőlap: filmplakát */
+.hero{border-radius:24px!important}
+.hero h1{font-size:min(11vw,84px);line-height:.95;letter-spacing:.03em;text-transform:uppercase}
+.hero h1 em{background:linear-gradient(180deg,#f4e4b8,var(--gold) 55%,#7a5a22);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.45))}
+.hero .tagline{border-bottom:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--red) 16%,transparent),transparent 55%)}
+.hero .tagline .k{color:var(--hud);font-family:var(--f-hud)}
+.hero svg{filter:sepia(.22) saturate(.85) contrast(1.06)}
+.specs div{border-radius:14px;background:color-mix(in srgb,var(--gold) 5%,transparent);border-color:var(--line)}
+.specs b{font:700 calc(24px * var(--fz))/1.05 var(--f-display);color:var(--gold2);letter-spacing:.02em}
+.home-update,.home-share,.kcard{border-radius:var(--r-lg)!important}.home-update .hu-icon,.home-share .hu-icon{border-radius:12px!important}
+/* kvíz: acélstúdió, lekerekített válaszok */
+.ans,.ans .in{clip-path:none!important}
+.ans{border-radius:18px}.ans .in{border-radius:16px}
+#game.mil .qcard{background:radial-gradient(ellipse at 50% -25%,color-mix(in srgb,var(--steel) 24%,transparent),transparent 62%),var(--panel)!important;border-color:color-mix(in srgb,var(--steel) 30%,transparent)!important;border-radius:var(--r-lg)!important;box-shadow:inset 0 0 70px rgba(0,0,0,.35)}
+#game.mil .qcard::before{opacity:.5}
+#game.mil .qcard h2{color:var(--ink);text-shadow:none}
+#game.mil .hud{background:var(--panel)!important;border-color:var(--line)!important;border-radius:var(--r-md)}
+#game.mil .ans{background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 45%,transparent),var(--gold2) 50%,color-mix(in srgb,var(--gold) 45%,transparent))}
+#game.mil .ans .in{background:linear-gradient(#1b201d,#0f1211)}
+#game.mil .ans:hover:not([disabled]){background:linear-gradient(90deg,var(--red),#ffb1a8 50%,var(--red))}
+#game.mil .ans .l{color:var(--gold2)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) #game.mil .ans .in{background:linear-gradient(#ffffff,#efebe0)}}
+:root[data-theme="light"] #game.mil .ans .in{background:linear-gradient(#ffffff,#efebe0)}
+.qtimer .fg{stroke:var(--gold)}
+.endcard .score{font-family:var(--f-display);font-weight:700;color:var(--gold2)}
+::selection{background:color-mix(in srgb,var(--red) 35%,transparent)}
+
+/* ===== v1.28 dinamikus főmenü ===== */
+.hero{position:relative}
+.hero::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;pointer-events:none;z-index:3;opacity:0;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--red) 80%,transparent) 30%,#ffd0c8 50%,color-mix(in srgb,var(--red) 80%,transparent) 70%,transparent);
+  box-shadow:0 0 14px var(--red);animation:scan 8s linear infinite 1.5s}
+@keyframes scan{0%{transform:translateY(0);opacity:0}2%{opacity:.75}22%{transform:translateY(var(--scanH,640px));opacity:.6}24%,100%{transform:translateY(var(--scanH,640px));opacity:0}}
+.hero h1 em{background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.75) 50%,transparent 58%) no-repeat,linear-gradient(180deg,#f4e4b8,var(--gold) 55%,#7a5a22);
+  background-size:250% 100%,100% 100%;background-position:160% 0,0 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 7s ease-in-out infinite 2s}
+@keyframes sheen{0%{background-position:160% 0,0 0}22%,100%{background-position:-60% 0,0 0}}
+.hero .tagline .k:first-child::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);margin-right:8px;vertical-align:1px;animation:eye 1.4s steps(2,jump-none) infinite}
+#home.enter .mrow,#home.enter .mgrp,#home.enter .specs>div,#home.enter .home-update,#home.enter .home-share{animation:mIn .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 55ms + 120ms)}
+@keyframes mIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+.mrow .mi svg{transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.mrow:hover .mi svg{transform:scale(1.15) rotate(-8deg)}
+.mrow:active{transform:scale(.985)}
+@media (prefers-reduced-motion:reduce){.hero::after,.hero h1 em,.hero .tagline .k:first-child::before{animation:none}#home.enter *{animation:none!important}}
+/* PK basszusgitár */
+.strum{animation:strum .29s ease-in-out infinite alternate}
+@keyframes strum{from{transform:rotate(-10deg)}to{transform:rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.strum{animation:none}}
+
+.dead .fb,.dead .armS,.dead .curl,.dead .pu,.dead .puff{animation:none!important}
+.dead .puffs{display:none}
+#hgPz.burnt{filter:brightness(.32) sepia(.5) contrast(1.1);transition:filter 1.2s}
+.burnfire path{transform-box:fill-box;transform-origin:50% 100%;animation:burnf .5s ease-in-out infinite alternate}
+@keyframes burnf{from{transform:scaleY(.7) scaleX(1.1);opacity:.75}to{transform:scaleY(1.25) scaleX(.9);opacity:1}}
+@media (prefers-reduced-motion:reduce){.burnfire path{animation:none}}
 </style>
 
 <div class="wrap">
@@ -1102,8 +1145,8 @@ h2,h3{font-family:var(--f-display);font-weight:700}
     <path d="M704.0 105.0 L715.8 100.5 L727.4 96.2 L738.9 92.2 L750.2 88.5 L761.3 85.0 L772.3 81.8 L783.2 78.8 L793.9 76.1 L804.5 73.6 L814.9 71.4 L825.3 69.4 L835.5 67.7 L845.5 66.1 L855.5 64.8 L865.3 63.8 L875.1 62.9 L884.7 62.3 L894.2 61.8 L903.6 61.6 L912.9 61.6 L922.1 61.9 L931.3 62.3 L940.3 62.9 L949.2 63.7 L958.0 64.8 L966.8 66.0 L975.4 67.4 L984.0 69.1 L992.5 70.9 L1000.8 72.9 L1009.2 75.1 L1017.4 77.5 L1025.5 80.1 L1033.6 82.8 L1041.6 85.8 L1049.5 88.9 L1057.3 92.2 L1065.1 95.7 L1072.7 99.3 L1080.3 103.1 L1087.9 107.1 L1095.3 111.3 L1102.7 115.7 L1110.0 120.2 L1117.2 124.8 L1124.4 129.7 L1131.5 134.7 L1138.5 139.8 L1145.4 145.1 L1152.3 150.6 L1159.1 156.2 L1159.9 156.9" fill="none" stroke="#f3dc95" stroke-width="2.5" stroke-dasharray="8 8" opacity=".95"/>
     <g transform="translate(1160,157)" stroke="#f3dc95" stroke-width="2.5" fill="none"><circle r="14"/><path d="M-24 0H-8M8 0H24M0 -24V-8M0 8V24"/></g>
     <text x="1150" y="200" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="13" fill="#f3dc95">30 / 40 km</text>
-    <circle r="40" cx="1160" cy="157" fill="url(#blastG)" opacity="0"><animate attributeName="opacity" dur="3.6s" repeatCount="indefinite" values="0;0;1;0" keyTimes="0;0.96;0.975;1"/></circle>
-    <circle r="5" fill="#fff1b8"><animateMotion dur="3.6s" repeatCount="indefinite" path="M704.0 105.0 L715.8 100.5 L727.4 96.2 L738.9 92.2 L750.2 88.5 L761.3 85.0 L772.3 81.8 L783.2 78.8 L793.9 76.1 L804.5 73.6 L814.9 71.4 L825.3 69.4 L835.5 67.7 L845.5 66.1 L855.5 64.8 L865.3 63.8 L875.1 62.9 L884.7 62.3 L894.2 61.8 L903.6 61.6 L912.9 61.6 L922.1 61.9 L931.3 62.3 L940.3 62.9 L949.2 63.7 L958.0 64.8 L966.8 66.0 L975.4 67.4 L984.0 69.1 L992.5 70.9 L1000.8 72.9 L1009.2 75.1 L1017.4 77.5 L1025.5 80.1 L1033.6 82.8 L1041.6 85.8 L1049.5 88.9 L1057.3 92.2 L1065.1 95.7 L1072.7 99.3 L1080.3 103.1 L1087.9 107.1 L1095.3 111.3 L1102.7 115.7 L1110.0 120.2 L1117.2 124.8 L1124.4 129.7 L1131.5 134.7 L1138.5 139.8 L1145.4 145.1 L1152.3 150.6 L1159.1 156.2 L1159.9 156.9"/></circle>
+    <circle r="40" cx="1160" cy="157" fill="url(#blastG)" opacity="0"><animate attributeName="opacity" dur="5.4s" repeatCount="indefinite" values="0;0;1;0" keyTimes="0;0.96;0.975;1"/></circle>
+    <circle r="5" fill="#fff1b8"><animateMotion dur="5.4s" repeatCount="indefinite" path="M704.0 105.0 L715.8 100.5 L727.4 96.2 L738.9 92.2 L750.2 88.5 L761.3 85.0 L772.3 81.8 L783.2 78.8 L793.9 76.1 L804.5 73.6 L814.9 71.4 L825.3 69.4 L835.5 67.7 L845.5 66.1 L855.5 64.8 L865.3 63.8 L875.1 62.9 L884.7 62.3 L894.2 61.8 L903.6 61.6 L912.9 61.6 L922.1 61.9 L931.3 62.3 L940.3 62.9 L949.2 63.7 L958.0 64.8 L966.8 66.0 L975.4 67.4 L984.0 69.1 L992.5 70.9 L1000.8 72.9 L1009.2 75.1 L1017.4 77.5 L1025.5 80.1 L1033.6 82.8 L1041.6 85.8 L1049.5 88.9 L1057.3 92.2 L1065.1 95.7 L1072.7 99.3 L1080.3 103.1 L1087.9 107.1 L1095.3 111.3 L1102.7 115.7 L1110.0 120.2 L1117.2 124.8 L1124.4 129.7 L1131.5 134.7 L1138.5 139.8 L1145.4 145.1 L1152.3 150.6 L1159.1 156.2 L1159.9 156.9"/></circle>
     <image x="20" y="100" width="700" height="344" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA6UAAAHLCAQAAACaSfbOAAAq4ElEQVR42u3de5BcdZ338fdhwoQMDGlq4sTERGIlXIIgoWKBKAEEC5abILEIsLqyYEHJCoKsPIUlK0tWLVhYWREtKJG4iApllEeERyiikbBIqKQIBoLBUAaCExIzRWPHCTNm6jx/TGfSM9M905dzuk+ffr9SSk9fTv/m2z3n099fn0swC0mSlPc57mWgsofsY9UkSQK+SUjId+gnrOyBk6ydJKnFXcq9o64JCYxSSZImdgorStxSQZg6wStJakVdvElYMkgB5hulkiQV9yQhO5g+wb02GKWSJI12LiEhp0a7UKNUktQKZvAmIQ9X9JhTjFJJkgCeIqRnwgndsZYapZKkVncDISGLqnz0wvLu5s4wkqQ0OrfCydxiyjzqkVEqSUqXLjaRiWRJy8q7W+AxeCVJqfELzolwaWUepMHvSiVJafA1QsJGBKlRKklqdhcQEvLlCJe4nMBj8EqS0uly5nPt8E9T2cDMiJ/hKF6s9CF2pZKkpPoSISEhFwCfIyTkbq4hJORr/C8h2UiDdCkBQeVB6mZHkqQkWsiauj5fhrerf7BdqSQpSWbwDmEdg/Q7BAS1BKnflUqSkuMEVtXx2Tbw/mgWZFcqSUqGqXUM0sUEUQWpXakkKSmydXmWVZwY9SKNUklSEoR1eI4FvBDHYp3glSQ1PkbjDtKhjYteiGfhdqWSpEZ6ndmxLn8zR7Ar3l/BrlSS1Di/jzVIlxDwvriD1CiVJDXOXI6Kacn3ExDwUH1+DSd4JUmN0c2mGJa6g/ezvb6/iF2pJKkRnmVb5Mv8NAHvqneQ2pVKkurtYDZHvswVfKxxv5BdqSSpfp4njDxIFxE0MkiNUklSfdxMSMiCyJcb8HSjfzUneCVJ8TqXh2Nb9qlJ+AU9X6kkKS5tvB7pyblH28QhSfg1neCVJMXh54TsjjVIr09GkDrBK0mK2k9YEvMzbGYRbyTnF7YrlSRF5RRCwpiD9NMEvC9JQWpXKkmKwizWMD3m53iEjyfzl7crlSTVZg0hW2IO0k8TJDVIjVJJUvVuISRkYazPsYKAgB8muQxO8EqSKhfnvqJDNnI1TzRHMYxSSVIljmR95Mtcyauso4flAPSxf3OVxCiVJJXrUc6MdHmjNyQKmrMsflcqSZrYFwgJIw3S05O8IZFRKkmKzhmEhNwR4RJvJCBolu9By+EErySplD8yL9LlZZnGYPrKZFcqSRrrLkLCSIN0MQEHpTFIjVJJ0khfJCTkygiXuIyAgJ+lt2RO8EqShsxnQ8RL7GMmb6e/cHalkiR4kjDiIL2SgP1bIUiNUklqdbcREnJqhEscmtD9buuU0AleSWpVJ7Ey8mXO49XWK6RdqSS1nm7+TBhxkH6ZgKAVg9SuVJJaSxubmBPxMlfzodYuql2pJLWKBwjZHXGQLiZo9SC1K5WkVhDHKdEe5EILa5RKUvrN5cnIJ3R3c3hrfidaihO8kpRWzxJG/s3ojQTsa5DalUpS2l3KvZEvc7XfiRqlktQK5rOazoiXmWMe2y1taU7wSlJaPEXIhoiD9CoCDjRIjVJJSrsbCAlZFOkynyEg4NsWd2JO8EpSM4tjNxc4jucsrVEqSen3OrMjX+a9fNbCVsoJXklqPncREkYcpFmmERikRqkkpd23CAm5MuKlLibgIHotb3Wc4JWk5nAGj8Ww1FWcaGmNUklKv7fIxLDURTxtaaPgBK8kJdnQt6JRB+n1BAQGqV2pJKXb+SyPYambeZ+ltSuVpLSbS0gYQ5AuITBIjVJJSrvfELIp8qUuIyDgIcsbDyd4JSkZvsLSWJYbWFq7UklKu6MJCWMI0ksIDFKjVJLSbRYvEbIu8uXeT0DADyxwfTjBK0mN8ShnxrLcw3jF4tqVSlK6fY6QMIYg/REBgUFqVypJaXY2j8Sy3PUcw6DlNUolKc3a+TPTYlnyyfzW8jaWE7ySFLdfENIfQ5A+RkBgkNqVSlKafYr7Y1lujqN4zfLalUpSms3nHcJYgvQSAg40SO1KJSnN1rAwluWu4GMW165UktLtNkLCGIK0jzkEBqlRKklpdjkhIdfFsORLCNjfCd0kc4JXkmr1VzpjWe5KPmpx7UolKd0eICSMIUh3MIfAIDVKJSnNbiYk5OIYlvxlAt7lhG4zcYJXkipzGo/HtOQdvMvy2pVKUprN5S3CmIL0MgKD1K5UktLsWY6LacmrONHy2pVKUpoN7eYST5CeSmCQGqWSlF5H8g4hd8ey7KUEBPzaIqeBE7ySVMyfmRnTktfzActrVypJafY1QsKYgvR0AoPUrlSS0uskVsa27Hv5rAU2SiUpvaawkdkxLbuH91jgdHOCV1Kr+wkhfTEF6WICg9QolaT0+gwhIUtiWfb9BAT8zCK3Aid4JbWiE/hNjOu/TnZaYrtSSUqv1wlZFVOQ3khAYJDalUpSWj3KmbEt+xk+YoHtSiUpvYb2FY0rSI8iMEjtSiUprU5hRYxLX84nLbGMUknpFd/ZXGA3x/CiJRY4wSspnb4Z49lchs4tuq9BKrtSSel0PstjXLobF8kolZRqf2RejEs/1VOiqTgneCWlwbcICWML0q97blHZlUpKr4v4UYxLz3KQJZZdqaS0msXfCGMM0k8TGKQySiWl1VOEbKEjpqUPHYr+h5ZZ5XGCV1JzuYsrY13+HF6zyLIrlZROZxASxhikQxsXGaSyK5WUQkeyOrbJXICVfNQiyyiVlFavMzvW5S/gBYus2jjBKympPkNIGGOQDm1cZJDKrlRSCp3G47EufzPzGLTMMkolpdNbZGJdvof/U+Sc4JWUFE8SEsYYpMs9/J/sSiWlVdz7im7iA+yyzLIrlZQGJ/EsYcG/52PeV3To3KKHGKSKUzDLGkiKw3w25C/1cztHcF7dR/AYZ/kyyCiV1JzWsLChz9/P+3nVl0H14gSvpCh9lZCwoUG6lID9DFLVk5sdSYrGVLINHsEW3uvLILtSSc3pKcIGB+npBAapjFJJzeguQkIWNXAEQ4f/e8KXQo3jBK+kasV9XKKJTaPXl0F2pZKa0fdiPi7RxC4jIDBIZVcqqfmcwWMNHoF7i8ooldSk2vhrrKffnlg/x3lKNCWRE7ySJnY3IbsbGqTXELCfQSq7UknN51LubfAIHuHjvgwySiU1owN4q+FriMN4xRdCyecEr6SxniQk19AgvYSAwCCVUSqp+XyLkJBTGziChwkI+IEvhZqHE7yShhzL6oaP4She9IWQUSqpGT3PggSMIvCFUHNygldqbUPHLUpCkF7piyG7UknN5SRWJmg0bqsro1RSkwkTNRqndtXUnOCVDNLGmmyQyq5UkkFqNyqjVFILed4YlYxSSdX7K52JGMc0Xwqlh9+VSrU6lJCQvyZ8lP9DSEiYkCB9xpN2yyiVBDCDPxKyESAhEVXMbYSEfDpBI1rHR3zzyCiVBP9DD/MKfj42YeNr43lCQq5L1KgeIeAY3zxKl2CWNZCqM3o72B7e0/AxncZpnMFMMoms2HE859tGaeRmR1JUZjb02b/AHQmuzZ1c7RtERqmkiR3Maw153l9xemJrso13+8ZQ2vldqRSd9Q14zm8RJjZIrycwSGVXKqmUzxS5rt5b8X6eOxNanVWc6FtEdqWSxre06LXz6/b8lxMmNEjPJDBI1VrcgleqTqnj2MZ/OLzvcVlCa7KRw31jqBU5wZskMziNY5nDZF5lB2tZwdsWRcPaeYaFiR3dEh7yJZJRqiT1OKcWXJ7mIdYS6OaSt/ycT0T+bEfz0xEHg0iWpfybbwi1Nid4k+CtCXaov4J7LFKiP/qM+quK8HnO5eEEVyHLQb4VJDc7SsZKOTPBPe62SC1o6Mi5yQ3SJQQGqWSUJr+7USv6Iu8k8Mi5he4hIPCbUWkvvytthiC9zEIlzPdiWOZXSuxekyQeuUiyK02cR8u83/ctVcWO5VHCmHr+heN+uDmiomUdzc/z5xFNepBe4pGLpFLc7Cj5PWk99lRMjwe4eMTPJ/PbSJf/VTJcU/LWTZzI1rKWcwM3N82c0L181jeWZJQapa1c0XKqdwHzuaOMvXhLv2KP8w9ljnEq2Saq6BG87NtKmogTvEqP+0rEX0jIp8YNyAe5iSzPAnu2nK10avjFsu51M2HTBOmNBAQGqWRXmmwz6LErjcwprJjwPlt4hOfYznay7BjuQSs5AGDpTYPWccwEz57Uw/318QkeL/h5JUv5tW8oySitdmV8d9EjyuzgIb4dw6fzg9lslNb1I0llHuTCMdctZE2Je2/ikHGWdQEPJrJ2y/mkbyCpdk7wDq3oQkJWlDg02zSuZAMhIV+M9FknW/iaPUAYU5DCkiLXHVny3iPfO5/hF/lp4qF/yQvSbQQEBqlklEbjpQpWdLcT8qvInnnQt18NvkhIOGpr3ai9Oeaa2RM+5iJCQpZxToJrd4+7tUhGaXR+QljhXoBwOiEXRfLs7b79qnIsISG31+GZphPyOmcXXJOZ4BEhP0p8/TZxhW8iKVqt/F1pLbvv5ziw5uefz4ZyXyXfqAB0sWnCMIvPav6dx8a5fSOHNUENv8O/+EaSjNJonDHuSrE+AXcoG43Ssv0i0VOmzSDHR1lrGaQ4tOYE70URBKkHoq+XWwgJDdKaHEfAgQapFJdWPJz90ZF9nxXaL8b8Sq2zCDW6g2stgmSURi/K1XMtYeoWvKW1sYYFlqEmP+IfLYJUH603wRv1tOwDVT/SLXiLu4uQ3QZpTaYRGKSSUdo8LmZKlY/stHijdBMScqWFqMHjBAT0WgjJKI3PWzEss6/Kx3nMxpG+yjaLUJPdBGWfn0aSUVq1TCxLvauqR8327TfCK5agJrPZ1yJIRmnzqm5Kco6FG+HHlqBqjxHwhmWQGqXeW/C20UUbA+wGBthV52df2AIdslrNDt5lEaT0dqXn8psRZ8cICdnNNnrYQZYsfWNuDQn5C3ePc/6N2sS3zex9VTzmUN9+o9xjCSqUJTBIpcaL48CBJ/BzpkWypCv5bsRR2h9THXdX8T3V38ueE2iVA0Gcy8P+SZbtET5uEaS0RunfI540PiLSk27Hd7C/IMaxXMb3U/9OLP+IxIIPehBAKUmin+CN+tvXDb5I3Mvva3r8m3UY4zfzE/R/41sVT9CfQGiQlqmfgMAgldLelUbf991T8vyK3Wyq8GRn8XWl83g11pEEJZYQlPlMnewcce0U5jCXkzmXeUUek+HtEkvrYj4ZZjOFDnJsZRtvcB+LauicPC1AudbyQYsgpS9K29hdl1GWmuAcP0zG3nowm2Mc5TL+uaz7Hc9PmVnF8nuADqCNNgaaaPvfLWxhJQ/xQpHbnuRU/wjLcoUbZUnpjNJjWV3Xsa4my2GJ3xuzh2/zjaK3zOJuzvQdZz9aocc4yyJIaY3Su7nc8qmGMP0piy3GBI7jOYsgJV+1GwmtSdjhDtQ8QmA9rxik43qQCy2ClO6u9I9FN1WRFIUP8zuLIDWTanaGed4glWLxHQICg1RqNqUneGeQYYBM/mi5fWTZySDwpCdlliK3nE9aBCltUeq2lVJ9lN5vWlLTd6WS4hZYAskolWSMSi3PU39L9bfWIJVS9cm4xM4wflcq2ZFKqqkr7bA0UiyWGaRSq0TpLksjRexeAoIyT3ogqYmU3uwocJJXisj9/JNFkFqvK5UUhasICAxSqVW7UvtSqXo5Zo462bqkFu1KN1ogqWKbCDjQIJWM0iGHWyCpQms5xCJIraXtwPFvH+BUiyRV4D2WQGo1E52v1G9LpYr+oiyB1HrGn+CdYYEkg1RSLVHaY4Gksl1nCaQW/RQ97gSv07tSufrY3yJIdqWj/cbySGUzSCW7UntSqZa/JEsg2ZWOdbzFkcrkLmOSXak9qVSDFXzMIkhGqVEq1fBXZAmk1lZqgvc+SyMZpJJqidJLLI1UBvcllVRygtfpXcmeVFINXanTu5JBKqmmrtSeVDJIJdXUlUqayGGWQNKQSUWuO9qySHakkmrpSu+1LNI4VhikkiaK0oWWRSrhJgKPbSRppEmWQCrLRg63CJLK7UoljXQOgUEqqfwofdaiSMNuIiDglxZCUmmFE7yXc7cFkfJyHGgRJFXalZ5vOaThXtQglVRFV3qc5VDLW8sHLYKk6qM0YznU0may1SJIqpxb8EpwJwGBQSqp9q5Uaj0P8wmLIMkolaqRYxoDlkFS7fZM8P7eE6uphZxDwIEGqaRo7DlfqUGqlnrfWwJJ0XelUit50hJIir4r/RNzLIbsSyWp+igd4jSvjFJJqpATvGpNv7IEkoxSqRanD1/6O2dYDklGqVS5lwB4ikk85lcbkmpReIiGWyyHWsgRvMRyFuV/Cv32VFK1Cjc78pO5WvyvwRJIqoYTvJIfJiUZpVJELrUEkiq3d4L3UDZaDvkXYQkkVd+VXmcxJEmqpSv1eyLJrlRSTV2pJLjZEkiyK5XsSyU1pCudYSkkwK14JVUdpUsthQTAvZZAUmX2TPA6vSsV/F1YAkmVd6WS9vqcJZBkVyrZl0qqa1d6rIWQRnjKEkiqLEqvtxDSCIssgaRyDU3wOr0rjXYUL1oESeV3pZJGWwMcym8ICd0MSZJdqVTzX4olkDReV2qQSpJUQ5TOtwiSJFVvkucplSb09SYb77EcyRy6mEw7HbTRRid9nFXVsr5AOx0MAv35dQa00UYbsJ1BvuvbQwpmOb0rjW8mWxM9viNp44WC6LujxP362a/iZZezfvB7ZNmVWgKppFWcmOjxvc7s4ctLeAh4iSNK3nuyL6gUD3eGkYq5lYAg0UF6AmFBkMKDhITjBOlQj1nuv7PLHsdxvlkku1Kp0BbOTPShGer1hcwjwFJyZdzzOd80kt+VSkOu4b+bYJTJ+3v1m1LJrlTiYn6cwFF9ikEG2c1OetlNhk5O4ypfLMkolZJlN/smajzHk6UdgHVNU8MZCd++WTJKpRhFPTXZxRn8sIbHvzTBRkPJ1G2USpPYMmIrQMkgrdYOqCJKf0Iv02lndlMGKcwp2KdVatXVyaw3mW4ZZJRGIKxiqX9PwczQJfzAt5Nam/uVqlV1Rby80wC4vMJH7Usw/K9ZLSvYH/Up31hqza70L0yzDLIvjaQnrW2pl3KvVZWasyv9mUWQInRAhfdvo5tZHM0JqQhSCPkJf+AlQrp9M6h1ulKAG7iI+W7Nq5byIBdGuLQ/MSd/aQvvreBxLzXpxkZ2qNKYKC1uBgs5ntksZA4dlkopso5jIu/F4g2Q5jwq2WJnvWSUjmcu3RxKNxmm002GTjIc4Leuaho30cYgbUxnPhmmkCFTMC/TzyADZMmRZTs5etnAG6ylt8TS7uOSmKP089zZhFXu4T2+1WSURq2LLuYwhy5mMJeZZOii0xdBTaqfdbzIc0wZdYbQ6HveZo1Sp3hllCZEN7M5mGlMpYMuusmQYQ6dTjmrKWzglzzC7xisegnNfcIJo1RGadPw7DZKvof5RMu9u7fxbl94tQIP0SDVx3kt+Dv/U/6/F+UP4PCHGj4uV3I6cqnO3AFGqpdwRL+2jq1s4UU2k2WQHUAH7XTQxmw6OYAOGD5PTLP6ChnO5zwm538+jJBcwfYRfXy0rFOHfwkYOh35Dt7lG0nJE+8E75HMZg5zmUuGfmCQV7g25lWUpGZzD1eMe/vII4X7/ataKkpLBdzXGSQL7GKQdjqZwWymMI2pdNLGTnYzwAD9QBfTgS30kiPLVnJsJ8PXC5a1iu3M4jhfSKnpreZDI35+gHX8gO0cy+qCa0/nCUul1onSbrZZXkkV2sJ/cM84H8XtSdVSUfpX9xiVFMdayxIoaeLbgtcglSS1hLi24D3f0kqyH1WLvDVjmeBtp9/SSopYB7ssgpIojgne0CCVFIM+Qv7ACQ0dw6EcTDdTfDEUd1fqXp6S4raFq/i/dX7OLnaMivb9i9yrm3ay7PQlMkprcwvXW1hJddLDtTwEwDc5jzZW8SKvkqOXPibTT5Y3GtIm+M2uUVqzlzjC4kpKzrquqkd9ivvzlzYzp6JHetrzllLud6WX8jx/5B3e4S/8iYUT3t+NAyQlSXVfPN0/fKm8IA2G/xmkdqWj3DDiUH1DVpPlDTbTxwDtdDCDTqCNybTRzxEcZWklNX1fWl4Ar2NBTb2vUh+lC1ljkSS1aJT+vcJ9741So7SGz2SSlHTX8V8T3ONrnMPvaCPLCp7h7SrWgEapUVrECayyRJJSYhtnsbbkrefycEM6X6U+Su1JJaXPAl4ocu07w6coN0pVofG24P2m5ZGUQusICTlp1LWTLYzi6ErtSSWl3VV8O8I1nl2pXakktZw7CQm5jW5LIbtSSWq8TRxiEYxSo1SSalyrWoLW4wSvJEXJJsQolSTV6IuWoNU4wStJka9ZLYFdqSRJMkolSTJKJUkySiVJMkolSZJRKkmSUSpJklEqSZJRKkmayHxLYJRKkmqxgZBbLEPr8MCBkhSXLbzXItiVSpKqN5uQkC8N/3wfUy2KXakkqRrrOGZ4nXoJP7AgRqkkqTabOMQipIcTvJJUf/MICfmJhTBKJUm1WDLqu1QZpZKkKtxKyKP5y18zWJuR35VKUtKs4xiLYJRKkmpaN1uCZuIEryQlz5uWwCiVJNViOiEhN1iI5uAEryQlVz/7WQS7UklS9SZbAqNUklSb31uC5HOCV5ISvp62BHalkqRa3GcJ7EolSfaldqWSJMkolSTJKJWklnSwJTBKJUm1uMoSJJubHUlS0vWxv0WwK5UkVa/DEhilkiQZpZKkBjreEhilkqRaeMSjRHOzI0lqirW1JbArlSTJKJUkNcwplsAolSTV4jxLYJRKkmqxwBIkl5sdSVKTrK8tgV2pJElGqSSpQfotgVEqSarW49zIfpYhuSZZAklKpFVcy1rLYJRKkiq1kat5wjI0Eyd4JSkZ7mAyAQGHG6R2pZKkSm3j3RbBrlSSVL3plsAolSTJKJUkNZAn9zZKJUk1OcESGKWSpFostARGqSSpFjMtgVEqSarF7ZageblfqSQ13hxeswh2pZKkat1pkBqlkqRa/NISNLdgVunbQssjSfVYE1sCu1JJkoxSSVLDfM8SGKWSpFpcZpgapZKk2sy1BM3MzY4kqfE62GUR7EolSdUzSI1SSVINrrEEzW28Cd7jecYCSVL8a2JLkN6u9Hc8aIEkKWaPWYI0RylcyP0xPGeWjaxiWdn3v9KXSVKKnWUJmt14E7xDZrGljOX0sZn1vM021vEKW+kt4zG/4vTyxgh8njt9sSSl0Ho+YBHSH6V7tdPOAAORPfcJrCrjXov5Wf6SO+dISpN1LMDvSVsuSqNXTjgGFd1bkppk7WsJ0mMf32yS5LpN6YzSLdw44s220BdLkpTIT0YNneD9Xz5c9mc1p3clpcczfMQi2JVG49tjrrnfl0RSC/iuJbArjc7IXrOf/Ure83yW+3JJSoXd7GsR7ErjsWqcIGV4lxhJSpIVBPl/d5T5iO8YpEZpXBZx4kQdtC+XpIbbSEDAJcM/f2z40rXcXsbjp/MvFjFtkjHBu4x/Luve89ngSyapYe7g2lFrr6DoOs2WwK60vlFOQFBmkMLLrPMlk9QQVxEUBCkEzBsTjL8o+sjd+f9uNkiN0mQ4xpdMUt0dQcCr3Dbq2lfHdKTnFHnsMvYl4EwyvM9CplWjJ3ir4R6mkurnTP5fwXrnHH5Z9F6/56hSa1lLaJQm0wy2Am+R8QWUFKNJDAIwlWxBh/pyRR/wjdIWsE9TjnorAAex3hdQUiz6CQjyQQpvF9wyeuPHn44bpB52xihNvFJn+VvLB1npiyupKhsIxt3LPRxxefE49/wy/2Q5jdJmtZAv8NHh3ab3/vuRL7ikcV1MwPuLXD9ymvYPADw6wZYbAd+woK2hOb8rLf7pcPy3PhzPM77gkopawWW8VsHaZhPzxr334/yDRbUrbRY7xn3jf6rgpyMLgvSeopusS2odm7mTy8gMz1l9bIIgHf3hvHiQfphpAEwySO1Km8uzHFfW2z8sct3dXO5bQGrNdV/JW87l4RL38EhGSmlXCh/i9HFvD5k16k9g3fClKwgmeLSkVvNwyeDstDhKa5TCExN8Ftwy6k/imDGPDtjoW0EScGTB5WdH3eaGi0pxlAIE3Dp8eVMVjz+cgHms8g0h1c16bmJFw569rcT1LxZcPo7jhy8fXOKwgHtN9yVtXc3/XWmhu/g+awH4HN8pGboTOYOfM9m3hhTjR9+9GnUg0OlsL3HLmyNCcWisf2ZmBb+TjNIUKXZMzEv4QdH7hhzGK6Oum8/ScXe+lprRM7SxkynkmMzJLRylM/NHTSu+Pih0RBkndzRIjdJUG/tnuoinR11zAQ8CpfcDO5tHfKMoJY7juQTEWBKidBq9Faw3xrOs7NNEyihNUZiO/EP+KjdN+Mmy8eeimcwAbQxyAJDzbVvgQY4gRweD7Pn264CCnwbI0g9sZwtXWizgMr5vlA7/TUEbhxY5OP3Eo+pnP27mRvtRDZmU+t9wMcuL/JnsefvfVcYK9tgE/BYDwCCwE1jFIt+4E3z4KWZ6g6frr+c/E/DRbGQntq2FN5UZKHglKo/D/YB/49/8E9SQfVL/G15Qos88Gri7rE6lLWG/UUcCPp4MHR9mSVO9E7Y0+Pn/c/hSTwNHMXJTm6dbeu239yPNX8bc1mc4yCgt9NsS168jHHWso1KfTLsT9hv1NHwEP8v/96Gmeick5xvvRu50NXIDmuW+nwGYxtkFPx1MOMEH1s1Gh1otSr9b5v2+XvKWrQn7jdz7tTq/TsxIGvkR5O0RP/24IWMYGUT/3pAx7ADuKPpBKywjKN/nn5NGSv9mRwCPcubElRjntkZvdrSbfQt+mtXwqcogMZWp7DuuMCFjbWN3YirWiJpcx381fAxDWzIXPnOWgzi64LCipdzDFQaHWjNKYf4Ee4YFCV4FwypOTNR49lZrDQsbOI4+9m+aKF3OJxMxkiREaXLG8AcOi/XDm1rGPi3ye748wZ/AKUWuu42QlxIx+ocTVcvHCi7f2tCRfLnC+69t4Fg/mYjXbuwHymUJGFX9j2y7Z4eyw8u472ruz1+60iBVq3elQ77HZcBSji1yPpgtvHfEz08N73ISNLwLHNoDbq+3yDRwNAt4ISGdXqUrthkN3MRl5FjL+cohDvN4teG9+no+0PAx7D222V8nONtLkH/nfKpgC2ypxaN0oj/eSQzmL32FpcPXZriTTzf2VRr180UNPUNF0NCVYC1R2rjR5jgwESMJElCTvX9ljRtDeYeI+GBD5zHUVPZp2d+82EplN18C4KSCIIW3+WHCxv7jBI2lcaG+vorHNOpkeocl4rVaWfTaa+o8isEi19V3X+nTywxxg1RG6YSK7y16KyHfG7HKuQl4oqEjXZ2out0+6ud/bNhIPlDFYw5v0FjH7lB1fQNG8dGi1/53XcdwSdFrd9V1DHv+ni9NwCFBlZbebFbr/u7l/RkFFdw3HqO/KYXxTiJX/24+TMxIonvVo3V90e/ZwsRU7Jt17EyDhr8yQdnP50ZGsistw/1l3GfPgQXXN3CcA0Wu+26C6tiYFc7SJhrtf0b6G0T/Ol1btzGcOs5tj9XxffM3g1R2pfXsTBt/MIIHubDo9X9kXmJiM0zMSJLYl17BPQkYycoS07tDjueZBLxqYV1GMLQdv0Eqo7RuYbq54ABhyZvGTE6A1f/oPXdydYwfoOoXH2EiRlG/GEvax5ziljTZ0aWVAPu0fAWC/Im/i5lT8Kd9Y0NGt63K2+q7Khyse5ReXdOjr0tM97yiTqOYnYAurDl6wT4Cg1R2pdUZOqrtrRxf9Eygd+S/S0reNGaYoNHUcywf5ncxzkVEafxp1XqN5DHOanhVCg/McBo5skVPuN2Yv7IsBzF0AA+ndWWURuJy7i4ZIieV2C+vcSvi2xLUX010lOP6jSRJYRokYiTl1qs7xpmOvWP4W34v0tv510QEqd+LKgJO8I50T4mzWoY8yZy6j2aijuZf6ziWr09w+8tkm2rFFyRmpMfVbRQhISFTitznfELCugTp3sMxXIdkV5pa95XYibz+ZvNGYrqrpPRX5cbTLeTo5P8Uve1Z1tLFhRwa87GPhkZ6PHeyjdklDigRArkJjgIbXZCWruHe25aMs+1ANK9ZeeOwK5VR2tS+yk2JGEepnWBGq88h2ida2RxJJ1mWsjjmcUxn+6iV7hxeG2eFHIx72/ksj71i5Y3l9ph6tKCKqkQbaGNPhFfuOJL0IVGagBO8o/17Qk5pdmGZ99ta8anGqlvZrMlPDz5a5PaTWM8zbGAxR8U6jg8PB+m5w9fV8g3tz7g4Iavnf2VaQkLi3EjD5d6KzijbNWr0i2N/Z59jkMoojcsnEvDnVckIvhHDlNzYsew5xXexk4PdMnzpxRhr98GC7XaPHb409kDoxxdcbptgmT8uYzeRekTYBfRGXrnSy5s77seVoccuiWQO4bNjrju24PLUUbd1j/moE8S4qd9GAn7p6k5Gabzxsa7hQXo+5xe9dWG+PwwLOtiHYx7L+PZuOPN54powC0acp2O8s32eMCKiSpsPwBsRj3fliOVNKXMsR+d/x00RjeKacX+rs8fMKux1ZP6/DxFwZw0juINgeA6h0JyCy+eNuq3Y7jEfJYjw0P+P5evSQ9CwUxsolSZZghKO4cgGHXk3AKbQVzLKflW0k75hwm1sowrSWeNsDrUg/6g1w11sPONYMM59Ty64fMaoE9LNHfGR5OXhpT8/7hLLN43eET8vGtGPld71f8/9DqGd/tg//iwY8+Fsr0MLLl/N1fy+ykn7ZcznUAaZyVQmM0gfWQZYN2IGZRlbaacLGKSTDVxVcNsaVpMBOnk5wq0BzsLvRhXPatvNjsYVAot5IbJuodzV4N6O89Yx26Huve3LfGNEb7Ey0pGs5kMFHdze7ySv4tslR7R3I5Moj+q6jH8u+YxjV42FRyfexCEjbvsMy4YvP8LHSy6zGjfyH2Ou+3xBZzf6+QqfsfAQlbWf92cR25nCZAbpIkM/h/Ict4zY6eZMzmMuXXSzmbUjIizl6ztXaTJKGx+qcds4POm099m28N6SI3mGj4y45QBykY3lKF4sEUEr+FiZwfaHiE55vZt9x3nG0Seh+9uI70+DktHWz36jllrL7jEn89si175FZsRYuhlkIVnWMTBqt6vLmEMnHUxlEitrmlpVKXfU8Rw4MkrVoDA9lV+X1XXtvW3ogGfRj3H9mL0gC48C1cN7KugRoxnReEu9mB8Ds7icp9nG7FEH2VhCN+cxg17g1VH7DPfQ7VccLWMBL1gEGaVpj9KgqnCqT3DBAyN2Gxm6/WZW8FsY9Z1yAExlEjPoZApP81TsR/ORRtvIMQwUnGRhEU9bFBmlaY/S0RurNDpKpea1jXcPXz6NJyyI6sHprfKdHMs+bpWe5eTsotd20UUbM3yR1PKm8yxH5Sf0X+VU2plNlhwD+f8H2M0uBulnkD52kSPHAH0MMMCgBZRdafz+FPlB7Vexgi5ggH4GgU42cwuTR9ynj+1sGHdfSklJtJtBdtHHAH35OO9jgBy76CNLlp35QN+ZvzVrmBulreJZv/2TlNjwHqCPNxgkl4/vQXJkyfE2ffSwixy95BgYteW7jNIG+DMzh+qXP224JKVdP7l8J72TPvp4myz9ZNlFlixZ+thJHzl2GqUq3ynDO698kdsthyRV2D/3kmWAbWTZyQ6y7KKXbewim7/FKG0x7ayO6NBzkqRyZMnRw3Z689G7nW35y7uM0saaQoYOZpChm9l0kaGLTrrpiuUkWJKk+usnS5ZettNLjs3k2M5WsuzgbaMU2sjQxSymk6GbTrrpZhoHMGfUFrGSJFUfxVt4jS305v/3cjL3K+1ixnBHOJMZdNHFdA6wM5QkNVCOHNvJso3X6CHLZnayhe3xR+kUZnIws+lmGt1k6KKb6SMO8i1JUv1l2UEvb5BlM5vpoZdX2VXNvr3VRGk7s5nBbGYxk266yDCT2b4mkqSG6aOXXnrIMUAvPbxGD71sqc+uOaOjdC5zOZIjmMtc41GSVGc5+uglx0562J7fNjfLdrYkefeYcjY7mkKGDN10MZMpTMtv3zqdLjp91SVJI+ygl53sYCdZtrA1f3ylLD3Vbh+bfPFuwdtGNzPpoju/S8lsOsnQZQhLUsLsJkuWXWwnl99VpI9edpFlG73sGnP+KtUtSms1hU5mMDMfxB1kmEonncyhnYw7uEhqUf3k2Ek/A/nD4r9NP7n8UYJy9LGdHL2teAA/ozTe7jjDDLrJ0EE3nXTSRYYpdNDBVDJkPNmcpFgib4AcOQbppYeB/Fli9lzbyy5y9PCG54MxSlvNAXQxjQNoYzKd+UBuo51OMmSYQicZug1nKdF208sgA/Tnz1c6SF8+6PrYNXztTvrZSpZc/Q9EJ6NU1WqnkwOYTDsddDGFyWToop02JjGFDjK0DffSnXTSbmCr6bu2QQbIMUh/vmPrZXc+1AbJ5q8dus8Affn75OhnlycJk1Gq5MV4O52000EH7UxhMu200cnk/E9tZGijY/iWNiYzhUlMyV9uz38EUHLtmVociq89lwfyEbXnpz525c91OcBg/r59w/cxwKQi7Go0ZICBlGyk0J7fPrwtH/1D30INMoVOBoG2/L32/g20V1yrvXYXfMs1kH8mGKQvfwkgV3CfHAMFt0hKhf8PZhnxSad8WyEAAAAASUVORK5CYII="/>
    </svg>
    </div>
@@ -1499,8 +1542,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.24.0",APP_DATE="2026-10-13";
-var CHANGELOG=[["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.28.0",APP_DATE="2026-10-16";
+var CHANGELOG=[["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,online:true,rank:true,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -1516,9 +1559,10 @@ var SECTIONS=["home","start","game","end","simStart","sim","simEnd","dd","ter","
 var GAMES=["game","sim","dd","ter","hangar","htd"];
 function curSec(){for(var i=0;i<SECTIONS.length;i++)if(!$(SECTIONS[i]).classList.contains("hide"))return SECTIONS[i];return "home";}
 var TABOF={home:"home",start:"start",game:"start",end:"start",simStart:"sim",sim:"sim",simEnd:"sim",dd:"dd",ter:"ter",terEnd:"ter",hangar:"hangar",hangarEnd:"hangar",kis:"kis",rank:"rank"};
-function show(id){if(window.factInto){if(id==="hangarEnd")factInto("factHg");if(id==="simEnd")factInto("factSim");if(id==="end")factInto("factQuiz");if(id==="terEnd")factInto("factTer");}
+function show(id){if(id==="home"){var hm=$("home");if(hm){hm.classList.remove("enter");void hm.offsetWidth;hm.classList.add("enter");}}if(window.factInto){if(id==="hangarEnd")factInto("factHg");if(id==="simEnd")factInto("factSim");if(id==="end")factInto("factQuiz");if(id==="terEnd")factInto("factTer");}
 SECTIONS.forEach(function(s){$(s).classList.toggle("hide",s!==id);});if(id!=="sim"){wakeOff();if(window.clkStop&&id!=="simEnd"&&CLK.iv){clearInterval(CLK.iv);CLK.iv=null;}}
-  if(id!=="game"&&window.qtStop){qtStop();if(window.SND&&SND.mode)SND.mode("normal");}
+  if(id!=="game"&&window.qtStop){qtStop();}
+  if(window.SND&&SND.mode){if(id==="hangar"||id==="hangarEnd")SND.mode("bass");else if(id!=="game")SND.mode("normal");}
   var lt=document.getElementById("lbTab");if(lt)lt.classList.toggle("hide",id==="rank");
   var xb=$("tbExit");xb.classList.toggle("hide",id==="home");xb.textContent=GAMES.indexOf(id)>=0?"✕ Kilépés":"‹ Főmenü";
   window.scrollTo(0,0);}
@@ -2602,7 +2646,7 @@ function wisentSide(par,o){o=o||{};var S=(o.w||300)/1090,u=vdefs(par),g=el("g",{
   g.S=S;return g;}
 /* kezdőlap: élethű PzH modell a sziluett helyett */
 (function(){var hs=$("heroSvg");if(!hs)return;var img=hs.querySelector("image");if(!img)return;img.style.display="none";
-  var wrap=document.createElementNS(SVGNS,"g");img.parentNode.insertBefore(wrap,img.nextSibling);pzhSil(wrap,{x:20,y:444,w:700,seed:5});})();
+  var wrap=document.createElementNS(SVGNS,"g");img.parentNode.insertBefore(wrap,img.nextSibling);pzhSil(wrap,{x:20,y:444,w:700,seed:5});window.HEROPZ=wrap;})();
 
 
 var TSV=$("terSvg"),TG=40; /* ~30 px / m a rajzon */
@@ -2778,9 +2822,9 @@ var ITEMS=[
  {id:"m982",cat:"granat",name:"M982 Excalibur",sub:"GPS-vezérelt (amerikai–svéd)",look:"he",cal:155,intl:1,guided:1,code:"GPS",info:"GPS/INS-vezérelt, kormányszárnyas lövedék, néhány méteres pontossággal. Drága, és az MH-nál nem rendszeresített.",src:"Nemzetközi forrás (gyártói adatok, sajtó) · MH-nál nem rendszeresített"},
  {id:"bonus",cat:"granat",name:"BONUS",sub:"célkereső altöltetes (svéd–francia)",look:"he",cal:155,intl:1,code:"BONUS",info:"Két, forogva ereszkedő célkereső altöltetet tartalmaz páncélozott célok ellen. Létező NATO-lőszer, de az MH-nál nem rendszeresített.",src:"Nemzetközi forrás (gyártói adatok, sajtó) · MH-nál nem rendszeresített"},
  {id:"vulcano",cat:"granat",name:"Vulcano 155",sub:"nagy hatótávú, vezérelt (olasz)",look:"he",cal:155,intl:1,guided:1,code:"GLR",info:"Kis keresztmetszetű, szárnystabilizált olasz lövedékcsalád, a vezérelt változat nagy, 50–70 km körüli lőtávolsággal (változattól függően). Az MH-nál nem rendszeresített.",src:"Nemzetközi forrás (gyártói adatok, sajtó) · MH-nál nem rendszeresített"},
- {id:"krumpli",cat:"granat",name:"155 mm-es krumpli",sub:"a konyháról, frissen",look:"potato",cal:155,joke:1,info:"Ez nem lőszer, hanem krumpli – bár pont 155 mm. Gulyásba való, nem a csőbe. Ha ezt adod a töltőkezelőnek, LELE pk is megkérdezi, mi folyik itt.",src:"Laktanyai konyha"},
+ {id:"krumpli",cat:"granat",name:"155 mm-es krumpli",sub:"a konyháról, frissen",look:"potato",cal:155,joke:1,info:"Ez nem lőszer, hanem krumpli – bár pont 155 mm. Gulyásba való, nem a csőbe. Ha ezt adod a töltőkezelőnek, a PK is megkérdezi, mi folyik itt.",src:"Laktanyai konyha"},
  {id:"m1156",cat:"gyujto",name:"M1156 PGK",sub:"GPS-es pályakorrekciós gyújtó",look:"fuzeG",intl:1,info:"Precision Guidance Kit: szabványos gyújtófészekbe csavarható GPS-es gyújtó, kis kormányszárnyakkal korrigálja a röppályát. Létező, de az MH-nál nem rendszeresített.",src:"Nemzetközi forrás (gyártói adatok, sajtó) · MH-nál nem rendszeresített"},
- {id:"zippo",cat:"gyujto",name:"LELE pk öngyújtója",sub:"benzines, kopott",look:"zippo",joke:1,info:"Ez is gyújtó, csak a cigihez. A gránátba nem csavarható be, és LELE pk nagyon keresi.",src:"LELE pk zsebe"},
+ {id:"zippo",cat:"gyujto",name:"PK öngyújtója",sub:"benzines, kopott",look:"zippo",joke:1,info:"Ez is gyújtó, csak a cigihez. A gránátba nem csavarható be, és a PK nagyon keresi.",src:"A PK zsebe"},
  {id:"m232",cat:"toltet",name:"M232",sub:"moduláris töltet (amerikai MACS)",look:"modUS",intl:1,info:"Az amerikai moduláris tüzérségi töltetrendszer (MACS) modulja. A közös 155 mm-es szabvány miatt elvben kompatibilis, de az MH a DM72/DM92 töltetet használja.",src:"Nemzetközi forrás (gyártói adatok, sajtó) · MH-nál nem rendszeresített"},
  {id:"energia",cat:"toltet",name:"Energiaital 6-os pakk",sub:"„töltet” a kezelőnek",look:"can",joke:1,info:"Ez a kezelőszemélyzet hajtótöltete, nem a lövegé. Hajnali négykor hasznos, a töltőűrben nem.",src:"Büfé"}
 ];
@@ -2938,7 +2982,7 @@ function itemArt(it){var s=document.createElementNS(SVGNS,"svg");s.setAttribute(
   if(L==="potato"){part("M60 92 C30 92 30 130 34 170 C38 214 48 246 62 246 C82 246 92 214 88 170 C86 128 92 92 60 92 Z","#b08a52",{stroke:"#7a5a2e","stroke-width":2});
     [[50,130],[70,160],[55,200],[72,222],[48,175]].forEach(function(p){el("ellipse",{cx:p[0],cy:p[1],rx:3,ry:2,fill:"#6f5228"},s);});txt(cx,64,"155 MM",9,"#e3b341");}
   else if(L==="zippo"){part("M38 150 h44 v86 h-44 Z","#b9bbb6",{stroke:"#6b6d68","stroke-width":2});part("M38 120 h44 v30 h-44 Z","#c9cbc6",{stroke:"#6b6d68","stroke-width":2});
-    for(var zi=0;zi<4;zi++)el("circle",{cx:46+zi*9,cy:132,r:2.6,fill:"#555"},s);el("path",{d:"M60 116 q-12 -26 0 -46 q12 20 0 46 Z",fill:"#ffb43c",opacity:.9},s);el("path",{d:"M60 112 q-5 -14 0 -26 q5 12 0 26 Z",fill:"#fff2b0"},s);txt(cx,196,"LELE",9,"#4a4c48");}
+    for(var zi=0;zi<4;zi++)el("circle",{cx:46+zi*9,cy:132,r:2.6,fill:"#555"},s);el("path",{d:"M60 116 q-12 -26 0 -46 q12 20 0 46 Z",fill:"#ffb43c",opacity:.9},s);el("path",{d:"M60 112 q-5 -14 0 -26 q5 12 0 26 Z",fill:"#fff2b0"},s);txt(cx,196,"PK",10,"#4a4c48");}
   else if(L==="can"){[[36,140],[60,140],[84,140],[36,196],[60,196],[84,196]].forEach(function(p){part("M"+(p[0]-11)+" "+(p[1]-26)+" h22 v52 h-22 Z",p[1]<160?"#1f6fd1":"#1a1a1a",{stroke:"#0d0d0d","stroke-width":1});el("rect",{x:p[0]-11,y:p[1]-6,width:22,height:12,fill:"#e8ff3c"},s);});txt(cx,96,"ENERGY",9,"#e3b341");}
   else if(it.cat==="granat"&&L!=="dart"){var c=LOOK[L]||LOOK.he,k=(it.cal||155)/155,r=19*k,Ln=196*k,yb=B,yt=yb-Ln,yo=yb-0.58*Ln;
     var tail=it.base==="bt"?0.09*Ln:0,rb=it.base==="bt"?r*0.8:r;
@@ -3041,7 +3085,7 @@ var HSV=$("hgSvg");
       el("rect",{x:18,y:-6,width:3,height:12,fill:"#e0c23a"},sh);}});
   el("rect",{x:130,y:250,width:60,height:70,fill:"#4d5a3a",stroke:"#2d3622"},g);el("text",{x:160,y:290,"text-anchor":"middle",style:"font:700 10px var(--f-mono);fill:#e6dfb8"},g,"DM92");
   /* PzH a jobb oldalon, hátulja felénk */
-  var pz=el("g",{transform:"translate(560,334)"},g);
+  var pz=el("g",{id:"hgPz",transform:"translate(560,334)"},g);
   var PZ=pzhSil(pz,{w:430,hatchId:"hgHatch",seed:3});window.HG_MUZ={x:560+PZ.muzzle.x,y:334+PZ.muzzle.y};
   /* robbanás-réteg, torkolattűz-réteg */
   el("g",{id:"hgFx"},g);
@@ -3059,7 +3103,7 @@ var FANS=[],FANT=null;
       el("rect",{x:-11,y:-74,width:22,height:42,rx:7,fill:sh},b);}
     if(o.pose==="push"){var pu=el("g",{"class":"pu"},b);el("rect",{x:-44,y:-9,width:44,height:8,rx:3,fill:PN},pu);el("rect",{x:-76,y:-13,width:34,height:12,rx:5,fill:sh},pu);el("circle",{cx:-84,cy:-10,r:8,fill:SK},pu);
       el("rect",{x:-72,y:-6,width:6,height:12,rx:2,fill:SK},pu);el("rect",{x:4,y:-5,width:7,height:5,fill:"#1d1d1a"},pu);
-      FANS.push({x:x-84*sc,y:y-26*sc,g:g});return g;}
+      FANS.push({x:x-84*sc,y:y-26*sc,g:g,gy:y,push:1});return g;}
     el("circle",{cx:hx,cy:hy,r:10.5,fill:o.skin||SK},b);el("circle",{cx:hx+6,cy:hy-1,r:1.3,fill:"#2a1d12"},b);
     if(o.helmet){el("path",{d:"M"+(hx-13)+" "+(hy+1)+"Q"+(hx-13)+" "+(hy-17)+" "+hx+" "+(hy-17)+"Q"+(hx+13)+" "+(hy-17)+" "+(hx+13)+" "+(hy+1)+"Z",fill:o.helmet},b);el("rect",{x:hx-14,y:hy-1,width:28,height:3,rx:1.5,fill:"rgba(0,0,0,.35)"},b);}
     else if(o.bare){el("path",{d:"M"+(hx-10)+" "+(hy-4)+"Q"+hx+" "+(hy-14)+" "+(hx+10)+" "+(hy-4)+"Z",fill:o.hair||"#3a2a1a"},b);}
@@ -3071,7 +3115,7 @@ var FANS=[],FANT=null;
     else if(o.act==="curl"){el("rect",{x:-3,y:0,width:7,height:16,rx:3,fill:SK},aa);var fo=el("g",{transform:"translate(0.5,15)"},aa),cu=el("g",{"class":"curl"},fo);el("rect",{x:-3,y:0,width:7,height:15,rx:3,fill:SK},cu);
       el("rect",{x:-9,y:13,width:19,height:3,fill:"#2a2a26"},cu);el("rect",{x:-11,y:9,width:5,height:11,rx:1,fill:"#1a1a18"},cu);el("rect",{x:6,y:9,width:5,height:11,rx:1,fill:"#1a1a18"},cu);}
     var aS=el("g",{"class":"armF2"},aa);if(o.act!=="smoke"&&o.act!=="curl"){el("rect",{x:-3,y:0,width:7,height:26,rx:3,fill:sh},aS);el("circle",{cx:0.5,cy:27,r:4,fill:SK},aS);}
-    FANS.push({x:x+(o.flip?-hx:hx)*sc,y:y+(hy-14)*sc,g:g});return g;}
+    FANS.push({x:x+(o.flip?-hx:hx)*sc,y:y+(hy-14)*sc,g:g,gy:y});return g;}
   fig(66,412,.86,{pose:"sit",act:"smoke",d:0});
   fig(140,412,.86,{pose:"sit",act:"smoke",d:2.1,cap:"#5b4a2e"});
   fig(222,412,.86,{pose:"stand",act:"curl",shirt:"#8b8a5c"});
@@ -3090,7 +3134,7 @@ var FANS=[],FANT=null;
     if(o.helmet){el("path",{d:"M-15 -96 Q-16 -121 0 -121 Q16 -121 15 -96 Q0 -91 -15 -96 Z",fill:o.helmet},b);el("path",{d:"M-15 -96 Q0 -91 15 -96",stroke:"rgba(0,0,0,.35)","stroke-width":2,fill:"none"},b);}
     else if(o.cap){el("path",{d:"M-13 -100 Q-13 -117 0 -117 Q13 -117 13 -100 Z",fill:o.cap},b);el("rect",{x:-6,y:-103,width:12,height:4,rx:2,fill:"rgba(0,0,0,.35)"},b);}
     else el("path",{d:"M-12.5 -98 Q-14 -116 0 -116 Q14 -116 12.5 -98 Q0 -102 -12.5 -98 Z",fill:o.hair||"#3a2a1a"},b);
-    FANS.push({x:x,y:y-126*sc,g:g});return g;};
+    FANS.push({x:x,y:y-126*sc,g:g,gy:418,front:1});return g;};
   window.buildCrowd=function(){var cr=el("g",{id:"crowd","class":"fans crowd"},HSV);
     var C=[[40,505,1.5,{shirt:"#4f5e38",helmet:"#46523a",dl:0}],[120,512,1.62,{shirt:"#7f7d52",hair:"#2b1d10",dl:.4,tee:1}],[200,500,1.48,{shirt:"#5a6a40",cap:"#3e4a2c",dl:.8,vest:1}],
       [282,514,1.66,{shirt:"#6e6a45",helmet:"#55613f",dl:.2}],[770,512,1.62,{shirt:"#556540",cap:"#2f3a24",dl:.6,vest:1}],[852,503,1.5,{shirt:"#8b8a5c",hair:"#6b4a2a",dl:1,tee:1}],[940,516,1.72,{shirt:"#4a5836",helmet:"#46523a",dl:.3}]];
@@ -3125,8 +3169,8 @@ var LD=el("g",{id:"ld",transform:"translate(600,330)"},HSV);
   el("text",{x:0,y:-133,"text-anchor":"middle",id:"ldSay",style:"font:700 13px var(--f-body);fill:#3a2a08"},bub,"");
   el("rect",{x:-40,y:-130,width:80,height:130,fill:"transparent",id:"ldHit","data-hand":"1"},LD);})();
 el("ellipse",{cx:0,cy:2,rx:26,ry:4.5,fill:"rgba(0,0,0,.38)"},LD).parentNode.insertBefore(LD.lastChild,LD.firstChild);
-if(window.buildCrowd)buildCrowd();
-/* LELE pk: cigivel a szájában figyel */
+if(window.buildCrowd)buildCrowd();el("g",{id:"hgGore"},HSV);
+/* PK: cigivel a szájában, basszusgitárral */
 var LELE=(function(){var g=el("g",{id:"lele",transform:"translate(535,336) scale(1.05)"},HSV);el("ellipse",{cx:2,cy:1,rx:24,ry:4,fill:"rgba(0,0,0,.35)"},g);var b=el("g",{"class":"fb"},g);
   el("rect",{x:-8,y:-36,width:10,height:36,rx:3,fill:"#36402a"},b);el("rect",{x:0,y:-36,width:10,height:36,rx:3,fill:"#3d4830"},b);el("rect",{x:-9,y:-4,width:16,height:6,rx:2,fill:"#1a1a17"},b);el("rect",{x:-1,y:-4,width:16,height:6,rx:2,fill:"#1a1a17"},b);
   el("rect",{x:-13,y:-78,width:28,height:46,rx:8,fill:"#5d6b45"},b);el("rect",{x:-13,y:-50,width:28,height:5,fill:"#2f3824"},b);
@@ -3135,7 +3179,16 @@ var LELE=(function(){var g=el("g",{id:"lele",transform:"translate(535,336) scale
   el("path",{d:"M-12 -94 Q1 -110 14 -94 L19 -91 L-12 -91 Z",fill:"#2f3a24"},b);el("rect",{x:-2,y:-105,width:6,height:4,fill:"#c9a54a"},b);
   el("rect",{x:9,y:-86,width:13,height:2.6,fill:"#f2efe6"},b);el("circle",{cx:22.5,cy:-84.7,r:1.9,fill:"#ff7a2a","class":"cig"},b);
   var pf=el("g",{"class":"puffs",transform:"translate(24,-90)"},b);for(var i=0;i<3;i++){var c=el("circle",{cx:0,cy:0,r:5,fill:"#d6d8cf","class":"puff"},pf);c.style.animationDelay=(i*1.3+.5)+"s";}
-  var tag=el("g",{transform:"translate(0,-128)"},g);el("rect",{x:-34,y:-12,width:68,height:20,rx:6,fill:"#1d2116",stroke:"#e3b341"},tag);el("text",{x:0,y:3,"text-anchor":"middle",style:"font:800 11px var(--f-mono);fill:#e3b341;letter-spacing:.06em"},tag,"LELE pk");
+  el("path",{d:"M-8 -74 L18 -36",stroke:"#2a1d12","stroke-width":3},b);
+  var gt=el("g",{transform:"translate(8,-44) rotate(28)"},b);
+  el("rect",{x:-66,y:-2.4,width:54,height:4.8,rx:1.5,fill:"#7a5232"},gt);for(var fr=0;fr<6;fr++)el("rect",{x:-62+fr*8,y:-2.4,width:1,height:4.8,fill:"#d9c58a"},gt);
+  el("rect",{x:-78,y:-4,width:13,height:8,rx:2,fill:"#1d1410"},gt);for(var pg=0;pg<4;pg++)el("circle",{cx:-76+pg*3.4,cy:pg%2?5:-5,r:1.3,fill:"#c9c9c4"},gt);
+  el("path",{d:"M-14 -9 C-4 -17 8 -12 14 -7 C20 -3 20 6 13 10 C5 15 -6 14 -14 9 C-10 4 -10 -4 -14 -9 Z",fill:"#8b1f1a",stroke:"#2a0d0a","stroke-width":1.4},gt);
+  el("path",{d:"M-8 -6 C0 -9 8 -6 10 -2 L2 6 C-4 6 -8 2 -8 -6 Z",fill:"#111"},gt);el("rect",{x:2,y:-3.5,width:3,height:7,fill:"#c9c9c4"},gt);
+  for(var st=0;st<4;st++)el("line",{x1:-74,y1:-1.6+st*1.07,x2:10,y2:-1.6+st*1.07,stroke:"#e8e4d0","stroke-width":.35},gt);
+  var la=el("g",{transform:"translate(-11,-72)"},b);el("path",{d:"M0 0 L-6 14 L-20 12",stroke:"#56633f","stroke-width":7,fill:"none","stroke-linecap":"round","stroke-linejoin":"round"},la);el("circle",{cx:-21,cy:11,r:4,fill:"#cf9f7a"},la);
+  var ra0=el("g",{transform:"translate(13,-72)"},b),ra=el("g",{"class":"strum"},ra0);el("path",{d:"M0 0 L5 14 L0 26",stroke:"#56633f","stroke-width":7,fill:"none","stroke-linecap":"round","stroke-linejoin":"round"},ra);el("circle",{cx:0,cy:27,r:4,fill:"#cf9f7a"},ra);
+  var tag=el("g",{transform:"translate(0,-128)"},g);el("rect",{x:-20,y:-12,width:40,height:20,rx:6,fill:"#1d2116",stroke:"#e3b341"},tag);el("text",{x:0,y:3,"text-anchor":"middle",style:"font:800 12px var(--f-mono);fill:#e3b341;letter-spacing:.1em"},tag,"PK");
   var bub=el("g",{id:"leleBub",opacity:0,transform:"translate(700,170)"},HSV);el("rect",{x:-150,y:-30,width:300,height:30,rx:9,fill:"#fff8e2",stroke:"#a8741a","stroke-width":1.5},bub);el("path",{d:"M-6 0 l6 12 l6 -12 Z",fill:"#fff8e2",stroke:"#a8741a"},bub);
   el("text",{x:0,y:-10,"text-anchor":"middle",id:"leleSay",style:"font:800 13px var(--f-body);fill:#3a2a08"},bub,"");
   var T=null;return {say:function(t,ms,voice){$("leleSay").textContent=t;var w=Math.min(420,Math.max(160,t.length*7.4+30));bub.firstChild.setAttribute("x",-w/2);bub.firstChild.setAttribute("width",w);
@@ -3179,7 +3232,7 @@ function pileMini(it){var g=document.createElementNS(SVGNS,"g");
   return g;}
 function startHangar(){HG={run:HG.run+1,list:shuffle(MISSIONS).slice(0,5),i:0,step:0,score:0,errs:0,missed:[],t0:0,state:"idle",pick:null,lx:HX.home};
   show("hangar");hgMission();}
-function hgMission(){LD.classList.remove("soot");if(window.LELE&&HG.i===0)setTimeout(function(){LELE.say("Na, haladjunk, emberek!",2000);},900);var m=HG.list[HG.i];HG.step=0;HG.t0=performance.now();HG.bad=null;
+function hgMission(){LD.classList.remove("soot");hgReset();if(window.LELE&&HG.i===0)setTimeout(function(){LELE.say("Na, haladjunk, emberek!",2000);},900);var m=HG.list[HG.i];HG.step=0;HG.t0=performance.now();HG.bad=null;
   $("hgNo").textContent="Igénylés "+(HG.i+1)+" / "+HG.list.length;$("hgTitle").textContent=m.t;$("hgDesc").textContent=m.d;$("hgScore").textContent=fmt(HG.score)+" pont";
   $("hgModal").classList.add("hide");renderSteps();holdItem(null);
   LD.getAnimations().forEach(function(a){a.cancel();});HG.lx=HX.home;LD.setAttribute("transform","translate("+HX.home+",330)");
@@ -3258,7 +3311,40 @@ async function fireOk(){var run=HG.run,m=HG.list[HG.i];HG.state="fire";say("Tűz
   await wait(900);if(HG.run!==run)return;
   lesson(true,"Helyes kiadás! +"+pts+" pont ("+secs+" mp)",null,m);}
 function shake(id){var sc=$(id);sc.classList.remove("shake");void sc.offsetWidth;sc.classList.add("shake");}
-async function blowUp(it,k){var run=HG.run,m=HG.list[HG.i];HG.state="boom";SND.wrong();
+var CARN=[];
+function hgCarnage(run){var gore=CFG.gore,G=$("hgGore");if(!G)return;G.innerHTML="";
+  /* PzH: lőszer-belobbanás, szúrólángok a nyílásokból */
+  var pzg=$("hgPz");if(pzg)pzg.classList.add("burnt");
+  [[612,204,0],[652,198,.15],[694,206,.3],[566,262,.45]].forEach(function(j,ix){var jt=el("g",{transform:"translate("+j[0]+","+j[1]+")"+(ix===3?" rotate(-70)":"")},G);
+    var f1=el("ellipse",{cx:0,cy:-60,rx:16,ry:62,fill:"url(#blastG2)"},jt),f2=el("ellipse",{cx:0,cy:-40,rx:8,ry:40,fill:"#fff2b8",opacity:.85},jt);
+    [f1,f2].forEach(function(f){f.style.transformBox="fill-box";f.style.transformOrigin="50% 100%";
+      f.animate([{transform:"scaleY(.1)",opacity:0},{transform:"scaleY(1.6)",opacity:1,offset:.15},{transform:"scaleY(.9)",opacity:1,offset:.3},{transform:"scaleY(1.8)",opacity:1,offset:.5},{transform:"scaleY(1.1)",opacity:.9,offset:.75},{transform:"scaleY(.4)",opacity:0}],{duration:2600,delay:j[2]*1000+200,easing:"ease-out",fill:"forwards"});});});
+  var fb=el("circle",{cx:660,cy:200,r:40,fill:"url(#blastG2)"},G);fb.style.transformBox="fill-box";fb.style.transformOrigin="center";
+  fb.animate([{transform:"scale(.2)",opacity:1},{transform:"scale(3.2)",opacity:1,offset:.35},{transform:"scale(4)",opacity:0}],{duration:1800,delay:250,easing:"ease-out",fill:"forwards"});
+  for(var e=0;e<30;e++){var a=-Math.PI*(0.1+Math.random()*0.8),d=150+Math.random()*260,sp=el("circle",{cx:655,cy:200,r:1.5+Math.random()*2,fill:Math.random()<.5?"#ffd36a":"#ff7a2a"},G);
+    sp.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate("+Math.cos(a)*d+"px,"+(Math.sin(a)*d+120)+"px)",opacity:0}],{duration:1500+Math.random()*900,delay:300,easing:"cubic-bezier(.2,.6,.4,1)",fill:"forwards"});}
+  var burn=el("g",{"class":"burnfire"},G);[[620,212],[660,206],[700,214],[640,226],[685,222]].forEach(function(p,ix){var fl=el("path",{d:"M"+(p[0]-9)+" "+p[1]+" Q"+p[0]+" "+(p[1]-46)+" "+(p[0]+9)+" "+p[1]+" Z",fill:ix%2?"#ff8a2a":"#ffc24a",opacity:.9},burn);fl.style.animationDelay=(ix*.13)+"s";});
+  for(var sm=0;sm<10;sm++){var c=el("circle",{cx:640+Math.random()*60,cy:190,r:20+Math.random()*16,fill:sm%2?"#2b2925":"#3d3a33",opacity:0},G);c.style.transformBox="fill-box";c.style.transformOrigin="center";
+    c.animate([{opacity:0,transform:"translate(0,0) scale(.5)"},{opacity:.85,offset:.2},{opacity:0,transform:"translate("+(Math.random()*80-20)+"px,-260px) scale(3)"}],{duration:5200,delay:600+sm*280,iterations:Infinity,easing:"ease-out"});}
+  /* katonák: drámai elesés, halálhörgés, vér */
+  var victims=FANS.slice();victims.forEach(function(f,ix){var dl=250+Math.random()*900,body=f.g.querySelector(".fb");if(!body)return;f.g.classList.add("dead");
+    var dir=Math.random()<.5?-1:1,kf=f.front?[{transform:"translate(0,0) rotate(0)"},{transform:"translate(0,-6px) rotate("+(dir*8)+"deg)",offset:.25},{transform:"translate("+(dir*20)+"px,140px) rotate("+(dir*28)+"deg)"}]
+      :f.push?[{transform:"rotate(0)"},{transform:"rotate(-4deg)"}]:[{transform:"rotate(0)"},{transform:"rotate("+(dir*-12)+"deg)",offset:.3},{transform:"rotate("+(dir*88)+"deg) translateY(4px)"}];
+    CARN.push(body.animate(kf,{duration:f.front?1300:900,delay:dl,easing:"cubic-bezier(.55,.05,.7,.4)",fill:"forwards"}));
+    if(ix<9)setTimeout(function(){if(HG.run===run&&SND.groan)SND.groan(.7+Math.random()*.6);},dl+200);
+    if(gore&&!f.front){var bx=f.x+(f.push?0:dir*34),pool=el("ellipse",{cx:bx,cy:f.gy+2,rx:2,ry:1,fill:"#6e0b0b",opacity:.92},G);
+      pool.animate([{rx:2,ry:1},{rx:46,ry:9}],{duration:3200,delay:dl+700,easing:"ease-out",fill:"forwards"});
+      for(var d2=0;d2<6;d2++){var dr=el("circle",{cx:f.x,cy:f.gy-30,r:2+Math.random()*2.5,fill:"#8a1010"},G);var ang=-Math.PI*Math.random();
+        dr.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate("+(Math.cos(ang)*50)+"px,"+(28+Math.random()*10)+"px)",opacity:.9}],{duration:600,delay:dl+100,easing:"cubic-bezier(.3,0,.7,1)",fill:"forwards"});}}
+    if(gore&&f.front){var fp=el("ellipse",{cx:f.x,cy:416,rx:2,ry:1,fill:"#6e0b0b",opacity:.9},G);fp.animate([{rx:2,ry:1},{rx:60,ry:10}],{duration:3000,delay:dl+900,fill:"forwards"});}});
+  /* a töltőkezelő is */
+  var wk=LD.querySelector(".walker");if(wk){CARN.push(wk.animate([{transform:"rotate(0)"},{transform:"rotate(-90deg) translateY(-6px)"}],{duration:800,delay:150,easing:"cubic-bezier(.55,.05,.7,.4)",fill:"forwards"}));
+    setTimeout(function(){if(HG.run===run&&SND.groan)SND.groan(.8);},400);
+    if(gore){var lx=(HG.lx||600)-30,lp=el("ellipse",{cx:lx,cy:332,rx:2,ry:1,fill:"#6e0b0b",opacity:.92},G);lp.animate([{rx:2,ry:1},{rx:50,ry:8}],{duration:3000,delay:900,fill:"forwards"});}}}
+function hgReset(){CARN.forEach(function(a){try{a.cancel();}catch(e){}});CARN=[];var G=$("hgGore");if(G)G.innerHTML="";var pzg=$("hgPz");if(pzg)pzg.classList.remove("burnt");
+  FANS.forEach(function(f){f.g.classList.remove("dead");var b=f.g.querySelector(".fb");if(b)b.getAnimations().forEach(function(a){a.cancel();});});
+  var wk=LD.querySelector(".walker");if(wk)wk.getAnimations().forEach(function(a){a.cancel();});}
+async function blowUp(it,k){var run=HG.run,m=HG.list[HG.i];HG.state="boom";SND.wrong();hgCarnage(run);
   var fx=$("hgFx"),cx=600,cy=250;SND.boom(1,1800);shake("hgScene");
   var fl=$("hgFlash");fl.classList.remove("go");void fl.offsetWidth;fl.classList.add("go");
   var core=el("circle",{cx:cx,cy:cy,r:30,fill:"url(#blastG2)"},fx);core.style.transformBox="fill-box";core.style.transformOrigin="center";
@@ -3269,7 +3355,7 @@ async function blowUp(it,k){var run=HG.run,m=HG.list[HG.i];HG.state="boom";SND.w
     s.style.transformBox="fill-box";s.style.transformOrigin="center";
     s.animate([{opacity:0,transform:"scale(.4)"},{opacity:.85,offset:.2},{opacity:0,transform:"translateY(-120px) scale(2.4)"}],{duration:3200,delay:200+j*60,easing:"ease-out",fill:"forwards"});}
   LD.classList.add("soot");setTimeout(function(){if(HG.run===run&&window.LELE)LELE.say("Na jó emberek, mi a faszom történik itt?",3200,true);},700);
-  await wait(2600);if(HG.run!==run)return;fx.innerHTML="";
+  await wait(3800);if(HG.run!==run)return;fx.innerHTML="";
   HG.errs++;var right=m.ok[k].map(function(id){return ITEMS.filter(function(x){return x.id===id;})[0].name;}).join(" / ");
   HG.missed.push({t:m.t+" – "+SLOTN[k],y:it.name,r:right,w:m.why,f:it.src});
   lesson(false,(it.joke?"Na ne… ":it.intl?"Létező lőszer, de nem rendszeresített: ":"BUMM! Rossz "+SLOTN[k].toLowerCase()+": ")+it.name,it,m,k);}
@@ -3748,13 +3834,39 @@ var SND=(function(){
   function hymnBar(t,i){var k=i%16;var ch=HCH[k];strings(ch.slice(1).map(hz),t,HBAR+0.6);bass(hz(ch[0]-12),t,HB*3.6);
     if(k%4===0)timp(t,0.7);if(k%8===7){for(var r=0;r<14;r++)snare(t+HB*2+r*HB/7,0.12+r*0.03);timp(t+HB*3.5,0.9);}
     if(i>=4){var tt=t;HMEL[k].forEach(function(n){horn(hz(n[0]),tt,n[1]*HB*0.97,0.1);if(i>=20)horn(hz(n[0]-12),tt,n[1]*HB*0.97,0.05);tt+=n[1]*HB;});}}
-  function scheduleBar(t,i){if(MODE==="tense"){tenseBar(t,i);return;}if(MODE!=="old"){hymnBar(t,i);return;}var k=i%8;
+  var BB=60/104;
+  var RIFF=[[40,40,52,40,43,40,45,47],[40,40,52,40,50,47,45,43],[36,36,48,36,43,36,45,47],[38,38,50,38,45,47,50,52]];
+  function bassG(f,t,dur){var o=ac.createOscillator(),o2=ac.createOscillator(),g=ac.createGain(),lp=ac.createBiquadFilter(),sh=ac.createWaveShaper();sh.curve=dcurve(2.2);
+    o.type="sawtooth";o2.type="sine";o.frequency.value=f;o2.frequency.value=f/2;lp.type="lowpass";lp.Q.value=2;lp.frequency.setValueAtTime(1400,t);lp.frequency.exponentialRampToValueAtTime(320,t+0.22);
+    o.connect(sh);sh.connect(lp);o2.connect(lp);lp.connect(g);g.connect(music);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.32,t+0.006);g.gain.exponentialRampToValueAtTime(0.09,t+0.16);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    [o,o2].forEach(function(x){x.start(t);x.stop(t+dur+0.02);});}
+  function kick(t,v){var o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(42,t+0.16);o.connect(g);g.connect(music);env(g,t,0.003,0.7*v,0.28,0.25);o.start(t);o.stop(t+0.3);}
+  function hat(t,v){var s2=ac.createBufferSource(),g=ac.createGain(),hp=ac.createBiquadFilter();s2.buffer=noiseBuf;hp.type="highpass";hp.frequency.value=7500;s2.connect(hp);hp.connect(g);g.connect(music);env(g,t,0.002,0.08*v,0.05,0.04);s2.start(t,Math.random());s2.stop(t+0.06);}
+  var GDIST=null;
+  function pchord(root,t,dur,mute,v){if(!GDIST){GDIST=dcurve(40);}var g=ac.createGain(),sh=ac.createWaveShaper(),lp=ac.createBiquadFilter(),hp=ac.createBiquadFilter();sh.curve=GDIST;sh.oversample="2x";
+    lp.type="lowpass";lp.frequency.value=mute?1300:3200;hp.type="highpass";hp.frequency.value=95;
+    [0,7,12].forEach(function(iv,ix){[-9,9].forEach(function(dt){var o=ac.createOscillator();o.type="sawtooth";o.frequency.value=hz(root+iv);o.detune.value=dt+(ix?0:0);o.connect(sh);o.start(t);o.stop(t+dur+0.05);});});
+    sh.connect(lp);lp.connect(hp);hp.connect(g);g.connect(music);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime((v||0.05),t+0.005);g.gain.exponentialRampToValueAtTime(mute?0.0001:(v||0.05)*0.6,t+(mute?dur:dur*0.7));g.gain.exponentialRampToValueAtTime(0.0001,t+dur+0.04);}
+  function crash(t,v){var s3=ac.createBufferSource(),g=ac.createGain(),bp=ac.createBiquadFilter();s3.buffer=noiseBuf;bp.type="highpass";bp.frequency.value=4500;s3.connect(bp);bp.connect(g);g.connect(music);env(g,t,0.003,0.12*(v||1),1.4,1.3);s3.start(t,Math.random());s3.stop(t+1.5);}
+  var PCH=[[40,40,40,43],[40,40,38,36],[36,36,38,38],[40,43,45,47]];
+  function bassBar(t,i){var sec=i%16,r=RIFF[i%4],e=BB/2,q=BB/4;
+    if(sec<8){/* ROCK: basszus-riff + power-akkordok, egyenes dob */
+      for(var n=0;n<8;n++){bassG(hz(r[n]),t+n*e,e*0.92);hat(t+n*e,n%2?0.6:1);}
+      if(sec>=2){var pc=PCH[i%4];for(var c2=0;c2<4;c2++)pchord(pc[c2],t+c2*BB,BB*0.9,false,0.045);}
+      kick(t,1);kick(t+BB*1.5,0.7);kick(t+BB*2,1);snare(t+BB,0.55);snare(t+BB*3,0.6);if(sec%4===0)crash(t,.7);if(i%4===3){snare(t+BB*3.5,0.4);snare(t+BB*3.75,0.5);}}
+    else{/* METÁL: tompított lefojtott „chug”-ok, dupla lábdob, cintányér */
+      var pat=[1,1,0,1,1,1,0,1,1,0,1,1,1,1,0,1],root=(sec%4===3)?43:40;
+      for(var m2=0;m2<16;m2++){kick(t+m2*q,0.75);if(pat[m2])pchord(root-12+12,t+m2*q,q*0.8,true,0.05);if(m2%2===0)bassG(hz(root-12+12-12+12),t+m2*q,q*0.85);}
+      if(sec%4===3){pchord(root+5,t+BB*2,BB*0.9,false,0.055);pchord(root+3,t+BB*3,BB*0.9,false,0.055);}
+      snare(t+BB,0.7);snare(t+BB*3,0.75);crash(t,1);if(sec%2)crash(t+BB*2,.6);}}
+  function barLen(){return MODE==="bass"?BB*4:((MODE==="tense"||MODE==="old")?BARLEN:HBAR);}
+  function scheduleBar(t,i){if(MODE==="tense"){tenseBar(t,i);return;}if(MODE==="bass"){bassBar(t,i);return;}if(MODE!=="old"){hymnBar(t,i);return;}var k=i%8;
     pad(CH[k].map(hz),t,BARLEN+0.4);
     bass(hz(BS[k]),t,BEAT*1.8);bass(hz(BS[k]),t+BEAT*2,BEAT*1.8);
     timp(t,k%4===0?1:0.6);timp(t+BEAT*2,0.35);
     snare(t+BEAT*3,0.5);snare(t+BEAT*3.5,0.35);snare(t+BEAT*3.75,0.45);
     if(i>=8||i%2===1){var tt=t;MEL[k].forEach(function(n){brass(hz(n[0]),tt,n[1]*BEAT*0.95);tt+=n[1]*BEAT;});}}
-  function tick(){if(!ac)return;while(nextBar<ac.currentTime+1.2){scheduleBar(nextBar,bar++);nextBar+=(MODE==="tense"||MODE==="old")?BARLEN:HBAR;}}
+  function tick(){if(!ac)return;while(nextBar<ac.currentTime+1.2){scheduleBar(nextBar,bar++);nextBar+=barLen();}}
   function startMusic(){if(timer||!ac)return;nextBar=ac.currentTime+0.1;timer=setInterval(tick,250);tick();}
   function stopMusic(){if(timer){clearInterval(timer);timer=null;}}
   /* effektek */
@@ -3794,6 +3906,12 @@ var SND=(function(){
     ding:function(){if(!api.ok())return;var t=ac.currentTime;piano(hz(N.G5),t,0.22);piano(hz(N.C6),t+0.08,0.2);},
     chime:function(){if(!api.ok())return;var t=ac.currentTime;[N.E5,N.A5].forEach(function(n,i){tone(hz(n),t+i*0.07,0.5,"sine",0.15);});},
     boom:function(v,lp){if(!api.ok())return;boom(v,lp);},
+    groan:function(p){if(!api.ok())return;p=p||1;var t=ac.currentTime+Math.random()*0.05,o=ac.createOscillator(),g=ac.createGain(),bp=ac.createBiquadFilter(),bp2=ac.createBiquadFilter(),lfo=ac.createOscillator(),lg=ac.createGain();
+      o.type="sawtooth";o.frequency.setValueAtTime(150*p,t);o.frequency.linearRampToValueAtTime(175*p,t+0.25);o.frequency.exponentialRampToValueAtTime(62*p,t+1.5);
+      lfo.frequency.value=7+Math.random()*4;lg.gain.value=14*p;lfo.connect(lg);lg.connect(o.frequency);
+      bp.type="bandpass";bp.frequency.setValueAtTime(800,t);bp.frequency.linearRampToValueAtTime(520,t+1.4);bp.Q.value=4;bp2.type="bandpass";bp2.frequency.value=1250;bp2.Q.value=6;
+      o.connect(bp);o.connect(bp2);bp.connect(g);bp2.connect(g);g.connect(sfx);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.32,t+0.08);g.gain.setValueAtTime(0.28,t+0.7);g.gain.exponentialRampToValueAtTime(0.0001,t+1.6);
+      [o,lfo].forEach(function(x){x.start(t);x.stop(t+1.65);});nz(t+0.9,0.8,"bandpass",900,400,1.2,0.05,0.05,0.1);},
     whistle:function(){if(!api.ok())return;var t=ac.currentTime;sweep(t,1500,420,0.85,0.06,"sine",0.2);sweep(t,1520,430,0.85,0.03,"triangle",0.2);},
     mode:function(m){if(MODE===m)return;MODE=m;if(ac&&timer){nextBar=Math.max(ac.currentTime+0.08,Math.min(nextBar,ac.currentTime+0.6));}},
     tock:function(hi){if(!api.ok())return;var t=ac.currentTime;tone(hi?1760:1320,t,0.06,"square",hi?0.12:0.08);tone(hi?880:660,t,0.08,"sine",0.12);},
@@ -3882,6 +4000,52 @@ renderSnd();
   setTimeout(blast,1200);
 })();
 
+
+/* ===== v1.28 dinamikus főmenü: becsapódó gránátok, visszatüzelő PzH, füst ===== */
+(function(){var hs=$("heroSvg");if(!hs)return;
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fx=el("g",{id:"heroFx"},hs),drift=el("g",{id:"heroDrift"});var bl=$("blasts");if(bl)bl.parentNode.insertBefore(drift,bl.nextSibling);
+  var i=0;Array.prototype.forEach.call(document.querySelectorAll("#home .mgrp,#home .mrow,#home .specs>div,#home .home-update,#home .home-share"),function(n){n.style.setProperty("--i",i++);});
+  function onHome(){var h=$("home");return h&&!h.classList.contains("hide")&&!document.hidden;}
+  function fb(n,o){n.style.transformBox="fill-box";n.style.transformOrigin=o||"center";return n;}
+  function R(a,b){return a+Math.random()*(b-a);}
+  /* lassan sodródó csatafüst az égen */
+  if(!reduce)for(var k=0;k<4;k++){var c=el("ellipse",{cx:0,cy:R(150,330),rx:R(160,260),ry:R(26,46),fill:k%2?"#4b4a3e":"#8d8670",opacity:R(.12,.22)},drift);
+    c.animate([{transform:"translateX(-320px)"},{transform:"translateX(1520px)"}],{duration:R(55,95)*1000,iterations:Infinity,delay:-R(0,60)*1000});}
+  /* PzH lövés: torkolattűz, füst, hátrarúgás – a nyomjelző indulásával szinkronban */
+  function muzzle(){if(!onHome())return;var g=el("g",{transform:"translate(704,105) rotate(-21)"},fx);
+    fb(el("circle",{r:26,fill:"url(#blastG)"},g)).animate([{transform:"scale(.2)",opacity:1},{transform:"scale(1.7)",opacity:0}],{duration:380,easing:"ease-out",fill:"forwards"});
+    fb(el("path",{d:"M0 -10 L58 0 L0 10 L14 0Z",fill:"#fff2b0"},g),"0 50%").animate([{transform:"scaleX(0)"},{transform:"scaleX(1)",offset:.3},{transform:"scaleX(0)"}],{duration:200,fill:"forwards"});
+    for(var j=0;j<6;j++){var p=fb(el("circle",{cx:6,cy:0,r:R(8,13),fill:j%2?"#9a937e":"#77705f",opacity:0},g));
+      p.animate([{transform:"translate(0,0) scale(.4)",opacity:.8},{transform:"translate("+R(20,90)+"px,"+R(-40,20)+"px) scale("+R(2,3.2)+")",opacity:0}],{duration:R(1800,3000),delay:j*40,easing:"ease-out",fill:"forwards"});}
+    if(window.HEROPZ)HEROPZ.animate([{transform:"translate(0,0)"},{transform:"translate(-8px,1px)",offset:.15},{transform:"translate(0,0)"}],{duration:520,easing:"cubic-bezier(.2,.8,.3,1)"});
+    for(var d=0;d<6;d++){var e=fb(el("ellipse",{cx:R(90,700),cy:R(438,450),rx:R(20,40),ry:6,fill:"#a59a76",opacity:0},fx));
+      e.animate([{transform:"scale(.4)",opacity:.55},{transform:"translateY(-8px) scale(2.2)",opacity:0}],{duration:R(1200,2000),easing:"ease-out",fill:"forwards"});setTimeout(e.remove.bind(e),2100);}
+    if(CFG.blasts)SND.boom(.07,1300);setTimeout(function(){g.remove();},3200);}
+  var mot=hs.querySelector("animateMotion");if(mot){mot.addEventListener("beginEvent",muzzle);mot.addEventListener("repeatEvent",muzzle);}
+  /* becsapódó ellenséges gránát */
+  function impact(x,y,s){if(!onHome())return;SND.boom(.12+.2*s,s>1?1100:700);if(s>1)buzz(30);
+    var g=el("g",{transform:"translate("+x+","+y+") scale("+s+")"},fx);
+    var cr=el("ellipse",{cx:0,cy:2,rx:44,ry:7,fill:"#17150f",opacity:.85},g);cr.animate([{opacity:.85},{opacity:.85,offset:.6},{opacity:0}],{duration:9000,fill:"forwards"});
+    var fl=el("rect",{x:0,y:0,width:1200,height:490,fill:"#ffd89a",opacity:0},fx);fl.animate([{opacity:s>1?.35:.2},{opacity:0}],{duration:380,easing:"ease-out",fill:"forwards"}).onfinish=function(){fl.remove();};
+    fb(el("circle",{cy:-20,r:95,fill:"url(#blastG)"},g)).animate([{transform:"scale(.1)",opacity:1},{transform:"scale(1)",opacity:1,offset:.25},{transform:"scale(1.5)",opacity:0}],{duration:1100,easing:"ease-out",fill:"forwards"});
+    fb(el("circle",{cy:-14,r:30,fill:"#fff6d2"},g)).animate([{transform:"scale(.2)",opacity:1},{transform:"scale(1.3)",opacity:0}],{duration:320,easing:"ease-out",fill:"forwards"});
+    fb(el("ellipse",{rx:20,ry:5,fill:"none",stroke:"#f3e3b0","stroke-width":3},g)).animate([{transform:"scale(1)",opacity:.9},{transform:"scale(7)",opacity:0}],{duration:650,easing:"ease-out",fill:"forwards"});
+    fb(el("path",{d:"M-24 0 C-44 -80 -18 -160 0 -215 C18 -160 44 -80 24 0Z",fill:"#4b4334"},g),"50% 100%").animate([{transform:"scale(.3,0)",opacity:1},{transform:"scale(1,1)",opacity:.95,offset:.35},{transform:"scale(1.5,1.1)",opacity:0}],{duration:1300,easing:"ease-out",fill:"forwards"});
+    for(var j=0;j<16;j++){var vx=R(-130,130),h=R(60,170),em=j<6,r=em?el("circle",{r:R(1.5,3),fill:"#ffbe55"},g):el("rect",{x:-2,y:-2,width:R(3,7),height:R(3,6),fill:j%2?"#2e2a21":"#5a5040"},g);
+      r.animate([{transform:"translate(0,-4px)",opacity:1},{transform:"translate("+vx*.55+"px,"+(-h)+"px)",offset:.45,opacity:1},{transform:"translate("+vx+"px,10px) rotate("+R(-400,400)+"deg)",opacity:em?0:.9}],{duration:R(1000,1600),easing:"cubic-bezier(.25,.6,.45,1)",fill:"forwards"});}
+    for(var m=0;m<9;m++){var sm=fb(el("circle",{cx:R(-26,26),cy:-10,r:R(18,32),fill:m%3?"#5d584b":"#3a372f",opacity:0},g));
+      sm.animate([{transform:"translate(0,0) scale(.4)",opacity:0},{opacity:.85,offset:.12},{transform:"translate("+R(50,150)+"px,"+R(-230,-130)+"px) scale("+R(2.2,3.4)+")",opacity:0}],{duration:R(4500,6800),delay:m*70,easing:"ease-out",fill:"forwards"});}
+    if(s>1)hs.animate([{transform:"translate(0,0)"},{transform:"translate(-5px,4px)"},{transform:"translate(4px,-3px)"},{transform:"translate(-2px,2px)"},{transform:"translate(0,0)"}],{duration:420});
+    setTimeout(function(){g.remove();},9500);}
+  function incoming(){if(onHome()&&CFG.blasts){var near=Math.random()<.35,x=near?R(120,690):R(780,1170),y=near?R(456,480):R(420,470),s=near?1.2:.75+(y-420)/50*.4;
+      if(SND.whistle)SND.whistle();var sx=x+R(200,320),sy=-40,ang=Math.atan2(y-sy,x-sx)*180/Math.PI;
+      var o=el("g",{},fx),sh=el("g",{transform:"rotate("+ang+")"},o);
+      el("line",{x1:-70,y1:0,x2:0,y2:0,stroke:"rgba(255,232,170,.55)","stroke-width":2.5,"stroke-linecap":"round"},sh);el("ellipse",{cx:0,cy:0,rx:7,ry:3,fill:"#26251f"},sh);
+      o.animate([{transform:"translate("+sx+"px,"+sy+"px)"},{transform:"translate("+x+"px,"+y+"px)"}],{duration:850,easing:"cubic-bezier(.45,0,1,1)",fill:"forwards"}).onfinish=function(){o.remove();impact(x,y,s);};}
+    setTimeout(incoming,reduce?14000:R(4200,8500));}
+  setTimeout(incoming,2500);
+})();
 /* ===== VERZIÓ, FRISSÍTÉS, OFFLINE ===== */
 var PWA=!!window.PZH_PWA,FILEMODE=location.protocol==="file:",UPD={remote:null};
 function toast(t,ms){var n=$("toast");n.textContent=t;n.classList.remove("hide");clearTimeout(toast.h);toast.h=setTimeout(function(){n.classList.add("hide");},ms||3200);}
@@ -3932,19 +4096,32 @@ async function doUpdate(){
     var j=await r.json();if(!j.version)throw new Error("Hiányzó verziószám");UPD.remote=j.version;
     if("serviceWorker" in navigator){
       var reg=await navigator.serviceWorker.getRegistration();
-      if(reg){await reg.update();if(reg.waiting){reg.waiting.postMessage("SKIP_WAITING");setHomeUpdateStatus("Új verzió aktiválása…");return;}
+      if(reg){await reg.update();if(reg.waiting){await primePage(j.version);window.__pzhUpdating=false;reg.waiting.postMessage("SKIP_WAITING");setHomeUpdateStatus("Új verzió aktiválása…");setTimeout(function(){location.reload();},2500);return;}
         if(reg.installing){setHomeUpdateStatus("Új verzió letöltése…");await new Promise(function(resolve,reject){var w=reg.installing;var timer=setTimeout(function(){reject(new Error("A frissítés időtúllépés miatt leállt."));},15000);w.addEventListener("statechange",function(){if(w.state==="installed"||w.state==="activated"){clearTimeout(timer);resolve();}else if(w.state==="redundant"){clearTimeout(timer);reject(new Error("A frissítés telepítése sikertelen."));}});});}
       }
     }
-    setHomeUpdateStatus("Friss verzió ellenőrizve · újratöltés…");
-    // Ne töröljük az összes cache-t: az offline működés és az aktív SW így nem sérül.
-    setTimeout(function(){location.reload();},350);
+    setHomeUpdateStatus("Új verzió letöltése…");
+    await primePage(j.version);
+    setHomeUpdateStatus("Friss verzió betöltve · újraindítás…");
+    window.__pzhUpdating=true;setTimeout(function(){location.reload();},300);
   }catch(e){setUpdateBusy(false);var t="Frissítés nem sikerült: "+(e&&e.message?e.message:"hálózati hiba");setUpdMsg(t);setHomeUpdateStatus(t);toast("Frissítés nem sikerült. Ellenőrizd a tárhely fájljait.");}
 }
 $("updGo").addEventListener("click",doUpdate);
 $("updCheck").addEventListener("click",async function(){var newer=await checkUpdate(true);if(newer)showUpd(UPD.remote);});
-$("homeUpdate").addEventListener("click",async function(){setUpdateBusy(true);try{var newer=await checkUpdate(true);if(newer){setUpdateBusy(false);setHomeUpdateStatus("Új verzió: "+UPD.remote+" · telepítés indul…");await doUpdate();}else{if(!FILEMODE&&navigator.onLine&&!CFG.offline){if("serviceWorker" in navigator){var reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update();}setHomeUpdateStatus("Ellenőrizve · v"+APP_VERSION+" · ha a tárhelyen már cseréltél fájlokat, újratöltés…");setTimeout(function(){location.reload();},500);}setUpdateBusy(false);}}catch(e){setUpdateBusy(false);setHomeUpdateStatus("Nem sikerült frissíteni. Ellenőrizd az internetet és a tárhelyet.");}});
-navigator.serviceWorker&&navigator.serviceWorker.addEventListener("controllerchange",function(){if(window.__pzhUpdating)return;window.__pzhUpdating=true;location.reload();});
+$("homeUpdate").addEventListener("click",async function(){setUpdateBusy(true);try{var newer=await checkUpdate(true);if(newer){setUpdateBusy(false);setHomeUpdateStatus("Új verzió: "+UPD.remote+" · telepítés indul…");await doUpdate();}else{setHomeUpdateStatus("Naprakész · v"+APP_VERSION);setUpdateBusy(false);}}catch(e){setUpdateBusy(false);setHomeUpdateStatus("Nem sikerült frissíteni. Ellenőrizd az internetet és a tárhelyet.");}});
+navigator.serviceWorker&&navigator.serviceWorker.addEventListener("controllerchange",function(){if(window.__pzhUpdating)return;if(busy()){showUpd(UPD.remote||"új");return;}window.__pzhUpdating=true;location.reload();});
+/* friss oldal előtöltése a gyorsítótárakba: így az újraindítás biztosan az új verziót nyitja */
+async function primePage(ver){try{var fr=await fetch("./?v="+encodeURIComponent(ver||"")+"&t="+Date.now(),{cache:"reload"});if(!fr.ok)return false;
+  var txt=await fr.clone().text();var good=!ver||txt.indexOf(ver)>=0;
+  if(window.caches){var ks=await caches.keys();for(var i=0;i<ks.length;i++){if(ks[i].indexOf("pzh-milliomos-")!==0)continue;var c=await caches.open(ks[i]);
+    var h={headers:{"Content-Type":"text/html; charset=utf-8"}};await c.put("./",new Response(txt,h));await c.put("index.html",new Response(txt,h));}}
+  return good;}catch(e){return false;}}
+/* automatikus frissítés indításkor és visszatéréskor (ha nincs folyamatban játék) */
+function autoUpd(){var v=UPD.remote;if(!v)return;var k="pzhAuto"+v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1");}catch(e){}
+  if(busy()){showUpd(v);return;}toast("Új verzió ("+v+") telepítése…",2500);doUpdate();}
+var LASTCHK=Date.now();
+document.addEventListener("visibilitychange",function(){if(document.visibilityState!=="visible"||Date.now()-LASTCHK<5*60e3)return;LASTCHK=Date.now();
+  checkUpdate(false).then(function(n){if(n)autoUpd();});if(navigator.serviceWorker)navigator.serviceWorker.getRegistration().then(function(r){if(r)r.update().catch(function(){});});});
 $("offSave").addEventListener("click",saveOffline);
 $("netChip").addEventListener("click",function(){route("set");});
 $("cfOffline").addEventListener("click",function(){CFG.offline=!CFG.offline;saveCfg();
@@ -3954,7 +4131,7 @@ $("cfOffline").addEventListener("click",function(){CFG.offline=!CFG.offline;save
   renderNet();LB.renderView();});
 window.addEventListener("offline",function(){toast("Nincs hálózat – a játék offline tovább fut.");renderNet();LB.renderView();});
 window.addEventListener("online",function(){renderNet();if(!CFG.offline){toast("Újra online.");LB.last=null;LB.init();checkUpdate(false);}});
-renderVer();renderNet();setTimeout(function(){checkUpdate(false);},2500);
+renderVer();renderNet();setTimeout(function(){checkUpdate(false).then(function(n){if(n)autoUpd();});},1500);
 
 
 /* ===== ÉRTESÍTÉS FRISSÍTÉSRŐL =====
@@ -3997,6 +4174,6 @@ if(CFG.notif&&PWA&&window.Notification&&Notification.permission==="granted")setT
 show("home");renderStats();
 </script>
 
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(r){setInterval(function(){r.update().catch(function(){});},30*60e3);}).catch(function(){});});}</script>
 </body>
 </html>
