@@ -2,7 +2,9 @@
 
 PzH 2000 HU kezelői felkészítő játék, egyetlen weboldalban:
 
-- **Milliomos kvíz** – 232 kérdés, 50 kérdéses játék, 3 élet, 3 segítség, magyarázat a tananyag fejezetével
+- **Milliomos kvíz** – 251 kérdés, 50 kérdéses játék, 3 élet, 3 segítség, magyarázat a tananyag fejezetével
+- **Hibáim gyakorló** – az elrontott kérdések külön listába kerülnek; ha háromszor egymás után jól válaszolsz rá, kikerül
+- **Témakörök** – témánkénti százalék, koppintásra 10 kérdéses gyakorlás, „Leggyengébb gyakorlása” gomb
 - **Tűzfeladat** – 12 lépés a löveg metszetén, véletlen feladattal és lőelemekkel, animációval
 - **Lőszertároló** – húzd a helyére a tároló, rekesz és lőszerszállító rendszer megnevezéseit
 - **Terepjárás** – árok, lépcső, emelkedő, oldaldőlés, gázló, híd: átjut vagy nem?

@@ -1,5 +1,5 @@
 {
- "version": "1.31.3",
- "date": "2026-10-16",
- "notes": "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"
+ "version": "1.32.0",
+ "date": "2026-10-17",
+ "notes": "Új: Hibáim gyakorló (3 jó válasz után kikerül a hibás kérdés) és Témakörök oldal százalékokkal"
 }

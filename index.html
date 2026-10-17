@@ -1192,6 +1192,23 @@ body{overflow-x:clip}
 .burnfire path{transform-box:fill-box;transform-origin:50% 100%;animation:burnf .5s ease-in-out infinite alternate}
 @keyframes burnf{from{transform:scaleY(.7) scaleX(1.1);opacity:.75}to{transform:scaleY(1.25) scaleX(.9);opacity:1}}
 @media (prefers-reduced-motion:reduce){.burnfire path{animation:none}}
+
+/* ===== Hibáim + témakörök (v1.32) ===== */
+.hibrow{margin-bottom:10px}
+.hibrow .btn small{font:600 .8em var(--f-mono);opacity:.75;margin-left:4px}
+.tplist{display:grid;gap:8px;margin:0 0 14px}
+.tprow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;width:100%;padding:10px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--ink);font:inherit}
+.tprow:active{filter:brightness(1.12)}
+.tprow .tpn{font:600 calc(17px * var(--fz)) var(--f-cond);letter-spacing:.04em;text-transform:uppercase}
+.tprow .tpp{font:700 calc(17px * var(--fz)) var(--f-mono);text-align:right}
+.tprow .tpbar{grid-column:1/-1;height:8px;border-radius:4px;background:rgba(128,128,128,.22);overflow:hidden}
+.tprow .tpbar i{display:block;height:100%;border-radius:4px;background:var(--gold)}
+.tprow.g .tpbar i,.tprow.g .tpp{color:var(--ok);background:var(--ok)}.tprow.g .tpp{background:none}
+.tprow.m .tpbar i{background:var(--gold)}.tprow.m .tpp{color:var(--gold)}
+.tprow.r .tpbar i{background:var(--bad)}.tprow.r .tpp{color:var(--bad)}
+.tprow.n .tpp{color:var(--muted)}
+.tprow small{grid-column:1/-1;color:var(--muted);font-size:calc(13px * var(--fz))}
+.tpsum{margin:0 0 12px;color:var(--muted);font-size:calc(15px * var(--fz))}.tpsum strong{color:var(--ink)}
 </style>
 
 <div class="wrap">
@@ -1291,7 +1308,19 @@ body{overflow-x:clip}
     <li><b>★</b><span>A nehezebb kérdés többet ér. Hibánál látod a magyarázatot és a tananyag fejezetét.</span></li>
     <li><b>⚑</b><span>Segítségek: Felezés, Közönség, Telefon. Bármikor megállhatsz.</span></li>
    </ul>
+   <div class="row2 hibrow"><button class="btn ghost" id="hibBtn" type="button">Hibáim <small id="hibN"></small></button><button class="btn ghost" id="topBtn" type="button">Témakörök</button></div>
    <div class="row2"><button class="btn ghost" id="qallBtn" type="button">Összes kérdés</button><button class="btn" id="startBtn" type="button">Játék indítása</button></div>
+  </div>
+ </section>
+
+ <section id="topics" class="hide">
+  <div class="panel pg">
+   <div class="ddhead"><h2 class="pgt">Témakörök</h2><span class="k" id="tpCount"></span></div>
+   <p class="sub">Melyik témakörben hány százalékot értél el a kvízekben. Koppints egy sorra: 10 kérdéssel gyakorolhatod az adott témát, a hibásan megválaszoltak előre kerülnek.</p>
+   <div class="tpsum" id="tpSum"></div>
+   <button class="btn" id="tpWeak" type="button" style="width:100%;margin-bottom:12px">Leggyengébb téma gyakorlása</button>
+   <div class="tplist" id="tpList"></div>
+   <button class="btn ghost" data-go="start" type="button" style="width:100%">‹ Vissza</button>
   </div>
  </section>
 
@@ -1651,8 +1680,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.31.3",APP_DATE="2026-10-16";
-var CHANGELOG=[["1.31.3", "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"], ["1.31.2", "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"], ["1.31.1", "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"], ["1.31.0", "Főképernyő: realisztikus lövés (csőszájfék-lángok, lökéshullám, porfelverés, füst), géppuskás a toronyban, aki a támadó drónokat lövi; figyelmeztetés foglalt becenévnél"], ["1.30.4", "Ranglista: ugyanaz a becenév több készülékről egy sorban, a legjobb eredménnyel"], ["1.30.3", "Kisebb javítások"], ["1.30.2", "Kisebb javítások"], ["1.30.1", "Összes kérdés: javítások, gyorsabb betöltés"], ["1.30.0", "Kvíz: új Összes kérdés lista a helyes válaszokkal, magyarázattal, kereséssel és témakör-szűrővel"], ["1.29.0", "Lőszerraktár a lőtéren: lőtérfigyelő torony (az erkélyen a PK basszusgitározik), célterület, álcaháló; új lőszer-ismertető: felcímkézett metszet, NATO színkód, lőtávolság-skála a feladat céltávolságával, rendszeresítési jelzés"], ["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.32.0",APP_DATE="2026-10-17";
+var CHANGELOG=[["1.32.0", "Új: Hibáim gyakorló (a hibás kérdések, 3 jó válasz után kikerülnek) és Témakörök oldal százalékokkal, gyakorlással"], ["1.31.3", "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"], ["1.31.2", "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"], ["1.31.1", "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"], ["1.31.0", "Főképernyő: realisztikus lövés (csőszájfék-lángok, lökéshullám, porfelverés, füst), géppuskás a toronyban, aki a támadó drónokat lövi; figyelmeztetés foglalt becenévnél"], ["1.30.4", "Ranglista: ugyanaz a becenév több készülékről egy sorban, a legjobb eredménnyel"], ["1.30.3", "Kisebb javítások"], ["1.30.2", "Kisebb javítások"], ["1.30.1", "Összes kérdés: javítások, gyorsabb betöltés"], ["1.30.0", "Kvíz: új Összes kérdés lista a helyes válaszokkal, magyarázattal, kereséssel és témakör-szűrővel"], ["1.29.0", "Lőszerraktár a lőtéren: lőtérfigyelő torony (az erkélyen a PK basszusgitározik), célterület, álcaháló; új lőszer-ismertető: felcímkézett metszet, NATO színkód, lőtávolság-skála a feladat céltávolságával, rendszeresítési jelzés"], ["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,blasts:true,gore:true,notif:false,offline:false,fz:1.2,online:true,rank:true,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -1664,10 +1693,10 @@ document.addEventListener("visibilitychange",function(){if(!document.hidden&&!$(
 function applyFz(){document.documentElement.style.setProperty("--fz",String(CFG.fz||1.2));}
 applyFz();
 
-var SECTIONS=["home","start","game","end","simStart","sim","simEnd","dd","ter","terEnd","hangar","hangarEnd","htd","htdEnd","kis","rank","set","share","qall"];
+var SECTIONS=["home","start","game","end","simStart","sim","simEnd","dd","ter","terEnd","hangar","hangarEnd","htd","htdEnd","kis","rank","set","share","qall","topics"];
 var GAMES=["game","sim","dd","ter","hangar","htd"];
 function curSec(){for(var i=0;i<SECTIONS.length;i++)if(!$(SECTIONS[i]).classList.contains("hide"))return SECTIONS[i];return "home";}
-var TABOF={home:"home",start:"start",game:"start",end:"start",simStart:"sim",sim:"sim",simEnd:"sim",dd:"dd",ter:"ter",terEnd:"ter",hangar:"hangar",hangarEnd:"hangar",kis:"kis",rank:"rank"};
+var TABOF={home:"home",start:"start",game:"start",end:"start",simStart:"sim",sim:"sim",simEnd:"sim",dd:"dd",ter:"ter",terEnd:"ter",hangar:"hangar",hangarEnd:"hangar",kis:"kis",rank:"rank",topics:"start"};
 function show(id){if(id==="sim")setTimeout(fitSim,30);if(id==="home"){var hm=$("home");if(hm){hm.classList.remove("enter");void hm.offsetWidth;hm.classList.add("enter");}}if(window.factInto){if(id==="hangarEnd")factInto("factHg");if(id==="simEnd")factInto("factSim");if(id==="end")factInto("factQuiz");if(id==="terEnd")factInto("factTer");}
 SECTIONS.forEach(function(s){$(s).classList.toggle("hide",s!==id);});if(id!=="sim"){wakeOff();if(window.clkStop&&id!=="simEnd"&&CLK.iv){clearInterval(CLK.iv);CLK.iv=null;}}
   if(id!=="game"&&window.qtStop){qtStop();}
@@ -1681,7 +1710,7 @@ function go(target){
   route(target);
 }
 var pendingGo=null;
-function route(t){ if(t==="htd") startHtd(15); else if(t==="sim") show("simStart"); else if(t==="dd") startDD(); else if(t==="ter") startTer(); else if(t==="hangar") startHangar(); else if(t==="kis"){show("kis");renderKis();} else if(t==="rank"){show("rank");LB.push();LB.render();} else if(t==="set"){show("set");renderSet();} else if(t==="share"){show("share");} else {show(t); renderStats();} }
+function route(t){ if(t==="htd") startHtd(15); else if(t==="sim") show("simStart"); else if(t==="dd") startDD(); else if(t==="ter") startTer(); else if(t==="hangar") startHangar(); else if(t==="kis"){show("kis");renderKis();} else if(t==="rank"){show("rank");LB.push();LB.render();} else if(t==="set"){show("set");renderSet();} else if(t==="share"){show("share");} else {show(t); renderStats(); if(t==="start")renderHib();} }
 Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(b){b.addEventListener("click",function(){go(b.dataset.go);});});
 $("brand").addEventListener("click",function(){go("home");});
 $("tbExit").addEventListener("click",function(){go("home");});
@@ -1810,7 +1839,7 @@ function makeFlag(parent,x,y,w,h,opt){opt=opt||{};var g=el("g",{"class":"hflag"}
 makeFlag($("heroFlag"),12,10,104,64,{pole:118,pw:3.4,sec:"home"});
 
 /* ===== KVÍZ ===== */
-var TOTAL=50,LIVES=3,S=null;
+var TOTAL=50,LIVES=3,S=null,LASTPR=null;
 function worth(lv){var c=S&&S.qs&&S.qs[lv];var d=c?c.q.d:1;return d===1?1000:(d===2?2000:3000);}
 function diffOf(lv){return lv<16?1:(lv<33?2:3);}
 function pickQuestions(){
@@ -1818,20 +1847,32 @@ function pickQuestions(){
   for(var k=0;k<TOTAL&&k<all.length;k++){var q=BANK[all[k]];out.push({q:q,order:shuffle(q.o.map(function(_,j){return j;}))});}
   return out;
 }
-function newGame(){S={lv:0,qs:pickQuestions(),locked:false,gone:[],life:{l50:true,lAud:true,lTel:true},score:0,lives:LIVES,okN:0,badN:0,missed:[],after:null};
+function mkQs(list){return list.map(function(q){return {q:q,order:shuffle(q.o.map(function(_,j){return j;}))};});}
+/* Hibáim: store.wrong = {kérdés-azonosító: egymás utáni jó válaszok száma}; 3 jó válasznál kikerül */
+function qKey(q){var i=BANK.indexOf(q);return qid(QORIG[i].q);}
+function hibList(){var w=store.wrong||{};return BANK.filter(function(q){return (qid(QORIG[BANK.indexOf(q)].q)) in w;});}
+function noteAns(q,right){var k=qKey(q),w=store.wrong||(store.wrong={}),st=null;
+  if(right){if(k in w){w[k]++;if(w[k]>=3){delete w[k];st="out";}else st=3-w[k];}}
+  else{w[k]=0;st="in";}
+  save(store);return st;}
+function hibNote(st){return st==="out"?" Kikerült a Hibáim listából.":st==="in"?" Bekerült a Hibáim listába.":st?" Hibáim: még "+st+" jó válasz kell.":"";}
+function newGame(opts){var pr=opts&&opts.qs&&opts.qs.length?opts:null,qs=pr?mkQs(pr.qs):pickQuestions();if(!pr)LASTPR=null;
+  S={lv:0,qs:qs,total:qs.length,pr:!!pr,ptitle:pr?pr.title:"",locked:false,gone:[],life:{l50:true,lAud:true,lTel:true},score:0,lives:LIVES,okN:0,badN:0,missed:[],after:null};
   show("game");["l50","lAud","lTel"].forEach(function(id){$(id).disabled=false;});showQuestion();}
 function renderHud(){var h="";for(var i=0;i<LIVES;i++){h+=i<S.lives?"♥":'<span class="lost">♥</span>';}
-  $("hearts").innerHTML=h;$("lvl").textContent=(S.lv+1)+" / "+TOTAL;$("score").textContent=fmt(S.score);$("progBar").style.width=(S.lv/TOTAL*100)+"%";}
+  if(S.pr)h="∞";
+  $("hearts").innerHTML=h;$("lvl").textContent=(S.lv+1)+" / "+S.total;$("score").textContent=S.pr?S.okN+" jó":fmt(S.score);$("progBar").style.width=(S.lv/S.total*100)+"%";
+  document.querySelector(".lifelines").classList.toggle("hide",!!S.pr);$("qTimer").classList.toggle("hide",!!S.pr);}
 function showQuestion(){var cur=S.qs[S.lv],q=cur.q;S.locked=false;S.gone=[];S.after=null;
-  $("tag").textContent=q.t+" · "+["","könnyű","közepes","nehéz"][q.d||1]+" · +"+fmt(worth(S.lv))+" pont";$("qtext").textContent=q.q;
+  $("tag").textContent=q.t+" · "+["","könnyű","közepes","nehéz"][q.d||1]+(S.pr?" · "+S.ptitle:" · +"+fmt(worth(S.lv))+" pont");$("qtext").textContent=q.q;
   ["note","verdict","nextBtn","expl"].forEach(function(id){$(id).classList.add("hide");});
-  $("stopBtn").classList.toggle("hide",S.lv===0);$("nextBtn").textContent="Következő kérdés";
+  $("stopBtn").classList.toggle("hide",S.lv===0&&!S.pr);$("stopBtn").textContent=S.pr?"Befejezem a gyakorlást":"Megállok, viszem a pontokat";$("nextBtn").textContent="Következő kérdés";
   var box=$("answers");box.innerHTML="";
   cur.order.forEach(function(oi,pos){var b=document.createElement("button");b.className="ans";b.type="button";
     b.innerHTML='<span class="in"><span class="l"></span><span class="t"></span><span class="p"></span></span>';
     b.querySelector(".l").textContent="ABC"[pos];b.querySelector(".t").textContent=q.o[oi];
     b.addEventListener("click",function(){answer(pos);});box.appendChild(b);});
-  renderHud();renderOnline();qtStart();}
+  renderHud();renderOnline();if(!S.pr)qtStart();}
 /* 60 mp-es időzítő */
 var QT={t:null,end:0,last:0,C:2*Math.PI*19};
 function qtStart(){qtStop();QT.end=performance.now()+60000;QT.last=61;$("qTimer").classList.remove("warn","crit","done");QT.t=setInterval(qtTick,100);qtTick();SND.mode("tense");}
@@ -1842,9 +1883,9 @@ function qtTick(){var left=Math.max(0,(QT.end-performance.now())/1000),n=Math.ce
   if(n!==QT.last){QT.last=n;if(n<=10&&n>0){SND.tock(n<=5);if(n<=5)buzz(30);}}
   if(left<=0){qtStop();q.classList.add("done");timeUp();}}
 function timeUp(){if(!S||S.locked||$("game").classList.contains("hide"))return;S.locked=true;var st=S;
-  var bs=btns();bs.forEach(function(b){b.disabled=true;});var cp=correctPos(),cur=S.qs[S.lv],q=cur.q,last=S.lv===TOTAL-1;
+  var bs=btns();bs.forEach(function(b){b.disabled=true;});var cp=correctPos(),cur=S.qs[S.lv],q=cur.q,last=S.lv===S.total-1;
   bs[cp].classList.add("ok","flash");SND.wrong();buzz([80,60,80]);
-  var t=store.topics[q.t]||(store.topics[q.t]={ok:0,bad:0});t.bad++;save(store);
+  var t=store.topics[q.t]||(store.topics[q.t]={ok:0,bad:0});t.bad++;save(store);noteAns(q,false);
   S.badN++;S.lives--;S.missed.push({t:q.q,y:"– (lejárt az idő)",r:q.o[q.a],w:q.e,f:q.r});
   var v=$("verdict");v.classList.remove("hide","ok","bad");v.classList.add("bad");v.textContent="Lejárt az idő! "+(S.lives>0?S.lives+" életed maradt.":"Elfogyott az életed.");
   var ex=$("expl");ex.className="expl";ex.innerHTML="<b>Magyarázat</b><div></div><div class='ref'></div>";
@@ -1859,12 +1900,12 @@ function answer(pos){if(!S||S.locked||S.gone.indexOf(pos)>-1)return;S.locked=tru
   setTimeout(function(){if(S!==st||$("game").classList.contains("hide"))return;
     var cp=correctPos(),right=pos===cp,cur=S.qs[S.lv],q=cur.q;
     bs[pos].classList.remove("sel");bs[cp].classList.add("ok","flash");if(!right)bs[pos].classList.add("bad");
-    var t=store.topics[q.t]||(store.topics[q.t]={ok:0,bad:0});if(right)t.ok++;else t.bad++;save(store);
-    var v=$("verdict");v.classList.remove("hide","ok","bad");var last=S.lv===TOTAL-1;
-    if(right){SND.right();S.okN++;S.score+=worth(S.lv);v.classList.add("ok");v.textContent="Helyes válasz! +"+fmt(worth(S.lv))+" pont";renderHud();
+    var t=store.topics[q.t]||(store.topics[q.t]={ok:0,bad:0});if(right)t.ok++;else t.bad++;save(store);var hst=noteAns(q,right);
+    var v=$("verdict");v.classList.remove("hide","ok","bad");var last=S.lv===S.total-1;
+    if(right){SND.right();S.okN++;if(!S.pr)S.score+=worth(S.lv);v.classList.add("ok");v.textContent="Helyes válasz!"+(S.pr?"":" +"+fmt(worth(S.lv))+" pont")+hibNote(hst);renderHud();
       if(last){S.after="win";setTimeout(function(){if(S===st)finish("win");},1300);}else{$("nextBtn").classList.remove("hide");$("nextBtn").focus({preventScroll:true});}}
-    else{SND.wrong();S.badN++;S.lives--;S.missed.push({t:q.q,y:q.o[cur.order[pos]],r:q.o[q.a],w:q.e,f:q.r});
-      v.classList.add("bad");v.textContent=S.lives>0?"Nem ez a jó válasz. "+S.lives+" életed maradt.":"Nem ez a jó válasz. Elfogyott az életed.";
+    else{SND.wrong();S.badN++;if(!S.pr)S.lives--;S.missed.push({t:q.q,y:q.o[cur.order[pos]],r:q.o[q.a],w:q.e,f:q.r});
+      v.classList.add("bad");v.textContent=(S.pr?"Nem ez a jó válasz.":S.lives>0?"Nem ez a jó válasz. "+S.lives+" életed maradt.":"Nem ez a jó válasz. Elfogyott az életed.")+hibNote(hst);
       var ex=$("expl");ex.className="expl";ex.innerHTML="<b>Magyarázat</b><div></div><div class='ref'></div>";
       ex.children[1].textContent="Helyes: "+"ABC"[cp]+") "+q.o[q.a]+". "+(q.e||"");ex.children[2].textContent="Tananyag: "+(q.r||q.t);
       $("stopBtn").classList.add("hide");S.after=S.lives<=0?"lose":(last?"done":null);
@@ -1889,7 +1930,11 @@ $("lTel").addEventListener("click",function(){if(S.locked||!S.life.lTel)return;S
   var sure=Math.random()<(d===1?0.92:(d===2?0.78:0.6));var pick=sure?cp:alive.filter(function(p){return p!==cp;})[0];
   var conf=sure?(d===3?"Nem vagyok száz százalékig biztos, de szerintem":"Teljesen biztos vagyok benne:"):"Hú, ez nehéz. Én erre tippelnék:";
   var n=$("note");n.classList.remove("hide");n.textContent="Telefonon a lövegparancsnok: „"+conf+" a(z) "+"ABC"[pick]+" válasz.”";});
-function finish(how){qtStop();SND.mode("normal");var score=S.score,answered=S.okN+S.badN;show("end");
+function finishPr(){qtStop();SND.mode("normal");var tot=S.okN+S.badN,left=hibList().length,pct=tot?Math.round(S.okN/tot*100):0;show("end");
+  $("endBadge").textContent="Gyakorló mód";$("endTitle").textContent=S.ptitle;$("endScore").textContent=S.okN+" / "+tot+" jó";
+  $("endSub").textContent=tot?(pct+"%. "+(left?"A Hibáim listán még "+left+" kérdés vár.":"A Hibáim lista üres – szép munka!")):"Nem válaszoltál meg egy kérdést sem.";
+  renderReview($("review"),S.missed);$("againBtn").textContent="Gyakorlás újra";S=null;}
+function finish(how){if(S&&S.pr)return finishPr();$("againBtn").textContent="Új játék";qtStop();SND.mode("normal");var score=S.score,answered=S.okN+S.badN;show("end");
   var t={win:["Gratulálunk!","PzH-milliomos!","Mind az 50 kérdésen végigmentél, "+S.lives+" élettel."],
          done:["Végigértél","Szép munka!","Mind az 50 kérdés megvan: "+S.okN+" helyes, "+S.badN+" hiba."],
          stop:["Megálltál","Szép játék!",answered+" kérdésre válaszoltál ("+S.okN+" helyes), viszed a pontjaidat."],
@@ -1914,10 +1959,35 @@ function renderStats(){var parts=[];
   var B={start:store.best?fmt(store.best)+" p":"",sim:store.simBest!=null?store.simBest+" hiba":"",hangar:store.hgBest!=null?fmt(store.hgBest)+" p":"",
     ter:store.terBest!=null?store.terBest+" / 8":"",dd:store.ddBest!=null?store.ddBest+" hiba":"",htd:store.htdBest!=null?store.htdBest+"%":"",kis:window.KIS?Object.keys(store.kisRead||{}).length+" / "+KIS.length:"",rank:LB&&LB.total()?fmt(LB.total())+" p":"",set:"",share:""};
   Array.prototype.forEach.call(document.querySelectorAll(".mbest"),function(n){var v=B[n.dataset.best]||"";n.textContent=v&&(n.dataset.best==="kis"?"Olvasva "+v:n.dataset.best==="rank"?"Össz. "+v:"Legjobb "+v);});}
-$("startBtn").addEventListener("click",newGame);$("againBtn").addEventListener("click",newGame);
+$("startBtn").addEventListener("click",function(){newGame();});$("againBtn").addEventListener("click",function(){if(LASTPR)LASTPR();else newGame();});
+
+/* ===== Hibáim gyakorló + témakör-statisztika ===== */
+function startPractice(kind,topic){var qs,title;
+  if(kind==="hib"){qs=shuffle(hibList()).slice(0,20);title="Hibáim";if(!qs.length){toast("Még nincs hibás kérdésed. Játssz egy kvízt!");return;}}
+  else{var w=store.wrong||{},pool=BANK.filter(function(q){return q.t===topic;}),bad=shuffle(pool.filter(function(q){return qKey(q) in w;})),rest=shuffle(pool.filter(function(q){return !(qKey(q) in w);}));
+    qs=bad.concat(rest).slice(0,10);title=topic;if(!qs.length)return;}
+  newGame({qs:qs,title:title});LASTPR=function(){startPractice(kind,topic);};}
+function renderHib(){var n=hibList().length,b=$("hibN");if(b)b.textContent=n?"("+n+")":"";}
+function topicRows(){var w=store.wrong||{},m={};
+  BANK.forEach(function(q){var r=m[q.t]||(m[q.t]={t:q.t,n:0,hib:0});r.n++;if(qKey(q) in w)r.hib++;});
+  return Object.keys(m).map(function(k){var r=m[k],st=store.topics[k]||{ok:0,bad:0};r.ok=st.ok;r.ans=st.ok+st.bad;r.pct=r.ans?Math.round(st.ok/r.ans*100):null;return r;});}
+function renderTopics(){var rows=topicRows(),L=$("tpList");L.innerHTML="";
+  rows.sort(function(a,b){if(a.pct===null&&b.pct===null)return a.t<b.t?-1:1;if(a.pct===null)return 1;if(b.pct===null)return -1;return a.pct-b.pct||a.t.localeCompare(b.t);});
+  var ok=0,ans=0;rows.forEach(function(r){ok+=r.ok;ans+=r.ans;
+    var b=document.createElement("button");b.type="button";b.className="tprow "+(r.pct===null?"n":r.pct>=80?"g":r.pct>=60?"m":"r");
+    b.innerHTML='<span class="tpn"></span><span class="tpp"></span><span class="tpbar"><i></i></span><small></small>';
+    b.children[0].textContent=r.t;b.children[1].textContent=r.pct===null?"–":r.pct+"%";b.children[2].firstChild.style.width=(r.pct||0)+"%";
+    b.children[3].textContent=(r.ans?r.ok+" / "+r.ans+" jó válasz":"még nem játszottad")+" · "+r.n+" kérdés"+(r.hib?" · Hibáim: "+r.hib:"")+(r.ans&&r.ans<5?" · kevés adat":"");
+    b.addEventListener("click",function(){startPractice("topic",r.t);});L.appendChild(b);});
+  $("tpCount").textContent=rows.length+" témakör";
+  $("tpSum").innerHTML=ans?"Összesítve: <strong>"+Math.round(ok/ans*100)+"%</strong> ("+ok+" / "+ans+" jó válasz)":"Még nincs adat. Játssz egy kvízt, és itt látod az eredményeidet.";}
+function weakTopic(){var best=null;topicRows().forEach(function(r){if(r.ans>=3&&r.pct<100&&(!best||r.pct<best.pct))best=r;});return best?best.t:weakest();}
+$("hibBtn").addEventListener("click",function(){startPractice("hib");});
+$("topBtn").addEventListener("click",function(){show("topics");renderTopics();});
+$("tpWeak").addEventListener("click",function(){var t=weakTopic();if(!t){toast("Még kevés adat. Játssz néhány kvízt!");return;}startPractice("topic",t);});
 
 /* kilépés */
-function openExit(){var c=curSec();$("exitText").textContent=c==="sim"?"A tűzfeladat állása elvész.":c==="game"?"Az eddigi állásod elvész. Ha a pontjaidat vinnéd, használd a „Megállok” gombot.":"A játék állása elvész, és visszajutsz a főmenübe.";$("exitModal").classList.remove("hide");$("exitNo").focus();}
+function openExit(){var c=curSec();$("exitText").textContent=c==="sim"?"A tűzfeladat állása elvész.":c==="game"?(S&&S.pr?"A gyakorlás állása elvész. A Hibáim lista megmarad.":"Az eddigi állásod elvész. Ha a pontjaidat vinnéd, használd a „Megállok” gombot."):"A játék állása elvész, és visszajutsz a főmenübe.";$("exitModal").classList.remove("hide");$("exitNo").focus();}
 function closeExit(){$("exitModal").classList.add("hide");pendingGo=null;}
 $("exitNo").addEventListener("click",closeExit);
 $("exitYes").addEventListener("click",function(){var t=pendingGo||"home";$("exitModal").classList.add("hide");pendingGo=null;S=null;SIM.run++;TER.run++;HG.run++;$("sim").classList.add("hide");route(t);});
