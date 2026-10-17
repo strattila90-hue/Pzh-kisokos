@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0a0c0b">
-<title>Parancsnoki útmutató</title>
+<title>Parancsnoki verzió</title>
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@700&family=Share+Tech+Mono&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
@@ -112,16 +112,18 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
   <b>PzH <i>Milliomos</i></b><span class="cls">CSAK PARANCSNOKI</span>
  </div>
 
- <h1>Parancsnoki <em>útmutató</em></h1>
- <p class="lead">A PzH 2000 kezelői felkészítő játék telepítése, frissítése és a kvízkérdések titkos szerkesztése. Ezt az oldalt ne továbbítsd – a játék kiosztott linkje és a laktanyai QR-kód nem vezet ide.</p>
+ <h1>Parancsnoki <em>verzió</em></h1>
+ <p class="lead">A PzH 2000 kezelői felkészítő játék parancsnoki változata: telepítés, frissítés és a kvízkérdések szerkesztése – <b>kód nélkül</b>. Amit itt javítasz, az mindenkinél megváltozik, aki letöltötte a játékot.</p>
+ <div class="okb" id="keyOk" hidden><b>✓ Parancsnoki kulcs a linkben.</b> Az alábbi gombokkal megnyitva a telefonod azonnal szerkesztő lesz, kódot nem kell beírni. Ezt a linket csak annak küldd, akinek szerkesztenie kell.</div>
+ <div class="warn" id="keyNo" hidden><b>Ez a link nem tartalmaz parancsnoki kulcsot.</b> A játék és az útmutató működik, de a szerkesztéshez a teljes parancsnoki link kell (a <code>#</code> utáni résszel együtt).</div>
 
  <div class="card">
   <div class="k">Gyors indítás</div>
   <div class="btns">
-   <a class="btn" href="./">▶ Játék megnyitása</a>
-   <a class="btn ghost" href="./#kerdesek">✎ Kérdések szerkesztése</a>
+   <a class="btn" id="bPlay" href="./">▶ Játék megnyitása</a>
+   <a class="btn ghost" id="bEdit" href="./#kerdesek">✎ Kérdések szerkesztése</a>
   </div>
-  <p style="margin:12px 0 0;color:var(--muted);font-size:15px">A második gomb közvetlenül az <b>Összes kérdés</b> oldalt nyitja meg, ahol a szerkesztés történik.</p>
+  <p style="margin:12px 0 0;color:var(--muted);font-size:15px">Mindkét gomb bekapcsolja a parancsnoki módot ezen a telefonon (egyszer kell, utána megmarad). A második egyből az <b>Összes kérdés</b> oldalra visz, ahol a szerkesztés történik.</p>
  </div>
 
  <div class="card" id="telepites">
@@ -134,7 +136,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
   </div>
   <div class="pane" id="pA" role="tabpanel">
    <ol class="steps">
-    <li>Nyisd meg a <b>Játék megnyitása</b> gombot <b>Chrome</b> böngészőben.</li>
+    <li>Nyisd meg ezt az oldalt <b>Chrome</b>-ban, és koppints a <b>Játék megnyitása</b> gombra – így a telepített app is parancsnoki lesz.</li>
     <li>Koppints a jobb felső <span class="ico">⋮</span> menüre.</li>
     <li>Válaszd: <b>Alkalmazás telepítése</b> vagy <b>Hozzáadás a kezdőképernyőhöz</b>.</li>
     <li>Koppints a <b>Telepítés</b> gombra. Az ikon megjelenik a kezdőképernyőn – innen indítsd.</li>
@@ -186,7 +188,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
     <div class="finger"></div>
     <svg class="ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28"/></svg>
     <div class="cnt">3 mp</div>
-    <div class="kode"><div>Kód:<span>••••••••••••</span></div></div>
+    <div class="kode"><div>✓ Parancsnoki szerkesztés bekapcsolva<span style="font-family:var(--f-b);letter-spacing:0">kód nélkül, a link alapján</span></div></div>
     <div class="toast">Mentve – mindenkinél frissül.</div>
    </div>
    <div class="cap" id="cap">Tartsd az ujjad 3 mp-ig a kérdésen</div>
@@ -198,7 +200,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
     <div class="mock"><span>Főmenü</span>›<span>Milliomos kvíz</span>›<span><em>Összes kérdés</em></span></div></li>
    <li><b>Keresd meg a kérdést.</b> Írj a keresőbe egy szót a kérdésből vagy a válaszból, vagy szűrj témakörre (pl. Lőszerek, Biztonság). A <b>magyarázatok</b> pipával a magyarázat is látszik.</li>
    <li><b>Tartsd az ujjad 3 másodpercig a kérdés kártyáján.</b> Ne görgess közben, és ne engedd el. A telefon röviden rezeg, és a kártya alján megnyílik a szerkesztő.</li>
-   <li><b>Csak az első alkalommal:</b> felugrik egy egyszerű <b>„Kód:”</b> ablak. Írd be a szerkesztői kódot, amit személyesen kaptál meg, és nyomd meg az OK-t. A telefon ezt megjegyzi, többet nem kérdezi.</li>
+   <li><b>Kód nem kell.</b> Ha a játékot a fenti parancsnoki gombbal nyitottad meg, a telefon már szerkesztő: ezt a „<b>Parancsnoki szerkesztés bekapcsolva</b>” üzenet jelezte, és a kérdéslista tetején ott a sárga „✎ Parancsnoki mód” sor.</li>
    <li><b>Írd át, amit kell:</b>
     <table>
      <tr><td>Kérdés</td><td>a kérdés szövege</td></tr>
@@ -222,9 +224,10 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
   <ul style="margin:0;padding-left:20px">
    <li>Üres mezővel nem ment – minden válasznak legyen szövege.</li>
    <li>Szerkesztéshez <b>hálózat</b> kell. Offline módban („Beállítások → Offline mód”) nem lehet.</li>
-   <li>Ha törlöd az app adatait vagy újratelepíted, a kódot egyszer újra be kell írni.</li>
-   <li>„<b>Hibás kód.</b>” – elírtad; a kód nagybetűs, kötőjellel. Próbáld újra a 3 mp-es nyomással.</li>
-   <li>„<b>Mentés nem sikerült</b>” – nincs net, vagy ezen a telefonon még nem adtad meg a kódot.</li>
+   <li>Ha törlöd az app adatait vagy újratelepíted, nyisd meg újra ezt a linket, és koppints az egyik gombra.</li>
+   <li>„<b>Mentés nem sikerült</b>” – nincs net, vagy a játékot nem a parancsnoki gombbal nyitottad meg.</li>
+   <li>„<b>A parancsnoki link érvénytelen</b>” – a kulcsot lecserélték; kérj új linket Tudsztól.</li>
+   <li id="iosK" hidden><b>iPhone, főképernyőről indított app:</b> az iPhone a főképernyős appnak külön tárolót ad, ezért ott első szerkesztéskor egy „Kód:” ablak jöhet fel. Ilyenkor ezt írd be: <code id="kTxt"></code></li>
    <li>Egyszerre többen is szerkeszthetnek; ugyanannál a kérdésnél az utolsó mentés marad meg.</li>
   </ul>
  </div>
@@ -232,11 +235,11 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
  <div class="card">
   <div class="k">4. Biztonság</div>
   <h2>Kód és link</h2>
-  <div class="warn">A szerkesztői kódot <b>ne írd le ide, ne küldd chatben</b>, és ezt a linket se továbbítsd. Ha a kód kiszivárog, szólj Tudsznak – új kódot kap a rendszer, a régi azonnal érvénytelen lesz (a már beléptetett telefonok jogát is vissza lehet vonni).</div>
+  <div class="warn"><b>A link maga a kulcs:</b> aki megkapja, szerkesztheti a kérdéseket. Csak megbízható személynek küldd, ne tedd ki csoportba vagy táblára. Ha kiszivárog, szólj Tudsznak – új kulcsot kap a rendszer, a régi link azonnal érvénytelen lesz, és a már bekapcsolt telefonok joga is visszavonható.</div>
   <p>A játékba nem kerül személyes adat: a ranglistán álnév szerepel. A tananyag nem nyilvános – csak a kiképzésben résztvevők használják.</p>
  </div>
 
- <footer>PzH Milliomos · parancsnoki útmutató · ez az oldal nincs a keresőkben</footer>
+ <footer>PzH Milliomos · parancsnoki verzió · ez az oldal nincs a keresőkben</footer>
 </div>
 <script>
 (function(){
@@ -244,7 +247,10 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
   function sel(i){tA.setAttribute("aria-selected",String(!i));tI.setAttribute("aria-selected",String(!!i));pA.hidden=!!i;pI.hidden=!i;}
   tA.addEventListener("click",function(){sel(0);});tI.addEventListener("click",function(){sel(1);});
   if(/iPhone|iPad|iPod/.test(navigator.userAgent))sel(1);
-  var cap=document.getElementById("cap"),T=[[0,"Tartsd az ujjad 3 mp-ig a kérdésen"],[4.7,"Első alkalommal: add meg a kódot"],[6.8,"Írd át a szöveget"],[11.3,"Mentés – mindenkinél frissül"]],t0=performance.now();
+  var K="";try{var m=location.hash.match(/k=([^&]+)/);if(m){K=decodeURIComponent(m[1]);localStorage.setItem("pzhPK",K);}else K=localStorage.getItem("pzhPK")||"";}catch(e){}
+  document.getElementById(K?"keyOk":"keyNo").hidden=false;
+  if(K){var e=encodeURIComponent(K);document.getElementById("bPlay").href="./#pk="+e;document.getElementById("bEdit").href="./#pk="+e;document.getElementById("kTxt").textContent=K;document.getElementById("iosK").hidden=false;}
+  var cap=document.getElementById("cap"),T=[[0,"Tartsd az ujjad 3 mp-ig a kérdésen"],[4.7,"Nincs kód – a link a kulcs"],[6.8,"Írd át a szöveget"],[11.3,"Mentés – mindenkinél frissül"]],t0=performance.now();
   if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){cap.textContent="3 mp nyomás → kód (első alkalommal) → szerkesztés → mentés";return;}
   setInterval(function(){var t=((performance.now()-t0)/1000)%14,c=T[0][1];T.forEach(function(x){if(t>=x[0])c=x[1];});if(cap.textContent!==c)cap.textContent=c;},250);
 })();
