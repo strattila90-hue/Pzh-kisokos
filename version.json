@@ -1,5 +1,5 @@
 {
- "version": "1.31.1",
+ "version": "1.31.2",
  "date": "2026-10-16",
- "notes": "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"
+ "notes": "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"
 }
