@@ -123,7 +123,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
    <a class="btn" id="bPlay" href="./">▶ Játék megnyitása</a>
    <a class="btn ghost" id="bEdit" href="./#kerdesek">✎ Kérdések szerkesztése</a>
   </div>
-  <p style="margin:12px 0 0;color:var(--muted);font-size:15px">Mindkét gomb bekapcsolja a parancsnoki módot ezen a telefonon (egyszer kell, utána megmarad). A második egyből az <b>Összes kérdés</b> oldalra visz, ahol a szerkesztés történik.</p>
+  <p style="margin:12px 0 0;color:var(--muted);font-size:15px">Mindkét gomb bekapcsolja a parancsnoki módot ezen a telefonon (egyszer kell, utána megmarad). Az első a normál főmenüt nyitja meg – felül a piros <b>PK VERZIÓ</b> sáv jelzi a parancsnoki módot, verziószámmal, <b>✎ Kérdések</b> és <b>↻ Frissítés</b> gombbal. A második egyből az <b>Összes kérdés</b> oldalra visz.</p>
  </div>
 
  <div class="card" id="telepites">
@@ -249,7 +249,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
   if(/iPhone|iPad|iPod/.test(navigator.userAgent))sel(1);
   var K="";try{var m=location.hash.match(/k=([^&]+)/);if(m){K=decodeURIComponent(m[1]);localStorage.setItem("pzhPK",K);}else K=localStorage.getItem("pzhPK")||"";}catch(e){}
   document.getElementById(K?"keyOk":"keyNo").hidden=false;
-  if(K){var e=encodeURIComponent(K);document.getElementById("bPlay").href="./#pk="+e;document.getElementById("bEdit").href="./#pk="+e;document.getElementById("kTxt").textContent=K;document.getElementById("iosK").hidden=false;}
+  if(K){var e=encodeURIComponent(K);document.getElementById("bPlay").href="./#pk="+e;document.getElementById("bEdit").href="./#pk="+e+"&q";document.getElementById("kTxt").textContent=K;document.getElementById("iosK").hidden=false;}
   var cap=document.getElementById("cap"),T=[[0,"Tartsd az ujjad 3 mp-ig a kérdésen"],[4.7,"Nincs kód – a link a kulcs"],[6.8,"Írd át a szöveget"],[11.3,"Mentés – mindenkinél frissül"]],t0=performance.now();
   if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){cap.textContent="3 mp nyomás → kód (első alkalommal) → szerkesztés → mentés";return;}
   setInterval(function(){var t=((performance.now()-t0)/1000)%14,c=T[0][1];T.forEach(function(x){if(t>=x[0])c=x[1];});if(cap.textContent!==c)cap.textContent=c;},250);
