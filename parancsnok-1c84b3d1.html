@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0a0c0b">
+<title>Parancsnoki útmutató</title>
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@700&family=Share+Tech+Mono&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c0b;--panel:#131715;--panel2:#1a1f1c;--ink:#ebe7da;--muted:#a3a495;--line:rgba(214,206,170,.14);
+  --gold:#c7a35a;--gold2:#ead39b;--red:#ff3b30;--ok:#5cc985;--steel:#8fb3c9;
+  --f-d:"Stardos Stencil","Barlow Condensed",Impact,sans-serif;--f-c:"Barlow Condensed","Arial Narrow",sans-serif;--f-b:"Barlow",system-ui,sans-serif;--f-m:"Share Tech Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#e8e5da;--panel:#f7f5ee;--panel2:#eeeadd;--ink:#191b17;--muted:#575a4f;--line:rgba(50,52,36,.16);--gold:#7a5e20;--gold2:#9c7a2c;--red:#c8231b;--ok:#18804a;--steel:#3b6276}}
+:root[data-theme="light"]{--bg:#e8e5da;--panel:#f7f5ee;--panel2:#eeeadd;--ink:#191b17;--muted:#575a4f;--line:rgba(50,52,36,.16);--gold:#7a5e20;--gold2:#9c7a2c;--red:#c8231b;--ok:#18804a;--steel:#3b6276}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:radial-gradient(900px 520px at 88% -12%,color-mix(in srgb,var(--steel) 15%,transparent),transparent 70%),radial-gradient(900px 620px at -5% 108%,color-mix(in srgb,var(--gold) 13%,transparent),transparent 70%),var(--bg);background-attachment:fixed;color:var(--ink);font:400 17px/1.55 var(--f-b)}
+.wrap{max-width:760px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 60px}
+.top{display:flex;align-items:center;gap:10px;padding:8px 0 14px;border-bottom:1px solid var(--line);box-shadow:0 1px 0 0 color-mix(in srgb,var(--red) 45%,transparent)}
+.top svg{width:24px;height:24px;flex:none}
+.top b{font:700 20px var(--f-d);letter-spacing:.06em;text-transform:uppercase}
+.top b i{font-style:normal;color:var(--gold)}
+.top .cls{margin-left:auto;font:400 11px var(--f-m);letter-spacing:.16em;color:var(--red);border:1px solid color-mix(in srgb,var(--red) 50%,transparent);padding:3px 8px;border-radius:99px;white-space:nowrap}
+h1{font:700 clamp(30px,8vw,46px)/1.02 var(--f-d);text-transform:uppercase;letter-spacing:.03em;margin:22px 0 8px}
+h1 em{font-style:normal;color:var(--gold)}
+.lead{color:var(--muted);margin:0 0 18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 60%),var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 24px 48px -30px rgba(0,0,0,.9)}
+.k{font:400 12px var(--f-m);letter-spacing:.2em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:8px;margin:0 0 6px}
+.k::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red)}
+h2{font:700 24px/1.15 var(--f-d);text-transform:uppercase;letter-spacing:.03em;margin:2px 0 10px}
+h3{font:700 18px var(--f-c);letter-spacing:.04em;text-transform:uppercase;margin:16px 0 6px;color:var(--gold2)}
+p{margin:0 0 10px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{flex:1 1 220px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:12px 18px;border-radius:14px;text-decoration:none;font:700 16px var(--f-c);letter-spacing:.12em;text-transform:uppercase;color:#17130a;background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,color-mix(in srgb,var(--gold) 76%,#000));box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 10px 22px -12px var(--gold)}
+.btn.ghost{background:var(--panel2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+ol.steps{list-style:none;counter-reset:s;margin:8px 0 0;padding:0;display:grid;gap:10px}
+ol.steps>li{counter-increment:s;position:relative;padding:12px 14px 12px 54px;background:var(--panel2);border-radius:14px;border:1px solid var(--line)}
+ol.steps>li::before{content:counter(s);position:absolute;left:12px;top:12px;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font:700 16px var(--f-c);color:#17130a;background:var(--gold)}
+ol.steps b{color:var(--ink)}
+.tabs{display:flex;gap:8px;margin:6px 0 4px}
+.tab{flex:1;min-height:44px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 15px var(--f-c);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.tab[aria-selected="true"]{background:color-mix(in srgb,var(--gold) 18%,transparent);border-color:color-mix(in srgb,var(--gold) 55%,transparent);color:var(--gold2)}
+.pane[hidden]{display:none}
+.ico{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:8px;background:color-mix(in srgb,var(--ink) 10%,transparent);font:700 15px var(--f-m);vertical-align:-5px}
+.note{padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--gold) 10%,transparent);border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);margin:12px 0}
+.warn{padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--red) 10%,transparent);border:1px solid color-mix(in srgb,var(--red) 40%,transparent);margin:12px 0}
+.okb{padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--ok) 10%,transparent);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent);margin:12px 0}
+code{font:400 15px var(--f-m);background:color-mix(in srgb,var(--ink) 9%,transparent);padding:2px 7px;border-radius:7px}
+/* animált bemutató */
+.demo{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;justify-items:center;margin:8px 0 4px}
+.phone{width:min(330px,100%);border-radius:30px;padding:14px 12px 18px;background:#0b0d0c;border:2px solid #2a2f2b;box-shadow:0 30px 60px -30px #000,inset 0 0 0 1px rgba(255,255,255,.05);position:relative;overflow:hidden;color:#ebe7da}
+.phone .bar{display:flex;justify-content:space-between;font:400 10px var(--f-m);letter-spacing:.12em;color:#a3a495;margin:0 6px 10px}
+.qc{position:relative;padding:12px 12px 10px;border-radius:16px;border:1px solid rgba(214,206,170,.14);background:#1a1f1c}
+.qc .h{display:flex;gap:8px;font:400 10px var(--f-m);letter-spacing:.12em;color:#a3a495;margin-bottom:4px}
+.qc .h b{color:#ead39b;font-weight:400}
+.qc .q{font:600 14px/1.3 var(--f-b);margin:0 0 8px}
+.qc .o{font:500 12.5px var(--f-b);padding:6px 9px;border-radius:9px;background:rgba(235,231,218,.05);color:#a3a495;margin-top:4px}
+.qc .o.g{color:#5cc985;background:rgba(92,201,133,.13);box-shadow:inset 0 0 0 1px rgba(92,201,133,.4);font-weight:700}
+.finger{position:absolute;left:58%;top:34%;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.55);opacity:0;transform:scale(1.4)}
+.ring{position:absolute;left:calc(58% - 9px);top:calc(34% - 9px);width:64px;height:64px;opacity:0}
+.ring circle{fill:none;stroke:#c7a35a;stroke-width:5;stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:176;transform:rotate(-90deg);transform-origin:50% 50%}
+.cnt{position:absolute;left:calc(58% - 9px);top:calc(34% + 60px);width:64px;text-align:center;font:400 12px var(--f-m);color:#ead39b;opacity:0}
+.ed{display:grid;gap:6px;margin-top:10px;max-height:0;overflow:hidden;opacity:0}
+.ed label{display:grid;gap:2px;font:600 9.5px var(--f-c);letter-spacing:.1em;text-transform:uppercase;color:#a3a495}
+.ed label.g{color:#5cc985}
+.ed .f{text-transform:none;letter-spacing:0;font:500 12px var(--f-b);color:#ebe7da;padding:6px 8px;border-radius:8px;border:1px solid rgba(214,206,170,.18);background:#131715;min-height:26px}
+.ed .typ{border-color:#c7a35a;box-shadow:0 0 0 2px rgba(199,163,90,.25)}
+.ed .typ span{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0;border-right:2px solid #ead39b}
+.ed .bb{display:flex;gap:6px;justify-content:flex-end;margin-top:2px}
+.ed .bb i{font:700 10px var(--f-c);letter-spacing:.1em;text-transform:uppercase;font-style:normal;padding:6px 10px;border-radius:8px;background:#1a1f1c;box-shadow:inset 0 0 0 1px rgba(214,206,170,.18)}
+.ed .bb i.s{background:#c7a35a;color:#17130a}
+.toast{position:absolute;left:50%;bottom:16px;transform:translate(-50%,20px);padding:8px 14px;border-radius:12px;background:#ebe7da;color:#17130a;font:700 12px var(--f-b);white-space:nowrap;opacity:0}
+.kode{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.55);opacity:0}
+.kode div{width:78%;padding:14px;border-radius:14px;background:#ebe7da;color:#17130a;font:600 13px var(--f-b)}
+.kode div span{display:block;margin-top:8px;padding:7px 9px;border-radius:8px;border:1px solid #999;font:400 13px var(--f-m);letter-spacing:.1em}
+.cap{font:600 14px var(--f-c);letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);text-align:center;min-height:22px}
+.play .finger{animation:fg 14s infinite}
+.play .ring{animation:rg 14s infinite}.play .ring circle{animation:rc 14s infinite}
+.play .cnt{animation:rg 14s infinite}
+.play .kode{animation:kd 14s infinite}
+.play .ed{animation:ed 14s infinite}
+.play .typ span{animation:ty 14s infinite steps(22)}
+.play .toast{animation:ts 14s infinite}
+@keyframes fg{0%,6%{opacity:0;transform:scale(1.4)}9%{opacity:1;transform:scale(1)}31%{opacity:1;transform:scale(1)}34%,100%{opacity:0;transform:scale(1.4)}}
+@keyframes rg{0%,9%{opacity:0}10%,31%{opacity:1}33%,100%{opacity:0}}
+@keyframes rc{0%,10%{stroke-dashoffset:176}31%,100%{stroke-dashoffset:0}}
+@keyframes kd{0%,33%{opacity:0}35%,46%{opacity:1}48%,100%{opacity:0}}
+@keyframes ed{0%,48%{max-height:0;opacity:0}52%,92%{max-height:400px;opacity:1}96%,100%{max-height:0;opacity:0}}
+@keyframes ty{0%,55%{width:0}72%,100%{width:13.5em}}
+@keyframes ts{0%,80%{opacity:0;transform:translate(-50%,20px)}83%,93%{opacity:1;transform:translate(-50%,0)}96%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.play *{animation:none!important}.ed{max-height:none;opacity:1}.ed .typ span{width:auto;border:0}}
+.mock{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}
+.mock span{padding:7px 12px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font:700 14px var(--f-c);letter-spacing:.08em;text-transform:uppercase}
+.mock em{font-style:normal;color:var(--gold)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td{padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:700;width:38%;color:var(--gold2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);vertical-align:2px}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="top">
+  <svg viewBox="0 0 32 32" fill="none" stroke="#c7a35a" stroke-width="2" aria-hidden="true"><circle cx="16" cy="16" r="11"/><path d="M16 1v8M16 23v8M1 16h8M23 16h8"/><circle cx="16" cy="16" r="2.8" fill="#ff3b30" stroke="none"/></svg>
+  <b>PzH <i>Milliomos</i></b><span class="cls">CSAK PARANCSNOKI</span>
+ </div>
+
+ <h1>Parancsnoki <em>útmutató</em></h1>
+ <p class="lead">A PzH 2000 kezelői felkészítő játék telepítése, frissítése és a kvízkérdések titkos szerkesztése. Ezt az oldalt ne továbbítsd – a játék kiosztott linkje és a laktanyai QR-kód nem vezet ide.</p>
+
+ <div class="card">
+  <div class="k">Gyors indítás</div>
+  <div class="btns">
+   <a class="btn" href="./">▶ Játék megnyitása</a>
+   <a class="btn ghost" href="./#kerdesek">✎ Kérdések szerkesztése</a>
+  </div>
+  <p style="margin:12px 0 0;color:var(--muted);font-size:15px">A második gomb közvetlenül az <b>Összes kérdés</b> oldalt nyitja meg, ahol a szerkesztés történik.</p>
+ </div>
+
+ <div class="card" id="telepites">
+  <div class="k">1. Telepítés appként</div>
+  <h2>Letöltés a telefonra</h2>
+  <p>A játék nem az áruházból jön: a böngészőből kerül a kezdőképernyőre, és utána úgy működik, mint egy alkalmazás – saját ikonnal, teljes képernyőn, internet nélkül is.</p>
+  <div class="tabs" role="tablist">
+   <button class="tab" role="tab" id="tA" aria-selected="true" aria-controls="pA">Android</button>
+   <button class="tab" role="tab" id="tI" aria-selected="false" aria-controls="pI">iPhone</button>
+  </div>
+  <div class="pane" id="pA" role="tabpanel">
+   <ol class="steps">
+    <li>Nyisd meg a <b>Játék megnyitása</b> gombot <b>Chrome</b> böngészőben.</li>
+    <li>Koppints a jobb felső <span class="ico">⋮</span> menüre.</li>
+    <li>Válaszd: <b>Alkalmazás telepítése</b> vagy <b>Hozzáadás a kezdőképernyőhöz</b>.</li>
+    <li>Koppints a <b>Telepítés</b> gombra. Az ikon megjelenik a kezdőképernyőn – innen indítsd.</li>
+   </ol>
+  </div>
+  <div class="pane" id="pI" role="tabpanel" hidden>
+   <ol class="steps">
+    <li>Nyisd meg a <b>Játék megnyitása</b> gombot <b>Safari</b> böngészőben (más böngészőből iPhone-on nem telepíthető).</li>
+    <li>Koppints alul a <b>Megosztás</b> gombra <span class="ico">⬆</span>.</li>
+    <li>Görgess le, és válaszd: <b>Főképernyőhöz adás</b>.</li>
+    <li>Jobb felül <b>Hozzáadás</b>. Az ikon megjelenik a főképernyőn – innen indítsd.</li>
+   </ol>
+  </div>
+  <div class="note"><b>Offline:</b> az első megnyitás után a játék internet nélkül is indul. A ranglistához és a kérdések szerkesztéséhez hálózat kell.</div>
+ </div>
+
+ <div class="card">
+  <div class="k">2. Frissítés</div>
+  <h2>Mindig a legújabb</h2>
+  <p>Az app induláskor és visszatéréskor magától ellenőrzi, van-e új verzió, és ha nincs folyamatban játék, magától frissül. Ha mégis régi verziót látsz:</p>
+  <ol class="steps">
+   <li>Főmenü alján: <b>Frissítés → Keresés</b>.</li>
+   <li>Ha nem segít: zárd be teljesen az appot (a futó alkalmazások közül is), és nyisd meg újra.</li>
+  </ol>
+  <p style="margin-top:10px;color:var(--muted);font-size:15px">A verziószám a Beállítások alján és a főmenü alján látszik.</p>
+ </div>
+
+ <div class="card" id="szerkeszto">
+  <div class="k">3. Titkos menü</div>
+  <h2>Kvízkérdések szerkesztése</h2>
+  <p>Bármelyik kvízkérdés szövegét, válaszait és magyarázatát javíthatod. A mentés <b>mindenkinél</b> megváltozik – a játékosok nem kapnak róla értesítést, és a funkció sehol nem látszik a felületen.</p>
+
+  <div class="demo">
+   <div class="phone play" aria-label="Animált bemutató: 3 másodperces nyomás, kód, szerkesztés, mentés">
+    <div class="bar"><span>ÖSSZES KÉRDÉS</span><span>251 KÉRDÉS</span></div>
+    <div class="qc">
+     <div class="h"><b>#2</b><span>RENDELTETÉS</span><span style="margin-left:auto;color:#c7a35a">★</span></div>
+     <p class="q">Milyen célok ellen alkalmazható a PzH 2000 közvetlen irányzással?</p>
+     <div class="o g">✓ Páncélozott célok ellen, önvédelemből</div>
+     <div class="o">Légi célok ellen</div>
+     <div class="o">Csak erődített épületek ellen</div>
+     <div class="ed">
+      <label>Kérdés<div class="f">Milyen célok ellen alkalmazható…</div></label>
+      <label class="g">✓ Helyes válasz<div class="f typ"><span>Páncélozott célok ellen…</span></div></label>
+      <label>Válasz B<div class="f">Légi célok ellen</div></label>
+      <div class="bb"><i>Eredeti</i><i>Mégse</i><i class="s">Mentés</i></div>
+     </div>
+    </div>
+    <div class="finger"></div>
+    <svg class="ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28"/></svg>
+    <div class="cnt">3 mp</div>
+    <div class="kode"><div>Kód:<span>••••••••••••</span></div></div>
+    <div class="toast">Mentve – mindenkinél frissül.</div>
+   </div>
+   <div class="cap" id="cap">Tartsd az ujjad 3 mp-ig a kérdésen</div>
+  </div>
+
+  <h3>Lépésről lépésre</h3>
+  <ol class="steps">
+   <li><b>Nyisd meg a kérdéslistát.</b> Vagy a fenti <b>Kérdések szerkesztése</b> gombbal, vagy az appban:
+    <div class="mock"><span>Főmenü</span>›<span>Milliomos kvíz</span>›<span><em>Összes kérdés</em></span></div></li>
+   <li><b>Keresd meg a kérdést.</b> Írj a keresőbe egy szót a kérdésből vagy a válaszból, vagy szűrj témakörre (pl. Lőszerek, Biztonság). A <b>magyarázatok</b> pipával a magyarázat is látszik.</li>
+   <li><b>Tartsd az ujjad 3 másodpercig a kérdés kártyáján.</b> Ne görgess közben, és ne engedd el. A telefon röviden rezeg, és a kártya alján megnyílik a szerkesztő.</li>
+   <li><b>Csak az első alkalommal:</b> felugrik egy egyszerű <b>„Kód:”</b> ablak. Írd be a szerkesztői kódot, amit személyesen kaptál meg, és nyomd meg az OK-t. A telefon ezt megjegyzi, többet nem kérdezi.</li>
+   <li><b>Írd át, amit kell:</b>
+    <table>
+     <tr><td>Kérdés</td><td>a kérdés szövege</td></tr>
+     <tr><td style="color:var(--ok)">✓ Helyes válasz</td><td>zöld felirat jelöli – ennek a <b>szövege</b> írható át; hogy melyik a helyes, az nem változik</td></tr>
+     <tr><td>Válasz B, C</td><td>a rossz válaszok</td></tr>
+     <tr><td>Magyarázat</td><td>hibás válasz után ezt látja a játékos</td></tr>
+    </table></li>
+   <li><b>Mentés.</b> Megjelenik: <b>„Mentve – mindenkinél frissül.”</b> A nyitott appokban pár másodpercen belül, a többieknél a következő megnyitáskor jelenik meg.</li>
+  </ol>
+
+  <h3>A gombok</h3>
+  <table>
+   <tr><td>Mentés</td><td>elmenti mindenkinek</td></tr>
+   <tr><td>Mégse</td><td>bezárja a szerkesztőt, nem ment</td></tr>
+   <tr><td>Eredeti</td><td>visszaállítja a gyári szöveget – mindenkinél</td></tr>
+  </table>
+
+  <div class="okb"><b>Mi látszik a játékosoknak?</b> Csak az, hogy a kérdés szövege más. Értesítést nem kapnak, a frissítési üzenetekben sem szerepel. A módosított kérdést a listában csak egy apró arany pont <span class="dot"></span> jelöli a sorszám mellett.</div>
+
+  <h3>Jó tudni</h3>
+  <ul style="margin:0;padding-left:20px">
+   <li>Üres mezővel nem ment – minden válasznak legyen szövege.</li>
+   <li>Szerkesztéshez <b>hálózat</b> kell. Offline módban („Beállítások → Offline mód”) nem lehet.</li>
+   <li>Ha törlöd az app adatait vagy újratelepíted, a kódot egyszer újra be kell írni.</li>
+   <li>„<b>Hibás kód.</b>” – elírtad; a kód nagybetűs, kötőjellel. Próbáld újra a 3 mp-es nyomással.</li>
+   <li>„<b>Mentés nem sikerült</b>” – nincs net, vagy ezen a telefonon még nem adtad meg a kódot.</li>
+   <li>Egyszerre többen is szerkeszthetnek; ugyanannál a kérdésnél az utolsó mentés marad meg.</li>
+  </ul>
+ </div>
+
+ <div class="card">
+  <div class="k">4. Biztonság</div>
+  <h2>Kód és link</h2>
+  <div class="warn">A szerkesztői kódot <b>ne írd le ide, ne küldd chatben</b>, és ezt a linket se továbbítsd. Ha a kód kiszivárog, szólj Tudsznak – új kódot kap a rendszer, a régi azonnal érvénytelen lesz (a már beléptetett telefonok jogát is vissza lehet vonni).</div>
+  <p>A játékba nem kerül személyes adat: a ranglistán álnév szerepel. A tananyag nem nyilvános – csak a kiképzésben résztvevők használják.</p>
+ </div>
+
+ <footer>PzH Milliomos · parancsnoki útmutató · ez az oldal nincs a keresőkben</footer>
+</div>
+<script>
+(function(){
+  var tA=document.getElementById("tA"),tI=document.getElementById("tI"),pA=document.getElementById("pA"),pI=document.getElementById("pI");
+  function sel(i){tA.setAttribute("aria-selected",String(!i));tI.setAttribute("aria-selected",String(!!i));pA.hidden=!!i;pI.hidden=!i;}
+  tA.addEventListener("click",function(){sel(0);});tI.addEventListener("click",function(){sel(1);});
+  if(/iPhone|iPad|iPod/.test(navigator.userAgent))sel(1);
+  var cap=document.getElementById("cap"),T=[[0,"Tartsd az ujjad 3 mp-ig a kérdésen"],[4.7,"Első alkalommal: add meg a kódot"],[6.8,"Írd át a szöveget"],[11.3,"Mentés – mindenkinél frissül"]],t0=performance.now();
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){cap.textContent="3 mp nyomás → kód (első alkalommal) → szerkesztés → mentés";return;}
+  setInterval(function(){var t=((performance.now()-t0)/1000)%14,c=T[0][1];T.forEach(function(x){if(t>=x[0])c=x[1];});if(cap.textContent!==c)cap.textContent=c;},250);
+})();
+</script>
+</body>
+</html>
