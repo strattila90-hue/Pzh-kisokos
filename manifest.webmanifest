@@ -1,7 +1,7 @@
 {
   "name": "PzH Milliomos",
   "short_name": "PzH Milliomos",
-  "description": "PzH 2000 kezelői felkészítő: kvíz, tűzfeladat, lőszertároló, terepjárás, lőszerraktár, kisokos.",
+  "description": "PzH 2000 kezelői felkészítő: kvíz, tűzfeladat, lőszertároló, terepjárás, lőszerraktár, kisokos. Készítette: Strasszer szkv., 2026.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
