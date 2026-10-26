@@ -1,5 +1,5 @@
 {
- "version": "1.34.0",
+ "version": "1.34.1",
  "date": "2026-10-26",
- "notes": "Lőszerraktár: a hiba csak a teljes töltés után derül ki – ellenőrzés, hibalista, aztán robbanás; főmenü: kompakt csempék, 2–3 egymás mellett"
+ "notes": "Lőszerraktár: lefelé görgetve az igénylés szövege egy lebegő sávban követi a görgetést"
 }
