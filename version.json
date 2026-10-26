@@ -1,5 +1,5 @@
 {
- "version": "1.34.1",
+ "version": "1.34.2",
  "date": "2026-10-26",
- "notes": "Lőszerraktár: lefelé görgetve az igénylés szövege egy lebegő sávban követi a görgetést"
+ "notes": "Pontozás: kilépéskor a kvíz és a raktár pontjai megmaradnak; a játék végén látszik, felkerült-e az eredmény a ranglistára; kapcsolatkor automatikus újrafeltöltés"
 }
