@@ -1,7 +1,7 @@
-/* PzH Milliomos service worker – v1.33.0
+/* PzH Milliomos service worker – v1.34.0
    Offline működés: a játék fájljai gyorsítótárba kerülnek.
    Az oldal (index.html) hálózat-első: ha van net, mindig a legfrissebb jön, ha nincs, a tárolt. */
-const VERSION = "1.33.0";
+const VERSION = "1.34.0";
 const CACHE = "pzh-milliomos-" + VERSION;
 const CORE = ["./", "index.html", "firebase-config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });
