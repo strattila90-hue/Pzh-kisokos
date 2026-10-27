@@ -1419,6 +1419,48 @@ body::before{background:url("data:image/webp;base64,UklGRjaYAABXRUJQVlA4ICqYAADw
 .rpcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 10px;display:flex;flex-direction:column;gap:6px;background:var(--panel2)}
 .rpcard>b{font-weight:600;line-height:1.35}.rpcard small{color:var(--muted);font-size:calc(13px * var(--fz))}.rpcard small.ok{color:var(--ok)}
 .rptags{display:flex;flex-wrap:wrap;gap:6px}.rptags span{font-size:calc(12.5px * var(--fz));padding:3px 9px;border-radius:99px;border:1px solid var(--bad);color:var(--ink);background:var(--bad-bg)}.rptags span.good{border-color:var(--ok);background:var(--ok-bg)}
+
+/* v1.36 telepítő varázsló + mélylink */
+.qrcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+.qrcode-tx{font:700 calc(14px * var(--fz)) var(--f-mono);letter-spacing:.08em;color:var(--ink)}
+.shopt{display:grid;gap:8px}
+.shgo{display:flex;flex-wrap:wrap;gap:6px}
+.shgob{padding:7px 11px;border-radius:99px;border:1.5px solid var(--line);background:var(--panel2);color:var(--ink);font:500 calc(12.5px * var(--fz)) var(--f-body);min-height:36px}
+.shgob.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 22%,var(--panel2))}
+.dlcode{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;border:1px dashed color-mix(in srgb,var(--gold) 60%,var(--line));border-radius:10px}
+.dlcode b{font:700 calc(15px * var(--fz)) var(--f-mono);letter-spacing:.04em;flex:1 1 auto;min-width:0;white-space:nowrap}
+.dlpaste{margin-top:14px}
+.dlcard{position:relative;display:grid;gap:8px;margin-top:10px;padding:12px 44px 12px 14px}
+.dlx{position:absolute;right:8px;top:8px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted)}
+.wiz{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--bg) 92%,transparent);display:flex;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom));overflow:auto}
+.wiz.hide{display:none}
+.wiz:has(.wzarrow:not(.hide)){padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+.wzsteps li>span{flex:1;min-width:0}
+body.wzon{overflow:hidden}
+.wzin{margin:auto;width:min(520px,100%);display:flex;flex-direction:column;gap:14px;padding:18px 18px 16px;border-radius:20px}
+.wztop{display:flex;justify-content:space-between;align-items:center}
+.wzback{min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 calc(15px * var(--fz)) var(--f-body)}
+.wzinv{font:600 calc(13px * var(--fz)) var(--f-body);color:var(--gold)}.wzinv:empty{display:none}
+.wzin h2{margin:0;font-size:calc(26px * var(--fz));line-height:1.15}
+#wzBody{display:flex;flex-direction:column;gap:12px}
+.wzbig{min-height:56px;width:100%;font-size:calc(17px * var(--fz));display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;text-decoration:none}
+.wzos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.wzos .wzbig{flex-direction:column;gap:2px;min-height:76px}
+.wzos small{font:600 calc(11.5px * var(--fz)) var(--f-body);letter-spacing:.04em;text-transform:none;color:var(--gold)}
+.wzdet{border-color:var(--gold)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 40%,transparent)}
+.wzp{margin:0;font-size:calc(15.5px * var(--fz));line-height:1.45;color:var(--ink)}
+.wzsteps{margin:0;padding:0;list-style:none;counter-reset:w;display:flex;flex-direction:column;gap:10px}
+.wzsteps li{counter-increment:w;display:flex;gap:12px;align-items:center;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);font-size:calc(15px * var(--fz));line-height:1.35}
+.wzsteps li::before{content:counter(w);flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--gold-ink);font-weight:700}
+.wzsteps .ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;color:#2f7cf6}
+.wzsteps .plus{display:inline-grid;place-items:center;width:22px;height:22px;border:1.5px solid currentColor;border-radius:5px;font-size:15px;line-height:1}
+.wzcode{margin-top:2px}
+.wzskip{min-height:48px;border:0;background:transparent;color:var(--muted);text-decoration:underline;font:500 calc(14.5px * var(--fz)) var(--f-body)}
+.wzarrow{position:fixed;left:50%;bottom:calc(6px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:61;color:var(--gold);pointer-events:none}
+.wzarrow.hide{display:none}
+.wzarrow svg{width:34px;height:52px;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;animation:wzBounce 1.3s ease-in-out infinite!important;animation-duration:1.3s!important}
+@keyframes wzBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+@media(prefers-reduced-motion:reduce){.wzarrow svg{animation:none!important}}
 </style>
 
 <div class="wrap">
@@ -1518,6 +1560,11 @@ body::before{background:url("data:image/webp;base64,UklGRjaYAABXRUJQVlA4ICqYAADw
 <div class="mgrp k">Rendszer</div>
 <button class="mrow" data-go="set" type="button"><span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span><span class="mtx"><b>Beállítások</b><small>Hang, becenév, eredmények</small></span><span class="mbest" data-best="set"></span><span class="mchev" aria-hidden="true">›</span></button>
 </nav>
+  <section class="dlcard panel hide" id="dlCard" aria-label="Meghívó kód">
+   <div class="hu-copy"><b>Meghívóval jöttél?</b><small>Ha a link nem vitt a helyére, írd be a kódot vagy másold be a linket.</small></div>
+   <div class="linkrow"><input id="dlIn2" autocomplete="off" placeholder="ABCDE-FGHJK vagy link" aria-label="Kód vagy link"><button class="btn small" id="dlGo2" type="button">Tovább</button></div>
+   <button class="dlx" id="dlX" type="button" aria-label="Bezárás">✕</button>
+  </section>
   <section class="home-update panel" aria-label="Alkalmazás frissítése">
    <div class="hu-icon" aria-hidden="true">↻</div>
    <div class="hu-copy"><b>Frissítés</b><small id="homeUpdateStatus">Új verzió keresése</small></div>
@@ -1821,12 +1868,17 @@ body::before{background:url("data:image/webp;base64,UklGRjaYAABXRUJQVlA4ICqYAADw
    <h2 class="pgt">Megosztás</h2>
    <p class="sub">Olvasd be telefonnal a QR-kódot, vagy küldd el a linket a bajtársaidnak.</p>
    <div class="shgrid">
-    <div class="qrbox" id="qr" aria-label="QR-kód a játék linkjéhez"></div>
+    <div class="qrcol"><div class="qrbox" id="qr" aria-label="QR-kód a játék linkjéhez"></div><b class="qrcode-tx" id="qrCodeTx"></b></div>
     <div style="min-width:0;display:grid;gap:10px;align-content:start">
+     <div class="shopt"><span class="k">Hová nyíljon az app?</span><div class="shgo" id="shGo"></div>
+      <label class="chk"><input type="checkbox" id="shInv" checked> Meghívó: az ütegem és a becenevem is menjen</label></div>
      <div class="linkrow"><input id="shareUrl" readonly aria-label="A játék linkje"><button class="btn small" id="copyBtn" type="button">Másolás</button></div>
+     <div class="dlcode"><span class="k">Kód</span><b id="shCode"></b><button class="btn ghost small" id="shCodeCopy" type="button">Másolás</button></div>
      <button class="btn ghost hide" id="nativeShare" type="button">Küldés másik alkalmazással…</button>
     </div>
    </div>
+   <div class="dlpaste"><h3 class="pgs">Kód / link beillesztése</h3><p class="sub">Ha a telepített app nem a meghívó szerint indult, írd be a kódot vagy másold be a kapott linket.</p>
+    <div class="linkrow"><input id="dlIn" autocomplete="off" placeholder="pl. ABCDE-FGHJK vagy a teljes link" aria-label="Kód vagy link"><button class="btn small" id="dlGo" type="button">Tovább</button></div></div>
    <div class="howto hide" id="howto">
     <h3 class="pgs">Telepítés telefonra (offline is fut)</h3>
     <div class="srow"><div><b>iPhone</b><small>Safari → Megosztás gomb → „Hozzáadás a Főképernyőhöz”</small></div></div>
@@ -1942,6 +1994,17 @@ body::before{background:url("data:image/webp;base64,UklGRjaYAABXRUJQVlA4ICqYAADw
  </section>
 </div>
 
+<div class="wiz hide" id="wiz" role="dialog" aria-modal="true" aria-labelledby="wzT">
+ <div class="wzin panel">
+  <div class="wztop"><button class="wzback" id="wzBack" type="button">‹ Vissza</button><span class="k" id="wzStep"></span></div>
+  <div class="wzinv" id="wzInv"></div>
+  <h2 id="wzT"></h2>
+  <div id="wzBody"></div>
+  <div class="dlcode wzcode" id="wzCodeRow"><span class="k" id="wzCodeL">Kód</span><b id="wzCode"></b><button class="btn ghost small" id="wzCopy" type="button">Másolás</button></div>
+  <button class="wzskip" id="wzSkip" type="button">Inkább a böngészőben folytatom</button>
+ </div>
+ <div class="wzarrow hide" id="wzArrow" aria-hidden="true"><svg viewBox="0 0 40 60"><path d="M20 4v46M6 36l14 16 14-16"/></svg></div>
+</div>
 <div class="modal hide" id="repModal" role="dialog" aria-modal="true" aria-labelledby="repT">
  <div class="panel mcard repcard">
   <h2 id="repT">Üzenet az adminnak</h2>
@@ -1976,8 +2039,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.35.0",APP_DATE="2026-10-26";
-var CHANGELOG=[["1.35.0", "Kvíz: „Üzenek az adminnak” gomb – hibás vagy rossz kérdés jelzése előre megadott okokkal, rövid megjegyzéssel"], ["1.34.2", "Pontozás: kilépéskor a kvíz és a raktár pontjai megmaradnak; a játék végén látszik, felkerült-e az eredmény a ranglistára; kapcsolatkor automatikus újrafeltöltés"], ["1.34.1", "Lőszerraktár: lefelé görgetve az igénylés szövege egy lebegő sávban követi a görgetést"], ["1.34.0", "Lőszerraktár: a hiba csak a teljes töltés után derül ki – ellenőrzés, hibalista, aztán robbanás; főmenü: kompakt csempék, 2–3 egymás mellett"], ["1.33.0", "Kisokos: 400 kártya (duplázva), új témakörök: Tájékozódás, Egészség – offline is; főmenü: Tudtad? hírsáv véletlen érdekességekkel"], ["1.32.1", "Készítői tanúsítvány és logó-vízjel – készítette: Strasszer szkv., 2026"], ["1.32.0", "Tanulóközpont: Hibáim gyakorló, Miért? gomb, vizsga mód, témakör-statisztika, kártyás ismétlő, napi kihívás, rendfokozatok és jelvények, üteg-ranglista, adatpárosító; tűzfeladat: szerepek, lépésgyakorló, éjszaka/eső/köd, tűzparancs felolvasása; raktár: súgó ki-be; külön zene- és hanghatás-hangerő; új vízjel-logó"], ["1.31.4", "Illeszkedés minden kijelzőn: menükártyák, adatkártyák, ranglista-gomb telefonon a sarokban, játék közben elrejtve"], ["1.31.3", "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"], ["1.31.2", "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"], ["1.31.1", "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"], ["1.31.0", "Főképernyő: realisztikus lövés (csőszájfék-lángok, lökéshullám, porfelverés, füst), géppuskás a toronyban, aki a támadó drónokat lövi; figyelmeztetés foglalt becenévnél"], ["1.30.4", "Ranglista: ugyanaz a becenév több készülékről egy sorban, a legjobb eredménnyel"], ["1.30.3", "Kisebb javítások"], ["1.30.2", "Kisebb javítások"], ["1.30.1", "Összes kérdés: javítások, gyorsabb betöltés"], ["1.30.0", "Kvíz: új Összes kérdés lista a helyes válaszokkal, magyarázattal, kereséssel és témakör-szűrővel"], ["1.29.0", "Lőszerraktár a lőtéren: lőtérfigyelő torony (az erkélyen a PK basszusgitározik), célterület, álcaháló; új lőszer-ismertető: felcímkézett metszet, NATO színkód, lőtávolság-skála a feladat céltávolságával, rendszeresítési jelzés"], ["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.36.0",APP_DATE="2026-10-27";
+var CHANGELOG=[["1.36.0", "Telepítő varázsló: QR-kód vagy meghívó link után lépésről lépésre telepítés Androidra és iPhone-ra, utána az app oda nyílik, ahová a link mutat; megosztásnál választható cél és üteg-meghívó"], ["1.35.0", "Kvíz: „Üzenek az adminnak” gomb – hibás vagy rossz kérdés jelzése előre megadott okokkal, rövid megjegyzéssel"], ["1.34.2", "Pontozás: kilépéskor a kvíz és a raktár pontjai megmaradnak; a játék végén látszik, felkerült-e az eredmény a ranglistára; kapcsolatkor automatikus újrafeltöltés"], ["1.34.1", "Lőszerraktár: lefelé görgetve az igénylés szövege egy lebegő sávban követi a görgetést"], ["1.34.0", "Lőszerraktár: a hiba csak a teljes töltés után derül ki – ellenőrzés, hibalista, aztán robbanás; főmenü: kompakt csempék, 2–3 egymás mellett"], ["1.33.0", "Kisokos: 400 kártya (duplázva), új témakörök: Tájékozódás, Egészség – offline is; főmenü: Tudtad? hírsáv véletlen érdekességekkel"], ["1.32.1", "Készítői tanúsítvány és logó-vízjel – készítette: Strasszer szkv., 2026"], ["1.32.0", "Tanulóközpont: Hibáim gyakorló, Miért? gomb, vizsga mód, témakör-statisztika, kártyás ismétlő, napi kihívás, rendfokozatok és jelvények, üteg-ranglista, adatpárosító; tűzfeladat: szerepek, lépésgyakorló, éjszaka/eső/köd, tűzparancs felolvasása; raktár: súgó ki-be; külön zene- és hanghatás-hangerő; új vízjel-logó"], ["1.31.4", "Illeszkedés minden kijelzőn: menükártyák, adatkártyák, ranglista-gomb telefonon a sarokban, játék közben elrejtve"], ["1.31.3", "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"], ["1.31.2", "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"], ["1.31.1", "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"], ["1.31.0", "Főképernyő: realisztikus lövés (csőszájfék-lángok, lökéshullám, porfelverés, füst), géppuskás a toronyban, aki a támadó drónokat lövi; figyelmeztetés foglalt becenévnél"], ["1.30.4", "Ranglista: ugyanaz a becenév több készülékről egy sorban, a legjobb eredménnyel"], ["1.30.3", "Kisebb javítások"], ["1.30.2", "Kisebb javítások"], ["1.30.1", "Összes kérdés: javítások, gyorsabb betöltés"], ["1.30.0", "Kvíz: új Összes kérdés lista a helyes válaszokkal, magyarázattal, kereséssel és témakör-szűrővel"], ["1.29.0", "Lőszerraktár a lőtéren: lőtérfigyelő torony (az erkélyen a PK basszusgitározik), célterület, álcaháló; új lőszer-ismertető: felcímkézett metszet, NATO színkód, lőtávolság-skála a feladat céltávolságával, rendszeresítési jelzés"], ["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,mvol:1,svol:1,blasts:true,gore:true,notif:false,offline:false,fz:1.2,online:true,rank:true,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -4365,15 +4428,15 @@ $("nickIn").value=LB.nick();
 LB.init();
 
 /* ===== alkalmazás megosztása ===== */
-function resolveShareUrl(){
-  try{var u=new URL(location.href);u.hash="";u.search="";if(u.protocol==="http:"||u.protocol==="https:"){u.pathname=u.pathname.replace(/index\.html$/i,"");return u.href;}}catch(e){}
-  return window.PZH_SHARE_URL||"";
-}
+function dlBase(){try{var u=new URL(location.href);u.hash="";u.search="";if(u.protocol==="http:"||u.protocol==="https:"){u.pathname=u.pathname.replace(/index\.html$/i,"");return u.href;}}catch(e){}
+  return window.PZH_SHARE_URL||"";}
+function resolveShareUrl(){var b=dlBase();if(!b)return "";return (window.DL&&window.dlShareCode)?b+"?m="+dlShareCode():b;}
 var SHARE_URL=resolveShareUrl();
 function renderShare(){
   SHARE_URL=resolveShareUrl();var field=$("shareUrl"),qr=$("qr");if(field)field.value=SHARE_URL||"A megosztáshoz előbb töltsd fel az alkalmazást webtárhelyre.";
   if(qr){qr.innerHTML="";if(SHARE_URL&&window.QRCode){try{new QRCode(qr,{text:SHARE_URL,width:180,height:180,colorDark:"#101310",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});}catch(e){qr.textContent="A QR-kód nem készíthető el. Használd a linkmásolást.";}}else{qr.textContent="QR-kód a közzétett alkalmazáslinkhez jelenik meg.";}}
   var how=$("howto");if(how)how.classList.toggle("hide",!SHARE_URL||!/^https?:/.test(SHARE_URL));
+  if(window.dlShareCode){var c=dlShareCode();$("shCode").textContent=c;$("qrCodeTx").textContent=c;}
 }
 if(navigator.share){$("nativeShare").classList.remove("hide");$("nativeShare").addEventListener("click",function(){SHARE_URL=resolveShareUrl();if(!SHARE_URL){toast("Előbb tedd közzé az alkalmazást egy webcímen.");return;}navigator.share({title:"PzH Milliomos",text:"PzH Milliomos – nyisd meg az alkalmazást ezen a linken:",url:SHARE_URL}).catch(function(){});});}
 $("copyBtn").addEventListener("click",async function(){SHARE_URL=resolveShareUrl();if(!SHARE_URL){toast("Előbb tedd közzé az alkalmazást egy webcímen.");return;}var b=this;try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(SHARE_URL);}else{var f=$("shareUrl");f.value=SHARE_URL;f.focus();f.select();if(!document.execCommand("copy"))throw new Error("Másolás nem támogatott");}b.textContent="Másolva ✓";toast("Az alkalmazás linkje másolva.");setTimeout(function(){b.textContent="Másolás";},1800);}catch(e){var f=$("shareUrl");f.value=SHARE_URL;f.focus();f.select();toast("Jelöld ki és másold ki a megjelenő linket.");}});
@@ -4915,7 +4978,111 @@ function pkBar(){var b=$("pkBar");if(!b)return;b.classList.toggle("hide",!QE.ed)
 $("pkQ").addEventListener("click",function(){show("qall");renderQall();window.scrollTo(0,0);});
 $("pkUpd").addEventListener("click",function(){var h=$("homeUpdate");if(h)h.click();toast("Frissítés keresése…");});
 pkBar();
-setTimeout(function(){pkLink().then(function(d){if(!d)qaHash();});},400);window.addEventListener("hashchange",qaHash);
+
+/* ===== v1.36 TELEPÍTŐ VARÁZSLÓ + halasztott mélylink (QR és link ugyanaz) ===== */
+var DLGO={h:["home","Főmenü"],k:["start","Milliomos kvíz"],n:["daily","Napi kihívás"],t:["sim","Tűzfeladat"],r:["hangar","Lőszerraktár"],s:["dd","Lőszertároló"],j:["ter","Terepjárás"],o:["kis","Kisokos"],a:["htd","HTD adatok"]};
+var DL={key:"app-deeplink",ttl:48*3600e3,bip:null,d:null,step:"ask",hist:[],os:null,shGo:"h"};
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();DL.bip=e;if(!$("wiz").classList.contains("hide")&&DL.step==="android")wzRender();});
+window.addEventListener("appinstalled",function(){DL.bip=null;if(!$("wiz").classList.contains("hide"))wzGo("done");});
+function dlStandalone(){try{return window.navigator.standalone===true||matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||matchMedia("(display-mode: minimal-ui)").matches;}catch(e){return false;}}
+function dlUA(){return navigator.userAgent||"";}
+function dlIsIOS(){var u=dlUA();return /iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1);}
+function dlIsAndroid(){return /Android/i.test(dlUA());}
+function dlInApp(){return /FBAN|FBAV|FB_IAB|Instagram|Messenger|Viber|Line\/|Telegram|WhatsApp|; wv\)/.test(dlUA());}
+function dlIOSSafari(){var u=dlUA();return dlIsIOS()&&/Safari/.test(u)&&!/CriOS|FxiOS|EdgiOS|OPiOS|GSA\//.test(u)&&!dlInApp();}
+/* kód: Crockford base32, 5-ös csoportok */
+var B32="0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+function b32enc(str){var by=new TextEncoder().encode(str),bits=0,val=0,out="";for(var i=0;i<by.length;i++){val=(val<<8)|by[i];bits+=8;while(bits>=5){out+=B32[(val>>>(bits-5))&31];bits-=5;}}if(bits>0)out+=B32[(val<<(5-bits))&31];return out.replace(/(.{5})(?=.)/g,"$1-");}
+function b32dec(code){var c=String(code||"").toUpperCase().replace(/O/g,"0").replace(/[IL]/g,"1").replace(/[^0-9A-Z]/g,""),bits=0,val=0,out=[];
+  for(var i=0;i<c.length;i++){var k=B32.indexOf(c[i]);if(k<0)return null;val=((val<<5)|k)&0xffff;bits+=5;if(bits>=8){out.push((val>>>(bits-8))&255);bits-=8;}}
+  try{return new TextDecoder("utf-8",{fatal:true}).decode(new Uint8Array(out));}catch(e){return null;}}
+function dlMake(go,b,nick){return b32enc((go||"h")+String(+b||0).slice(0,1)+String(nick||"").slice(0,24));}
+function dlParseM(code){var s=b32dec(code);if(!s||s.length<2||!DLGO[s[0]]||!/[0-9]/.test(s[1]))return null;return {go:s[0],b:+s[1],ref:s.slice(2)};}
+function dlShareCode(){var inv=$("shInv")&&$("shInv").checked;return dlMake(DL.shGo,inv?(store.bat||0):0,inv?LB.nick():"");}
+/* mélylink kiolvasása az URL-ből: ?m=KÓD vagy ?pk=KULCS / #pk=KULCS */
+function dlFrom(href){try{var u=new URL(href,location.href),sp=u.searchParams,h=u.hash||"";
+    if(sp.get("m")){var m=dlParseM(sp.get("m"));if(m)return {m:sp.get("m").toUpperCase(),p:m};}
+    var pk=sp.get("pk"),q=sp.has("q");if(!pk){var hm=h.match(/^#pk=([^&]+)/);if(hm){pk=decodeURIComponent(hm[1]);q=/&q\b/.test(h);}}
+    if(pk)return {pk:pk,q:q};}catch(e){}return null;}
+function dlFromInput(t){t=String(t||"").trim();if(!t)return null;if(/^https?:|[?#]/.test(t))return dlFrom(t);var p=dlParseM(t);return p?{m:t.toUpperCase(),p:p}:null;}
+function dlQuery(d){return d.m?"?m="+encodeURIComponent(d.m):"?pk="+encodeURIComponent(d.pk)+(d.q?"&q=1":"");}
+function dlSave(d){try{localStorage.setItem(DL.key,JSON.stringify({q:dlQuery(d),exp:Date.now()+DL.ttl}));}catch(e){}}
+function dlLoad(){try{var o=JSON.parse(localStorage.getItem(DL.key)||"null");if(!o)return null;if(!(o.exp>Date.now())){localStorage.removeItem(DL.key);return null;}return dlFrom(o.q);}catch(e){return null;}}
+function dlClear(){try{localStorage.removeItem(DL.key);}catch(e){}}
+function dlStrip(){if(dlIsIOS()&&!dlStandalone())return;try{history.replaceState(null,"",location.pathname+(location.hash==="#kerdesek"?location.hash:""));}catch(e){}}
+/* iPhone: a Főképernyő-ikon indító címe vigye a paramétereket */
+function dlIosManifest(d){if(!dlIsIOS()||!PWA)return;var l=document.querySelector('link[rel="manifest"]');var base=dlBase();if(!base||!/^https?:/.test(base))return;
+  var man={name:"PzH Milliomos",short_name:"PzH Milliomos",description:"PzH 2000 kezelői felkészítő. Készítette: Strasszer szkv., 2026.",start_url:base+dlQuery(d),scope:base,display:"standalone",background_color:"#0a0c0b",theme_color:"#0a0c0b",lang:"hu",
+    icons:[{src:base+"icon-192.png",sizes:"192x192",type:"image/png"},{src:base+"icon-512.png",sizes:"512x512",type:"image/png",purpose:"any maskable"}]};
+  if(!l){l=document.createElement("link");l.rel="manifest";document.head.appendChild(l);}l.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify(man));}
+/* a cél alkalmazása */
+async function pkActivate(code,toQ){if(toQ){show("qall");renderQall();window.scrollTo(0,0);}else show("home");
+  if(QE.ed){pkBar();toast("Parancsnoki mód aktív.");renderQall();return true;}
+  if(!window.PZH_FIREBASE){return true;}
+  if(!navigator.onLine||CFG.offline){toast("A parancsnoki mód bekapcsolásához hálózat kell.");return true;}
+  var ok=await qeClaim(code);toast(ok?"Parancsnoki mód bekapcsolva.":"A parancsnoki link érvénytelen.",3500);pkBar();renderQall();return true;}
+function dlApply(d){if(!d)return false;
+  if(d.pk){pkActivate(d.pk,d.q);dlStrip();return true;}
+  var p=d.p||dlParseM(d.m);if(!p){toast("Érvénytelen kód.");return false;}
+  if(p.b&&!store.bat){store.bat=p.b;save(store);var cb=$("cfBat");if(cb)cb.value=String(p.b);LB.last=null;LB.push();}
+  if(p.ref&&p.ref!==LB.nick())toast(p.ref+" hívott meg"+(p.b?" – "+(p.b===5?"Törzs":p.b+". üteg"):"")+". Jó gyakorlást!",3500);
+  var g=DLGO[p.go]||DLGO.h;dlStrip();if(g[0]==="home")show("home");else if(g[0]==="sim")route("sim");else go(g[0]);
+  store.dlSeen=1;save(store);var dc=$("dlCard");if(dc)dc.classList.add("hide");return true;}
+function dlUseInput(id){var d=dlFromInput($(id).value);if(!d){toast("Ebből nem tudok kódot kiolvasni. Másold be a teljes linket vagy a kódot.");return;}$(id).value="";dlClear();dlApply(d);}
+$("dlGo").addEventListener("click",function(){dlUseInput("dlIn");});$("dlGo2").addEventListener("click",function(){dlUseInput("dlIn2");});
+$("dlIn").addEventListener("keydown",function(e){if(e.key==="Enter")dlUseInput("dlIn");});$("dlIn2").addEventListener("keydown",function(e){if(e.key==="Enter")dlUseInput("dlIn2");});
+$("dlX").addEventListener("click",function(){store.dlSeen=1;save(store);$("dlCard").classList.add("hide");});
+/* megosztás: cél-választó */
+(function(){var c=$("shGo");Object.keys(DLGO).forEach(function(k){var b=document.createElement("button");b.type="button";b.className="shgob"+(k===DL.shGo?" on":"");b.textContent=DLGO[k][1];
+  b.addEventListener("click",function(){DL.shGo=k;Array.prototype.forEach.call(c.children,function(x){x.classList.toggle("on",x===b);});renderShare();});c.appendChild(b);});
+  $("shInv").addEventListener("change",renderShare);
+  $("shCodeCopy").addEventListener("click",function(){dlCopy(dlShareCode(),this);});})();
+async function dlCopy(txt,btn){try{if(navigator.clipboard&&navigator.clipboard.writeText)await navigator.clipboard.writeText(txt);else throw 0;if(btn){var o=btn.textContent;btn.textContent="Másolva ✓";setTimeout(function(){btn.textContent=o;},1600);}toast("Másolva.");}
+  catch(e){prompt("Másold ki:",txt);}}
+/* ---- varázsló ---- */
+function wzLink(){return dlBase()+dlQuery(DL.d);}
+function wzOpen(d){DL.d=d;DL.hist=[];DL.os=dlIsIOS()?"ios":(dlIsAndroid()?"android":null);
+  var inv=$("wzInv"),p=d.p;inv.textContent=d.pk?"Parancsnoki link":p?((p.ref?p.ref+" meghívott":"Meghívó")+(p.b?" · "+(p.b===5?"Törzs":p.b+". üteg"):"")+" · Cél: "+(DLGO[p.go]||DLGO.h)[1]):"";
+  $("wzCodeL").textContent=d.pk?"Link":"Kód";$("wzCode").textContent=d.pk?"parancsnoki":d.m;
+  $("wiz").classList.remove("hide");document.body.classList.add("wzon");wzGo("ask",true);}
+function wzGo(st,first){if(!first)DL.hist.push(DL.step);DL.step=st;wzRender();}
+function wzBtn(txt,cls,fn){var b=document.createElement("button");b.type="button";b.className="btn wzbig "+(cls||"");b.innerHTML=txt;b.addEventListener("click",fn);return b;}
+function wzP(html){var p=document.createElement("p");p.className="wzp";p.innerHTML=html;return p;}
+var SHAREIC='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M6 11H5v10h14V11h-1"/></svg>';
+function wzRender(){var st=DL.step,B=$("wzBody"),T=$("wzT");B.innerHTML="";$("wzArrow").classList.add("hide");$("wzBack").style.visibility=DL.hist.length?"visible":"hidden";
+  var lab={ask:"1 / 3",os:"2 / 3",android:"3 / 3",ios:"3 / 3",done:"Kész"};$("wzStep").textContent=lab[st]||"";
+  if(st==="ask"){T.textContent="📲 Telepíted az appot?";B.appendChild(wzP("Telepítve teljes képernyőn, ikonról és net nélkül is fut. Utána rögtön oda visz, ahová a link mutat."));
+    B.appendChild(wzBtn("Igen, telepítem","",function(){wzGo("os");}));}
+  else if(st==="os"){T.textContent="Milyen telefonod van?";var g=document.createElement("div");g.className="wzos";
+    [["android","🤖 Android"],["ios","🍎 iPhone"]].forEach(function(o){var b=wzBtn(o[1]+(DL.os===o[0]?"<small>ez a telefonod</small>":""),"ghost"+(DL.os===o[0]?" wzdet":""),function(){wzGo(o[0]);});g.appendChild(b);});B.appendChild(g);}
+  else if(st==="android"){T.textContent="Telepítés Androidon";
+    if(dlInApp()){B.appendChild(wzP("Ebből az üzenetküldőből nem lehet telepíteni. Nyisd meg Chrome-ban – ott folytatódik."));
+      var a=document.createElement("a");a.className="btn wzbig";a.textContent="🌐 Megnyitás Chrome-ban";var u=new URL(wzLink());a.href="intent://"+u.host+u.pathname+u.search+"#Intent;scheme=https;package=com.android.chrome;end";B.appendChild(a);}
+    else if(DL.bip){B.appendChild(wzBtn("📲 Telepítés most","",async function(){var e=DL.bip;try{e.prompt();var ch=await e.userChoice;if(ch&&ch.outcome==="accepted"){DL.bip=null;wzGo("done");}}catch(err){wzRender();}}));
+      B.appendChild(wzP("A felugró ablakban válaszd a <b>Telepítés</b> gombot."));}
+    else{var ol=document.createElement("ol");ol.className="wzsteps";
+      ['<b>Chrome:</b> jobb fent <b>⋮</b> menü › <b>Alkalmazás telepítése</b> (vagy „Hozzáadás a kezdőképernyőhöz”)','<b>Samsung Internet:</b> lent <b>≡</b> menü › <b>Oldal hozzáadása</b> › <b>Kezdőképernyő</b>','Nyisd meg az új ikont – ott folytatódik.'].forEach(function(t){var li=document.createElement("li");li.innerHTML="<span>"+t+"</span>";ol.appendChild(li);});B.appendChild(ol);}}
+  else if(st==="ios"){T.textContent="Telepítés iPhone-on";
+    if(!dlIOSSafari()){B.appendChild(wzP("iPhone-on csak a <b>Safari</b> tud appot a Főképernyőre tenni. Másold ki a linket, és nyisd meg Safariban."));
+      B.appendChild(wzBtn("🔗 Link másolása Safarihoz","",function(){dlCopy(wzLink(),this);}));}
+    else{var ol2=document.createElement("ol");ol2.className="wzsteps";
+      ['Koppints alul a <b>Megosztás</b> gombra '+SHAREIC,'Görgess le: <b>Főképernyőhöz adás</b> <span class="ic plus">＋</span>','Jobb fent: <b>Hozzáadás</b>','Nyisd meg az új ikont – ott folytatódik.'].forEach(function(t){var li=document.createElement("li");li.innerHTML="<span>"+t+"</span>";ol2.appendChild(li);});B.appendChild(ol2);
+      $("wzArrow").classList.remove("hide");}}
+  else if(st==="done"){T.textContent="✅ Telepítve";B.appendChild(wzP("Nyisd meg a kezdőképernyőn az <b>PzH Milliomos</b> ikont – ott folytatódik."));}
+  var f=$("wiz").querySelector(".wzbig")||$("wzSkip");try{f.focus({preventScroll:true});}catch(e){}}
+function wzClose(){$("wiz").classList.add("hide");document.body.classList.remove("wzon");$("wzArrow").classList.add("hide");}
+$("wzBack").addEventListener("click",function(){if(!DL.hist.length)return;DL.step=DL.hist.pop();wzRender();});
+$("wzSkip").addEventListener("click",function(){try{sessionStorage.setItem("pzhWizSkip","1");}catch(e){}wzClose();dlClear();dlApply(DL.d);});
+$("wzCopy").addEventListener("click",function(){dlCopy(DL.d&&DL.d.m?DL.d.m:wzLink(),this);});
+/* indulás */
+function dlBoot(){var d=dlFrom(location.href);
+  if(dlStandalone()){if(d){dlClear();dlApply(d);return;}var s=dlLoad();dlClear();if(s){dlApply(s);return;}qaHash();if(!store.dlSeen){var dc=$("dlCard");if(dc)dc.classList.remove("hide");}return;}
+  if(!d){qaHash();return;}
+  dlSave(d);dlIosManifest(d);
+  var skip=false;try{skip=sessionStorage.getItem("pzhWizSkip")==="1";}catch(e){}
+  if(skip){dlClear();dlApply(d);return;}
+  wzOpen(d);}
+setTimeout(dlBoot,400);window.addEventListener("hashchange",function(){var d=dlFrom(location.href);if(d&&d.pk){dlApply(d);return;}qaHash();});
 window.addEventListener("online",function(){qeSync();});
 longPress($("qall"),"#qaTitle",function(){var m=qeLoad(),n=Object.keys(m).length,txt=JSON.stringify(m,null,1);
   try{navigator.clipboard.writeText(txt).then(function(){toast(n+" módosítás a vágólapon.");},function(){prompt("Másold ki:",txt);});}catch(e){prompt("Másold ki:",txt);}});

@@ -1,5 +1,5 @@
 {
- "version": "1.35.0",
- "date": "2026-10-26",
- "notes": "Kvíz: „Üzenek az adminnak” gomb – hibás vagy rossz kérdés jelzése előre megadott okokkal, rövid megjegyzéssel"
+ "version": "1.36.0",
+ "date": "2026-10-27",
+ "notes": "Telepítő varázsló: QR-kód vagy meghívó link után lépésről lépésre telepítés Androidra és iPhone-ra, utána az app oda nyílik, ahová a link mutat; megosztásnál választható cél és üteg-meghívó"
 }
