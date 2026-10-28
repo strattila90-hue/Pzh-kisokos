@@ -1,7 +1,7 @@
-/* PzH Milliomos service worker – v1.36.0
+/* PzH Milliomos service worker – v1.36.1
    Offline működés: a játék fájljai gyorsítótárba kerülnek.
    Az oldal (index.html) hálózat-első: ha van net, mindig a legfrissebb jön, ha nincs, a tárolt. */
-const VERSION = "1.36.0";
+const VERSION = "1.36.1";
 const CACHE = "pzh-milliomos-" + VERSION;
 const CORE = ["./", "index.html", "firebase-config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });
@@ -34,7 +34,7 @@ self.addEventListener("notificationclick", e => {
   e.waitUntil(clients.matchAll({ type: "window", includeUncontrolled: true }).then(ws => { for (const w of ws) { if ("focus" in w) return w.focus(); } return clients.openWindow("./"); }));
 });
 function put(req, r) { if (r && r.ok) { const cp = r.clone(); caches.open(CACHE).then(c => c.put(req, cp)); } return r; }
-function fromCache(req) { return caches.match(req).then(h => h || caches.match("index.html")).then(h => h || caches.match("./")); }
+function fromCache(req) { return caches.match(req, { ignoreSearch: true }).then(h => h || caches.match("index.html")).then(h => h || caches.match("./")); }
 self.addEventListener("fetch", e => {
   const req = e.request, u = new URL(req.url);
   if (req.method !== "GET") return;
@@ -46,7 +46,8 @@ self.addEventListener("fetch", e => {
       let done = false;
       const fin = r => { if (!done && r) { done = true; resolve(r); } };
       const t = setTimeout(() => fromCache(req).then(fin), 7000);
-      fetch(req.url, { cache: "no-store", credentials: "same-origin" }).then(r => { clearTimeout(t); fin(put(req, r)); })
+      const key = u.search ? new Request(u.origin + u.pathname) : req;                       // meghívó-linkek (?m=, ?pk=) ne töltsék a tárat
+      fetch(req.url, { cache: "no-store", credentials: "same-origin" }).then(r => { clearTimeout(t); fin(put(key, r)); })
         .catch(() => { clearTimeout(t); fromCache(req).then(h => { if (!done) { done = true; resolve(h || Response.error()); } }); });
     }));
     return;

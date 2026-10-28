@@ -20,5 +20,11 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://pzh-kisokos.vercel.app/manifest.webmanifest"
+    }
   ]
 }
