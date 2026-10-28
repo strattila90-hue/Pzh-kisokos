@@ -1,5 +1,5 @@
 {
- "version": "1.36.1",
+ "version": "1.37.0",
  "date": "2026-10-28",
- "notes": "Telepítő varázsló: ha az app már telepítve van (Android), nem kéri újra; meghívó linkek nem töltik a tárhelyet; javítások"
+ "notes": "Telepítés: iPhone-on a „Megnyitás webappként” kapcsoló jelzése, teljes képernyős app indítás javítva"
 }

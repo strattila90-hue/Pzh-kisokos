@@ -8,6 +8,21 @@
 <meta name="theme-color" content="#0a0c0b">
 <title>Parancsnoki verzió</title>
 <link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PzH Milliomos">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script>/* ha ikonról (appként) nyílik meg ez az oldal, rögtön a parancsnoki appba lép – böngészősáv nélkül */
+(function(){var K="";try{var m=location.hash.match(/k=([^&]+)/);K=m?decodeURIComponent(m[1]):(localStorage.getItem("pzhPK")||"");}catch(e){}
+ var sa=window.navigator.standalone===true||(window.matchMedia&&(matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches));
+ if(sa){location.replace("./"+(K?"?pk="+encodeURIComponent(K):""));return;}
+ var ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
+ if(ios&&K){var b=location.origin+location.pathname.replace(/[^/]*$/,"");var man={name:"PzH Milliomos",short_name:"PzH Milliomos",start_url:b+"?pk="+encodeURIComponent(K),scope:b,display:"standalone",background_color:"#0a0c0b",theme_color:"#0a0c0b",lang:"hu",
+   icons:[{src:b+"icon-192.png",sizes:"192x192",type:"image/png"},{src:b+"icon-512.png",sizes:"512x512",type:"image/png",purpose:"any maskable"}]};
+   document.addEventListener("DOMContentLoaded",function(){var l=document.querySelector('link[rel="manifest"]');if(l)l.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify(man));});}
+})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@700&family=Share+Tech+Mono&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -140,6 +155,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
     <li>Koppints a jobb felső <span class="ico">⋮</span> menüre.</li>
     <li>Válaszd: <b>Alkalmazás telepítése</b> vagy <b>Hozzáadás a kezdőképernyőhöz</b>.</li>
     <li>Koppints a <b>Telepítés</b> gombra. Az ikon megjelenik a kezdőképernyőn – innen indítsd.</li>
+    <li>Az app <b>teljes képernyőn</b> nyílik, böngészősáv és jobb felső <b>⋮</b> nélkül. Ha mégis böngészőként jön (címsor, ⋮), az ikon csak könyvjelző lett: töröld, és telepítsd újra a fenti lépésekkel.</li>
    </ol>
   </div>
   <div class="pane" id="pI" role="tabpanel" hidden>
@@ -147,7 +163,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
     <li>Nyisd meg a <b>Játék megnyitása</b> gombot <b>Safari</b> böngészőben (más böngészőből iPhone-on nem telepíthető).</li>
     <li>Koppints alul a <b>Megosztás</b> gombra <span class="ico">⬆</span>.</li>
     <li>Görgess le, és válaszd: <b>Főképernyőhöz adás</b>.</li>
-    <li>Jobb felül <b>Hozzáadás</b>. Az ikon megjelenik a főképernyőn – innen indítsd.</li>
+    <li>Jobb felül <b>Hozzáadás</b>. Ha látod a <b>Megnyitás webappként</b> kapcsolót, legyen bekapcsolva. Az ikon megjelenik a főképernyőn – innen indítsd.</li>
    </ol>
   </div>
   <div class="note"><b>Offline:</b> az első megnyitás után a játék internet nélkül is indul. A ranglistához és a kérdések szerkesztéséhez hálózat kell.</div>
