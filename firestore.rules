@@ -1,15 +1,88 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Ranglista: mindenki olvashatja, mindenki csak a saját (névtelen) sorát írhatja.
+    function isEditor() {
+      return request.auth != null && exists(/databases/$(database)/documents/editors/$(request.auth.uid));
+    }
+
+    // Ranglista: mindenki olvashatja, mindenki csak a saját (névtelen) sorát írhatja vagy törölheti.
     match /board/{uid} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(['nick','total','quiz','hangar','sim','ter','dd','at'])
+      allow delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['nick','total','quiz','hangar','sim','ter','dd','at','play','hide','bat','dly','dlyD','stk','wk','wkn','bon','ps'])
         && request.resource.data.nick is string
         && request.resource.data.nick.size() >= 2 && request.resource.data.nick.size() <= 24
-        && request.resource.data.total is number && request.resource.data.total >= 0 && request.resource.data.total < 100000;
+        && request.resource.data.total is number && request.resource.data.total >= 0 && request.resource.data.total < 10000000
+        && (!('bon' in request.resource.data) || (request.resource.data.bon is int && request.resource.data.bon >= 0 && request.resource.data.bon < 5000000))
+        && (!('ps' in request.resource.data) || (request.resource.data.ps is int && request.resource.data.ps >= 0 && request.resource.data.ps < 10000))
+        && (!('bat' in request.resource.data) || (request.resource.data.bat is int && request.resource.data.bat >= 0 && request.resource.data.bat <= 9))
+        && (!('dly' in request.resource.data) || (request.resource.data.dly is int && request.resource.data.dly >= 0 && request.resource.data.dly <= 5))
+        && (!('wkn' in request.resource.data) || (request.resource.data.wkn is int && request.resource.data.wkn >= 0 && request.resource.data.wkn < 100000));
     }
+
+    // Kérdés-módosítások: mindenki olvassa, csak szerkesztő írhatja.
+    match /qedits/{id} {
+      allow read: if true;
+      allow delete: if isEditor();
+      allow create, update: if isEditor()
+        && request.resource.data.keys().hasOnly(['q','o','e','at'])
+        && request.resource.data.q is string && request.resource.data.q.size() > 0 && request.resource.data.q.size() <= 600
+        && request.resource.data.o is list && request.resource.data.o.size() >= 2 && request.resource.data.o.size() <= 4
+        && request.resource.data.e is string && request.resource.data.e.size() <= 2000;
+    }
+
+    // Parancsnok által felvett új kérdések: mindenki olvassa, csak szerkesztő írhatja.
+    match /qadds/{id} {
+      allow read: if true;
+      allow delete: if isEditor();
+      allow create, update: if isEditor()
+        && request.resource.data.keys().hasOnly(['q','o','a','d','t','e','at'])
+        && request.resource.data.q is string && request.resource.data.q.size() > 0 && request.resource.data.q.size() <= 600
+        && request.resource.data.o is list && request.resource.data.o.size() >= 2 && request.resource.data.o.size() <= 4
+        && request.resource.data.a is int && request.resource.data.a >= 0 && request.resource.data.a <= 3
+        && request.resource.data.t is string && request.resource.data.t.size() <= 60
+        && request.resource.data.e is string && request.resource.data.e.size() <= 2000;
+    }
+
+    // Névtelen hibastatisztika kérdésenként: bárki növelheti (legfeljebb 50-nel), csak szerkesztő olvashatja.
+    match /qstats/{id} {
+      allow read: if isEditor();
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['n','w'])
+        && request.resource.data.n is int && request.resource.data.n >= 1 && request.resource.data.n <= 50
+        && request.resource.data.w is int && request.resource.data.w >= 0 && request.resource.data.w <= request.resource.data.n;
+      allow update: if request.auth != null
+        && request.resource.data.keys().hasOnly(['n','w'])
+        && request.resource.data.n is int && request.resource.data.n > resource.data.n && request.resource.data.n <= resource.data.n + 50
+        && request.resource.data.w is int && request.resource.data.w >= resource.data.w && request.resource.data.w <= resource.data.w + 50
+        && request.resource.data.w <= request.resource.data.n;
+    }
+
+    // Szerkesztők: a kód csak egyszer, a saját készülékről adható meg. A kód helyett csak a hash-e van itt.
+    match /editors/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['k','at'])
+        && hashing.sha256(request.resource.data.k).toHexString().lower() == 'cc338a897803121b74d1deaf58531275ddc3c2572b854823fe2da56783646f0b';
+    }
+
+    // Játékosok jelzései a kérdésekről: bárki küldhet (kérdésenként egyet, a saját azonosítójával), csak szerkesztő olvashatja/törölheti.
+    match /reports/{id} {
+      allow read, delete: if isEditor();
+      allow create, update: if request.auth != null
+        && id.matches(request.auth.uid + '_q[a-z0-9]+')
+        && request.resource.data.keys().hasOnly(['qk','q','a','r','t','n','at','v'])
+        && request.resource.data.qk is string && request.resource.data.qk.size() <= 40
+        && request.resource.data.q is string && request.resource.data.q.size() <= 200
+        && request.resource.data.a is string && request.resource.data.a.size() <= 100
+        && request.resource.data.r is list && request.resource.data.r.size() >= 1 && request.resource.data.r.size() <= 4
+        && request.resource.data.t is string && request.resource.data.t.size() <= 120
+        && request.resource.data.n is string && request.resource.data.n.size() <= 24
+        && request.resource.data.at is string && request.resource.data.at.size() <= 30
+        && request.resource.data.v is string && request.resource.data.v.size() <= 12;
+    }
+
     match /{document=**} { allow read, write: if false; }
   }
 }
