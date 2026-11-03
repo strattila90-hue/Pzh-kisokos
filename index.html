@@ -1555,7 +1555,7 @@ body.wzon{overflow:hidden}
 #simSvg.real [fill="var(--muted)"]{fill:#8d917d;stroke:#2b2e25;stroke-width:1px}
 #simSvg.real [fill="var(--bg)"]{fill:url(#pzWheel);stroke:#121410;stroke-width:3px}
 #simSvg.real [fill="var(--gold)"]{fill:#a99a62;stroke:#4b4325;stroke-width:1px}
-#simSvg.real #srecoil>rect[fill="var(--sil)"]{fill:url(#pzBarrel)}
+#simSvg.real #srecoil>[fill="var(--sil)"]{fill:url(#pzBarrel)}
 #simSvg.real .xd{fill:none;stroke:rgba(10,12,8,.45);stroke-width:1px}
 #simSvg.real .ghost{fill:#4a5636;stroke:#1f2416;stroke-width:1px}
 #simSvg.real .lbl{fill:#e8ecd8}#simSvg.real .lblk{fill:#ffd84a}
@@ -1582,6 +1582,45 @@ body.wzon{overflow:hidden}
 }
 @media(min-width:900px){#sim:not(.hide){grid-template-columns:minmax(0,1fr) minmax(340px,390px)!important}}
 @media(max-width:380px){#home .specs{grid-template-columns:repeat(2,minmax(0,1fr))!important}#home .specs b{font-size:calc(12.5px * var(--fz))!important}}
+
+#simSvg.real .pztooth{fill:#2c3023;stroke:#11130e;stroke-width:.8px}
+#simSvg.real .pzspoke{stroke:#1a1d15;stroke-width:3px}
+#simSvg.real .pzrim{fill:none;stroke:#3d4232;stroke-width:3px}
+#simSvg.real .pzflap{fill:#1d2016}
+#simSvg.real .pzguard{stroke:#2a301c;stroke-width:2px}
+#simSvg.real .pzlock{stroke:#3a4126;stroke-width:4px;stroke-linecap:round}
+#simSvg.real .pzglass{fill:#4f6f7a;stroke:#0f1512;stroke-width:.8px}
+#simSvg.real .pzedge2{fill:#2e3420}
+#simSvg.real .pzant{stroke:#1d2116;stroke-width:1.6px}
+#simSvg.real .pzrail{stroke:#2c321e;stroke-width:2.2px}
+#simSvg.real .pzband{fill:rgba(20,24,12,.45)}
+#simSvg.real .pzboot{fill:#20251a;stroke:#0f120c;stroke-width:1px}
+#simSvg.real .pzslot{fill:#0d0f0a}
+#simSvg.xray .pzdet{display:none}
+#simSvg.xray .pzband,#simSvg.xray .pzboot,#simSvg.xray .pzslot{display:none}
+#simSvg.real .xd{display:none}
+
+#simSvg.real .pzmagback{opacity:.8;filter:brightness(.55)}
+#simSvg.real .pzengb{fill:#5e6a4f;stroke:#1b1f16;stroke-width:1.2px}
+#simSvg.real .pzcyl{fill:#7b8669;stroke:#1b1f16;stroke-width:1px}
+#simSvg.real .pzgear{fill:#4b5340;stroke:#151812;stroke-width:2px}
+#simSvg.real .pzhub2{fill:#2a2f24}
+#simSvg.real .pzturbo{fill:#8a7a5c;stroke:#2b2418;stroke-width:1px}
+#simSvg.real .pzpipe{stroke:#2b2f24;stroke-width:2px}
+#simSvg.real .pzfan{fill:#353b2d;stroke:#171a13;stroke-width:1.2px}
+#simSvg.real .pzringo{fill:none;stroke:#6b6f5f;stroke-width:4px}
+#simSvg.real .pzringi{fill:none;stroke:#3a3e33;stroke-width:2px}
+#simSvg.real .pzringt{fill:#2a2d24}
+#simSvg.xray .pzmagback,#simSvg.xray .pzeng,#simSvg.xray .pzring{display:none}
+
+/* v1.41.1 villogás ellen: a kiemelés nem pulzál, mobilon nincs drága szűrő; a kamera GPU-n mozog */
+#sim .svgwrap{overflow:hidden}
+#simSvg{backface-visibility:hidden}
+#simSvg .hl,#simSvg .hl *{animation:none!important}
+#simSvg.real .hl,#simSvg.real .act{filter:none!important}
+#simSvg.real .hl>*:first-child,#simSvg.real rect.hl,#simSvg.real circle.hl,#simSvg.real path.hl{stroke-width:2.5px!important}
+@media(pointer:coarse){#simBg .smk{filter:none!important;opacity:.5}#simSvg .hl,#simSvg .act{filter:none!important}}
+#simBg .fire{animation-duration:2.6s}
 </style>
 
 <nav class="bnav" id="bnav" aria-label="Fő navigáció"><button type="button" data-tab="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5V20h-5.5v-5.5h-5V20H4z"/></svg><span>Főmenü</span></button><button type="button" data-tab="start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 20.2 7.5v9L12 21.2 3.8 16.5v-9z"/><path d="M9.8 9.6a2.3 2.3 0 1 1 3.1 2.2c-.6.3-.9.7-.9 1.4v.5"/><circle cx="12" cy="16.4" r=".7"/></svg><span>Kvíz</span></button><button type="button" data-tab="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg><span>Tűzfeladat</span></button><button type="button" data-tab="rank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 13v4M8.5 20.5h7M9.5 17h5v3.5h-5z"/></svg><span>Ranglista</span></button><button type="button" data-tab="set"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg><span>Beállítás</span></button></nav>
@@ -2185,8 +2224,8 @@ var KEY="pzh-milliomos-v1";
 function load(){try{var s=localStorage.getItem(KEY);return s?JSON.parse(s):{};}catch(e){return {};}}
 function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
 var store=load(); if(!store.topics) store.topics={};
-var APP_VERSION="1.40.0",APP_DATE="2026-11-02";
-var CHANGELOG=[["1.40.0", "Új főmenü: gyors indítás, kompakt csempék, alsó navigációs sáv telefonon; tűzfeladat: élethű löveg-grafika, nagyobb kép, közelítő kamera, röntgen-kapcsoló"], ["1.39.0", "Jutalompontok: napi játék-sorozat (100 p × napok, max 1000/nap) és mérföldkövek, napi kihívás bónusz; a kvíz a rég nem látott kérdéseket hozza előre, véletlen sorrendben"], ["1.38.0", "Megosztás: QR-kód és link ugyanarra a címre, telepítő varázslóval"], ["1.37.0", "Telepítés: iPhone-on a „Megnyitás webappként” kapcsoló jelzése, teljes képernyős app indítás javítva"], ["1.36.1", "Telepítő varázsló: ha az app már telepítve van (Android), nem kéri újra; meghívó linkek nem töltik a tárhelyet; javítások"], ["1.36.0", "Telepítő varázsló: QR-kód vagy meghívó link után lépésről lépésre telepítés Androidra és iPhone-ra, utána az app oda nyílik, ahová a link mutat; megosztásnál választható cél és üteg-meghívó"], ["1.35.0", "Kvíz: „Üzenek az adminnak” gomb – hibás vagy rossz kérdés jelzése előre megadott okokkal, rövid megjegyzéssel"], ["1.34.2", "Pontozás: kilépéskor a kvíz és a raktár pontjai megmaradnak; a játék végén látszik, felkerült-e az eredmény a ranglistára; kapcsolatkor automatikus újrafeltöltés"], ["1.34.1", "Lőszerraktár: lefelé görgetve az igénylés szövege egy lebegő sávban követi a görgetést"], ["1.34.0", "Lőszerraktár: a hiba csak a teljes töltés után derül ki – ellenőrzés, hibalista, aztán robbanás; főmenü: kompakt csempék, 2–3 egymás mellett"], ["1.33.0", "Kisokos: 400 kártya (duplázva), új témakörök: Tájékozódás, Egészség – offline is; főmenü: Tudtad? hírsáv véletlen érdekességekkel"], ["1.32.1", "Készítői tanúsítvány és logó-vízjel – készítette: Strasszer szkv., 2026"], ["1.32.0", "Tanulóközpont: Hibáim gyakorló, Miért? gomb, vizsga mód, témakör-statisztika, kártyás ismétlő, napi kihívás, rendfokozatok és jelvények, üteg-ranglista, adatpárosító; tűzfeladat: szerepek, lépésgyakorló, éjszaka/eső/köd, tűzparancs felolvasása; raktár: súgó ki-be; külön zene- és hanghatás-hangerő; új vízjel-logó"], ["1.31.4", "Illeszkedés minden kijelzőn: menükártyák, adatkártyák, ranglista-gomb telefonon a sarokban, játék közben elrejtve"], ["1.31.3", "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"], ["1.31.2", "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"], ["1.31.1", "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"], ["1.31.0", "Főképernyő: realisztikus lövés (csőszájfék-lángok, lökéshullám, porfelverés, füst), géppuskás a toronyban, aki a támadó drónokat lövi; figyelmeztetés foglalt becenévnél"], ["1.30.4", "Ranglista: ugyanaz a becenév több készülékről egy sorban, a legjobb eredménnyel"], ["1.30.3", "Kisebb javítások"], ["1.30.2", "Kisebb javítások"], ["1.30.1", "Összes kérdés: javítások, gyorsabb betöltés"], ["1.30.0", "Kvíz: új Összes kérdés lista a helyes válaszokkal, magyarázattal, kereséssel és témakör-szűrővel"], ["1.29.0", "Lőszerraktár a lőtéren: lőtérfigyelő torony (az erkélyen a PK basszusgitározik), célterület, álcaháló; új lőszer-ismertető: felcímkézett metszet, NATO színkód, lőtávolság-skála a feladat céltávolságával, rendszeresítési jelzés"], ["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
+var APP_VERSION="1.41.1",APP_DATE="2026-11-03";
+var CHANGELOG=[["1.41.1", "Tűzfeladat: nincs villogás (nyugodt kiemelés, egyenletes kameramozgás), valósághűbb PzH 2000 arányok (alacsonyabb torony, nagyobb futógörgők), gyorsabb futás telefonon"], ["1.41.0", "Tűzfeladat: valósághű belső elrendezés (két sorban álló gránátok a teknő-tárolóban, motor-erőforrás elöl, toronygyűrű) és élethűbb lövés: 700 mm-es hátrasiklás, lökéshullám, oldalra fújó csőszájfék, berugózó futómű"], ["1.40.1", "Tűzfeladat: élethűbb PzH 2000 – valós arányú torony és teknő, lánckerék, feszítőkerék, gumikötény, PERI irányzék, MG3, ködgránát-vetők, útizár, kúpos cső csőszájfékkel"], ["1.40.0", "Új főmenü: gyors indítás, kompakt csempék, alsó navigációs sáv telefonon; tűzfeladat: élethű löveg-grafika, nagyobb kép, közelítő kamera, röntgen-kapcsoló"], ["1.39.0", "Jutalompontok: napi játék-sorozat (100 p × napok, max 1000/nap) és mérföldkövek, napi kihívás bónusz; a kvíz a rég nem látott kérdéseket hozza előre, véletlen sorrendben"], ["1.38.0", "Megosztás: QR-kód és link ugyanarra a címre, telepítő varázslóval"], ["1.37.0", "Telepítés: iPhone-on a „Megnyitás webappként” kapcsoló jelzése, teljes képernyős app indítás javítva"], ["1.36.1", "Telepítő varázsló: ha az app már telepítve van (Android), nem kéri újra; meghívó linkek nem töltik a tárhelyet; javítások"], ["1.36.0", "Telepítő varázsló: QR-kód vagy meghívó link után lépésről lépésre telepítés Androidra és iPhone-ra, utána az app oda nyílik, ahová a link mutat; megosztásnál választható cél és üteg-meghívó"], ["1.35.0", "Kvíz: „Üzenek az adminnak” gomb – hibás vagy rossz kérdés jelzése előre megadott okokkal, rövid megjegyzéssel"], ["1.34.2", "Pontozás: kilépéskor a kvíz és a raktár pontjai megmaradnak; a játék végén látszik, felkerült-e az eredmény a ranglistára; kapcsolatkor automatikus újrafeltöltés"], ["1.34.1", "Lőszerraktár: lefelé görgetve az igénylés szövege egy lebegő sávban követi a görgetést"], ["1.34.0", "Lőszerraktár: a hiba csak a teljes töltés után derül ki – ellenőrzés, hibalista, aztán robbanás; főmenü: kompakt csempék, 2–3 egymás mellett"], ["1.33.0", "Kisokos: 400 kártya (duplázva), új témakörök: Tájékozódás, Egészség – offline is; főmenü: Tudtad? hírsáv véletlen érdekességekkel"], ["1.32.1", "Készítői tanúsítvány és logó-vízjel – készítette: Strasszer szkv., 2026"], ["1.32.0", "Tanulóközpont: Hibáim gyakorló, Miért? gomb, vizsga mód, témakör-statisztika, kártyás ismétlő, napi kihívás, rendfokozatok és jelvények, üteg-ranglista, adatpárosító; tűzfeladat: szerepek, lépésgyakorló, éjszaka/eső/köd, tűzparancs felolvasása; raktár: súgó ki-be; külön zene- és hanghatás-hangerő; új vízjel-logó"], ["1.31.4", "Illeszkedés minden kijelzőn: menükártyák, adatkártyák, ranglista-gomb telefonon a sarokban, játék közben elrejtve"], ["1.31.3", "Telefonos javítások: sötét rendszer-sávok, egyenletes görgetés a menüben, a tűzfeladat pontosan kitölti a képernyőt"], ["1.31.2", "Főképernyő: becsapódáskor nincs zuhanó hang, hangosabb robbanás"], ["1.31.1", "Tűzfeladat: tompább, élethűbb fémes hangok (zár, töltés, retesz)"], ["1.31.0", "Főképernyő: realisztikus lövés (csőszájfék-lángok, lökéshullám, porfelverés, füst), géppuskás a toronyban, aki a támadó drónokat lövi; figyelmeztetés foglalt becenévnél"], ["1.30.4", "Ranglista: ugyanaz a becenév több készülékről egy sorban, a legjobb eredménnyel"], ["1.30.3", "Kisebb javítások"], ["1.30.2", "Kisebb javítások"], ["1.30.1", "Összes kérdés: javítások, gyorsabb betöltés"], ["1.30.0", "Kvíz: új Összes kérdés lista a helyes válaszokkal, magyarázattal, kereséssel és témakör-szűrővel"], ["1.29.0", "Lőszerraktár a lőtéren: lőtérfigyelő torony (az erkélyen a PK basszusgitározik), célterület, álcaháló; új lőszer-ismertető: felcímkézett metszet, NATO színkód, lőtávolság-skála a feladat céltávolságával, rendszeresítési jelzés"], ["1.28.0", "Dinamikus főmenü: becsapódó gránátok (fütty, tűzgolyó, földszökőkút, füst, kráter), visszatüzelő PzH torkolattűzzel és hátrarúgással, sodródó csatafüst, beúszó menü"], ["1.27.0", "Megbízható, automatikus frissítés (indításkor és visszatéréskor magától frissít); új, lekerekített katonai filmes kinézet: filmszemcse, szépia, sablonbetű, vörös HUD-célkereszt"], ["1.26.0", "Lőszerraktár: rock és metál szakaszok a zenében; rossz lőszernél a PzH szúrólánggal kigyullad, a katonák drámaian elesnek (a vér a Beállításokban kapcsolható)"], ["1.25.0", "Új, tüzéres díszegyenruha-kinézet (sárgaréz, tüzérpiros, keresztbe tett ágyúk); a PK basszusgitározik, saját zenével a lőszerraktárban"], ["1.24.0", "Lőszerraktár: nemzetközi 155 mm-es lőszerek (DM121, M795, SMArt, Excalibur, BONUS, Vulcano, PGK, M232) és poéntételek; új magasztos, hősies menüzene"], ["1.23.0", "Teljesen új, taktikai dizájn; az eredeti PzH 2000 modell kidolgozva (álcafestés, árnyékolás, kötény, forgó görgők) minden képernyőn; Wisent mentő"], ["1.22.0", "Lőszerpont városi környezetben, részletes PzH, LELE pk, ellenséges becsapódások a szurkolók között; közelebbi forgózsámoly info gombbal; terep: lánctalp-animáció és Wisent műszaki mentő"], ["1.21.0", "Tűzfeladat: vékony vízszintes adatsáv felül; lőszerraktár: nagyobb szurkoló tömeg közelről, új beszólások, árnyékok, por; modern felület minden eszközre"], ["1.20.0", "Megosztás és frissítés gomb a főoldalon; dinamikus link és QR; tűzfeladat Kezdés képernyő"], ["1.14.0", "Modern megjelenés: üveghatású kártyák, lekerekített menü, új betűtípusok, tapadó felső sáv, iOS-stílusú kapcsolók"], ["1.13.0", "Kvíz: teljesen véletlen sorrend, vegyes nehézség; új: Harcászattechnikai adatok gyakorló (kézzel beírós, időzítő nélkül); oltórendszer- és EÜ-kérdések; ranglista ki/be a Beállításokban, élő mód nélkül"], ["1.12.2", "Belépés a laktanyai tábla QR-kódjával; a Megosztás menü kikerült"], ["1.12.1", "Biztonság: a ranglistát és az online jelzést csak belépett tagok látják; kapcsolható online-láthatóság; álnév-figyelmeztetés"], ["1.12.0", "Jelszavas védelem: frissítés után egyszer meg kell adni a jelszót (az ütegnél kapod). Az eredményeid megmaradnak."], ["1.11.1", "Tűzfeladat: stopper másodperccel és tized másodperccel, legjobb idő mentése"], ["1.11.0", "Kvíz: 60 mp-es időzítő, milliomos-stílus feszült zenével, véletlen sorrend; ranglista-fül minden képernyőn, ki játszik most; állított, részletes lőszerképek adatlappal; szurkoló bajtársak a raktárban; Kisokos 198 kártya"], ["1.10.0", "Gyorstűz valós sebességű mechanikával; MRSI-kérdések idézetekkel és MRSI tűzfeladat (5 gránát egyidejű becsapódással)"], ["1.9.1", "Lőszerraktár: forgózsámolyos kiválasztás; rossz tételnél a kezelő szól, aztán robban; a halálkiáltás kikerült"], ["1.9.0", "Távolság méterben; katonák a becsapódásoknál; lobogó magyar zászló és az üteg címere; értesítés frissítésről"], ["1.8.1", "Valósághű hangok: 155 mm-es lövés visszhanggal, fémes betöltés és ékzárzárás, pneumatika és kompresszor"], ["1.8.0", "Tűzfeladat: javítás az első lövés után + 3 gránát hatásra időre; teljes képszélesség, fekvő mód, iOS safe-area, rezgés, képernyő ébren tartása"], ["1.7.0", "Tűzfeladat görgetés nélkül: kérdés és válaszok a kép alatt (telefonon) / mellett (gépen); OLDAL–MAG.–TŰZ jobbra fent"], ["1.6.2", "Tűzfeladat: az FKE zöld kijelzője a kép tetejére került"], ["1.6.1", "Tűzfeladat: a Tovább gomb a helyes válaszban jelenik meg, nem kell görgetni"], ["1.6.0", "Nagyobb, jobban olvasható betűk mindenhol; betűméret-választó a Beállításokban"], ["1.5.0", "Tűzfeladat röntgennézetben harctéri háttérrel; új lépések: Löveg töltve, Tűzkész, Tűz!"], ["1.4.0", "Verziószám, Frissítés keresése gomb, kapcsolható offline mód, offline jelző"], ["1.3.0", "Kvízkérdések szakmai és nyelvi javítása"], ["1.2.0", "Új menü, Beállítások, Megosztás, 99 kisokos-kártya, élő ranglista kategóriákkal"], ["1.1.0", "Lőszerraktár, Kisokos, ranglista"]];
 var CFG=(function(){var d={music:true,sfx:true,vol:0.9,mvol:1,svol:1,blasts:true,gore:true,notif:false,offline:false,fz:1.2,online:true,rank:true,_prev:null};
   try{var o=JSON.parse(localStorage.getItem(KEY+"-cfg")||"null");if(o){for(var k in d)if(k in o)d[k]=o[k];}else if(localStorage.getItem(KEY+"-snd")==="0"){d.music=false;d.sfx=false;}}catch(e){}return d;})();
 function saveCfg(){try{localStorage.setItem(KEY+"-cfg",JSON.stringify(CFG));}catch(e){}}
@@ -2242,19 +2281,21 @@ function drawPzH(root,o){
   o=o||{};
   var hull=el("g",{},root);
   /* lánc, görgők */
-  el("rect",{x:52,y:392,width:660,height:62,rx:31,fill:"var(--sil)",id:o.p+"track"},hull);
-  for(var i=0;i<7;i++) el("circle",{cx:120+i*86,cy:424,r:24,fill:"var(--bg)",stroke:"var(--sil)","stroke-width":4},hull);
-  el("circle",{cx:82,cy:410,r:15,fill:"var(--bg)"},hull); el("circle",{cx:683,cy:410,r:16,fill:"var(--bg)"},hull);
+  /* lánc: felső ág a támgörgőkön, elöl magasan a lánckerék, hátul a feszítőkerék, alsó ág a talajon */
+  el("path",{d:"M70 382 L694 384 A30 30 0 0 1 716 430 L656 456 L106 456 L58 428 A24 24 0 0 1 70 382 Z",fill:"var(--sil)",id:o.p+"track"},hull);
+  for(var i=0;i<7;i++) el("circle",{cx:120+i*86,cy:427,r:28,fill:"var(--bg)",stroke:"var(--sil)","stroke-width":4},hull);
+  el("circle",{cx:80,cy:404,r:17,fill:"var(--bg)"},hull); el("circle",{cx:694,cy:404,r:19,fill:"var(--bg)"},hull);
   /* alváz */
-  el("polygon",{points:"40,395 40,318 62,290 575,290 712,330 725,362 708,395",fill:"var(--sil)"},hull);
+  el("polygon",{points:"40,396 38,314 58,290 566,290 706,322 728,350 722,372 704,396",fill:"var(--sil)"},hull);
   /* torony */
-  el("polygon",{points:"30,290 26,196 50,166 360,160 448,176 478,206 478,290",fill:"var(--sil)"},hull);
-  el("rect",{x:200,y:146,width:46,height:18,rx:6,fill:"var(--sil)"},hull);
-  el("rect",{x:300,y:140,width:12,height:24,rx:2,fill:"var(--sil)"},hull);
-  el("path",{d:"M130 160 l0 -14 l22 -6",stroke:"var(--sil)","stroke-width":5,fill:"none"},hull);
+  /* nagy, hátra kinyúló torony: ferde hátsó és első tetőél, ferde homlokpáncél */
+  el("polygon",{points:"24,290 20,216 34,188 62,175 300,168 410,170 452,182 482,204 488,252 472,290",fill:"var(--sil)"},hull);
+  el("rect",{x:196,y:160,width:58,height:12,rx:5,fill:"var(--sil)"},hull);   /* töltőkezelő búvónyílás-gyűrű */
+  el("rect",{x:318,y:154,width:40,height:18,rx:3,fill:"var(--sil)"},hull);   /* parancsnoki kupola */
+  el("rect",{x:330,y:136,width:22,height:20,rx:3,fill:"var(--sil)"},hull);   /* PERI panoráma-irányzék feje */
   if(o.interior){
     /* metszet belső terek */
-    el("polygon",{points:"36,282 34,200 56,174 356,168 440,182 466,208 466,282",fill:"var(--cut)",id:o.p+"turretIn"},hull);
+    el("polygon",{points:"36,282 34,210 56,184 356,178 440,192 466,214 466,282",fill:"var(--cut)",id:o.p+"turretIn"},hull);
     el("polygon",{points:"52,386 52,300 568,300 694,334 704,360 694,386",fill:"var(--cut)"},hull);
     el("line",{x1:52,y1:290,x2:478,y2:290,stroke:"var(--sil)","stroke-width":8},hull); /* toronypadozat */
     /* motortér */
@@ -2282,13 +2323,13 @@ function drawPzH(root,o){
     el("rect",{x:436,y:276,width:22,height:16,rx:3,fill:"var(--muted)",id:o.p+"prog"},hull);
     /* töltettároló a torony hátsó részén */
     var tt=el("g",{id:o.p+"chg"},hull);
-    el("rect",{x:44,y:186,width:116,height:94,rx:4,fill:"var(--cut2)",stroke:"var(--line)","stroke-width":2,id:o.p+"chgBox"},tt);
-    for(var cy=0;cy<3;cy++)for(var cx=0;cx<4;cx++) chargeShape(tt,52+cx*26,196+cy*28,22,22).setAttribute("class",o.p+"cmod");
+    el("rect",{x:44,y:194,width:116,height:86,rx:4,fill:"var(--cut2)",stroke:"var(--line)","stroke-width":2,id:o.p+"chgBox"},tt);
+    for(var cy=0;cy<3;cy++)for(var cx=0;cx<4;cx++) chargeShape(tt,52+cx*26,202+cy*26,22,22).setAttribute("class",o.p+"cmod");
     /* kezelők a toronyban */
     el("circle",{cx:250,cy:196,r:9,fill:"var(--muted)",opacity:.55},hull);
     el("path",{d:"M238 284 l4 -76 h18 l6 76 Z",fill:"var(--muted)",opacity:.35},hull);
     /* búvónyílás fedél */
-    el("rect",{x:196,y:160,width:56,height:6,fill:"var(--sil)",id:o.p+"hatchLid","class":"mv",style:"transform-origin:196px 163px;transform:rotate(-70deg)"},hull);
+    el("rect",{x:196,y:170,width:56,height:6,fill:"var(--sil)",id:o.p+"hatchLid","class":"mv",style:"transform-origin:196px 173px;transform:rotate(-70deg)"},hull);
     /* töltőkar (PTA) */
     var pta=el("g",{id:o.p+"pta","class":"mv",style:"transform-origin:"+PIV.x+"px "+PIV.y+"px"},root);
     el("rect",{x:300,y:250,width:140,height:12,rx:4,fill:"var(--gold)",opacity:.85,id:o.p+"ptaBar"},pta);
@@ -2297,7 +2338,7 @@ function drawPzH(root,o){
   /* cső + bölcső + csőfar – a forgáspont körül emelkedik */
   var gun=el("g",{id:o.p+"gun","class":"mvs",style:"transform-origin:"+PIV.x+"px "+PIV.y+"px"},root);
   var rec=el("g",{id:o.p+"recoil",style:"transition:transform .12s ease-out"},gun);
-  el("rect",{x:470,y:197,width:470,height:16,rx:3,fill:"var(--sil)"},rec);
+  el("path",{d:"M470 195.5 L930 199 L930 211 L470 214.5 Z",fill:"var(--sil)"},rec);
   el("rect",{x:660,y:193,width:56,height:24,rx:6,fill:"var(--sil)"},rec); /* füstelszívó */
   el("rect",{x:930,y:190,width:40,height:30,rx:4,fill:"var(--sil)"},rec); /* csőszájfék */
   if(o.interior){
@@ -2666,18 +2707,55 @@ function hl(ids){hlNodes.forEach(function(n){n.classList.remove("hl");n.classLis
   /* álcafestés a teknőn és a tornyon */
   Array.prototype.forEach.call(hull.querySelectorAll(':scope > polygon[fill="var(--sil)"]'),function(p){var c=p.cloneNode();c.setAttribute("fill","url(#pzCamo)");c.setAttribute("class","pzcamo");c.removeAttribute("id");p.parentNode.insertBefore(c,p.nextSibling);});
   var D=el("g",{"class":"pzdet"},hull);hull.insertBefore(D,hull.querySelector('[fill="var(--cut)"]')||null);
-  /* oldalkötény lemezek csavarokkal a lánc fölött */
-  for(var i=0;i<8;i++){var x=58+i*80;el("rect",{x:x,y:384,width:78,height:16,rx:2,"class":"pzskirt"},D);for(var b=0;b<3;b++)el("circle",{cx:x+12+b*27,cy:392,r:1.6,"class":"pzbolt"},D);}
-  /* visszafutó görgők */
-  for(var r=0;r<4;r++)el("circle",{cx:170+r*150,cy:402,r:5,"class":"pzhub"},D);
-  /* ködgránát-vetők a torony elején, géppuska, periszkópok, antenna-talpak */
-  for(var k=0;k<4;k++)el("rect",{x:452+k*0,y:190+k*9,width:22,height:7,rx:3,"class":"pzsmoke",transform:"rotate(-18 463 "+(193+k*9)+")"},D);
-  el("rect",{x:196,y:132,width:56,height:6,rx:2,"class":"pzmg"},D);el("rect",{x:232,y:128,width:30,height:4,rx:1,"class":"pzmg"},D);el("rect",{x:212,y:138,width:6,height:10,"class":"pzmg"},D);
-  el("rect",{x:300,y:150,width:16,height:10,rx:2,"class":"pzperi"},D);el("rect",{x:392,y:166,width:14,height:10,rx:2,"class":"pzperi"},D);
-  /* fényszórók, vonóhorog elöl */
-  el("rect",{x:700,y:340,width:12,height:8,rx:2,"class":"pzlamp"},D);el("path",{d:"M712 372 h10 v8 h-10",fill:"none","class":"pzhook"},D);
-  /* torony felső élfény */
-  el("path",{d:"M50 167 L360 161 L448 177",fill:"none","class":"pzedge"},D);el("path",{d:"M62 291 L575 291 L712 331",fill:"none","class":"pzedge"},D);
+  /* futómű: lánckerék fogakkal, feszítőkerék küllőkkel, futógörgő-agyak, támgörgők */
+  for(var t=0;t<14;t++){var a=t*Math.PI/7;el("rect",{x:691,y:381,width:6,height:8,rx:1,"class":"pztooth",transform:"rotate("+(a*180/Math.PI)+" 694 404)"},D);}
+  el("circle",{cx:694,cy:404,r:9,"class":"pzhub"},D);el("circle",{cx:80,cy:404,r:8,"class":"pzhub"},D);
+  for(var sp=0;sp<5;sp++){var aa=sp*Math.PI*2/5;el("line",{x1:80+3*Math.cos(aa),y1:404+3*Math.sin(aa),x2:80+13*Math.cos(aa),y2:404+13*Math.sin(aa),"class":"pzspoke"},D);}
+  for(var w=0;w<7;w++){var cx=120+w*86;el("circle",{cx:cx,cy:427,r:19,"class":"pzrim"},D);el("circle",{cx:cx,cy:427,r:7,"class":"pzhub"},D);
+    for(var bo=0;bo<6;bo++){var ab=bo*Math.PI/3;el("circle",{cx:cx+12*Math.cos(ab),cy:427+12*Math.sin(ab),r:1.5,"class":"pzbolt"},D);}}
+  for(var r=0;r<4;r++)el("circle",{cx:170+r*150,cy:388,r:6,"class":"pzhub"},D);
+  /* gumi oldalkötény szegmensekkel a felső láncág előtt */
+  for(var i=0;i<8;i++){var x=60+i*79;el("rect",{x:x,y:378,width:77,height:22,rx:2,"class":"pzskirt"},D);el("rect",{x:x,y:396,width:77,height:5,"class":"pzflap"},D);for(var b2=0;b2<3;b2++)el("circle",{cx:x+12+b2*26,cy:384,r:1.6,"class":"pzbolt"},D);}
+  /* homlok: fényszórók védőkerettel, vonószemek, sárvédő, harcjárművezető periszkópjai */
+  el("rect",{x:706,y:332,width:13,height:9,rx:2,"class":"pzlamp"},D);el("path",{d:"M703 330 h19 v13 h-19 z",fill:"none","class":"pzguard"},D);
+  el("circle",{cx:722,cy:362,r:4.5,fill:"none","class":"pzhook"},D);el("circle",{cx:714,cy:382,r:4.5,fill:"none","class":"pzhook"},D);
+  el("path",{d:"M690 372 q24 -6 40 6",fill:"none","class":"pzguard"},D);
+  for(var pe=0;pe<3;pe++)el("rect",{x:586+pe*14,y:284,width:10,height:7,rx:1.5,"class":"pzperi"},D);
+  /* menetrögzítő (útizár) a teknő elején a cső alatt */
+  el("path",{d:"M640 300 L700 318",fill:"none","class":"pzlock"},D);el("rect",{x:696,y:312,width:10,height:9,rx:2,"class":"pzhub"},D);
+  /* torony teteje: parancsnoki kupola + PERI irányzék ablaka, irányzói irányzék, töltőkezelő MG3, antennák, hátsó kosár */
+  el("rect",{x:333,y:140,width:16,height:7,rx:1,"class":"pzglass"},D);el("rect",{x:316,y:152,width:44,height:4,rx:2,"class":"pzedge2"},D);
+  el("rect",{x:394,y:160,width:26,height:12,rx:2,"class":"pzperi"},D);el("rect",{x:412,y:163,width:8,height:5,"class":"pzglass"},D);
+  el("rect",{x:200,y:148,width:6,height:12,"class":"pzmg"},D);el("path",{d:"M203 148 L262 142 L262 146 L203 152 Z","class":"pzmg"},D);el("rect",{x:214,y:146,width:16,height:7,rx:1,"class":"pzmg"},D);el("rect",{x:224,y:153,width:5,height:9,"class":"pzmg"},D);
+  el("line",{x1:46,y1:180,x2:34,y2:38,"class":"pzant"},D);el("line",{x1:72,y1:176,x2:66,y2:56,"class":"pzant"},D);el("rect",{x:40,y:176,width:12,height:6,rx:2,"class":"pzhub"},D);el("rect",{x:66,y:172,width:12,height:6,rx:2,"class":"pzhub"},D);
+  el("path",{d:"M22 210 h-8 v62 h8 M14 226 h8 M14 244 h8 M14 260 h8",fill:"none","class":"pzrail"},D);
+  /* ködgránát-vetők: két 4-es köteg a torony homlokán */
+  var SM=el("g",{"class":"pzdet"},$("simPzh"));[[404,160],[424,164]].forEach(function(p){for(var k=0;k<4;k++)el("rect",{x:p[0]+k*4,y:p[1]-k*5,width:18,height:5,rx:2.4,"class":"pzsmoke",transform:"rotate(-28 "+(p[0]+k*4)+" "+(p[1]-k*5)+")"},SM);});
+  /* tetőél és teknőél fénye */
+  el("path",{d:"M34 188 L62 175 L300 168 L410 170 L452 182",fill:"none","class":"pzedge"},D);el("path",{d:"M58 291 L566 291 L706 323",fill:"none","class":"pzedge"},D);
+  /* cső: bölcső gumi-harmonikája, hőtakaró gyűrűk, füstelszívó, többkamrás csőszájfék */
+  var rec2=$("srecoil");if(rec2){[560,620,760,840].forEach(function(x){el("rect",{x:x,y:196,width:4,height:18,"class":"pzband"},rec2);});
+    el("rect",{x:470,y:194,width:16,height:22,rx:3,"class":"pzboot"},rec2);
+    for(var mb=0;mb<5;mb++)el("rect",{x:934+mb*7,y:191,width:3,height:28,"class":"pzslot"},rec2);}
+})();
+
+/* ===== v1.41 valósághű belső elrendezés: 60 gránátos teknő-tároló, motor-erőforrás elöl, toronygyűrű ===== */
+(function(){if(!$("simPzh"))return;
+  /* gránáttároló: hátsó sor (sötétebb, eltolva) – a tároló 60 lövedéke két sorban áll */
+  var mag=$("smag"),box=$("smagBox");if(mag&&box){var back=el("g",{"class":"pzmagback"});mag.insertBefore(back,box.nextSibling);
+    for(var r=0;r<13;r++){var x=181+r*26;if(x>500)break;shellShape(back,x,366,-90,0.92);}}
+  /* motor-erőforrás a teknő elején: blokk, hengerfejek, turbó, hajtómű-ház, hűtőventilátorok */
+  var eng=$("sengine");if(eng){var g=el("g",{"class":"pzeng"},eng);
+    el("rect",{x:578,y:322,width:70,height:44,rx:5,"class":"pzengb"},g);
+    for(var c=0;c<4;c++)el("rect",{x:582+c*16,y:312,width:13,height:12,rx:2,"class":"pzcyl"},g);
+    el("circle",{cx:662,cy:350,r:15,"class":"pzgear"},g);el("circle",{cx:662,cy:350,r:6,"class":"pzhub2"},g);
+    el("rect",{x:604,y:300,width:24,height:9,rx:4,"class":"pzturbo"},g);el("path",{d:"M628 304 q12 0 14 10",fill:"none","class":"pzpipe"},g);
+    for(var f=0;f<2;f++){var fx2=592+f*30;el("circle",{cx:fx2,cy:356,r:8,"class":"pzfan"},g);el("path",{d:"M"+(fx2-6)+" 356 h12 M"+fx2+" 350 v12",fill:"none","class":"pzpipe"},g);}
+    var lb=eng.querySelector(".lblk");if(lb)eng.appendChild(lb);}
+  /* toronygyűrű és toronykosár a torony padlóján */
+  var ti=$("sturretIn");if(ti){var ring=el("g",{"class":"pzring"});ti.parentNode.insertBefore(ring,ti.nextSibling);
+    el("ellipse",{cx:300,cy:288,rx:168,ry:7,"class":"pzringo"},ring);el("ellipse",{cx:300,cy:288,rx:150,ry:5,"class":"pzringi"},ring);
+    for(var t=0;t<18;t++)el("rect",{x:136+t*18.5,y:285,width:2,height:6,"class":"pzringt"},ring);}
 })();
 var CAM={vb:null,raf:0,full:null};
 function simSvgOn(){var s=$("simSvg");return s&&s.getBoundingClientRect().width>0;}
@@ -2689,13 +2767,16 @@ function camTarget(ids){var full=camFull();if(!camOn()||!ids||!ids.length)return
   ids.forEach(function(id){var n=typeof id==="string"?$(id):id;if(!n||!(n instanceof SVGElement)||!$("simSvg").contains(n))return;var b=svgBox(n);if(!b)return;B=B?[Math.min(B[0],b[0]),Math.min(B[1],b[1]),Math.max(B[2],b[2]),Math.max(B[3],b[3])]:b;});
   if(!B)return full;var a=camAsp(),pad=70,w=Math.max(B[2]-B[0]+pad*2,560),h=Math.max(B[3]-B[1]+pad*2,w/a);w=Math.max(w,h*a);h=w/a;
   if(w>=full[2]*0.78)return full;var cx=(B[0]+B[2])/2,cy=(B[1]+B[3])/2,x=Math.min(Math.max(cx-w/2,-20),1020-w),y=Math.min(Math.max(cy-h/2,-800),505-h);return [x,y,w,h];}
-function camSet(v){CAM.vb=v;$("simSvg").setAttribute("viewBox",v.map(function(n){return n.toFixed(1);}).join(" "));}
-function camTo(ids,inst){if(!simSvgOn())return;var t=camTarget(ids),f=CAM.vb||camFull();cancelAnimationFrame(CAM.raf);
-  if(inst||matchMedia("(prefers-reduced-motion: reduce)").matches){camSet(t);return;}var t0=performance.now();
-  (function st(now){var k=Math.min(1,(now-t0)/650),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;camSet(f.map(function(v,i){return v+(t[i]-v)*e;}));if(k<1)CAM.raf=requestAnimationFrame(st);})(t0);}
+function camFrame(){var svg=$("simSvg"),F=camFull();CAM.F=F;svg.setAttribute("viewBox",F.map(function(n){return n.toFixed(1);}).join(" "));svg.setAttribute("preserveAspectRatio","xMidYMid meet");}
+function camApply(t,inst){var svg=$("simSvg"),F=CAM.F||camFull(),w=svg.clientWidth||svg.getBoundingClientRect().width;if(!w)return;var k=w/F[2],sc=F[2]/t[2],tx=-(t[0]-F[0])*k*sc,ty=-(t[1]-F[1])*k*sc;
+  var red=inst||matchMedia("(prefers-reduced-motion: reduce)").matches;svg.style.transformOrigin="0 0";svg.style.transition=red?"none":"transform .7s cubic-bezier(.4,0,.2,1)";
+  svg.style.transform=(Math.abs(sc-1)<.01&&Math.abs(tx)<1&&Math.abs(ty)<1)?"none":"translate("+tx.toFixed(1)+"px,"+ty.toFixed(1)+"px) scale("+sc.toFixed(4)+")";CAM.vb=t;}
+function camTo(ids,inst){if(!simSvgOn())return;var svg=$("simSvg"),tr=svg.style.transform,tn=svg.style.transition;
+  if(!CAM.F)camFrame();svg.style.transition="none";svg.style.transform="none";var t=camTarget(ids);svg.style.transform=tr;void svg.offsetWidth;svg.style.transition=tn;
+  var same=CAM.vb&&t.every(function(v,i){return Math.abs(v-CAM.vb[i])<2;});if(same&&!inst)return;camApply(t,inst);}
 var _hl1=hl;hl=function(ids){_hl1(ids);CAM.ids=ids;setTimeout(function(){camTo(ids);},30);};
-function camRefresh(inst){if(simSvgOn())camTo(CAM.ids,inst);}
-window.addEventListener("resize",function(){setTimeout(function(){camRefresh(true);},60);});
+function camRefresh(inst){if(simSvgOn()){camFrame();CAM.vb=null;camTo(CAM.ids,inst);}}
+var CAMW=0;window.addEventListener("resize",function(){var w=innerWidth;if(Math.abs(w-CAMW)<3)return;CAMW=w;setTimeout(function(){camRefresh(true);},80);});
 function simToolsSync(){$("simZoom").setAttribute("aria-pressed",String(camOn()));$("simZoom").classList.toggle("on",camOn());var xr=$("simSvg").classList.contains("xray");$("simXr").setAttribute("aria-pressed",String(xr));$("simXr").classList.toggle("on",xr);}
 $("simZoom").addEventListener("click",function(){CFG.simCam=!camOn();saveCfg();simToolsSync();camRefresh();});
 $("simXr").addEventListener("click",function(){var x=!$("simSvg").classList.contains("xray");$("simSvg").classList.toggle("xray",x);$("simSvg").classList.toggle("real",!x);CFG.simXray=x;saveCfg();simToolsSync();});
@@ -2864,13 +2945,18 @@ async function aFire(run,o){o=o||{};buzz([45,30,90]);
   /* lövedék kirepül */
   var pr=el("circle",{cx:m.x,cy:m.y,r:4,fill:"#3a3a30"},fx);pr.animate([{transform:"translate(0,0)"},{transform:"translate("+(dirx*420)+"px,"+(diry*420)+"px)"}],{duration:380,fill:"forwards"});setTimeout(function(){pr.remove();},400);
   /* hátrasiklás és visszatérés, jármű megbillen */
-  $("srecoil").style.transition="transform 70ms ease-out";$("srecoil").style.transform="translateX(-46px)";
-  $("simPzh").style.transformOrigin="380px 450px";$("simPzh").animate([{transform:"rotate(0)"},{transform:"rotate(-0.8deg)",offset:.15},{transform:"rotate(0.3deg)",offset:.5},{transform:"rotate(0)"}],{duration:1100,easing:"ease-out"});
+  $("srecoil").style.transition="transform 60ms cubic-bezier(.1,.9,.2,1)";$("srecoil").style.transform="translateX(-60px)";
+  $("simPzh").style.transformOrigin="380px 456px";$("simPzh").animate([{transform:"translate(0,0) rotate(0)"},{transform:"translate(-5px,2px) rotate(-1.1deg)",offset:.12},{transform:"translate(-2px,0) rotate(.5deg)",offset:.38},{transform:"translate(-1px,0) rotate(-.25deg)",offset:.62},{transform:"translate(0,0) rotate(.08deg)",offset:.82},{transform:"translate(0,0) rotate(0)"}],{duration:1500,easing:"ease-out"});
+  /* lökéshullám-gyűrű a torkolatnál */
+  var sw=el("circle",{cx:m.x,cy:m.y,r:10,fill:"none",stroke:"rgba(255,240,200,.8)","stroke-width":3},fx);sw.style.transformBox="fill-box";sw.style.transformOrigin="center";
+  sw.animate([{transform:"scale(1)",opacity:.9},{transform:"scale(14)",opacity:0}],{duration:520,easing:"ease-out",fill:"forwards"});setTimeout(function(){sw.remove();},560);
+  /* a többkamrás csőszájfék oldalra és kissé hátra fújja a gázt: két csóva a cső két oldalán */
+  [[1,-1],[1,1]].forEach(function(sg){for(var q=0;q<4;q++){var nx=-diry*sg[1],ny=dirx*sg[1];puff(m.x-dirx*12,m.y-diry*12,9+q*3,q%2?"#c9b98e":"#e7d8a8",nx*(60+q*28)-dirx*20,ny*(60+q*28)-diry*20-10,1500+q*250,q*25);}});
   /* torkolatfék oldalra fújt füstje, por a talajon */
   for(var i=0;i<7;i++){puff(m.x+dirx*(i*6),m.y+diry*(i*6),12+i*2,i%2?"#8d8875":"#a39d86",(Math.random()-.3)*90,-30-Math.random()*60,2600,i*40);}
   puff(m.x,m.y,10,"#9a937c",-dirx*30,-50,2200,120);puff(m.x,m.y,10,"#9a937c",40,40,2200,120);
   for(var j=0;j<6;j++){puff(640+j*55,452,16,"#7b6a4b",(j-2.5)*14,-26-Math.random()*20,2400,80+j*30);}
-  await wait(90);$("srecoil").style.transition="transform 1100ms cubic-bezier(.3,.6,.3,1)";$("srecoil").style.transform="none";
+  await wait(80);$("srecoil").style.transition="transform 900ms cubic-bezier(.45,0,.25,1)";$("srecoil").style.transform="none";
   fke(["LÖVÉS LEADVA","HÁTRASIKLÁS: 700 mm","V0 MÉRÉS: OK"]);lamp("lpLoad","");wtAmmo(0);wtReady(false);$("modeCap").textContent="Lövés leadva";
   if(!o.noImpact)setTimeout(function(){if(!alive(run))return;bfBlast(930+(o.dx||0),436,1.25);if(o.txt)setTimeout(function(){if(alive(run))callout(o.txt[0],o.txt[1]);},500);},o.burst?900:1900);
   await wait(1300);if(!alive(run))return;setT("swedge","translateY(0)",250);SND.clang(0.45,null,260);SND.pneu(0.35,0.15);lamp("lpBreech","");

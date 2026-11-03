@@ -1,5 +1,5 @@
 {
- "version": "1.40.0",
- "date": "2026-11-02",
- "notes": "Új főmenü: gyors indítás, kompakt csempék, alsó navigációs sáv telefonon; tűzfeladat: élethű löveg-grafika, nagyobb kép, közelítő kamera, röntgen-kapcsoló"
+ "version": "1.41.1",
+ "date": "2026-11-03",
+ "notes": "Tűzfeladat: nincs villogás (nyugodt kiemelés, egyenletes kameramozgás), valósághűbb PzH 2000 arányok (alacsonyabb torony, nagyobb futógörgők), gyorsabb futás telefonon"
 }
