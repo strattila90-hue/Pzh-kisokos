@@ -83,6 +83,59 @@ service cloud.firestore {
         && request.resource.data.v is string && request.resource.data.v.size() <= 12;
     }
 
+    // Kisokos – a hét kártyája: mindenki olvassa, csak szerkesztő (parancsnok) írhatja.
+    match /kisweek/{id} {
+      allow read: if true;
+      allow delete: if isEditor();
+      allow create, update: if isEditor() && id == 'cur'
+        && request.resource.data.keys().hasOnly(['t','n','wk','at'])
+        && request.resource.data.t is string && request.resource.data.t.size() > 0 && request.resource.data.t.size() <= 200
+        && request.resource.data.n is string && request.resource.data.n.size() <= 120
+        && request.resource.data.wk is string && request.resource.data.wk.size() <= 10
+        && request.resource.data.at is string && request.resource.data.at.size() <= 30;
+    }
+
+    // Kisokos – ki olvasta el / oldotta meg a heti kártyát: mindenki olvassa (csak becenév), mindenki csak a sajátját írja.
+    match /kisweekst/{uid} {
+      allow read: if true;
+      allow delete: if request.auth != null && (request.auth.uid == uid || isEditor());
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['n','wk','t','r','s','at'])
+        && request.resource.data.n is string && request.resource.data.n.size() <= 24
+        && request.resource.data.wk is string && request.resource.data.wk.size() <= 10
+        && request.resource.data.t is string && request.resource.data.t.size() <= 200
+        && request.resource.data.r is int && request.resource.data.r >= 0 && request.resource.data.r <= 1
+        && request.resource.data.s is int && request.resource.data.s >= 0 && request.resource.data.s <= 1
+        && request.resource.data.at is string && request.resource.data.at.size() <= 30;
+    }
+
+    // Kisokos – kártyajavaslatok: bárki beküldhet (a saját azonosítójával), csak szerkesztő olvashatja/törölheti.
+    match /kissug/{id} {
+      allow read, delete: if isEditor();
+      allow create: if request.auth != null
+        && id.matches(request.auth.uid + '_k[a-z0-9]+')
+        && request.resource.data.keys().hasOnly(['c','t','b','n','at','v'])
+        && request.resource.data.c is string && request.resource.data.c.size() <= 40
+        && request.resource.data.t is string && request.resource.data.t.size() >= 4 && request.resource.data.t.size() <= 80
+        && request.resource.data.b is string && request.resource.data.b.size() >= 20 && request.resource.data.b.size() <= 600
+        && request.resource.data.n is string && request.resource.data.n.size() <= 24
+        && request.resource.data.at is string && request.resource.data.at.size() <= 30
+        && request.resource.data.v is string && request.resource.data.v.size() <= 12;
+    }
+
+    // Kisokos – jóváhagyott, beküldött kártyák: mindenki olvassa, csak szerkesztő írhatja.
+    match /kisadds/{id} {
+      allow read: if true;
+      allow delete: if isEditor();
+      allow create, update: if isEditor()
+        && request.resource.data.keys().hasOnly(['c','t','b','by','at'])
+        && request.resource.data.c is string && request.resource.data.c.size() <= 40
+        && request.resource.data.t is string && request.resource.data.t.size() > 0 && request.resource.data.t.size() <= 80
+        && request.resource.data.b is string && request.resource.data.b.size() > 0 && request.resource.data.b.size() <= 600
+        && request.resource.data.by is string && request.resource.data.by.size() <= 24
+        && request.resource.data.at is string && request.resource.data.at.size() <= 30;
+    }
+
     match /{document=**} { allow read, write: if false; }
   }
 }
