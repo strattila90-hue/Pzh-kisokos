@@ -43,7 +43,7 @@ A ranglistán csak a becenév és a pontszámok szerepelnek. Ha a `firebase-conf
 
 ## Frissítés
 
-Ha módosítod az `index.html`-t, a `sw.js`-ben emeld a `VERSION` értékét (pl. `1.44.0`), és a `version.json`-t is, hogy a telefonok letöltsék az újat.
+Ha módosítod az `index.html`-t, a `sw.js`-ben emeld a `VERSION` értékét (pl. `1.46.0`), és a `version.json`-t is, hogy a telefonok letöltsék az újat.
 
 ## Forrás
 
