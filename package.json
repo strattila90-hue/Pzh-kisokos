@@ -1,0 +1,11 @@
+{
+  "name": "pzh-milliomos",
+  "private": true,
+  "description": "PzH Milliomos – a játék maga statikus fájlokból áll; ez a fájl csak az automatikus teszthez kell.",
+  "scripts": {
+    "test": "node tests/smoke.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}

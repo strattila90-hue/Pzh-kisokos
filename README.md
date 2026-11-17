@@ -20,7 +20,22 @@ PzH 2000 HU kezelői felkészítő játék, egyetlen weboldalban:
   - *A hét kártyája* és *kártyajavaslat*: a parancsnok kitűz egy kártyát és heti kérdést, a játékosok kártyát javasolhatnak (PK sáv → 📚 Kisokos)
 - **Ranglista** – csak becenév, Firebase-en (opcionális)
 
-Minden tartalom az `index.html`-ben van. Telepíthető alkalmazásként (PWA), és első megnyitás után **hálózat nélkül is működik**.
+Telepíthető alkalmazásként (PWA), és első megnyitás után **hálózat nélkül is működik**.
+
+## Fájlok
+
+| Fájl | Mi van benne |
+|---|---|
+| `index.html` | az oldal váza (HTML, rajzok) – kicsi, minden megnyitáskor frissen töltődik |
+| `app.css` | a teljes megjelenés |
+| `data.js` | a kvíz kérdésbankja (`BANK`) |
+| `app.js` | a program és a Kisokos kártyái |
+| `sw.js`, `version.json`, `manifest.webmanifest`, ikonok | offline működés, frissítés, telepítés |
+| `firebase-config.js`, `firestore.rules` | ranglista (opcionális) |
+| `parancsnok-….html` | a parancsnoki változat belépője |
+| `tests/`, `package.json`, `.github/` | automatikus teszt – a játékhoz nem kell |
+
+A négy fő fájlnak (`index.html`, `app.css`, `data.js`, `app.js`) **együtt, egy mappában** kell lennie; az `index.html` önmagában már nem indul el.
 
 ## Közzététel GitHub Pages-en
 
@@ -43,7 +58,30 @@ A ranglistán csak a becenév és a pontszámok szerepelnek. Ha a `firebase-conf
 
 ## Frissítés
 
-Ha módosítod az `index.html`-t, a `sw.js`-ben emeld a `VERSION` értékét (pl. `1.44.0`), és a `version.json`-t is, hogy a telefonok letöltsék az újat.
+Bármelyik fájl módosítása után emeld a verziószámot **mind a négy helyen**, különben a telefonok a régi, tárolt példányt használják tovább:
+
+1. `app.js` – `var APP_VERSION="…"` (és egy új sor a `CHANGELOG` elejére)
+2. `sw.js` – `const VERSION = "…"`
+3. `version.json` – `"version"`
+4. `index.html` – a három `?v=…` (`app.css?v=`, `data.js?v=`, `app.js?v=`)
+
+A teszt ellenőrzi, hogy a négy hely egyezik.
+
+## Teszt
+
+```bash
+npm install
+```
+
+```bash
+npx playwright install chromium
+```
+
+```bash
+npm test
+```
+
+A `tests/smoke.js` telefonméretű böngészőben, valódi kattintásokkal végigmegy a menün, a kvízen, a Kisokos nézetein, a beállításokon, a vissza gombon és a játékok indításán. Külső hálózati kérést nem enged át, így a valódi ranglistára semmi nem kerül. GitHubon minden feltöltéskor magától lefut (Actions fül → *Gyorsteszt*).
 
 ## Forrás
 

@@ -1,9 +1,11 @@
-/* PzH Milliomos service worker – v1.45.0
+/* PzH Milliomos service worker – v1.47.0
    Offline működés: a játék fájljai gyorsítótárba kerülnek.
    Az oldal (index.html) hálózat-első: ha van net, mindig a legfrissebb jön, ha nincs, a tárolt. */
-const VERSION = "1.45.0";
+const VERSION = "1.47.0";
 const CACHE = "pzh-milliomos-" + VERSION;
-const CORE = ["./", "index.html", "firebase-config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
+/* a stílus, a kérdésbank és a program külön fájl; a ?v= miatt minden verzió a saját példányát kapja */
+const ASSETS = ["app.css", "data.js", "app.js"].map(f => f + "?v=" + VERSION);
+const CORE = ["./", "index.html", "firebase-config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"].concat(ASSETS);
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== "pzh-meta").map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener("message", e => { if (e.data === "SKIP_WAITING") self.skipWaiting(); });
@@ -52,8 +54,8 @@ self.addEventListener("fetch", e => {
     }));
     return;
   }
-  if (u.origin === location.origin) {                                                          // ikonok, manifest: tárolt-első
-    e.respondWith(caches.match(req).then(h => h || fetch(req).then(r => put(req, r))));
+  if (u.origin === location.origin) {                                                          // app.css, data.js, app.js, ikonok, manifest: tárolt-első (hálózat nélkül a régebbi példány is jó)
+    e.respondWith(caches.match(req).then(h => h || fetch(req).then(r => put(req, r)).catch(() => caches.match(req, { ignoreSearch: true }).then(o => o || Response.error()))));
     return;
   }
   if (/fonts\.(googleapis|gstatic)\.com|cdnjs\.cloudflare\.com|gstatic\.com\/firebasejs/.test(u.href)) {
